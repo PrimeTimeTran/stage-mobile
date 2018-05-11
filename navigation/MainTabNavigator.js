@@ -5,57 +5,104 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import VenuesScreen from '../screens/VenuesScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator({
+const MessagesStack = createStackNavigator({
   Home: HomeScreen,
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+MessagesStack.navigationOptions = {
+  tabBarLabel: 'Messages',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-text${focused ? '' : '-outline'}`
+          : 'md-text-circle'
       }
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const VenuesStack = createStackNavigator({
+  Venues: VenuesScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+VenuesStack.navigationOptions = {
+  tabBarLabel: 'Venue',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+      name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-link'}
     />
   ),
 };
 
-const SettingsStack = createStackNavigator({
+const ProfileStack = createStackNavigator({
   Settings: SettingsScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+      name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
     />
   ),
 };
 
+
+// const HomeStack = createStackNavigator({
+//   Home: HomeScreen,
+// });
+
+// HomeStack.navigationOptions = {
+//   tabBarLabel: 'Home',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={
+//         Platform.OS === 'ios'
+//           ? `ios-information-circle${focused ? '' : '-outline'}`
+//           : 'md-information-circle'
+//       }
+//     />
+//   ),
+// };
+
+// const LinksStack = createStackNavigator({
+//   Links: LinksScreen,
+// });
+
+// LinksStack.navigationOptions = {
+//   tabBarLabel: 'Links',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+//     />
+//   ),
+// };
+
+// const SettingsStack = createStackNavigator({
+//   Settings: SettingsScreen,
+// });
+
+// SettingsStack.navigationOptions = {
+//   tabBarLabel: 'Settings',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+//     />
+//   ),
+// };
+
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  MessagesStack,
+  VenuesStack,
+  ProfileStack,
 });

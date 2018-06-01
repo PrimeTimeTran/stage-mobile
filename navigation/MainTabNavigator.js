@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import VenuesScreen from '../screens/VenuesScreen';
+import StagesScreen from '../screens/StagesScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const MessagesStack = createStackNavigator({
@@ -26,12 +26,12 @@ MessagesStack.navigationOptions = {
   ),
 };
 
-const VenuesStack = createStackNavigator({
-  Venues: VenuesScreen,
+const StagesStack = createStackNavigator({
+  Stages: StagesScreen,
 });
 
-VenuesStack.navigationOptions = {
-  tabBarLabel: 'Venue',
+StagesStack.navigationOptions = {
+  tabBarLabel: 'Stages',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -54,55 +54,8 @@ ProfileStack.navigationOptions = {
   ),
 };
 
-
-// const HomeStack = createStackNavigator({
-//   Home: HomeScreen,
-// });
-
-// HomeStack.navigationOptions = {
-//   tabBarLabel: 'Home',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios'
-//           ? `ios-information-circle${focused ? '' : '-outline'}`
-//           : 'md-information-circle'
-//       }
-//     />
-//   ),
-// };
-
-// const LinksStack = createStackNavigator({
-//   Links: LinksScreen,
-// });
-
-// LinksStack.navigationOptions = {
-//   tabBarLabel: 'Links',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
-//     />
-//   ),
-// };
-
-// const SettingsStack = createStackNavigator({
-//   Settings: SettingsScreen,
-// });
-
-// SettingsStack.navigationOptions = {
-//   tabBarLabel: 'Settings',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-//     />
-//   ),
-// };
-
 export default createBottomTabNavigator({
   MessagesStack,
-  VenuesStack,
+  StagesStack,
   ProfileStack,
 });

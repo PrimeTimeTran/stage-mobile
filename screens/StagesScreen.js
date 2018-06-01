@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Image,
@@ -11,20 +12,22 @@ import {
 
 import axios from 'axios';
 
-import { API_ROOT } from '../constants/API-CONFIG';
+import { API_ROOT } from '../constants/ApiConfig';
 import { Card, CardSection } from '../components/common'
 
+import { AsyncStorage } from 'react-native';
 
-export default class VenuesScreen extends React.Component {
+import client from '../utils/client';
+
+export default class StagesScreen extends React.Component {
   state = { posts: [] }
 
   componentWillMount() {
-    axios.get(`${API_ROOT}lists`).then(response => {
-      return response
+    const request = client();
+    request.then((api) => api.get(`${API_ROOT}posts`)).then(response => {
+      return response.data
     }).then(data => {
-      this.setState({ posts: data.data }, () => { console.log('Posts: ', this.state.posts)})
-
-      return data.data
+      this.setState({ posts: data })
     }).catch(error => {
       console.log('Error:', error)
     })
@@ -39,25 +42,26 @@ export default class VenuesScreen extends React.Component {
     const { lists } = this.state
     const {
       headerContainerStyle,
-      headerTextStyle
+      headerTextStyle,
+      container
      } = styles;
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={container}>
         { this.state.posts && this.state.posts.map(post => {
             return (
-              <View>
+              <View style={container} key={post.id}>
                 {/* <CardSection>{post.body}</CardSection> */}
                 <Card>
                   <CardSection>
                     <View style={headerContainerStyle}>
-                      <Text style={headerTextStyle}>{post.title}</Text>
+                      <Text style={headerTextStyle}>{post.user.email}</Text>
                     </View>
                   </CardSection>
 
                   <CardSection>
                     <Text>
-                      {post.excerpt}
+                      {post.body}
                     </Text>
                   </CardSection>
                 </Card>

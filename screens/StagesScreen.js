@@ -34,9 +34,6 @@ export default class StagesScreen extends React.Component {
   }
 
   render() {
-    console.log('This: ', this);
-    console.log('Stages', this.state.stages);
-
     const { stages } = this.state
     const {
       headerContainerStyle,
@@ -61,7 +58,7 @@ export default class StagesScreen extends React.Component {
 
                     <CardSection>
                       { stage.uploads.map(upload => {
-                          return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
+                          return <Image key={upload.id} style={{ height: 100, width: 100 }} source={{ uri: upload.url }} />
                         })
                       }
                       <Text>
@@ -72,8 +69,7 @@ export default class StagesScreen extends React.Component {
                 </View>
                 )
               }
-            )
-          }
+          ) }
         </ScrollView>
       )
     } else {

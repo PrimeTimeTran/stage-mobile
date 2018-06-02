@@ -85,8 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   headerTextStyle: {
-    fontSize: 25,
-    fontWeight: '600'
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#cacdd1'
   },
   avatarStyle: {
     height: 50,

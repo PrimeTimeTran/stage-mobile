@@ -24,8 +24,6 @@ export default class ConversationsScreen extends React.Component {
   state = { conversations: [] }
 
   componentWillMount() {
-    console.log('Props: ', this.props);
-
     const request = client();
     request.then(api => api.get(`${API_ROOT}conversations`)).then(response => {
       return response.data
@@ -37,14 +35,13 @@ export default class ConversationsScreen extends React.Component {
   }
 
   render() {
-    console.log('This: ', this);
-    console.log('Conversations: ', this.state.conversations);
-
     const { conversations } = this.state
-
+    const { navigation } = this.props
     const {
       containerStyle,
-      headerTextStyle,
+      containerContentStyle,
+      headerInfoStyle,
+      headerTitleStyle,
       thumbnailStyle
      } = styles;
 
@@ -55,29 +52,43 @@ export default class ConversationsScreen extends React.Component {
               return (
                 <View key={conversation.id}>
                   <Card>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversation') }>
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate('Conversation', { conversation_id: conversation.id})  }
+                    >
                       <CardSection>
+
                         <View style={containerStyle}>
                           <Image
-                          id={conversation.id}
-                          style={styles.avatarStyle}
-                          source={{ uri: conversation.last_message_from_user.avatar_url }}
-                        />
+                            id={conversation.id}
+                            style={styles.avatarStyle}
+                            source={{ uri: conversation.last_message_from_user.avatar_url }}
+                          />
+                          <View style={containerContentStyle}>
+
+                            <View style={headerInfoStyle}>
+                              <Text style={headerTitleStyle}>
+                                {conversation.name || conversation.last_message_from_user.name}
+                              </Text>
+                              <Text style={{ color: '#cacdd1' }} >
+                                {conversation.last_message.sent_at}
+                              </Text>
+                            </View>
+
+                            <Text numberOfLines={3}>
+                              {conversation.last_message.body}
+                            </Text>
+                          </View>
                         </View>
-                        <View style={containerStyle}>
-                          <Text style={headerTextStyle}>{conversation.name || conversation.last_message_from_user.name}</Text>
-                        </View>
+
                       </CardSection>
 
-                      <CardSection>
-                        {/* { stage.uploads.map(upload => {
+                      {/* <CardSection>
+                        { stage.uploads.map(upload => {
                             return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
                           })
-                        } */}
-                        <Text numberOfLines={3}>
-                          {conversation.last_message.body}
-                        </Text>
-                      </CardSection>
+                        }
+
+                      </CardSection> */}
                     </TouchableOpacity>
                   </Card>
                 </View>
@@ -93,19 +104,32 @@ export default class ConversationsScreen extends React.Component {
   }
 }
 
+// This is the styles below
+
 const styles = StyleSheet.create({
   containerStyle: {
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   },
-  headerTextStyle: {
+  containerContentStyle: {
+    padding: 5,
+    margin: 5,
+    flex: 1
+  },
+  headerTitleStyle: {
     fontSize: 15,
     fontWeight: '600',
     color: '#cacdd1'
+  },
+  headerInfoStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch'
   },
   avatarStyle: {
     height: 50,
     width: 50,
     borderRadius: 25,
-  }
+  },
 });

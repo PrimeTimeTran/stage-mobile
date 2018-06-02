@@ -6,6 +6,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 
 import ConversationsScreen from '../screens/ConversationsScreen';
+import MessagesScreen from '../screens/MessagesScreen';
+import ConversationScreen from '../screens/ConversationScreen';
 import HomeScreen from '../screens/HomeScreen';
 import StagesScreen from '../screens/StagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -13,20 +15,31 @@ import SettingsScreen from '../screens/SettingsScreen';
 
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
+  Conversation: ConversationScreen,
 });
 
-ConversationsStack.navigationOptions = {
-  tabBarLabel: 'Messages',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-text${focused ? '' : '-outline'}`
-          : 'md-text-circle'
-      }
-    />
-  ),
+ConversationsStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarLabel: 'Conversation',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
+      />
+    ),
+    tabBarVisible: (navigation.state.index == 1) ? false : true
+  }
+  // tabBarLabel: 'Messages',
+  // tabBarIcon: ({ focused }) => (
+  //   <TabBarIcon
+  //     focused={focused}
+  //     name={
+  //       Platform.OS === 'ios'
+  //         ? `ios-text${focused ? '' : '-outline'}`
+  //         : 'md-text-circle'
+  //     }
+  //   />
+  // ),
 };
 
 const HomeStack = createStackNavigator({
@@ -38,7 +51,7 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-link'}
+      name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-link'}
     />
   ),
 };
@@ -62,14 +75,17 @@ const ProfileStack = createStackNavigator({
   Settings: SettingsScreen
 });
 
-ProfileStack.navigationOptions = {
-  tabBarLabel: 'Profile',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
+ProfileStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarLabel: 'Profile',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
+      />
+    ),
+    tabBarVisible: (navigation.state.index == 1) ? false : true
+  }
 };
 
 export default createBottomTabNavigator({

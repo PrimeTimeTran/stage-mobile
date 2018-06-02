@@ -24,6 +24,8 @@ export default class ConversationsScreen extends React.Component {
   state = { conversations: [] }
 
   componentWillMount() {
+    console.log('Props: ', this.props);
+
     const request = client();
     request.then(api => api.get(`${API_ROOT}conversations`)).then(response => {
       return response.data
@@ -52,7 +54,8 @@ export default class ConversationsScreen extends React.Component {
           { conversations && conversations.map(conversation => {
               return (
                 <View key={conversation.id}>
-                  <Card>
+                  {/* <Card onPress={() => this.props.navigation.navigate('Conversation') } > */}
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversation') } >
                     <CardSection>
                       <View style={headerContainerStyle}>
                         <Image
@@ -75,7 +78,7 @@ export default class ConversationsScreen extends React.Component {
                         {conversation.last_message.body}
                       </Text>
                     </CardSection>
-                  </Card>
+                  </TouchableOpacity>
                 </View>
                 )
               }

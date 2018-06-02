@@ -61,7 +61,7 @@ export default class HomeScreen extends React.Component {
                     </CardSection>
 
                     <CardSection>
-                      <Text>
+                    <Text numberOfLines={5}>
                         {post.body}
                       </Text>
                     </CardSection>

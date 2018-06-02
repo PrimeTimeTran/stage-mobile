@@ -17,7 +17,7 @@ export default class ProfileScreen extends React.Component {
       <Button
         title='Settings'
         onPress={() => navigation.navigate('Settings')}
-        backgroundColor='#ffffff'
+        backgroundColor='#0076FF'
         color='blue'
       />
     ),

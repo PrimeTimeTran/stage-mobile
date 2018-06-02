@@ -18,7 +18,7 @@ import client from '../utils/client';
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Messages',
+    title: 'Conversations',
   };
 
   state = { conversations: [] }
@@ -43,7 +43,7 @@ export default class ConversationsScreen extends React.Component {
     const { conversations } = this.state
 
     const {
-      headerContainerStyle,
+      containerStyle,
       headerTextStyle,
       thumbnailStyle
      } = styles;
@@ -54,31 +54,32 @@ export default class ConversationsScreen extends React.Component {
           { conversations && conversations.map(conversation => {
               return (
                 <View key={conversation.id}>
-                  {/* <Card onPress={() => this.props.navigation.navigate('Conversation') } > */}
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversation') } >
-                    <CardSection>
-                      <View style={headerContainerStyle}>
-                        <Image
-                        id={conversation.id}
-                        style={styles.avatarStyle}
-                        source={{ uri: conversation.last_message_from_user.avatar_url }}
-                      />
-                      </View>
-                      <View style={headerContainerStyle}>
-                        <Text style={headerTextStyle}>{conversation.name || conversation.last_message_from_user.name}</Text>
-                      </View>
-                    </CardSection>
+                  <Card>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Conversation') }>
+                      <CardSection>
+                        <View style={containerStyle}>
+                          <Image
+                          id={conversation.id}
+                          style={styles.avatarStyle}
+                          source={{ uri: conversation.last_message_from_user.avatar_url }}
+                        />
+                        </View>
+                        <View style={containerStyle}>
+                          <Text style={headerTextStyle}>{conversation.name || conversation.last_message_from_user.name}</Text>
+                        </View>
+                      </CardSection>
 
-                    <CardSection>
-                      {/* { stage.uploads.map(upload => {
-                          return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
-                        })
-                      } */}
-                      <Text>
-                        {conversation.last_message.body}
-                      </Text>
-                    </CardSection>
-                  </TouchableOpacity>
+                      <CardSection>
+                        {/* { stage.uploads.map(upload => {
+                            return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
+                          })
+                        } */}
+                        <Text numberOfLines={3}>
+                          {conversation.last_message.body}
+                        </Text>
+                      </CardSection>
+                    </TouchableOpacity>
+                  </Card>
                 </View>
                 )
               }
@@ -93,7 +94,7 @@ export default class ConversationsScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  headerContainerStyle: {
+  containerStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around'
   },

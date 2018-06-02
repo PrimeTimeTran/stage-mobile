@@ -6,16 +6,20 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 
 import ConversationsScreen from '../screens/ConversationsScreen';
-import MessagesScreen from '../screens/MessagesScreen';
 import ConversationScreen from '../screens/ConversationScreen';
+import UsersScreen from '../screens/UsersScreen';
+
 import HomeScreen from '../screens/HomeScreen';
+
 import StagesScreen from '../screens/StagesScreen';
+
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
+  Users: UsersScreen,
 });
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
@@ -27,7 +31,7 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
         name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
       />
     ),
-    tabBarVisible: (navigation.state.index == 1) ? false : true
+    tabBarVisible: (navigation.state.index == 0) ? true : false
   }
   // tabBarLabel: 'Messages',
   // tabBarIcon: ({ focused }) => (
@@ -84,7 +88,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
         name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
       />
     ),
-    tabBarVisible: (navigation.state.index == 1) ? false : true
+    tabBarVisible: (navigation.state.index == 0) ? true : false
   }
 };
 

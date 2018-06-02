@@ -1,23 +1,11 @@
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { Component } from 'react';
+import {  View, Text, } from 'react-native';
 
-export default class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Profile',
-  };
-
+export default class SettingsScreen extends Component {
   render() {
     return (
       <View>
-        <Text>Go</Text>
+        <Text> textInComponent </Text>
       </View>
     );
   }

@@ -16,53 +16,63 @@ import { Card, CardSection } from '../components/common';
 
 import client from '../utils/client';
 
-export default class HomeScreen extends React.Component {
+export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Messages',
   };
-  state = { posts: [] }
+
+  state = { conversations: [] }
 
   componentWillMount() {
     const request = client();
-    request.then(api => api.get(`${API_ROOT}posts`)).then(response => {
+    request.then(api => api.get(`${API_ROOT}conversations`)).then(response => {
       return response.data
     }).then(data => {
-      this.setState({ posts: data })
+      this.setState({ conversations: data })
     }).catch(error => {
       console.log('Error:', error)
     })
   }
 
   render() {
-    const { posts } = this.state
+    console.log('This: ', this);
+    console.log('Conversations: ', this.state.conversations);
+
+    const { conversations } = this.state
+
     const {
       headerContainerStyle,
       headerTextStyle,
-      avatarStyle
+      thumbnailStyle
      } = styles;
 
-    if (posts) {
+    if (conversations) {
       return (
         <ScrollView>
-          { posts && posts.map(post => {
+          { conversations && conversations.map(conversation => {
               return (
-                <View key={post.id}>
+                <View key={conversation.id}>
                   <Card>
                     <CardSection>
                       <View style={headerContainerStyle}>
                         <Image
-                          style={avatarStyle}
-                          source={{ uri: post.user.avatar_url }}
-                        />
+                        id={conversation.id}
+                        style={styles.avatarStyle}
+                        source={{ uri: conversation.last_message_from_user.avatar_url }}
+                      />
                       </View>
                       <View style={headerContainerStyle}>
-                        <Text style={headerTextStyle}>{post.user.full_name}</Text>
+                        <Text style={headerTextStyle}>{conversation.name || conversation.last_message_from_user.name}</Text>
                       </View>
                     </CardSection>
 
                     <CardSection>
+                      {/* { stage.uploads.map(upload => {
+                          return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
+                        })
+                      } */}
                       <Text>
-                        {post.body}
+                        {conversation.last_message.body}
                       </Text>
                     </CardSection>
                   </Card>
@@ -85,8 +95,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   headerTextStyle: {
-    fontSize: 25,
-    fontWeight: '600'
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#cacdd1'
   },
   avatarStyle: {
     height: 50,

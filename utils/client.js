@@ -3,7 +3,6 @@ import { AsyncStorage } from 'react-native';
 
 const client = async () => {
   let token = await AsyncStorage.getItem('auth_token');
-  console.log('Token is:', token);
 
   const defaultOptions = {
     headers: {

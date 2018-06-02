@@ -4,15 +4,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+
+import ConversationsScreen from '../screens/ConversationsScreen';
 import HomeScreen from '../screens/HomeScreen';
 import StagesScreen from '../screens/StagesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const MessagesStack = createStackNavigator({
-  Home: HomeScreen,
+const ConversationsStack = createStackNavigator({
+  Conversations: ConversationsScreen,
 });
 
-MessagesStack.navigationOptions = {
+ConversationsStack.navigationOptions = {
   tabBarLabel: 'Messages',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -22,6 +25,20 @@ MessagesStack.navigationOptions = {
           ? `ios-text${focused ? '' : '-outline'}`
           : 'md-text-circle'
       }
+    />
+  ),
+};
+
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+});
+
+HomeStack.navigationOptions = {
+  tabBarLabel: 'Home',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-link'}
     />
   ),
 };
@@ -41,7 +58,8 @@ StagesStack.navigationOptions = {
 };
 
 const ProfileStack = createStackNavigator({
-  Settings: SettingsScreen,
+  Profile: ProfileScreen,
+  Settings: SettingsScreen
 });
 
 ProfileStack.navigationOptions = {
@@ -55,7 +73,8 @@ ProfileStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  MessagesStack,
+  ConversationsStack,
+  HomeStack,
   StagesStack,
-  ProfileStack,
+  ProfileStack
 });

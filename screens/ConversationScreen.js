@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Platform } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat'
+
+
+import { API_ROOT } from '../constants/ApiConfig';
+import client from '../utils/client';
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Conversation',
@@ -21,19 +25,17 @@ export default class ConversationScreen extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
+    const request = client();
+    const conversation_id = this.props.navigation.state.params.conversation_id
+
+    request.then(api => api.get(`${API_ROOT}conversations/${conversation_id}/messages`, {conversation_id: conversation_id})).then(response => {
+      return response.data
+    }).then(data => {
+      let messages = data.map(chat => chat.gifted_chat)
+      console.log('Data: ', messages);
+      this.setState({ messages })
+    }).catch(error => {
+      console.log('Error:', error)
     })
   }
 

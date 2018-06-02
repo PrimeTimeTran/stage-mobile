@@ -9,8 +9,6 @@ import {
   Image
 } from 'react-native';
 
-import axios from 'axios';
-
 import { API_ROOT } from '../constants/ApiConfig';
 import { Card, CardSection } from '../components/common';
 

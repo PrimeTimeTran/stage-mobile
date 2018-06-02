@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Platform } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat'
+// import { GiftedChat } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble } from 'react-native-gifted-chat'
+// import Bubble from '../components/common/Bubble';
 
+import { sendMessage, setCallback } from "../utils/chat";
 
 import { API_ROOT } from '../constants/ApiConfig';
 import client from '../utils/client';
@@ -24,22 +27,35 @@ export default class ConversationScreen extends Component {
     messages: [],
   }
 
+  updateMessages(message) {
+    let newMessage = message[0];
+    this.setState({ messages: [newMessage, ...this.state.messages]})
+  }
+
   componentWillMount() {
-    const request = client();
     const conversation_id = this.props.navigation.state.params.conversation_id
 
-    request.then(api => api.get(`${API_ROOT}conversations/${conversation_id}/messages`, {conversation_id: conversation_id})).then(response => {
+    const request = client();
+    request.then(api => api.get(`${API_ROOT}conversations/${conversation_id}/messages`))
+    .then(response => {
       return response.data
-    }).then(data => {
+    })
+    .then(data => {
       let messages = data.map(chat => chat.gifted_chat)
-      console.log('Data: ', messages);
       this.setState({ messages })
-    }).catch(error => {
+    })
+    .catch(error => {
       console.log('Error:', error)
     })
   }
 
   onSend(messages = []) {
+    const conversation_id = this.props.navigation.state.params.conversation_id
+    sendMessage({
+      conversation_id: conversation_id,
+      body: messages[0].text
+    })
+
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }))
@@ -49,6 +65,7 @@ export default class ConversationScreen extends Component {
     return (
       <GiftedChat
         messages={this.state.messages}
+        // renderBubble={this.renderBubble}
         onSend={messages => this.onSend(messages)}
         user={{
           _id: 1,

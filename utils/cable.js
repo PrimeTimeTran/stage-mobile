@@ -16,7 +16,6 @@ if (hostname === 'localhost') {
 
 function createChannel(...args) {
   // let token = AsyncStorage.getItem('auth_token');
-
   // if (!consumer) {
   //   consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${token}`);
   // }

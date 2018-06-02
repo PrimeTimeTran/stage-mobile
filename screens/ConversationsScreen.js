@@ -9,8 +9,6 @@ import {
   Image
 } from 'react-native';
 
-import axios from 'axios';
-
 import { API_ROOT } from '../constants/ApiConfig';
 import { Card, CardSection } from '../components/common';
 
@@ -87,8 +85,8 @@ export default class ConversationsScreen extends React.Component {
                             return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
                           })
                         }
-
                       </CardSection> */}
+
                     </TouchableOpacity>
                   </Card>
                 </View>

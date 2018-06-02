@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Platform } from 'react-native';
-// import { GiftedChat } from 'react-native-gifted-chat'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
+
+// import { GiftedChat } from 'react-native-gifted-chat'
 // import Bubble from '../components/common/Bubble';
 
 import { sendMessage, setCallback } from "../utils/chat";
 
 import { API_ROOT } from '../constants/ApiConfig';
 import client from '../utils/client';
+
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Conversation',

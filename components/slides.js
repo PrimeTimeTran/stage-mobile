@@ -20,9 +20,17 @@ export default class Slides extends Component {
 
   renderSlides() {
     return this.props.data.map((slide, idx) => {
+      let image;
+      if (idx == 0) {
+        image = require('../assets/images/0.png');
+      } else if (idx == 1) {
+        image = require('../assets/images/1.png');
+      } else if (idx == 2) {
+        image = require('../assets/images/2.png');
+      }
       return (
         <ImageBackground
-          source={require('../assets/images/2.png')}
+          source={image}
           key={slide.text}
           style={styles.slideStyle}
         >

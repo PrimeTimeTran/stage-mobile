@@ -9,6 +9,8 @@ import {
   Image
 } from 'react-native';
 
+import Lightbox from 'react-native-lightbox';
+
 import { API_ROOT } from '../constants/ApiConfig';
 import { Card, CardSection } from '../components/common';
 
@@ -58,6 +60,19 @@ export default class StagesScreen extends React.Component {
                           return <Image key={upload.id} style={{ height: 100, width: 100 }} source={{ uri: upload.url }} />
                         })
                       }
+                      <Lightbox underlayColor="white">
+                        <Image
+                          style={styles.contain}
+                          resizeMode="contain"
+                          source={{ uri: 'https://www.yayomg.com/wp-content/uploads/2014/04/yayomg-pig-wearing-party-hat.jpg' }}
+                        />
+                      </Lightbox>
+                      <Lightbox springConfig={{tension: 15, friction: 7}} swipeToDismiss={false}>
+                        <Image
+                          resizeMode="contain"
+                          source={{ uri: 'http://cdn.lolwot.com/wp-content/uploads/2015/07/20-pictures-of-animals-in-hats-to-brighten-up-your-day-1.jpg' }}
+                        />
+                      </Lightbox>
                       <Text>
                         {/* {post.body} */}
                       </Text>

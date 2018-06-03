@@ -78,7 +78,12 @@ export default class StagesScreen extends React.Component {
 
   render() {
     const { stages } = this.state
-    const { cardHeaderStyle, headerContainerStyle, headerTextStyle, thumbnailStyle } = styles
+    const {
+      cardHeaderStyle,
+      headerContainerStyle,
+      headerTextStyle,
+      thumbnailStyle
+    } = styles
 
     if (stages) {
       return (
@@ -120,7 +125,7 @@ export default class StagesScreen extends React.Component {
         </ScrollView>
       )
     } else {
-      <div>Empty</div>
+      return <div>Empty</div>
     }
   }
 }

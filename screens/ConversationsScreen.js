@@ -44,6 +44,7 @@ export default class ConversationsScreen extends React.Component {
      } = styles;
 
     if (conversations) {
+      console.log('Conversatons: ', conversations)
       return (
         <ScrollView>
           { conversations && conversations.map(conversation => {

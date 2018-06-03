@@ -5,11 +5,14 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 
+import WelcomeScreen from '../screens/WelcomeScreen';
+import AuthScreen from '../screens/AuthScreen';
+
 import ConversationsScreen from '../screens/ConversationsScreen';
 import ConversationScreen from '../screens/ConversationScreen';
-import UsersScreen from '../screens/UsersScreen';
 
 import HomeScreen from '../screens/HomeScreen';
+import UsersScreen from '../screens/UsersScreen';
 
 import StagesScreen from '../screens/StagesScreen';
 
@@ -33,17 +36,6 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
-  // tabBarLabel: 'Messages',
-  // tabBarIcon: ({ focused }) => (
-  //   <TabBarIcon
-  //     focused={focused}
-  //     name={
-  //       Platform.OS === 'ios'
-  //         ? `ios-text${focused ? '' : '-outline'}`
-  //         : 'md-text-circle'
-  //     }
-  //   />
-  // ),
 };
 
 const HomeStack = createStackNavigator({
@@ -91,10 +83,22 @@ ProfileStack.navigationOptions = ({ navigation }) => {
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
 };
-
-export default createBottomTabNavigator({
-  ConversationsStack,
-  HomeStack,
-  StagesStack,
-  ProfileStack
+const MainTabScreen = createBottomTabNavigator({
+    ConversationsStack,
+    HomeStack,
+    StagesStack,
+    ProfileStack
 });
+
+
+export default createBottomTabNavigator(
+  {
+    Welcome: WelcomeScreen,
+    Auth: AuthScreen,
+    Main: MainTabScreen
+  },
+  {
+    lazy: true,
+    navigationOptions: { tabBarVisible: false }
+  }
+);

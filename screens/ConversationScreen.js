@@ -35,6 +35,7 @@ export default class ConversationScreen extends Component {
   }
 
   componentWillMount() {
+    console.log('Conversation Screen: ', this.props.navigation.state.params)
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client();

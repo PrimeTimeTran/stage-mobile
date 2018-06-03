@@ -6,9 +6,9 @@ import * as actions from '../actions';
 
 class AuthScreen extends Component {
   componentDidMount() {
-    // AsyncStorage.removeItem('fb_token'); // Remove Token to test state
-    this.props.facebookLogIn();
-    this.onAuthComplete(this.props)
+    // AsyncStorage.removeItem('auth_token'); // Remove to signout
+    // this.props.facebookLogIn();
+    // this.onAuthComplete(this.props)
   }
 
   componentWillUnMount() {
@@ -18,7 +18,7 @@ class AuthScreen extends Component {
 
   onAuthComplete(props) {
     if (props.token) {
-      this.props.navigation.navigate('Map');
+      this.props.navigation.navigate('Conversations');
     }
   }
 

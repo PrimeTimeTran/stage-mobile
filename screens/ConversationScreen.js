@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Platform } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
-
-// import { GiftedChat } from 'react-native-gifted-chat'
-// import Bubble from '../components/common/Bubble';
-
 import { sendMessage, setCallback } from "../utils/chat";
 
 import { API_ROOT } from '../constants/ApiConfig';
@@ -35,7 +31,6 @@ export default class ConversationScreen extends Component {
   }
 
   componentWillMount() {
-    console.log('Conversation Screen: ', this.props.navigation.state.params)
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client();
@@ -68,10 +63,9 @@ export default class ConversationScreen extends Component {
     return (
       <GiftedChat
         messages={this.state.messages}
-        // renderBubble={this.renderBubble}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 1,
+          _id: 4,
         }}
       />
     )

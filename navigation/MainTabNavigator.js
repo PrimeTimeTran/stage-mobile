@@ -83,13 +83,13 @@ ProfileStack.navigationOptions = ({ navigation }) => {
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
 };
+
 const MainTabScreen = createBottomTabNavigator({
     ConversationsStack,
     HomeStack,
     StagesStack,
     ProfileStack
 });
-
 
 export default createBottomTabNavigator(
   {

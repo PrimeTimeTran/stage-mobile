@@ -6,9 +6,9 @@ import { AppLoading } from 'expo';
 import Slides from '../components/slides'
 
 const SLIDE_DATA = [
-  { text: 'Welcome to Job App', color: '#03A9F4' },
-  { text: 'Use this to get a job', color: '#009688' },
-  { text: 'Set your location, then swipe away', color: '#03A9F4' }
+  { text: 'Welcome to Stage!', color: '#03A9F4' },
+  { text: "They're so many amazing people around you", color: '#009688' },
+  { text: 'Meet them!', color: '#03A9F4' }
 ]
 
  class Welcome extends Component {
@@ -17,7 +17,8 @@ const SLIDE_DATA = [
   }
 
   async componentWillMount() {
-    let token = await AsyncStorage.getItem('auth_token');
+    // let token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzM5OTd9.r_RBJEcXMXU5XXktMLCC8Gvc8KR8NKSxFME4oEe8BTzirBuM0Suj6AKvBPr18P29UR4bkLe_dvX8U3dNYxXAQA')
+    token = await AsyncStorage.getItem('auth_token');
     if (token) {
       this.props.navigation.navigate('Conversations');
       this.setState({ token })

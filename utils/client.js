@@ -2,13 +2,11 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
 const client = async () => {
-  // await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoyMSwiZXhwIjoxNTU5NTI3MzY3fQ.o5oK4ICHerM5LFxDPhC9Yn1cDiohcNoMRMGCU4V0qvTGKMYOMoZEHbvIENXu48t0SXwPU-dTiXOplvECCaNO8Q')
-  // await AsyncStorage.setItem('auth_token', '')
-  await AsyncStorage.setItem('token', '')
+  let hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzQyMzF9.uAAeML_EGXSqcpqedlaOiUjFyCbwzIFY3Jp5uSl6yHA6anfJDmn05__jT8mAcTun5Yqb0auKvKFWjpBL1LPYPg'
   let token = await AsyncStorage.getItem('auth_token');
   const defaultOptions = {
     headers: {
-      Authorization: token ? `Token ${token}` : '',
+      Authorization: token ? `Token ${hardToken}` : '',
     },
   };
 

@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, AsyncStorage, ImageBackground } from 'react-native';
 import { AppLoading } from 'expo';
 
 import Slides from '../components/slides'
 
 const SLIDE_DATA = [
-  { text: 'Welcome to Stage!', color: '#03A9F4' },
-  { text: "They're so many amazing people around you", color: '#009688' },
-  { text: 'Meet them!', color: '#03A9F4' }
+  { text: 'Welcome', color: '#03A9F4', path: '../assets/images/0.png' },
+  { text: "Meet amazing people!", color: '#009688', path: '../assets/images/1.png' },
+  { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
 ]
 
  class Welcome extends Component {
@@ -28,7 +28,7 @@ const SLIDE_DATA = [
   }
 
    onSlidesComplete = () => {
-    this.props.navigation.navigate('Auth')
+    this.props.navigation.navigate('Conversations')
   }
 
   render() {

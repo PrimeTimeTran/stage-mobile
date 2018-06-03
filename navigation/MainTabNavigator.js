@@ -94,7 +94,20 @@ const MainTabScreen = createBottomTabNavigator({
     HomeStack,
     StagesStack,
     ProfileStack
-});
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'white',
+      inactiveTintColor: 'lightgray',
+      style: {
+        backgroundColor: '#333333',
+        borderTopWidth: 1,
+        borderTopColor: 'white',
+        padding: 5
+      },
+    }
+  }
+);
 
 export default createBottomTabNavigator(
   {

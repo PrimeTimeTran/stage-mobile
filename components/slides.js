@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {  View, Text, ScrollView, Dimensions, Button } from 'react-native';
+import { View, Text, ScrollView, Dimensions, Button, ImageBackground } from 'react-native';
+import { Card, CardSection } from './common';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
+let SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class Slides extends Component {
   renderLastSlide(idx) {
@@ -9,7 +10,7 @@ export default class Slides extends Component {
       return (
         <Button
           raised
-          title='Onwards!'
+          title='Join'
           buttonStyle={styles.buttonStyle}
           onPress={this.props.onComplete}
         />
@@ -20,14 +21,20 @@ export default class Slides extends Component {
   renderSlides() {
     return this.props.data.map((slide, idx) => {
       return (
-        <View
+        <ImageBackground
+          source={require('../assets/images/2.png')}
           key={slide.text}
-          style={[styles.slideStyle, {backgroundColor: slide.color}]}
-
+          style={styles.slideStyle}
         >
-          <Text style={styles.slideTextStyle}>{slide.text}</Text>
-          {this.renderLastSlide(idx)}
-        </View>
+          <Card>
+            <CardSection styling={{backgroundColor: '#333333'}}>
+              <Text style={styles.slideTextStyle}>
+                {slide.text}
+              </Text>
+              {this.renderLastSlide(idx)}
+            </CardSection>
+          </Card>
+        </ImageBackground>
       )
     })
   }

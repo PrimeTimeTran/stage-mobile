@@ -16,7 +16,7 @@ import client from '../utils/client';
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Conversations',
+    title: 'Messages',
   };
 
   state = { conversations: [] }
@@ -47,6 +47,7 @@ export default class ConversationsScreen extends React.Component {
       return (
         <ScrollView>
           { conversations && conversations.map(conversation => {
+            const { last_message_from_user } = conversation
               return (
                 <View key={conversation.id}>
                   <Card>
@@ -56,26 +57,53 @@ export default class ConversationsScreen extends React.Component {
                       <CardSection>
 
                         <View style={containerStyle}>
+
                           <Image
                             id={conversation.id}
                             style={styles.avatarStyle}
-                            source={{ uri: conversation.last_message_from_user.avatar_url }}
+                            source={{ uri: last_message_from_user.avatar_url }}
                           />
                           <View style={containerContentStyle}>
 
-                            <View style={headerInfoStyle}>
+                            {/* <View style={headerInfoStyle}>
                               <Text style={headerTitleStyle}>
-                                {conversation.name || conversation.last_message_from_user.name}
+                                {conversation.name || last_message_from_user.name}
                               </Text>
                               <Text style={{ fontSize: 10 }}>
                                 {conversation.last_message.sent_at}
                               </Text>
-                            </View>
+                            </View> */}
+
+                              { conversation.name ?
+                                  <View style={headerInfoStyle}>
+                                    <View>
+                                      <Text style={headerTitleStyle}>
+                                        { conversation.name }
+                                      </Text>
+                                      <Text style={{ color: 'red' }}>
+                                        { last_message_from_user.name }
+                                      </Text>
+                                    </View>
+                                    <Text style={{ fontSize: 10 }}>
+                                      { conversation.last_message.sent_at }
+                                    </Text>
+                                  </View>
+                                :
+                                  <View style={headerInfoStyle}>
+                                    <Text style={headerTitleStyle}>
+                                      { last_message_from_user.name }
+                                    </Text>
+                                    <Text style={{ fontSize: 10 }}>
+                                      { conversation.last_message.sent_at }
+                                    </Text>
+                                  </View>
+                              }
 
                             <Text numberOfLines={3} style={{ color: '#696969'}} >
                               {conversation.last_message.body}
                             </Text>
                           </View>
+
                         </View>
 
                       </CardSection>

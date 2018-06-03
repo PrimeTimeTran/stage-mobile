@@ -2,8 +2,7 @@ import axios from 'axios'
 import { AsyncStorage } from 'react-native'
 
 const client = async () => {
-  let hardToken =
-    'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzQyMzF9.uAAeML_EGXSqcpqedlaOiUjFyCbwzIFY3Jp5uSl6yHA6anfJDmn05__jT8mAcTun5Yqb0auKvKFWjpBL1LPYPg'
+  let hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzQyMzF9.uAAeML_EGXSqcpqedlaOiUjFyCbwzIFY3Jp5uSl6yHA6anfJDmn05__jT8mAcTun5Yqb0auKvKFWjpBL1LPYPg'
   let token = await AsyncStorage.getItem('auth_token')
   if (!token) {
     token = hardToken

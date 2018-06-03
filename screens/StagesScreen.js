@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  Button
 } from 'react-native'
 
 import { API_ROOT } from '../constants/ApiConfig'
@@ -94,7 +95,6 @@ export default class StagesScreen extends React.Component {
                 <View key={stage.id}>
                   <Card>
                     <CardSection styling={cardHeaderStyle}>
-                      <View style={headerContainerStyle} />
                       <View style={headerContainerStyle}>
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
@@ -116,7 +116,12 @@ export default class StagesScreen extends React.Component {
                           </Lightbox>
                         )
                       })}
-                      <Text>{/* {post.body} */}</Text>
+                    </CardSection>
+                    <CardSection>
+                      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
+                        <Button title='Info' onPress={() => console.log('Info')}/>
+                        <Button title='Chat' onPress={() => console.log('Chat')}/>
+                      </View>
                     </CardSection>
                   </Card>
                 </View>

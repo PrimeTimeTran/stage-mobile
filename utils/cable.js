@@ -6,8 +6,20 @@ let backendHost;
 let socketType;
 let hostname = 'localhost'
 
+
+// Use to use a user
+
+// Signup
+// http :3000/v1/signup email=loi@gmail.com password=asdfas password_confirmation=asdfas
+
+// Login
+// http :3000/v1/auth/login email=christine@gmail.com password=asdfas password_confirmation=asdfas
+
+// Fetch posts
+// http :3000/v1/posts Accept:"application/vnd.posts.v1+json" Authorization:"eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoyMSwiZXhwIjoxNTU5NTI3MTI3fQ.06c2qq-LSx3WekKrOcvuhGLiNTPndu394pTHc53qgTgBJM3dK1LFFgToaXoCxhBK92oESkygzBmhTAzjDDeY1A"
+
 if (hostname === 'localhost') {
-  backendHost = 'localhost:3001';
+  backendHost = 'localhost:3000';
   socketType = 'ws';
 } else {
   backendHost = 'lit-brushlands-65490.herokuapp.com';
@@ -22,7 +34,7 @@ function createChannel(...args) {
   //   consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${token}`);
   // }
 
-  let hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzQyMzF9.uAAeML_EGXSqcpqedlaOiUjFyCbwzIFY3Jp5uSl6yHA6anfJDmn05__jT8mAcTun5Yqb0auKvKFWjpBL1LPYPg'
+  let hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk1Nzk4MTJ9.yQnmTqPo5kTHOFrkbR5f4YXuYJQo3t5WXkYH8zS-Oa-b6OlridEu9McSlwVMN5yVg9OD8L6t0b6MBbWwonAwVg'
   if (!consumer) {
     consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${hardToken}`);
   }

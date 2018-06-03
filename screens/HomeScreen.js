@@ -32,11 +32,13 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
+
     const { posts } = this.state
     const {
       headerContainerStyle,
       headerTextStyle,
-      avatarStyle
+      avatarStyle,
+      timeStyle
      } = styles;
 
     if (posts) {
@@ -53,8 +55,9 @@ export default class HomeScreen extends React.Component {
                           source={{ uri: post.user.avatar_url }}
                         />
                       </View>
-                      <View style={headerContainerStyle}>
+                      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
+                        <Text style={timeStyle}>{post.created_at}</Text>
                       </View>
                     </CardSection>
 
@@ -85,11 +88,17 @@ const styles = StyleSheet.create({
   headerTextStyle: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#cacdd1'
+    color: '#333333',
+    paddingLeft: 5,
+  },
+  timeStyle: {
+    fontSize: 10,
+    color: '#cacdd1',
   },
   avatarStyle: {
     height: 50,
     width: 50,
     borderRadius: 25,
+    borderWidth: 0.5
   }
 });

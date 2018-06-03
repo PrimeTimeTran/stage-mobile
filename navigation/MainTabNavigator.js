@@ -28,11 +28,11 @@ const ConversationsStack = createStackNavigator({
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: 'Conversations',
+    tabBarLabel: 'Messages',
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
+        name={Platform.OS === 'ios' ? `ios-mail${focused ? '' : '-outline'}` : 'md-options'}
       />
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false

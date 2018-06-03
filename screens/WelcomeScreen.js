@@ -19,8 +19,8 @@ const SLIDE_DATA = [
   async componentWillMount() {
     // let token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE1NTk1MzM5OTd9.r_RBJEcXMXU5XXktMLCC8Gvc8KR8NKSxFME4oEe8BTzirBuM0Suj6AKvBPr18P29UR4bkLe_dvX8U3dNYxXAQA')
     token = await AsyncStorage.getItem('auth_token');
-    if (false) {
-      this.props.navigation.navigate('Stages');
+    if (token) {
+      this.props.navigation.navigate('Home');
       this.setState({ token })
     } else {
       this.setState({ token: false });

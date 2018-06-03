@@ -2,7 +2,8 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
 const client = async () => {
-  let token = await AsyncStorage.getItem('auth_token');
+  // let token = await AsyncStorage.getItem('auth_token');
+  let token = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NTk0ODkxMjl9.0M5XmIK1fOh2LH9Q9ZCtJT49EW6-ILBSqqEi90f2taRy7zL-yrPqJIjkG6bWkUo4egxJsx70roH-QehzpHWj0A"
 
   const defaultOptions = {
     headers: {

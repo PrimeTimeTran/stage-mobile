@@ -15,6 +15,7 @@ import HomeScreen from '../screens/HomeScreen';
 import UsersScreen from '../screens/UsersScreen';
 
 import StagesScreen from '../screens/StagesScreen';
+import StageScreen from '../screens/StageScreen';
 
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -27,7 +28,7 @@ const ConversationsStack = createStackNavigator({
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: 'Conversation',
+    tabBarLabel: 'Conversations',
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
@@ -54,16 +55,20 @@ HomeStack.navigationOptions = {
 
 const StagesStack = createStackNavigator({
   Stages: StagesScreen,
+  Stage: StageScreen,
 });
 
-StagesStack.navigationOptions = {
-  tabBarLabel: 'Stages',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-link'}
-    />
-  ),
+StagesStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarLabel: 'Stages',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-options'}
+      />
+    ),
+    tabBarVisible: (navigation.state.index == 0) ? true : false
+  }
 };
 
 const ProfileStack = createStackNavigator({

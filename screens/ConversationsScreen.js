@@ -44,7 +44,6 @@ export default class ConversationsScreen extends React.Component {
      } = styles;
 
     if (conversations) {
-      console.log('Conversatons: ', conversations)
       return (
         <ScrollView>
           { conversations && conversations.map(conversation => {
@@ -68,12 +67,12 @@ export default class ConversationsScreen extends React.Component {
                               <Text style={headerTitleStyle}>
                                 {conversation.name || conversation.last_message_from_user.name}
                               </Text>
-                              <Text style={{ color: '#cacdd1' }} >
+                              <Text style={{ fontSize: 10 }}>
                                 {conversation.last_message.sent_at}
                               </Text>
                             </View>
 
-                            <Text numberOfLines={3}>
+                            <Text numberOfLines={3} style={{ color: '#cacdd1'}} >
                               {conversation.last_message.body}
                             </Text>
                           </View>
@@ -103,8 +102,6 @@ export default class ConversationsScreen extends React.Component {
   }
 }
 
-// This is the styles below
-
 const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
   headerTitleStyle: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#cacdd1'
+    color: '#333333'
   },
   headerInfoStyle: {
     flexDirection: 'row',

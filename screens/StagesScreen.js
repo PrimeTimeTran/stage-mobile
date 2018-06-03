@@ -34,6 +34,7 @@ export default class StagesScreen extends React.Component {
   render() {
     const { stages } = this.state
     const {
+      cardHeaderStyle,
       headerContainerStyle,
       headerTextStyle,
       thumbnailStyle
@@ -46,9 +47,7 @@ export default class StagesScreen extends React.Component {
               return (
                 <View key={stage.id}>
                   <Card>
-                    <CardSection>
-                      <View style={headerContainerStyle}>
-                      </View>
+                    <CardSection styling={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
@@ -77,13 +76,26 @@ export default class StagesScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  cardHeaderStyle: {
+    borderBottomWidth: 1,
+    padding: 5,
+    paddingLeft: 0,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderColor: '#ddd',
+    backgroundColor: '#333333',
+    position: 'relative'
+  },
   headerContainerStyle: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around'
   },
   headerTextStyle: {
     fontSize: 25,
-    fontWeight: '600'
+    fontWeight: '600',
+    color: 'white'
   },
   thumbnailStyle: {
     height: 50,

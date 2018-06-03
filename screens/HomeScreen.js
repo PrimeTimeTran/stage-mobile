@@ -96,9 +96,11 @@ const styles = StyleSheet.create({
     color: '#cacdd1',
   },
   avatarStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
+    height: 30,
+    width: 30,
+    paddingLeft: 10,
+    marginLeft: 10,
+    borderRadius: 15,
     borderWidth: 0.5
   }
 });

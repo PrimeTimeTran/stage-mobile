@@ -72,7 +72,7 @@ export default class ConversationsScreen extends React.Component {
                               </Text>
                             </View>
 
-                            <Text numberOfLines={3} style={{ color: '#cacdd1'}} >
+                            <Text numberOfLines={3} style={{ color: '#696969'}} >
                               {conversation.last_message.body}
                             </Text>
                           </View>

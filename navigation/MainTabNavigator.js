@@ -20,6 +20,8 @@ import StageScreen from '../screens/StageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+import TestScreen from '../screens/TestScreen';
+
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
@@ -113,7 +115,8 @@ export default createBottomTabNavigator(
   {
     Welcome: WelcomeScreen,
     Auth: AuthScreen,
-    Main: MainTabScreen
+    Main: MainTabScreen,
+    Test: TestScreen
   },
   {
     lazy: true,

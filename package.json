@@ -15,6 +15,8 @@
     "react-moment": "^0.7.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-gifted-chat": "^0.4.3",
+    "react-native-lightbox": "^0.7.0",
+    "react-native-looped-carousel": "^0.1.13",
     "react-navigation": "2.0.0"
   },
   "devDependencies": {

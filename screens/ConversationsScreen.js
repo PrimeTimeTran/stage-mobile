@@ -42,7 +42,8 @@ export default class ConversationsScreen extends React.Component {
       containerContentStyle,
       headerInfoStyle,
       headerTitleStyle,
-      thumbnailStyle
+      thumbnailStyle,
+      stageInfoStyle
      } = styles;
 
     if (conversations) {
@@ -55,7 +56,7 @@ export default class ConversationsScreen extends React.Component {
                 <View key={conversation.id}>
 
                     <TouchableOpacity
-                      onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})  }
+                      onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})}
                     >
                       <View style={containerStyle}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
@@ -66,32 +67,32 @@ export default class ConversationsScreen extends React.Component {
                           />
                           { (conversation.is_stage) &&
                               <View style={{ justifyContent: 'space-between', alignItems: 'center'}}>
-                                <Text style={{color: 'green', fontSize: 10}}>Active</Text>
+                                <Text style={stageInfoStyle}>Active</Text>
                                 <Icon name='users' type='font-awesome' color='green' size={10} />
-                                <Text style={{color: 'green', fontSize: 10}}>{Math.floor(Math.random() * Math.floor(1000))}</Text>
+                                <Text style={stageInfoStyle}>{Math.floor(Math.random() * Math.floor(1000))}</Text>
                               </View>
                           }
-
                         </View>
                         <View style={containerContentStyle}>
                           <View style={headerInfoStyle}>
                             { conversation.name ?
                               <View>
-                                <Text style={headerTitleStyle}>{conversation.name}</Text>
-                                <Text style={{color: 'green'}}>{last_message_from_user.name}</Text>
+                                <Text style={[headerTitleStyle, {textDecorationLine: 'underline'}]}>{conversation.name}</Text>
+                                <View style={{flexDirection: 'row', alignItems: 'center', color: '#7EA172'}}>
+                                  <Icon name='chevron-right' color='#7EA172' size='15' />
+                                  <Text style={stageInfoStyle}>{last_message_from_user.name}</Text>
+                                </View>
                               </View>
                             :
                               <Text style={headerTitleStyle}>{last_message_from_user.name}</Text>
                             }
-
-                            <Text style={{fontSize: 10}}>
-                              {conversation.last_message.sent_at}
-                            </Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                              <Icon name='clock' type='material-community' color='black' size='10'/>
+                              <Text style={{fontSize: 10, paddingLeft: 5}}>{conversation.last_message.sent_at}</Text>
                             </View>
-                            <Text numberOfLines={3} style={{color: '#696969'}} >
-                              {conversation.last_message.body}
-                            </Text>
                           </View>
+                          <Text numberOfLines={3} style={{color: '#696969', fontSize: 13}} >{conversation.last_message.body}</Text>
+                        </View>
                       </View>
                     </TouchableOpacity>
 
@@ -135,4 +136,8 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 25,
   },
+  stageInfoStyle: {
+    color: 'green',
+    fontSize: 10
+  }
 });

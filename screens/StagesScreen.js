@@ -107,6 +107,7 @@ export default class StagesScreen extends React.Component {
         <ScrollView>
           {stages &&
             stages.map(stage => {
+              console.log('Stage: ', stage)
               return (
                 <View key={stage.id}>
                   <Card>
@@ -139,12 +140,12 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                         <View style={{flex: 1, flexDirection: 'row'}}>
-                          <View>
+                          <View style={{justifyContent: 'space-between', paddingLeft: 5}}>
                             <Icon name='place' color='#276FBF'/>
                             <Icon name='mobile' type='font-awesome' color='#276FBF'/>
                             <Icon name='users' type='font-awesome' color='#276FBF' size={15}/>
                           </View>
-                          <View style={{justifyContent: 'space-around', paddingLeft: 5}}>
+                          <View style={{justifyContent: 'space-between', paddingLeft: 5}}>
                             <Text>{stage.address}, {stage.city}, {stage.country}</Text>
                             <Text>{stage.phone}</Text>
                             <Text>{Math.floor(Math.random() * Math.floor(1000))} <Text style={{color: 'green'}}>active users</Text></Text>

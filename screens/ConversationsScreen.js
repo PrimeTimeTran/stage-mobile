@@ -70,7 +70,7 @@ export default class ConversationsScreen extends React.Component {
                                       <Text style={headerTitleStyle}>
                                         {conversation.name}
                                       </Text>
-                                      <Text style={{color: 'lightgray'}}>
+                                      <Text style={{color: 'green'}}>
                                         {last_message_from_user.name}
                                       </Text>
                                     </View>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   headerTitleStyle: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: '600',
     color: '#333333'
   },

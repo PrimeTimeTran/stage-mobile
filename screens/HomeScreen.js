@@ -84,8 +84,7 @@ export default class HomeScreen extends Component {
     const {
       headerContainerStyle,
       headerTextStyle,
-      avatarStyle,
-      timeStyle
+      avatarStyle
      } = styles
 
     if (posts) {
@@ -105,7 +104,7 @@ export default class HomeScreen extends Component {
                       </View>
                       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
-                        <Text style={timeStyle}>{post.created_at}</Text>
+                        <Text style={{fontSize: 10}}>{post.created_at}</Text>
                       </View>
                     </CardSection>
                     <CardSection styling={{borderBottomWidth: 0}}>
@@ -158,10 +157,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333333',
     paddingLeft: 5
-  },
-  timeStyle: {
-    fontSize: 10,
-    color: '#cacdd1'
   },
   avatarStyle: {
     height: 30,

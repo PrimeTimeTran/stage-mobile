@@ -15,7 +15,6 @@ export default class ProfileScreen extends React.Component {
     headerTitle: 'Profile',
     headerStyle: {
       backgroundColor: '#333333',
-      color: 'white',
       marginTop: Platform.OS === 'android' ? 24 : 0
     },
     headerRight: (

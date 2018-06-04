@@ -8,8 +8,9 @@ import {
   View,
   Image,
   Dimensions,
-  Button
 } from 'react-native'
+
+import { Icon, Button } from 'react-native-elements'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
@@ -91,13 +92,18 @@ export default class StagesScreen extends React.Component {
         <ScrollView>
           {stages &&
             stages.map(stage => {
+              console.log('Stage: ', stage)
               return (
                 <View key={stage.id}>
                   <Card>
                     <CardSection styling={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
-                        <Text style={headerTextStyle}>{stage.name}</Text>
+                        <Icon name='arrow-right' type='evilicon' color='white'/>
+                        <Text style={headerTextStyle}>
+                          {stage.name}
+                        </Text>
                       </View>
+                      <Icon name='heart' type='evilicon' color='white'/>
                     </CardSection>
 
                     <CardSection>
@@ -119,8 +125,22 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
-                        <Button title='Info' onPress={() => console.log('Info')}/>
-                        <Button title='Chat' onPress={() => console.log('Chat')}/>
+                      <Button
+                        outline
+                        small
+                        icon={{name: 'info-with-circle', type: 'entypo', color: '#276FBF'}}
+                        title='Info'
+                        style={{width: 100}}
+                        color='#276FBF'
+                      />
+                      <Button
+                        outline
+                        small
+                        icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
+                        title='Chat'
+                        style={{width: 100}}
+                        color='#276FBF'
+                      />
                       </View>
                     </CardSection>
                   </Card>
@@ -137,18 +157,14 @@ export default class StagesScreen extends React.Component {
 
 const styles = StyleSheet.create({
   cardHeaderStyle: {
-    borderBottomWidth: 1,
-    padding: 5,
-    paddingLeft: 0,
-    backgroundColor: '#fff',
-    justifyContent: 'flex-start',
+    flex: 1,
     flexDirection: 'row',
-    borderColor: '#ddd',
+    justifyContent: 'space-between',
     backgroundColor: '#333333',
     position: 'relative'
   },
   headerContainerStyle: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'space-around'
   },
   headerTextStyle: {

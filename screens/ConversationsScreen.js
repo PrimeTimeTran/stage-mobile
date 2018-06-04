@@ -19,14 +19,14 @@ export default class ConversationsScreen extends React.Component {
     title: 'Messages',
   };
 
-  state = { conversations: [] }
+  state = {conversations: []}
 
   componentWillMount() {
     const request = client();
     request.then(api => api.get(`${API_ROOT}conversations`)).then(response => {
       return response.data
     }).then(data => {
-      this.setState({ conversations: data })
+      this.setState({conversations: data})
     }).catch(error => {
       console.log('Error:', error)
     })
@@ -52,7 +52,7 @@ export default class ConversationsScreen extends React.Component {
                 <View key={conversation.id}>
                   <Card>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate('Conversation', { conversation_id: conversation.id})  }
+                      onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})  }
                     >
                       <CardSection>
 
@@ -61,45 +61,35 @@ export default class ConversationsScreen extends React.Component {
                           <Image
                             id={conversation.id}
                             style={styles.avatarStyle}
-                            source={{ uri: last_message_from_user.avatar_url }}
+                            source={{uri: last_message_from_user.avatar_url}}
                           />
                           <View style={containerContentStyle}>
-
-                            {/* <View style={headerInfoStyle}>
-                              <Text style={headerTitleStyle}>
-                                {conversation.name || last_message_from_user.name}
-                              </Text>
-                              <Text style={{ fontSize: 10 }}>
-                                {conversation.last_message.sent_at}
-                              </Text>
-                            </View> */}
-
                               { conversation.name ?
                                   <View style={headerInfoStyle}>
                                     <View>
                                       <Text style={headerTitleStyle}>
-                                        { conversation.name }
+                                        {conversation.name}
                                       </Text>
-                                      <Text style={{ color: 'red' }}>
-                                        { last_message_from_user.name }
+                                      <Text style={{color: 'lightgray'}}>
+                                        {last_message_from_user.name}
                                       </Text>
                                     </View>
-                                    <Text style={{ fontSize: 10 }}>
-                                      { conversation.last_message.sent_at }
+                                    <Text style={{fontSize: 10}}>
+                                      {conversation.last_message.sent_at}
                                     </Text>
                                   </View>
                                 :
                                   <View style={headerInfoStyle}>
                                     <Text style={headerTitleStyle}>
-                                      { last_message_from_user.name }
+                                      {last_message_from_user.name}
                                     </Text>
-                                    <Text style={{ fontSize: 10 }}>
-                                      { conversation.last_message.sent_at }
+                                    <Text style={{fontSize: 10}}>
+                                      {conversation.last_message.sent_at}
                                     </Text>
                                   </View>
                               }
 
-                            <Text numberOfLines={3} style={{ color: '#696969'}} >
+                            <Text numberOfLines={3} style={{color: '#696969'}} >
                               {conversation.last_message.body}
                             </Text>
                           </View>

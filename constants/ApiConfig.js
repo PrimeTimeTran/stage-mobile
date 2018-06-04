@@ -4,9 +4,9 @@ let backendHost
 const apiVersion = 'v1'
 
 if (false) {
-  backendHost = `https://${hostname}/${apiVersion}/`
+  backendHost = `https://${hostname}`
 } else {
-  backendHost = BACKEND_API_HOST
+  backendHost = BACKEND_API_HOST || 'http://localhost:3000'
 }
 
 export const API_ROOT = `${backendHost}/${apiVersion}/`

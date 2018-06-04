@@ -29,6 +29,7 @@ export default class ProfileScreen extends React.Component {
   });
 
   render() {
+    console.log('Props: ', this.props);
     return (
       <View>
         <Text>

@@ -59,7 +59,6 @@ export default class HomeScreen extends Component {
           return (
             <View style={{flex: 1}} key={upload.id}>
               <Video
-                style={{flex: 1, resizeMode: 'cover'}}
                 key={upload.id}
                 source={{uri: upload.url}}
               />
@@ -90,7 +89,7 @@ export default class HomeScreen extends Component {
 
     if (posts) {
       return (
-        <ScrollView>
+        <ScrollView scrollEventThrottle={5}>
           { posts && posts.map(post => {
             console.log('Post: ', post)
               return (
@@ -106,7 +105,7 @@ export default class HomeScreen extends Component {
                       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
                         <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-                          <Icon name='clock' type='material-community' color='black' size='10'/>
+                          <Icon name='clock' type='material-community' color='black' size={10} />
                           <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
                         </View>
                       </View>

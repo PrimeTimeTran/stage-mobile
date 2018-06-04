@@ -44,7 +44,7 @@ export default class ConversationsScreen extends React.Component {
       headerTitleStyle,
       thumbnailStyle,
       stageInfoStyle
-     } = styles;
+     } = styles
 
     if (conversations) {
       return (
@@ -54,7 +54,7 @@ export default class ConversationsScreen extends React.Component {
               return (
                 <View key={conversation.id}>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})}
+                      onPress={() => navigation.navigate('Conversation', {conversation_name: conversation.name, conversation_id: conversation.id})}
                     >
                       <View style={containerStyle}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
@@ -89,7 +89,7 @@ export default class ConversationsScreen extends React.Component {
                               <Text style={{fontSize: 10, paddingLeft: 5}}>{conversation.last_message.sent_at}</Text>
                             </View>
                           </View>
-                          <Text numberOfLines={3} style={{color: '#696969', fontSize: 13}} >{conversation.last_message.body}</Text>
+                          <Text numberOfLines={3} style={{color: '#696969', fontSize: 13}}>{conversation.last_message.body}</Text>
                         </View>
                       </View>
                     </TouchableOpacity>

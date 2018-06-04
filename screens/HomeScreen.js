@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react';
 import {
   Platform,
   ScrollView,
@@ -9,13 +9,13 @@ import {
   Image
 } from 'react-native'
 
-import { API_ROOT } from '../constants/ApiConfig'
+import VideoPlayer from '../components/VideoPlayer'
 import { Card, CardSection } from '../components/common'
-import { VideoPlayer } from '../components/VideoPlayer'
 
+import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-export default class HomeScreen extends React.Component {
+export default class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
   };

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Video } from 'expo'
 import { MaterialIcons } from '@expo/vector-icons'
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-export default class VideoPlayer extends React.Component {
+class VideoPlayer extends Component {
 	state = {
 		mute: false,
 		fullScreen: false,
@@ -77,3 +77,5 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 	}
 });
+
+export default VideoPlayer

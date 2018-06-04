@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Platform,
   ScrollView,
@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   View,
   Image
-} from 'react-native';
+} from 'react-native'
 
-import { API_ROOT } from '../constants/ApiConfig';
-import { Card, CardSection } from '../components/common';
+import { API_ROOT } from '../constants/ApiConfig'
+import { Card, CardSection } from '../components/common'
+import { VideoPlayer } from '../components/VideoPlayer'
 
-import client from '../utils/client';
+import client from '../utils/client'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -60,6 +61,14 @@ export default class HomeScreen extends React.Component {
                         <Text style={timeStyle}>{post.created_at}</Text>
                       </View>
                     </CardSection>
+
+
+                      { post.uploads.map(upload => {
+                        { if (upload.media_type == 'video') {
+                            console.log('Upload URL: ', upload.url);
+                            <CardSection><VideoPlayer video={upload.url} /></CardSection>
+                        }}})
+                      }
 
                     <CardSection>
                     <Text numberOfLines={5}>

@@ -10,7 +10,7 @@ import {
   Dimensions,
 } from 'react-native'
 
-import { Icon, Button } from 'react-native-elements'
+import { Icon, Button, ButtonGroup } from 'react-native-elements'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
@@ -23,10 +23,22 @@ import Carousel from 'react-native-looped-carousel'
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class StagesScreen extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      selectedIndex: 2,
+      stages: []
+    }
+    this.updateIndex = this.updateIndex.bind(this)
+  }
+
+  updateIndex(selectedIndex) {
+    this.setState({selectedIndex})
+  }
+
   static navigationOptions = {
     title: 'Stages'
   }
-  state = { stages: [] }
 
   componentWillMount() {
     const request = client()
@@ -87,18 +99,20 @@ export default class StagesScreen extends React.Component {
       thumbnailStyle
     } = styles
 
+    const buttons = ['Hello', 'World']
+    const { selectedIndex } = this.state
+
     if (stages) {
       return (
         <ScrollView>
           {stages &&
             stages.map(stage => {
-              console.log('Stage: ', stage)
               return (
                 <View key={stage.id}>
                   <Card>
                     <CardSection styling={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
-                        <Icon name='arrow-right' type='evilicon' color='white'/>
+                        <Icon name='chevron-right' color='white'/>
                         <Text style={headerTextStyle}>
                           {stage.name}
                         </Text>
@@ -124,11 +138,27 @@ export default class StagesScreen extends React.Component {
                       })}
                     </CardSection>
                     <CardSection>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                          <View>
+                            <Icon name='place' color='#276FBF'/>
+                            <Icon name='mobile' type='font-awesome' color='#276FBF'/>
+                            <Icon name='users' type='font-awesome' color='#276FBF' size={15}/>
+                          </View>
+                          <View style={{justifyContent: 'space-around', paddingLeft: 5}}>
+                            <Text>{stage.address}, {stage.city}, {stage.country}</Text>
+                            <Text>{stage.phone}</Text>
+                            <Text>{Math.floor(Math.random() * Math.floor(1000))} <Text style={{color: 'green'}}>active users</Text></Text>
+                          </View>
+                      </View>
+                    </CardSection>
+                    <CardSection>
                       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
+                      {/*
+                        <Text> Works but ugly</Text>
                       <Button
                         outline
                         small
-                        icon={{name: 'info-with-circle', type: 'entypo', color: '#276FBF'}}
+                        icon={{name: 'info', type: 'feather', color: '#276FBF'}}
                         title='Info'
                         style={{width: 100}}
                         color='#276FBF'
@@ -140,6 +170,13 @@ export default class StagesScreen extends React.Component {
                         title='Chat'
                         style={{width: 100}}
                         color='#276FBF'
+                      /> */}
+                      <ButtonGroup
+                        onPress={this.updateIndex}
+                        selectedIndex={selectedIndex}
+                        buttons={buttons}
+                        color='red'
+                        containerStyle={{backgroundColor: 'red'}}
                       />
                       </View>
                     </CardSection>

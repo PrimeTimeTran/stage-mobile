@@ -108,7 +108,7 @@ export default class StagesScreen extends React.Component {
         <ScrollView>
           {stages &&
             stages.map(stage => {
-              console.log('Stage: ', stage)
+              // console.log('Stage: ', stage)
               return (
                 <View key={stage.id}>
                   <Card>

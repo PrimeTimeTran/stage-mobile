@@ -92,7 +92,6 @@ export default class HomeScreen extends Component {
       return (
         <ScrollView>
           { posts && posts.map(post => {
-            console.log('Post: ', post)
               return (
                 <View key={post.id}>
                   <Card>
@@ -106,7 +105,7 @@ export default class HomeScreen extends Component {
                       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
                         <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-                          <Icon name='clock' type='material-community' color='black' size='10'/>
+                          <Icon name='clock' type='material-community' color='black' size={10}/>
                           <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
                         </View>
                       </View>
@@ -133,8 +132,8 @@ export default class HomeScreen extends Component {
                         }}})
                       }
                       <CardSection styling={{justifyContent: 'space-around'}}>
-                        <Button title='Like' />
-                        <Button title='Comment' />
+                        <Button title='Like' onPress={() => {}} />
+                        <Button title='Comment' onPress={() => {}} />
                       </CardSection>
                   </Card>
                 </View>

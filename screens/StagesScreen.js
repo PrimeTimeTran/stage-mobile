@@ -108,7 +108,6 @@ export default class StagesScreen extends React.Component {
         <ScrollView>
           {stages &&
             stages.map(stage => {
-              console.log('Stage: ', stage)
               return (
                 <View key={stage.id}>
                   <Card>
@@ -167,8 +166,8 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
-                      {/*
-                        <Text> Works but ugly</Text>
+
+                      <Text> Works but ugly</Text>
                       <Button
                         outline
                         small
@@ -184,14 +183,15 @@ export default class StagesScreen extends React.Component {
                         title='Chat'
                         style={{width: 100}}
                         color='#276FBF'
-                      /> */}
-                      <ButtonGroup
+                        onPress={() => this.props.navigation.navigate('Conversation', {conversation_id: stage.conversation_id, stages: true})}
+                      />
+                      {/* <ButtonGroup
                         onPress={this.updateIndex}
                         selectedIndex={selectedIndex}
                         buttons={buttons}
                         color='red'
                         containerStyle={{backgroundColor: 'red'}}
-                      />
+                      /> */}
                       </View>
                     </CardSection>
                   </Card>

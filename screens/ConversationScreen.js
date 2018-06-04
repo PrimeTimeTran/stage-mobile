@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
-import { View, Text, Button, Platform } from 'react-native';
+import React, { Component } from 'react'
+import { View, Text, Button, Platform } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
-import { sendMessage, setCallback } from "../utils/chat";
+import { StackActions } from 'react-navigation';
+import { Icon } from 'react-native-elements'
+import { sendMessage, setCallback } from "../utils/chat"
 
-import { API_ROOT } from '../constants/ApiConfig';
-import client from '../utils/client';
+import { API_ROOT } from '../constants/ApiConfig'
+import client from '../utils/client'
 
 export default class ConversationScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: []
+    }
+  }
+
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Conversation',
     headerRight: (
@@ -21,9 +30,6 @@ export default class ConversationScreen extends Component {
       marginTop: Platform.OS === 'android' ? 24 : 0
     }
   });
-  state = {
-    messages: [],
-  }
 
   updateMessages(message) {
     let newMessage = message[0];
@@ -31,9 +37,10 @@ export default class ConversationScreen extends Component {
   }
 
   componentWillMount() {
+    console.log('This Navigation', );
     const conversation_id = this.props.navigation.state.params.conversation_id
 
-    const request = client();
+    const request = client()
     request.then(api => api.get(`${API_ROOT}conversations/${conversation_id}/messages`))
     .then(response => {
       return response.data
@@ -71,6 +78,3 @@ export default class ConversationScreen extends Component {
     )
   }
 }
-
-
-

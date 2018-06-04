@@ -6,7 +6,7 @@ const apiVersion = 'v1'
 if (false) {
   backendHost = `https://${hostname}/${apiVersion}/`
 } else {
-  backendHost = BACKEND_API_HOST || 'http://localhost:3000' || process.env.REACT_APP_BACKEND_HOST
+  backendHost = BACKEND_API_HOST
 }
 
 export const API_ROOT = `${backendHost}/${apiVersion}/`

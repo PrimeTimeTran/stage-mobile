@@ -53,7 +53,6 @@ export default class ConversationsScreen extends React.Component {
             const { last_message_from_user } = conversation
               return (
                 <View key={conversation.id}>
-
                     <TouchableOpacity
                       onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})}
                     >
@@ -77,8 +76,8 @@ export default class ConversationsScreen extends React.Component {
                             { conversation.name ?
                               <View>
                                 <Text style={[headerTitleStyle, {textDecorationLine: 'underline'}]}>{conversation.name}</Text>
-                                <View style={{flexDirection: 'row', alignItems: 'center', color: '#7EA172'}}>
-                                  <Icon name='chevron-right' color='#7EA172' size='15' />
+                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                  <Icon name='chevron-right' color='#7EA172' size={15} />
                                   <Text style={stageInfoStyle}>{last_message_from_user.name}</Text>
                                 </View>
                               </View>
@@ -86,7 +85,7 @@ export default class ConversationsScreen extends React.Component {
                               <Text style={headerTitleStyle}>{last_message_from_user.name}</Text>
                             }
                             <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-                              <Icon name='clock' type='material-community' color='black' size='10'/>
+                              <Icon name='clock' type='material-community' color='black' size={10}/>
                               <Text style={{fontSize: 10, paddingLeft: 5}}>{conversation.last_message.sent_at}</Text>
                             </View>
                           </View>

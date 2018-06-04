@@ -10,7 +10,7 @@ const chat = createChannel('ChatChannel', {
     console.log('Disconnected');
   },
   received( message ) {
-    console.log('Message: ', message)
+    console.log('Message Received in Cable: ', message)
     if (callback) callback.call(null, message);
   }
 });

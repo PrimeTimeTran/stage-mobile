@@ -58,6 +58,7 @@ HomeStack.navigationOptions = {
 const StagesStack = createStackNavigator({
   Stages: StagesScreen,
   Stage: StageScreen,
+  Conversation: ConversationScreen
 });
 
 StagesStack.navigationOptions = ({ navigation }) => {

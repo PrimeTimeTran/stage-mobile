@@ -107,8 +107,8 @@ const MainTabScreen = createBottomTabNavigator({
         borderTopColor: 'white',
         padding: 5
       },
-    }
-  }
+    },
+  },
 );
 
 export default createBottomTabNavigator(

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  Button
 } from 'react-native'
 
 import Lightbox from 'react-native-lightbox'
@@ -91,6 +92,7 @@ export default class HomeScreen extends Component {
       return (
         <ScrollView>
           { posts && posts.map(post => {
+            console.log('Post: ', post)
               return (
                 <View key={post.id}>
                   <Card>
@@ -106,7 +108,8 @@ export default class HomeScreen extends Component {
                         <Text style={timeStyle}>{post.created_at}</Text>
                       </View>
                     </CardSection>
-                    <CardSection style={{width: 100, height: 100, borderWith: 0}}>
+                    <CardSection styling={{borderBottomWidth: 0}}>
+
                       <Text numberOfLines={5}>
                           {post.body}
                       </Text>
@@ -127,6 +130,10 @@ export default class HomeScreen extends Component {
                             )
                         }}})
                       }
+                      <CardSection styling={{justifyContent: 'space-around'}}>
+                        <Button title='Like' />
+                        <Button title='Comment' />
+                      </CardSection>
                   </Card>
                 </View>
                 )

@@ -13,6 +13,11 @@ import {
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Profile',
+    headerStyle: {
+      backgroundColor: '#333333',
+      color: 'white',
+      marginTop: Platform.OS === 'android' ? 24 : 0
+    },
     headerRight: (
       <Button
         title='Settings'
@@ -21,9 +26,7 @@ export default class ProfileScreen extends React.Component {
         color='blue'
       />
     ),
-    headerStyle: {
-      marginTop: Platform.OS === 'android' ? 24 : 0
-    }
+
   });
 
   render() {

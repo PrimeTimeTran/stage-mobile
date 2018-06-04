@@ -51,7 +51,6 @@ export default class ConversationsScreen extends React.Component {
         <ScrollView>
           { conversations && conversations.map(conversation => {
             const { last_message_from_user } = conversation
-            console.log('Conversation: ', conversation)
               return (
                 <View key={conversation.id}>
 
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
   avatarStyle: {
     height: 50,
     width: 50,
-    borderRadius: 25,
+    borderRadius: 25
   },
   stageInfoStyle: {
     color: 'green',

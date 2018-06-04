@@ -11,6 +11,7 @@ import {
   Button
 } from 'react-native'
 
+import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
@@ -104,7 +105,10 @@ export default class HomeScreen extends Component {
                       </View>
                       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
-                        <Text style={{fontSize: 10}}>{post.created_at}</Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                          <Icon name='clock' type='material-community' color='black' size='10'/>
+                          <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
+                        </View>
                       </View>
                     </CardSection>
                     <CardSection styling={{borderBottomWidth: 0}}>
@@ -158,10 +162,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   avatarStyle: {
-    height: 30,
-    width: 30,
-    paddingLeft: 10,
-    marginLeft: 10,
-    borderRadius: 15
+    height: 50,
+    width: 50,
+    borderRadius: 25,
   }
 });

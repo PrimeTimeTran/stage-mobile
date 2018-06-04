@@ -32,7 +32,7 @@ export default class VideoPlayer extends React.Component {
 						<Video
 							source={{ uri: this.state.videoUrl }}
 							shouldPlay={this.state.shouldPlay}
-							fullscreen
+							resizeMode="cover"
 							style={{ width: 300, height: 300 }}
 							isMuted={this.state.mute}
 						/>

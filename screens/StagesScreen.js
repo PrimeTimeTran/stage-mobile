@@ -55,7 +55,7 @@ export default class StagesScreen extends React.Component {
       })
   }
 
-  showStage(stage, upload, index) {
+  showStageUploads(stage, upload, index) {
     return (
       <Carousel
         currentPage={index}
@@ -129,7 +129,7 @@ export default class StagesScreen extends React.Component {
                             key={upload.id}
                             swipeToDismiss={false}
                             renderContent={() =>
-                              this.showStage(stage, upload, index)
+                              this.showStageUploads(stage, upload, index)
                             }>
                             <View>
                               <Image
@@ -154,9 +154,9 @@ export default class StagesScreen extends React.Component {
                     <CardSection>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                           <View style={descriptionStyle}>
-                            <Icon name='users' type='font-awesome' color='#276FBF' size={15}/>
-                            <Icon name='place' color='#276FBF'/>
-                            <Icon name='mobile' type='font-awesome' color='#276FBF'/>
+                            <Icon name='users' type='font-awesome' color='green' size={10}/>
+                            <Icon name='place' color='black' size={15}/>
+                            <Icon name='mobile' type='font-awesome' color='black' size={17}/>
                           </View>
                           <View style={descriptionStyle}>
                             <Text style={{color: 'green'}}>{Math.floor(Math.random() * Math.floor(1000))} Active Users</Text>
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   headerContainerStyle: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   headerTextStyle: {
     fontSize: 25,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Platform,
   ScrollView,
@@ -17,19 +17,23 @@ import client from '../utils/client'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Home',
+    title: 'Home'
   };
   state = { posts: [] }
 
   componentWillMount() {
     const request = client();
-    request.then(api => api.get(`${API_ROOT}posts`)).then(response => {
-      return response.data
-    }).then(data => {
-      this.setState({ posts: data })
-    }).catch(error => {
-      console.log('Error:', error)
-    })
+    request
+      .then(api => api.get(`${API_ROOT}posts`))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setState({ posts: data })
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
   render() {
@@ -40,7 +44,7 @@ export default class HomeScreen extends Component {
       headerTextStyle,
       avatarStyle,
       timeStyle
-     } = styles;
+     } = styles
 
     if (posts) {
       return (
@@ -63,8 +67,9 @@ export default class HomeScreen extends Component {
                     </CardSection>
                       { post.uploads.map(upload => {
                         { if (upload.media_type == 'video') {
+                            console.log('Post has video upload: ', upload);
                             console.log('Post has video upload. Upload URL: ', upload.url);
-                            <CardSection>
+                            <CardSection style={{ flex: 1, height: 100, width: 100}}>
                               <VideoPlayer video={upload.url} />
                             </CardSection>
                         }}})
@@ -98,11 +103,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: '#333333',
-    paddingLeft: 5,
+    paddingLeft: 5
   },
   timeStyle: {
     fontSize: 10,
-    color: '#cacdd1',
+    color: '#cacdd1'
   },
   avatarStyle: {
     height: 30,

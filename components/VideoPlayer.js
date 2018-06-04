@@ -7,7 +7,7 @@ const { WINDOW_WIDTH } = Dimensions.get('window')
 
 export default class VideoPlayer extends Component {
 	state = {
-		mute: false,
+		mute: true,
 		fullScreen: false,
     shouldPlay: true,
     videoUrl: this.props.video
@@ -26,17 +26,17 @@ export default class VideoPlayer extends Component {
 	}
 
   render() {
-		console.log('Rendering Video Player: ', this)
     return (
-			<View style={{ flex: 1, height: 100, width: 100}}>
+			<View>
 					<Video
-						source={{ uri: this.state.videoUrl }}
+						source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
 						shouldPlay={this.state.shouldPlay}
 						resizeMode="cover"
 						isMuted={this.state.mute}
+						style={{height: 100, width: 100}}
 					/>
 					<View>
-						<MaterialIcons
+						{/* <MaterialIcons
 							name={this.state.mute ? "volume-mute" : "volume-up"}
 							size={45}
 							color="white"
@@ -47,7 +47,7 @@ export default class VideoPlayer extends Component {
 							size={45}
 							color="white"
 							onPress={this.handlePlayAndPause}
-						/>
+						/> */}
 					</View>
 			</View>
 		);

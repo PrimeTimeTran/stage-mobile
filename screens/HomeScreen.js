@@ -6,14 +6,20 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Dimensions
 } from 'react-native'
+
+import Lightbox from 'react-native-lightbox'
+import Carousel from 'react-native-looped-carousel'
 
 import VideoPlayer from '../components/VideoPlayer'
 import { Card, CardSection } from '../components/common'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
+
+const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -29,11 +35,46 @@ export default class HomeScreen extends Component {
         return response.data
       })
       .then(data => {
-        this.setState({ posts: data })
+        this.setState({posts: data})
       })
       .catch(error => {
         console.log('Error:', error)
       })
+  }
+
+  showStage(post, upload, index) {
+    return (
+      <Carousel
+        currentPage={index}
+        autoplay={false}
+        style={{
+          flex: 1,
+          width: WINDOW_WIDTH,
+          height: WINDOW_HEIGHT
+        }}>
+        {post.uploads.map(upload => {
+          return (
+            <View style={{flex: 1}} key={upload.id}>
+              <Image
+                style={{flex: 1, resizeMode: 'cover'}}
+                key={upload.id}
+                source={{uri: upload.url}}
+              />
+              <Text
+                style={{
+                  color: '#fff',
+                  position: 'absolute',
+                  bottom: 20,
+                  right: 20,
+                  fontWeight: 'bold'
+                }}>
+                {Math.floor(Math.random() * Math.floor(200))} likes
+              </Text>
+            </View>
+          )
+        })}
+      </Carousel>
+    )
   }
 
   render() {
@@ -57,29 +98,35 @@ export default class HomeScreen extends Component {
                       <View style={headerContainerStyle}>
                         <Image
                           style={avatarStyle}
-                          source={{ uri: post.user.avatar_url }}
+                          source={{uri: post.user.avatar_url}}
                         />
                       </View>
-                      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>
                         <Text style={timeStyle}>{post.created_at}</Text>
                       </View>
                     </CardSection>
-                      { post.uploads.map(upload => {
-                        { if (upload.media_type == 'video') {
-                            console.log('Post has video upload: ', upload);
-                            console.log('Post has video upload. Upload URL: ', upload.url);
-                            <CardSection style={{ flex: 1, height: 100, width: 100}}>
-                              <VideoPlayer video={upload.url} />
-                            </CardSection>
-                        }}})
-                      }
-
-                    <CardSection>
-                    <Text numberOfLines={5}>
-                        {post.body}
+                    <CardSection style={{width: 100, height: 100, borderWith: 0}}>
+                      <Text numberOfLines={5}>
+                          {post.body}
                       </Text>
                     </CardSection>
+                      { post.uploads.map((upload, index) => {
+                        { if (upload.media_type == 'video') {
+                            return (
+                              <CardSection>
+                                <Lightbox
+                                  key={upload.id}
+                                  swipeToDismiss={false}
+                                  renderContent={() =>
+                                    this.showStage(post, upload, index)
+                                  }>
+                                  <VideoPlayer video={upload.url} />
+                                </Lightbox>
+                              </CardSection>
+                            )
+                        }}})
+                      }
                   </Card>
                 </View>
                 )

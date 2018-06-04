@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, AsyncStorage, ImageBackground } from 'react-native';
-import { AppLoading } from 'expo';
+import _ from 'lodash'
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, AsyncStorage, ImageBackground } from 'react-native'
+import { AppLoading } from 'expo'
 
 import Slides from '../components/slides'
 
@@ -18,12 +18,12 @@ const SLIDE_DATA = [
 
   async componentWillMount() {
     // let token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk1Nzk4MTJ9.yQnmTqPo5kTHOFrkbR5f4YXuYJQo3t5WXkYH8zS-Oa-b6OlridEu9McSlwVMN5yVg9OD8L6t0b6MBbWwonAwVg')
-    token = await AsyncStorage.getItem('auth_token');
+    token = await AsyncStorage.getItem('auth_token')
     if (token) {
-      this.props.navigation.navigate('Conversations');
+      this.props.navigation.navigate('Conversations')
       this.setState({ token })
     } else {
-      this.setState({ token: false });
+      this.setState({ token: false })
     }
   }
 
@@ -33,7 +33,7 @@ const SLIDE_DATA = [
 
   render() {
     if (_.isNull(this.state.token)) {
-      return <AppLoading />;
+      return <AppLoading />
     }
     return (
       <Slides
@@ -44,4 +44,4 @@ const SLIDE_DATA = [
   }
 }
 
-export default Welcome;
+export default Welcome

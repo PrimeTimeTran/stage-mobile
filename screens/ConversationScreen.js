@@ -9,15 +9,8 @@ import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 export default class ConversationScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      messages: []
-    }
-  }
-
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: navigation.state.params.conversation_name,
+    headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),
     headerRight: (
       <Button
         title="Users"
@@ -30,6 +23,10 @@ export default class ConversationScreen extends Component {
       marginTop: Platform.OS === 'android' ? 24 : 0
     }
   })
+
+  state = {messages: []}
+
+
 
   componentWillMount() {
     const conversation_id = this.props.navigation.state.params.conversation_id

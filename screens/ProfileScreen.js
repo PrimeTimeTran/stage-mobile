@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Image,
   Platform,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
   Button
-} from 'react-native';
+} from 'react-native'
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -29,7 +29,7 @@ export default class ProfileScreen extends React.Component {
   });
 
   render() {
-    console.log('Props: ', this.props);
+    console.log('Props: ', this.props)
     return (
       <View>
         <Text>

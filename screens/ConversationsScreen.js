@@ -25,13 +25,18 @@ export default class ConversationsScreen extends React.Component {
 
   componentWillMount() {
     const request = client();
-    request.then(api => api.get(`${API_ROOT}conversations`)).then(response => {
-      return response.data
-    }).then(data => {
-      this.setState({conversations: data})
-    }).catch(error => {
-      console.log('Error:', error)
-    })
+    request
+      .then(api =>
+        api.get(`${API_ROOT}conversations`))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setState({conversations: data})
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
   render() {
@@ -54,7 +59,11 @@ export default class ConversationsScreen extends React.Component {
               return (
                 <View key={conversation.id}>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate('Conversation', {conversation_name: conversation.name, conversation_id: conversation.id})}
+                      onPress={() => navigation.navigate('Conversation', {
+                                      conversation_name: conversation.name,
+                                      conversation_id: conversation.id,
+                                      other_user_name: conversation.other_users[0].first_name
+                                    })}
                     >
                       <View style={containerStyle}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>

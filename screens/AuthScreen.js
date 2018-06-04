@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Button } from 'react-native';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { View, Text, AsyncStorage, Button } from 'react-native'
+import { connect } from 'react-redux'
 
-import * as actions from '../actions';
+import * as actions from '../actions'
 
 class AuthScreen extends Component {
   componentDidMount() {
@@ -18,12 +18,12 @@ class AuthScreen extends Component {
 
   onAuthComplete(props) {
     if (props.token) {
-      this.props.navigation.navigate('Conversations');
+      this.props.navigation.navigate('Conversations')
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.onAuthComplete(nextProps);
+    this.onAuthComplete(nextProps)
   }
 
   render() {
@@ -49,7 +49,7 @@ class AuthScreen extends Component {
 }
 
 function mapStateToProps({ auth }) {
-  return { token: auth.token };
+  return { token: auth.token }
 }
 
 export default connect(mapStateToProps, actions)(AuthScreen);

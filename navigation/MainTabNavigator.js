@@ -26,6 +26,7 @@ const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
   Users: UsersScreen,
+  Profile: ProfileScreen,
 });
 
 ConversationsStack.navigationOptions = ({ navigation }) => {

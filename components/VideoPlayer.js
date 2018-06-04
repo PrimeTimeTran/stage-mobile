@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Video } from 'expo'
 import { MaterialIcons } from '@expo/vector-icons'
 
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 export default class VideoPlayer extends React.Component {
 	state = {
 		mute: false,
@@ -24,8 +26,6 @@ export default class VideoPlayer extends React.Component {
 	}
 
   render() {
-		const { width } = Dimensions.get('window');
-
     return (
       <View style={styles.container}>
 				<View>
@@ -59,11 +59,11 @@ export default class VideoPlayer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'red',
     alignItems: 'center',
 		justifyContent: 'center',
 		height: 100,
-		width: 100
+		width: SCREEN_WIDTH
 	},
 	controlBar: {
     position: 'absolute',

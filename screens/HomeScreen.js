@@ -61,12 +61,12 @@ export default class HomeScreen extends React.Component {
                         <Text style={timeStyle}>{post.created_at}</Text>
                       </View>
                     </CardSection>
-
-
                       { post.uploads.map(upload => {
                         { if (upload.media_type == 'video') {
-                            console.log('Upload URL: ', upload.url);
-                            <CardSection><VideoPlayer video={upload.url} /></CardSection>
+                            console.log('Post has video upload. Upload URL: ', upload.url);
+                            <CardSection>
+                              <VideoPlayer video={upload.url} />
+                            </CardSection>
                         }}})
                       }
 

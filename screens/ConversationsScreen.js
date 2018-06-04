@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Platform,
   ScrollView,
@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
   View,
   Image
-} from 'react-native';
+} from 'react-native'
 
-import { API_ROOT } from '../constants/ApiConfig';
-import { Card, CardSection } from '../components/common';
+import { Icon } from 'react-native-elements'
 
-import client from '../utils/client';
+import { API_ROOT } from '../constants/ApiConfig'
+import { Card, CardSection } from '../components/common'
+
+import client from '../utils/client'
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
@@ -48,65 +50,51 @@ export default class ConversationsScreen extends React.Component {
         <ScrollView>
           { conversations && conversations.map(conversation => {
             const { last_message_from_user } = conversation
+            console.log('Conversation: ', conversation)
               return (
                 <View key={conversation.id}>
-                  <Card>
+
                     <TouchableOpacity
                       onPress={() => navigation.navigate('Conversation', {conversation_id: conversation.id})  }
                     >
-                      <CardSection>
-
-                        <View style={containerStyle}>
-
+                      <View style={containerStyle}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
                           <Image
                             id={conversation.id}
                             style={styles.avatarStyle}
                             source={{uri: last_message_from_user.avatar_url}}
                           />
-                          <View style={containerContentStyle}>
-                              { conversation.name ?
-                                  <View style={headerInfoStyle}>
-                                    <View>
-                                      <Text style={headerTitleStyle}>
-                                        {conversation.name}
-                                      </Text>
-                                      <Text style={{color: 'green'}}>
-                                        {last_message_from_user.name}
-                                      </Text>
-                                    </View>
-                                    <Text style={{fontSize: 10}}>
-                                      {conversation.last_message.sent_at}
-                                    </Text>
-                                  </View>
-                                :
-                                  <View style={headerInfoStyle}>
-                                    <Text style={headerTitleStyle}>
-                                      {last_message_from_user.name}
-                                    </Text>
-                                    <Text style={{fontSize: 10}}>
-                                      {conversation.last_message.sent_at}
-                                    </Text>
-                                  </View>
-                              }
+                          { (conversation.is_stage) &&
+                              <View style={{ justifyContent: 'space-between', alignItems: 'center'}}>
+                                <Text style={{color: 'green', fontSize: 10}}>Active</Text>
+                                <Icon name='users' type='font-awesome' color='green' size={10} />
+                                <Text style={{color: 'green', fontSize: 10}}>{Math.floor(Math.random() * Math.floor(1000))}</Text>
+                              </View>
+                          }
 
+                        </View>
+                        <View style={containerContentStyle}>
+                          <View style={headerInfoStyle}>
+                            { conversation.name ?
+                              <View>
+                                <Text style={headerTitleStyle}>{conversation.name}</Text>
+                                <Text style={{color: 'green'}}>{last_message_from_user.name}</Text>
+                              </View>
+                            :
+                              <Text style={headerTitleStyle}>{last_message_from_user.name}</Text>
+                            }
+
+                            <Text style={{fontSize: 10}}>
+                              {conversation.last_message.sent_at}
+                            </Text>
+                            </View>
                             <Text numberOfLines={3} style={{color: '#696969'}} >
                               {conversation.last_message.body}
                             </Text>
                           </View>
-
-                        </View>
-
-                      </CardSection>
-
-                      {/* <CardSection>
-                        { stage.uploads.map(upload => {
-                            return <Image style={{ height: 100, width: 100 }} id={upload.id} source={{ uri: upload.url }} />
-                          })
-                        }
-                      </CardSection> */}
-
+                      </View>
                     </TouchableOpacity>
-                  </Card>
+
                 </View>
                 )
               }
@@ -124,7 +112,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    backgroundColor: 'white'
   },
   containerContentStyle: {
     padding: 5,

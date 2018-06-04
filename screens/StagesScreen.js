@@ -131,10 +131,22 @@ export default class StagesScreen extends React.Component {
                             renderContent={() =>
                               this.showStage(stage, upload, index)
                             }>
-                            <Image
-                              style={{ height: 100, width: 100 }}
-                              source={{ uri: upload.url }}
-                            />
+                            <View>
+                              <Image
+                                style={{ height: 100, width: 100 }}
+                                source={{ uri: upload.url }}
+                              />
+                              <Text
+                                style={{
+                                  color: '#fff',
+                                  position: 'absolute',
+                                  bottom: 2,
+                                  right: 2,
+                                  fontWeight: 'bold'
+                                }}>
+                                {Math.floor(Math.random() * Math.floor(200))} likes
+                              </Text>
+                            </View>
                           </Lightbox>
                         )
                       })}
@@ -142,14 +154,14 @@ export default class StagesScreen extends React.Component {
                     <CardSection>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                           <View style={descriptionStyle}>
+                            <Icon name='users' type='font-awesome' color='#276FBF' size={15}/>
                             <Icon name='place' color='#276FBF'/>
                             <Icon name='mobile' type='font-awesome' color='#276FBF'/>
-                            <Icon name='users' type='font-awesome' color='#276FBF' size={15}/>
                           </View>
                           <View style={descriptionStyle}>
+                            <Text style={{color: 'green'}}>{Math.floor(Math.random() * Math.floor(1000))} Active Users</Text>
                             <Text>{stage.address}, {stage.city}, {stage.country}</Text>
                             <Text>{stage.phone}</Text>
-                            <Text>{Math.floor(Math.random() * Math.floor(1000))} <Text style={{color: 'green'}}>active users</Text></Text>
                           </View>
                       </View>
                     </CardSection>

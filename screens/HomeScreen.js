@@ -13,6 +13,7 @@ import {
 
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
+import { Video } from 'expo'
 
 import VideoPlayer from '../components/VideoPlayer'
 import { Card, CardSection } from '../components/common'
@@ -43,7 +44,7 @@ export default class HomeScreen extends Component {
       })
   }
 
-  showStage(post, upload, index) {
+  showUploads(post, upload, index) {
     return (
       <Carousel
         currentPage={index}
@@ -56,7 +57,7 @@ export default class HomeScreen extends Component {
         {post.uploads.map(upload => {
           return (
             <View style={{flex: 1}} key={upload.id}>
-              <Image
+              <Video
                 style={{flex: 1, resizeMode: 'cover'}}
                 key={upload.id}
                 source={{uri: upload.url}}
@@ -79,7 +80,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-
     const { posts } = this.state
     const {
       headerContainerStyle,
@@ -108,7 +108,6 @@ export default class HomeScreen extends Component {
                       </View>
                     </CardSection>
                     <CardSection styling={{borderBottomWidth: 0}}>
-
                       <Text numberOfLines={5}>
                           {post.body}
                       </Text>
@@ -121,7 +120,7 @@ export default class HomeScreen extends Component {
                                   key={upload.id}
                                   swipeToDismiss={false}
                                   renderContent={() =>
-                                    this.showStage(post, upload, index)
+                                    this.showUploads(post, upload, index)
                                   }>
                                   <VideoPlayer video={upload.url} />
                                 </Lightbox>
@@ -142,7 +141,7 @@ export default class HomeScreen extends Component {
         </ScrollView>
       )
     } else {
-      <div>Empty</div>
+      return <div>Empty</div>
     }
   }
 }
@@ -163,7 +162,6 @@ const styles = StyleSheet.create({
     width: 30,
     paddingLeft: 10,
     marginLeft: 10,
-    borderRadius: 15,
-    borderWidth: 0.5
+    borderRadius: 15
   }
 });

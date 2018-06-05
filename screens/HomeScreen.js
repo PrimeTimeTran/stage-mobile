@@ -26,7 +26,11 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Home'
+    title: 'Home',
+    headerTitleStyle: {color: 'white'},
+    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white',
   };
   state = { posts: [] }
 
@@ -98,7 +102,7 @@ export default class HomeScreen extends Component {
                     <CardSection>
                       <View style={headerContainerStyle}>
                         <TouchableOpacity
-                          onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id})}
+                          onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
                         >
                           <Image
                             style={avatarStyle}

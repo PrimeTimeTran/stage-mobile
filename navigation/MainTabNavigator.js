@@ -18,6 +18,7 @@ import StagesScreen from '../screens/StagesScreen'
 import StageScreen from '../screens/StageScreen'
 
 import ProfileScreen from '../screens/ProfileScreen'
+import MyProfileScreen from '../screens/MyProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 
 import TestScreen from '../screens/TestScreen'
@@ -25,8 +26,8 @@ import TestScreen from '../screens/TestScreen'
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
-  Users: UsersScreen,
   Profile: ProfileScreen,
+  Users: UsersScreen
 })
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
@@ -59,7 +60,8 @@ HomeStack.navigationOptions = {
 const StagesStack = createStackNavigator({
   Stages: StagesScreen,
   Stage: StageScreen,
-  Conversation: ConversationScreen
+  Conversation: ConversationScreen,
+  Profile: ProfileScreen,
 })
 
 StagesStack.navigationOptions = ({ navigation }) => {
@@ -76,7 +78,7 @@ StagesStack.navigationOptions = ({ navigation }) => {
 }
 
 const ProfileStack = createStackNavigator({
-  Profile: ProfileScreen,
+  MyProfileScreen: MyProfileScreen,
   Settings: SettingsScreen
 })
 

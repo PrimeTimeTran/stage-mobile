@@ -22,6 +22,14 @@ import client from '../utils/client'
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class StagesScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Stages',
+    headerTitleStyle: {color: 'white'},
+    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white',
+  }
+
   constructor () {
     super()
     this.state = {
@@ -33,10 +41,6 @@ export default class StagesScreen extends React.Component {
 
   updateIndex(selectedIndex) {
     this.setState({selectedIndex})
-  }
-
-  static navigationOptions = {
-    title: 'Stages'
   }
 
   componentWillMount() {

@@ -10,18 +10,18 @@ import client from '../utils/client'
 
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
+    headerTitleStyle: {color: 'white'},
+    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white',
     headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),
     headerRight: (
       <Button
         title="Users"
         onPress={() => navigation.navigate('Users')}
-        backgroundColor="#54C7FC"
-        color="blue"
+        color="white"
       />
-    ),
-    headerStyle: {
-      marginTop: Platform.OS === 'android' ? 24 : 0
-    }
+    )
   })
 
   state = {messages: []}
@@ -104,7 +104,7 @@ export default class ConversationScreen extends Component {
   }
 
   handleAvatarClick = props => {
-    this.props.navigation.navigate('Profile', {user_id: props._id})
+    this.props.navigation.navigate('Profile', {user_id: props._id, name: props.name})
   }
 
   render() {

@@ -27,29 +27,14 @@ export default class VideoPlayer extends Component {
 
   render() {
     return (
-			<View>
-					<Video
-						source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
-						shouldPlay={this.state.shouldPlay}
-						resizeMode="cover"
-						isMuted={this.state.mute}
-						style={{height: 100, width: 100}}
-					/>
-					<View>
-						{/* <MaterialIcons
-							name={this.state.mute ? "volume-mute" : "volume-up"}
-							size={45}
-							color="white"
-							onPress={this.handleVolume}
-						/>
-						<MaterialIcons
-							name={this.state.shouldPlay ? "pause" : "play-arrow"}
-							size={45}
-							color="white"
-							onPress={this.handlePlayAndPause}
-						/> */}
-					</View>
-			</View>
+				<Video
+					// source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
+					source={{uri: this.state.videoUrl}}
+					shouldPlay={this.state.shouldPlay}
+					resizeMode="cover"
+					isMuted={this.state.mute}
+					style={{height: 100, width: 100}}
+				/>
 		);
   }
 }

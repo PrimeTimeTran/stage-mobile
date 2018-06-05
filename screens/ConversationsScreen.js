@@ -13,7 +13,7 @@ import {
 import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
-import { Video } from 'expo'
+import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
@@ -25,6 +25,10 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
     title: 'Messages',
+    headerStyle: {backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerTitleStyle: {color: 'white'},
+    headerBackTitleStyle: {color: 'white'},
+    headerTintColor: 'white'
   };
 
   state = {conversations: []}
@@ -97,7 +101,6 @@ export default class ConversationsScreen extends React.Component {
       return (
         <ScrollView>
           { conversations && conversations.map(conversation => {
-            console.log('Conversaton:', conversation)
             const { name, avatar_url } = conversation.last_message_from_user
               return (
                 <View key={conversation.id}>
@@ -152,10 +155,7 @@ export default class ConversationsScreen extends React.Component {
                                   this.showStageUploads(conversation, upload, index)
                                 }>
                                 <View style={{flex: 1}}>
-                                  <Video
-                                    style={{paddingLeft: 5, height: 50, width: 50, backgroundColor: 'red', borderBottomWidth: 1, borderColor: 'blue'}}
-                                    source={{uri: upload.url}}
-                                  />
+                                  <VideoPlayer video={upload.url}/>
                                   <Text
                                     style={{
                                       color: '#fff',

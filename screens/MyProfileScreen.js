@@ -22,21 +22,14 @@ import client from '../utils/client'
 
 const { width } = Dimensions.get('window');
 
-export default class ProfileScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTintColor: 'white',
+export default class MyProfileScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Profile',
     headerTitleStyle: {color: 'white'},
+    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
     headerBackTitleStyle: {color: 'white'},
-    headerTitle: `${navigation.state.params.first_name}`,
-    headerStyle: {backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
-    headerRight: (
-      <Button
-        title='Settings'
-        onPress={() => navigation.navigate('Settings')}
-        color='white'
-      />
-    ),
-  });
+    headerTintColor: 'white',
+  };
 
   constructor(props) {
     super(props);
@@ -48,7 +41,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   componentWillMount() {
-    const user_id = this.props.navigation.state.params.user_id || 1
+    const user_id = 1
     const request = client();
     request
       .then(api =>
@@ -72,7 +65,6 @@ export default class ProfileScreen extends React.Component {
   render() {
     const { descriptionStyle } = styles
     const { size, user } = this.state
-    console.log(user);
 
     if (user && user.uploads && user.uploads.length > 0) {
       return (

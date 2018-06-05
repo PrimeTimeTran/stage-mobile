@@ -40,12 +40,12 @@ export default class VideoPlayer extends Component {
 		var rand = myArray[Math.floor(Math.random() * myArray.length)];
     return (
 				<Video
-					source={{uri: rand}}
 					// source={{uri: this.state.videoUrl}}
+					source={{uri: rand}}
 					shouldPlay={this.state.shouldPlay}
 					resizeMode="cover"
 					isMuted={this.state.mute}
-					style={[{height: 100, width: 100}, this.props.styling]}
+					style={{height: 100, width: 100}}
 				/>
 		);
   }

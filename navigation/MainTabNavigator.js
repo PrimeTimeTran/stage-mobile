@@ -26,8 +26,8 @@ import TestScreen from '../screens/TestScreen'
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
-  Profile: ProfileScreen,
-  Users: UsersScreen
+  Users: UsersScreen,
+  Profile: ProfileScreen
 })
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
@@ -36,7 +36,7 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-mail${focused ? '' : '-outline'}` : 'md-options'}
+        name={Platform.OS === 'ios' ? `ios-mail${focused ? '' : '-outline'}` : 'md-chatboxes'}
       />
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
@@ -45,6 +45,7 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Profile: ProfileScreen
 })
 
 HomeStack.navigationOptions = {
@@ -52,7 +53,7 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-link'}
+      name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-archive'}
     />
   ),
 }
@@ -70,7 +71,7 @@ StagesStack.navigationOptions = ({ navigation }) => {
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-options'}
+        name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-flag'}
       />
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
@@ -88,7 +89,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-options'}
+        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
       />
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false

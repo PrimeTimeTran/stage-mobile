@@ -25,7 +25,7 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
     title: 'Messages',
-    headerStyle: {backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerStyle: {backgroundColor: '#333333'},
     headerTitleStyle: {color: 'white'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white'
@@ -155,7 +155,7 @@ export default class ConversationsScreen extends React.Component {
                                   this.showStageUploads(conversation, upload, index)
                                 }>
                                 <View style={{flex: 1}}>
-                                  <VideoPlayer video={upload.url} style={{height: 50, width: 50}} />
+                                  <VideoPlayer isLooping video={upload.url} style={{height: 50, width: 50}} />
                                   <Text
                                     style={{
                                       color: '#fff',

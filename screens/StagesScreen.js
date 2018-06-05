@@ -25,7 +25,7 @@ export default class StagesScreen extends React.Component {
   static navigationOptions = {
     title: 'Stages',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
   }
@@ -169,25 +169,25 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
-
-                      <Text> Works but ugly</Text>
-                      <Button
-                        outline
-                        small
-                        icon={{name: 'info', type: 'feather', color: '#276FBF'}}
-                        title='Info'
-                        style={{width: 100}}
-                        color='#276FBF'
-                      />
-                      <Button
-                        outline
-                        small
-                        icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
-                        title='Chat'
-                        style={{width: 100}}
-                        color='#276FBF'
-                        onPress={() => this.props.navigation.navigate('Conversation', {conversation_id: stage.conversation_id, stages: true})}
-                      />
+                        <Text> Works but ugly</Text>
+                        <Button
+                          outline
+                          small
+                          icon={{name: 'info', type: 'feather', color: '#276FBF'}}
+                          title='Info'
+                          style={{width: 100}}
+                          color='#276FBF'
+                          onPress={() => console.log('Get more info')}
+                        />
+                        <Button
+                          outline
+                          small
+                          icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
+                          title='Chat'
+                          style={{width: 100}}
+                          color='#276FBF'
+                          onPress={() => this.props.navigation.navigate('Conversation', {conversation_id: stage.conversation_id, stages: true})}
+                        />
                       {/* <ButtonGroup
                         onPress={this.updateIndex}
                         selectedIndex={selectedIndex}

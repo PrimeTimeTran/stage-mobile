@@ -26,7 +26,7 @@ export default class MyProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'Profile',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
   };

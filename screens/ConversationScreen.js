@@ -11,7 +11,7 @@ import client from '../utils/client'
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
     headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),

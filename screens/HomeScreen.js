@@ -28,7 +28,7 @@ export default class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
+    headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
   };
@@ -126,22 +126,21 @@ export default class HomeScreen extends Component {
                       { post.uploads.map((upload, index) => {
                         { if (upload.media_type == 'video') {
                             return (
-                              <CardSection>
+                              <CardSection key={upload.id}>
                                 <Lightbox
-                                  key={upload.id}
                                   swipeToDismiss={false}
                                   renderContent={() =>
                                     this.showUploads(post, upload, index)
                                   }>
-                                  <VideoPlayer styling={{width: WINDOW_WIDTH, height: 100}} video={upload.url} />
+                                  <VideoPlayer video={upload.url} />
                                 </Lightbox>
                               </CardSection>
                             )
                         }}})
                       }
                       <CardSection styling={{justifyContent: 'space-around'}}>
-                        <Button title='Like' />
-                        <Button title='Comment' />
+                        <Button title='Like' onPress={() => console.log('Liked')}/>
+                        <Button title='Comment' onPress={() => console.log('Comment')}/>
                       </CardSection>
                   </Card>
                 </View>

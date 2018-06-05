@@ -34,7 +34,7 @@ export default class ConversationsScreen extends React.Component {
   state = {conversations: []}
 
   componentWillMount() {
-    const request = client();
+    const request = client()
     request
       .then(api =>
         api.get(`${API_ROOT}conversations`))
@@ -61,11 +61,11 @@ export default class ConversationsScreen extends React.Component {
         }}>
         {conversation.uploads.map(upload => {
           return (
-            <View style={{ flex: 1 }} key={upload.id}>
+            <View style={{flex: 1}} key={upload.id}>
               <Image
-                style={{ flex: 1, resizeMode: 'cover' }}
+                style={{flex: 1, resizeMode: 'cover'}}
                 key={upload.id}
-                source={{ uri: upload.url }}
+                source={{uri: upload.url}}
               />
               <Text
                 style={{
@@ -155,7 +155,7 @@ export default class ConversationsScreen extends React.Component {
                                   this.showStageUploads(conversation, upload, index)
                                 }>
                                 <View style={{flex: 1}}>
-                                  <VideoPlayer video={upload.url}/>
+                                  <VideoPlayer video={upload.url} style={{height: 50, width: 50}} />
                                   <Text
                                     style={{
                                       color: '#fff',

@@ -27,7 +27,7 @@ export default class ProfileScreen extends React.Component {
     headerTintColor: 'white',
     headerTitleStyle: {color: 'white'},
     headerBackTitleStyle: {color: 'white'},
-    headerTitle: `${navigation.state.params.first_name}`,
+    headerTitle: (navigation.state.params.name || navigation.state.params.first_name),
     headerStyle: {backgroundColor: '#333333', marginTop: Platform.OS === 'android' ? 24 : 0},
     headerRight: (
       <Button

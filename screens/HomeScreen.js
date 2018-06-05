@@ -133,7 +133,7 @@ export default class HomeScreen extends Component {
                                   renderContent={() =>
                                     this.showUploads(post, upload, index)
                                   }>
-                                  <VideoPlayer video={upload.url} />
+                                  <VideoPlayer styling={{width: WINDOW_WIDTH, height: 100}} video={upload.url} />
                                 </Lightbox>
                               </CardSection>
                             )

@@ -162,7 +162,7 @@ export default class StagesScreen extends React.Component {
                           </View>
                           <View style={descriptionStyle}>
                             <Text style={{color: 'green'}}>{Math.floor(Math.random() * Math.floor(1000))} Active Users</Text>
-                            <Text>{stage.address}, {stage.city}, {stage.country}</Text>
+                            <Text>{stage.business_address}</Text>
                             <Text>{stage.phone}</Text>
                           </View>
                       </View>

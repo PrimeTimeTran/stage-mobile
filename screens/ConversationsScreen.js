@@ -16,7 +16,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { Card, CardSection, Avatar } from '../components/common'
 
 import client from '../utils/client'
 
@@ -112,11 +112,7 @@ export default class ConversationsScreen extends React.Component {
                   >
                     <View style={headerContainerStyle}>
                       <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
-                        <Image
-                          id={conversation.id}
-                          style={[avatarStyle, {marginTop: 5}]}
-                          source={{uri: avatar_url}}
-                        />
+                        <Avatar source={avatar_url} styles={{marginTop: 5}}/>
                         { (conversation.is_stage) &&
                             <View style={{ justifyContent: 'space-between', alignItems: 'center'}}>
                               <Text style={stageInfoStyle}>Active</Text>

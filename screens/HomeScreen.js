@@ -16,9 +16,9 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
+import { Avatar, Card, CardSection } from '../components/common'
 import CommentContainer from '../containers/CommentContainer'
 import VideoPlayer from '../components/VideoPlayer'
-import { Card, CardSection } from '../components/common'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
@@ -90,70 +90,63 @@ export default class HomeScreen extends Component {
       headerContainerStyle,
       headerTextStyle,
       avatarStyle
-     } = styles
+    } = styles
 
-    if (posts) {
-      return (
-        <ScrollView scrollEventThrottle={5}>
-          { posts && posts.map(post => {
-              return (
-                <View key={post.id}>
-                  <Card>
-                    <CardSection style={{borderBottomWidth: 0}}>
-                      <View style={headerContainerStyle}>
-                        <TouchableOpacity
-                          onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
-                        >
-                          <Image
-                            style={avatarStyle}
-                            source={{uri: post.user.avatar_url}}
-                          />
-                        </TouchableOpacity>
+    return (
+      <ScrollView scrollEventThrottle={5}>
+        { posts && posts.map(post => {
+            return (
+              <View key={post.id}>
+                <Card>
+                  <CardSection style={{borderBottomWidth: 0}}>
+                    <View style={headerContainerStyle}>
+                      <TouchableOpacity
+                        onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
+                      >
+                        <Avatar styles={avatarStyle} url={post.user.avatar_url} />
+                      </TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                      <Text style={headerTextStyle}>{post.user.full_name}</Text>
+                      <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                        <Icon name='clock' type='material-community' color='black' size={10} />
+                        <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
                       </View>
-                      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Text style={headerTextStyle}>{post.user.full_name}</Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-                          <Icon name='clock' type='material-community' color='black' size={10} />
-                          <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
-                        </View>
-                      </View>
+                    </View>
+                  </CardSection>
+                  <CardSection styling={{borderWidth: 0}}>
+                    <Text numberOfLines={5}>
+                      {post.body}
+                    </Text>
+                  </CardSection>
+                    { post.uploads.map((upload, index) => {
+                      { if (upload.media_type == 'vid') {
+                          return (
+                            <CardSection key={upload.id}>
+                              <Lightbox
+                                swipeToDismiss={false}
+                                renderContent={() =>
+                                  this.showUploads(post, upload, index)
+                                }>
+                                <VideoPlayer video={upload.url} />
+                              </Lightbox>
+                            </CardSection>
+                          )
+                      }}})
+                    }
+                    <CardSection styling={{justifyContent: 'space-around'}}>
+                      <Button title='Like' onPress={() => console.log('Liked')}/>
+                      <Button title='Comment' onPress={() => console.log('Comment')}/>
                     </CardSection>
-                    <CardSection styling={{borderWidth: 0}}>
-                      <Text numberOfLines={5}>
-                        {post.body}
-                      </Text>
-                    </CardSection>
-                      { post.uploads.map((upload, index) => {
-                        { if (upload.media_type == 'vid') {
-                            return (
-                              <CardSection key={upload.id}>
-                                <Lightbox
-                                  swipeToDismiss={false}
-                                  renderContent={() =>
-                                    this.showUploads(post, upload, index)
-                                  }>
-                                  <VideoPlayer video={upload.url} />
-                                </Lightbox>
-                              </CardSection>
-                            )
-                        }}})
-                      }
-                      <CardSection styling={{justifyContent: 'space-around'}}>
-                        <Button title='Like' onPress={() => console.log('Liked')}/>
-                        <Button title='Comment' onPress={() => console.log('Comment')}/>
-                      </CardSection>
-                      <CommentContainer comments={post.comments} />
-                  </Card>
-                </View>
-                )
-              }
-            )
-          }
-        </ScrollView>
-      )
-    } else {
-      return <div>Empty</div>
-    }
+                    <CommentContainer comments={post.comments} />
+                </Card>
+              </View>
+              )
+            }
+          )
+        }
+      </ScrollView>
+    )
   }
 }
 

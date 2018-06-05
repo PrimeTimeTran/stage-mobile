@@ -42,10 +42,11 @@ export default class VideoPlayer extends Component {
 				<Video
 					// source={{uri: this.state.videoUrl}}
 					source={{uri: rand}}
-					shouldPlay={this.state.shouldPlay}
-					resizeMode="cover"
-					isMuted={this.state.mute}
 					style={{height: 100, width: 100}}
+					shouldPlay={this.state.shouldPlay}
+					resizeMode="contain"
+					isMuted={this.state.mute}
+
 				/>
 		);
   }

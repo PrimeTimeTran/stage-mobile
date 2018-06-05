@@ -16,6 +16,7 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
+import CommentContainer from '../containers/CommentContainer'
 import VideoPlayer from '../components/VideoPlayer'
 import { Card, CardSection } from '../components/common'
 
@@ -95,11 +96,10 @@ export default class HomeScreen extends Component {
       return (
         <ScrollView scrollEventThrottle={5}>
           { posts && posts.map(post => {
-            console.log('Post: ', post);
               return (
                 <View key={post.id}>
                   <Card>
-                    <CardSection>
+                    <CardSection style={{borderBottomWidth: 0}}>
                       <View style={headerContainerStyle}>
                         <TouchableOpacity
                           onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
@@ -118,13 +118,13 @@ export default class HomeScreen extends Component {
                         </View>
                       </View>
                     </CardSection>
-                    <CardSection styling={{borderBottomWidth: 0}}>
+                    <CardSection styling={{borderWidth: 0}}>
                       <Text numberOfLines={5}>
-                          {post.body}
+                        {post.body}
                       </Text>
                     </CardSection>
                       { post.uploads.map((upload, index) => {
-                        { if (upload.media_type == 'video') {
+                        { if (upload.media_type == 'vid') {
                             return (
                               <CardSection key={upload.id}>
                                 <Lightbox
@@ -142,6 +142,7 @@ export default class HomeScreen extends Component {
                         <Button title='Like' onPress={() => console.log('Liked')}/>
                         <Button title='Comment' onPress={() => console.log('Comment')}/>
                       </CardSection>
+                      <CommentContainer comments={post.comments} />
                   </Card>
                 </View>
                 )

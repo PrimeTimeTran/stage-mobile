@@ -61,9 +61,8 @@ export default class ConversationsScreen extends React.Component {
         }}>
         {conversation.uploads.map(upload => {
           return (
-            <View style={{flex: 1}} key={upload.id}>
-              <Image
-                style={{flex: 1, resizeMode: 'cover'}}
+            <View key={upload.id}>
+              <VideoPlayer
                 key={upload.id}
                 source={{uri: upload.url}}
               />

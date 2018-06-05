@@ -16,7 +16,7 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
-import { Avatar, Card, CardSection } from '../components/common'
+import { Avatar, Card, CardSection, SentAt } from '../components/common'
 import CommentContainer from '../containers/CommentContainer'
 import VideoPlayer from '../components/VideoPlayer'
 
@@ -103,14 +103,13 @@ export default class HomeScreen extends Component {
                       <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
                       >
-                        <Avatar styles={avatarStyle} url={post.user.avatar_url} />
+                        <Avatar custom={avatarStyle} url={post.user.avatar_url} />
                       </TouchableOpacity>
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                       <Text style={headerTextStyle}>{post.user.full_name}</Text>
                       <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
-                        <Icon name='clock' type='material-community' color='black' size={10} />
-                        <Text style={{fontSize: 10, paddingLeft: 5}}>{post.created_at}</Text>
+                        <SentAt sentAt={post.created_at} />
                       </View>
                     </View>
                   </CardSection>

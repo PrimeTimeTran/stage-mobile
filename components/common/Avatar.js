@@ -4,9 +4,9 @@ import {
   Image
 } from 'react-native'
 
-const Avatar = ({ url, styles }) => {
+const Avatar = ({ url, custom }) => {
   return (
-    <Image style={[styles.avatarStyle, styles]} source={{ uri: url}}/>
+    <Image style={[styles.avatarStyle, custom]} source={{ uri: url}}/>
   )
 }
 

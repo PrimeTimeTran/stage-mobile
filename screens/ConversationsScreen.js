@@ -16,7 +16,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection, Avatar } from '../components/common'
+import { Card, CardSection, Avatar, SentAt } from '../components/common'
 
 import client from '../utils/client'
 
@@ -87,7 +87,6 @@ export default class ConversationsScreen extends React.Component {
     const { conversations } = this.state
     const { navigation } = this.props
     const {
-      avatarStyle,
       headerContainerStyle,
       containerContentStyle,
       headerInfoStyle,
@@ -112,7 +111,7 @@ export default class ConversationsScreen extends React.Component {
                   >
                     <View style={headerContainerStyle}>
                       <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
-                        <Avatar source={avatar_url} styles={{marginTop: 5}}/>
+                        <Avatar url={avatar_url} />
                         { (conversation.is_stage) &&
                             <View style={{ justifyContent: 'space-between', alignItems: 'center'}}>
                               <Text style={stageInfoStyle}>Active</Text>
@@ -135,11 +134,10 @@ export default class ConversationsScreen extends React.Component {
                             <Text style={headerTitleStyle}>{name}</Text>
                           }
                           <View style={headerRightStyle}>
-                            <Icon name='clock' type='material-community' color='black' size={10} />
-                            <Text style={{fontSize: 10, paddingLeft: 5}}>{conversation.last_message.sent_at}</Text>
+                            <SentAt sentAt={conversation.last_message.sent_at} />
                           </View>
                         </View>
-                        <Text numberOfLines={3} style={{color: '#696969', fontSize: 15}}>{conversation.last_message.body}</Text>
+                        <Text numberOfLines={3} style={{color: '#696969', fontSize: 13}}>{conversation.last_message.body}</Text>
                         <View style={{flexDirection: 'row'}}>
                           {conversation.is_stage && conversation.uploads && conversation.uploads.map((upload, index) => {
                             return (
@@ -177,8 +175,6 @@ export default class ConversationsScreen extends React.Component {
           }
         </ScrollView>
       )
-    } else {
-      <div>Empty</div>
     }
   }
 }
@@ -208,11 +204,6 @@ const styles = StyleSheet.create({
   headerRightStyle: {
     flexDirection: 'row',
     alignSelf: 'flex-start'
-  },
-  avatarStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25
   },
   stageInfoStyle: {
     color: 'green',

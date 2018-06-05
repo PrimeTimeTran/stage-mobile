@@ -58,7 +58,6 @@ export default class ProfileScreen extends React.Component {
         return response.data
       })
       .then(data => {
-        console.log('Data: ', data);
         this.setState({user: data}, console.log('User: ', this.state.user))
       })
       .catch(error => {
@@ -73,40 +72,52 @@ export default class ProfileScreen extends React.Component {
 
   render() {
     const { descriptionStyle } = styles
-    const { size } = this.state
-    console.log('This State: ', this.state);
-    return (
-      <ScrollView>
-          <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
-            <Carousel
-              autoplay={false}
-              style={size}
-              pageInfo
-              onAnimateNextPage={(p) => console.log(p)}
-            >
-              <View style={[{ backgroundColor: '#BADA55' }, size]}><Text>1</Text></View>
-              <View style={[{ backgroundColor: 'red' }, size]}><Text>2</Text></View>
-              <View style={[{ backgroundColor: 'blue' }, size]}><Text>3</Text></View>
-            </Carousel>
-          </View>
-          <View>
-              <CardSection>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <View style={descriptionStyle}>
-                    <Icon name='users' type='font-awesome' color='green' size={10}/>
-                    <Icon name='place' color='black' size={15}/>
-                    <Icon name='mobile' type='font-awesome' color='black' size={17}/>
+    const { size, user } = this.state
+
+    if (user && user.uploads && user.uploads.length > 0) {
+      return (
+        <ScrollView>
+            <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
+              <Carousel
+                autoplay={false}
+                style={size}
+                onAnimateNextPage={(p) => console.log(p)}
+              >
+                { user.uploads.map(upload => {
+                  console.log('Rendering Uploads: ', upload);
+                    return (
+                      <View style={this.state.size} key={upload.id}>
+                        <Image
+                          style={this.state.size}
+                          source={{uri: upload.url}}
+                        />
+                      </View>
+                    )
+                  })
+                }
+              </Carousel>
+            </View>
+            <View>
+                <CardSection>
+                  <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={descriptionStyle}>
+                      <Icon name='users' type='font-awesome' color='green' size={10}/>
+                      <Icon name='place' color='black' size={15}/>
+                      <Icon name='mobile' type='font-awesome' color='black' size={17}/>
+                    </View>
+                    <View style={descriptionStyle}>
+                      <Text>Name</Text>
+                      <Text>Location</Text>
+                      <Text>Occupation</Text>
+                    </View>
                   </View>
-                  <View style={descriptionStyle}>
-                    <Text>Name</Text>
-                    <Text>Location</Text>
-                    <Text>Occupation</Text>
-                  </View>
-                </View>
-              </CardSection>
-          </View>
-      </ScrollView>
-    )
+                </CardSection>
+            </View>
+        </ScrollView>
+        )
+    } else {
+      return <View><Text>Hello World!</Text></View>
+    }
   }
 }
 const styles = StyleSheet.create({

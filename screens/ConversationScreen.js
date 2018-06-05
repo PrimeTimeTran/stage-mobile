@@ -26,8 +26,6 @@ export default class ConversationScreen extends Component {
 
   state = {messages: []}
 
-
-
   componentWillMount() {
     const conversation_id = this.props.navigation.state.params.conversation_id
 

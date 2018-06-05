@@ -6,15 +6,21 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Dimensions
 } from 'react-native'
 
 import { Icon } from 'react-native-elements'
+import Lightbox from 'react-native-lightbox'
+import Carousel from 'react-native-looped-carousel'
+import { Video } from 'expo'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
 
 import client from '../utils/client'
+
+const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = {
@@ -39,6 +45,41 @@ export default class ConversationsScreen extends React.Component {
       })
   }
 
+  showStageUploads(conversation, upload, index) {
+    return (
+      <Carousel
+        currentPage={index}
+        autoplay={false}
+        style={{
+          flex: 1,
+          width: WINDOW_WIDTH,
+          height: WINDOW_HEIGHT
+        }}>
+        {conversation.uploads.map(upload => {
+          return (
+            <View style={{ flex: 1 }} key={upload.id}>
+              <Image
+                style={{ flex: 1, resizeMode: 'cover' }}
+                key={upload.id}
+                source={{ uri: upload.url }}
+              />
+              <Text
+                style={{
+                  color: '#fff',
+                  position: 'absolute',
+                  bottom: 20,
+                  right: 20,
+                  fontWeight: 'bold'
+                }}>
+                {Math.floor(Math.random() * Math.floor(200))} likes
+              </Text>
+            </View>
+          )
+        })}
+      </Carousel>
+    )
+  }
+
   render() {
     const { conversations } = this.state
     const { navigation } = this.props
@@ -56,6 +97,7 @@ export default class ConversationsScreen extends React.Component {
       return (
         <ScrollView>
           { conversations && conversations.map(conversation => {
+            console.log('Conversaton:', conversation)
             const { name, avatar_url } = conversation.last_message_from_user
               return (
                 <View key={conversation.id}>
@@ -100,6 +142,37 @@ export default class ConversationsScreen extends React.Component {
                           </View>
                         </View>
                         <Text numberOfLines={3} style={{color: '#696969', fontSize: 15}}>{conversation.last_message.body}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                          {conversation.is_stage && conversation.uploads && conversation.uploads.map((upload, index) => {
+                            return (
+                              <Lightbox
+                                key={upload.id}
+                                swipeToDismiss={false}
+                                renderContent={() =>
+                                  this.showStageUploads(conversation, upload, index)
+                                }>
+                                <View style={{flex: 1}}>
+                                  <Video
+                                    style={{paddingLeft: 5, height: 50, width: 50, backgroundColor: 'red', borderBottomWidth: 1, borderColor: 'blue'}}
+                                    source={{uri: upload.url}}
+                                  />
+                                  <Text
+                                    style={{
+                                      color: '#fff',
+                                      position: 'absolute',
+                                      bottom: 2,
+                                      right: 2,
+                                      fontWeight: 'bold',
+                                      fontSize: 10
+                                    }}>
+                                    {Math.floor(Math.random() * Math.floor(200))} likes
+                                  </Text>
+                                  {/* <View style={{height: 100, width: 100, backgroundColor: 'red'}}><Text></Text></View> */}
+                                </View>
+                              </Lightbox>
+                            )
+                          })}
+                        </View>
                       </View>
                     </View>
                   </TouchableOpacity>

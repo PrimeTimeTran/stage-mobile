@@ -91,16 +91,20 @@ export default class HomeScreen extends Component {
       return (
         <ScrollView scrollEventThrottle={5}>
           { posts && posts.map(post => {
-            console.log('Post: ', post)
+            console.log('Post: ', post);
               return (
                 <View key={post.id}>
                   <Card>
                     <CardSection>
                       <View style={headerContainerStyle}>
-                        <Image
-                          style={avatarStyle}
-                          source={{uri: post.user.avatar_url}}
-                        />
+                        <TouchableOpacity
+                          onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id})}
+                        >
+                          <Image
+                            style={avatarStyle}
+                            source={{uri: post.user.avatar_url}}
+                          />
+                        </TouchableOpacity>
                       </View>
                       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle}>{post.user.full_name}</Text>

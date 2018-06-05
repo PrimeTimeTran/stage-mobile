@@ -11,14 +11,13 @@ import {
 } from 'react-native'
 
 import { Icon, Button, ButtonGroup } from 'react-native-elements'
+import Lightbox from 'react-native-lightbox'
+import Carousel from 'react-native-looped-carousel'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
 
 import client from '../utils/client'
-
-import Lightbox from 'react-native-lightbox'
-import Carousel from 'react-native-looped-carousel'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 

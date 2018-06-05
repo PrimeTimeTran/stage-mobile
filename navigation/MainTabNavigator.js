@@ -1,33 +1,33 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../components/TabBarIcon'
 
-import WelcomeScreen from '../screens/WelcomeScreen';
-import AuthScreen from '../screens/AuthScreen';
+import WelcomeScreen from '../screens/WelcomeScreen'
+import AuthScreen from '../screens/AuthScreen'
 
-import ConversationsScreen from '../screens/ConversationsScreen';
-import ConversationScreen from '../screens/ConversationScreen';
+import ConversationsScreen from '../screens/ConversationsScreen'
+import ConversationScreen from '../screens/ConversationScreen'
 
-import HomeScreen from '../screens/HomeScreen';
-import UsersScreen from '../screens/UsersScreen';
+import HomeScreen from '../screens/HomeScreen'
+import UsersScreen from '../screens/UsersScreen'
 
-import StagesScreen from '../screens/StagesScreen';
-import StageScreen from '../screens/StageScreen';
+import StagesScreen from '../screens/StagesScreen'
+import StageScreen from '../screens/StageScreen'
 
-import ProfileScreen from '../screens/ProfileScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen'
+import SettingsScreen from '../screens/SettingsScreen'
 
-import TestScreen from '../screens/TestScreen';
+import TestScreen from '../screens/TestScreen'
 
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
   Conversation: ConversationScreen,
   Users: UsersScreen,
   Profile: ProfileScreen,
-});
+})
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
@@ -40,11 +40,11 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
-};
+}
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-});
+})
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
@@ -54,13 +54,13 @@ HomeStack.navigationOptions = {
       name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-link'}
     />
   ),
-};
+}
 
 const StagesStack = createStackNavigator({
   Stages: StagesScreen,
   Stage: StageScreen,
   Conversation: ConversationScreen
-});
+})
 
 StagesStack.navigationOptions = ({ navigation }) => {
   return {
@@ -73,12 +73,12 @@ StagesStack.navigationOptions = ({ navigation }) => {
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
-};
+}
 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
   Settings: SettingsScreen
-});
+})
 
 ProfileStack.navigationOptions = ({ navigation }) => {
   return {
@@ -91,7 +91,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
     ),
     tabBarVisible: (navigation.state.index == 0) ? true : false
   }
-};
+}
 
 const MainTabScreen = createBottomTabNavigator({
     ConversationsStack,
@@ -111,7 +111,7 @@ const MainTabScreen = createBottomTabNavigator({
       },
     },
   },
-);
+)
 
 export default createBottomTabNavigator(
   {
@@ -124,4 +124,4 @@ export default createBottomTabNavigator(
     lazy: true,
     navigationOptions: { tabBarVisible: false }
   }
-);
+)

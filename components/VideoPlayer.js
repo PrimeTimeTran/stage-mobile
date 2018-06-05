@@ -28,8 +28,8 @@ export default class VideoPlayer extends Component {
   render() {
     return (
 				<Video
-					// source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
-					source={{uri: this.state.videoUrl}}
+					source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
+					// source={{uri: this.state.videoUrl}}
 					shouldPlay={this.state.shouldPlay}
 					resizeMode="cover"
 					isMuted={this.state.mute}

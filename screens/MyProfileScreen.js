@@ -76,16 +76,14 @@ export default class MyProfileScreen extends React.Component {
                 onAnimateNextPage={(p) => console.log(p)}
               >
                 { user.uploads.map(upload => {
-                  console.log('Rendering Uploads: ', upload);
-                    return (
-                      <View style={this.state.size} key={upload.id}>
-                        <Image
-                          style={this.state.size}
-                          source={{uri: upload.url}}
-                        />
-                      </View>
-                    )
-                  })
+                  return (
+                    <View style={this.state.size} key={upload.id}>
+                      <Image
+                        style={this.state.size}
+                        source={{uri: upload.url}}
+                      />
+                    </View>
+                  )})
                 }
               </Carousel>
             </View>
@@ -108,7 +106,7 @@ export default class MyProfileScreen extends React.Component {
         </ScrollView>
         )
     } else {
-      return <View><Text>Hello World!</Text></View>
+      return <Text>Loading</Text>
     }
   }
 }

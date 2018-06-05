@@ -72,8 +72,6 @@ export default class ProfileScreen extends React.Component {
   render() {
     const { descriptionStyle } = styles
     const { size, user } = this.state
-    console.log(user);
-
     if (user && user.uploads && user.uploads.length > 0) {
       return (
         <ScrollView>
@@ -84,7 +82,6 @@ export default class ProfileScreen extends React.Component {
                 onAnimateNextPage={(p) => console.log(p)}
               >
                 { user.uploads.map(upload => {
-                  console.log('Rendering Uploads: ', upload);
                     return (
                       <View style={this.state.size} key={upload.id}>
                         <Image
@@ -116,7 +113,7 @@ export default class ProfileScreen extends React.Component {
         </ScrollView>
         )
     } else {
-      return <View><Text>Hello World!</Text></View>
+      return <Text>Loading</Text>
     }
   }
 }

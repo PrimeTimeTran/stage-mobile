@@ -167,7 +167,6 @@ export default class ConversationsScreen extends React.Component {
                                     }}>
                                     {Math.floor(Math.random() * Math.floor(200))} likes
                                   </Text>
-                                  {/* <View style={{height: 100, width: 100, backgroundColor: 'red'}}><Text></Text></View> */}
                                 </View>
                               </Lightbox>
                             )

@@ -26,7 +26,6 @@ export default class VideoPlayer extends Component {
 	}
 
   render() {
-		console.log('This props', this.props)
 		let myArray = [
 			'https://i.imgur.com/gHFLves.mp4',
 			'https://i.imgur.com/6hNdBia.mp4',
@@ -35,7 +34,8 @@ export default class VideoPlayer extends Component {
 			'https://i.imgur.com/RNVhrQa.mp4',
 			'https://i.imgur.com/46IdBXo.mp4',
 			'https://i.imgur.com/U25iofY.mp4',
-			'https://i.imgur.com/XcuP9Qi.mp4'
+			'https://i.imgur.com/XcuP9Qi.mp4',
+			'https://i.imgur.com/h6UO42C.mp4',
 		]
 		var rand = myArray[Math.floor(Math.random() * myArray.length)];
     return (

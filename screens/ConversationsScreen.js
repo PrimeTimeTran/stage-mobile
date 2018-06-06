@@ -83,7 +83,6 @@ export default class ConversationsScreen extends React.Component {
   }
 
   render() {
-    console.log('Rendered Conversations')
     const { conversations } = this.state
     const { navigation } = this.props
     const {

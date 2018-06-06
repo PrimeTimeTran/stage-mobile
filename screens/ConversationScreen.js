@@ -63,9 +63,9 @@ export default class ConversationScreen extends Component {
       body: messages[0].text
     })
 
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages)
-    }))
+    // this.setState(previousState => ({
+    //   messages: GiftedChat.append(previousState.messages, messages)
+    // }))
   }
 
   renderBubble = props => {

@@ -44,6 +44,15 @@ export default class ConversationScreen extends Component {
       .catch(error => {
         console.log('Error:', error)
       })
+
+  setCallback(this.onReceive)
+  }
+
+  onReceive = (data) => {
+    const message = JSON.parse(data).gifted_chat
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, message)
+    }))
   }
 
   onSend(messages = []) {
@@ -108,6 +117,7 @@ export default class ConversationScreen extends Component {
   }
 
   render() {
+    const user_id = Platform.OS == 'ios' ? 3 : 1
     return (
       <GiftedChat
         onPressAvatar={props => this.handleAvatarClick(props)}
@@ -115,7 +125,7 @@ export default class ConversationScreen extends Component {
         renderBubble={props => this.renderBubble(props)}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: 3
+          _id: user_id
         }}
       />
     )

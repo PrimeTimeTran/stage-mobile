@@ -1,5 +1,5 @@
 import cable from 'react-native-actioncable'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Platform } from 'react-native'
 
 let consumer
 let backendHost
@@ -13,13 +13,13 @@ let hostname = 'localhost'
 // Request with Token
 // http :3000/v1/posts Accept:"application/vnd.posts.v1+json" Authorization:"eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoyMSwiZXhwIjoxNTU5NTI3MTI3fQ.06c2qq-LSx3WekKrOcvuhGLiNTPndu394pTHc53qgTgBJM3dK1LFFgToaXoCxhBK92oESkygzBmhTAzjDDeY1A"
 
-if (hostname === 'localhost') {
+if (Platform.OS == 'ios') {
   backendHost = 'localhost:3000'
-  socketType = 'ws'
 } else {
-  backendHost = 'lit-brushlands-65490.herokuapp.com'
-  socketType = 'wss'
+  backendHost = '192.168.1.218:3000'
 }
+
+socketType = 'ws'
 
 function createChannel(...args) {
   // Token used to determine who created the message

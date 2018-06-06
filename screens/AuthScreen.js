@@ -15,7 +15,8 @@ class AuthScreen extends Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   }
 
@@ -44,21 +45,50 @@ class AuthScreen extends Component {
   }
 
   handleSubmit = () => {
+    let { email, password } = this.state
 
+    emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+    password = password.length >= 6
+
+
+    if (!emailValid) {
+      this.handleInvalidEmail()
+      return
+    }
+    if (!password) {
+      this.handleInvalidPassword()
+      return
+    }
+    if (!password && !email) {
+      this.handleInvalidEmailAndPassword()
+      return
+    }
+
+    this.setState({errorMessage: ''})
+  }
+
+  handleInvalidEmailAndPassword() {
+    this.setState({errorMessage: 'Invalid email & password'})
+  }
+
+  handleInvalidEmail() {
+    this.setState({errorMessage: 'Invalid email.'})
+  }
+
+  handleInvalidPassword() {
+    this.setState({errorMessage: 'Invalid Password. Must be 6 characters'})
   }
 
   handleEmailChange = (email) => {
-    console.log('Email Changed', email);
     this.setState({email})
   }
 
   handlePasswordChange = (password) => {
-    console.log('Password Changed', password)
     this.setState({password})
   }
 
   render() {
-    const { formContainer } = styles
+    const { containerStyle, screenContainer, backgroundColor } = styles
 
     if (this.props.token) {
       return (
@@ -73,30 +103,34 @@ class AuthScreen extends Component {
     return (
 
       <ImageBackground source={image} style={{ height, width, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={formContainer}>
-
+        <View style={screenContainer}>
+          <View style={containerStyle}>
           <FormLabel>Email</FormLabel>
             <FormInput
+              name="Email"
               placeholder="loi@gmail.com"
-              containerStyle={styles.containerStyle}
               value={this.state.email}
-              onChangeText={e => this.handleEmailChange(e)}
+              onChangeText={this.handleEmailChange}
             />
 
           <FormLabel>Password</FormLabel>
             <FormInput
               placeholder="**********"
               secureTextEntry
-              containerStyle={styles.containerStyle}
               onSubmit={this.handlePasswordChange}
               value={this.state.password}
-              onChangeText={e => this.handlePasswordChange(e)}
+              onChangeText={this.handlePasswordChange}
             />
+            <View style={{padding: 5, justifyContent: 'center', alignItems: 'center'}}>
+              <Text>{this.state.errorMessage}</Text>
+            </View>
             <Button
-              icon={{name: 'cached'}}
-              title='Comment'
+              style={{marginBottom: 10}}
+              icon={{name: 'sign-in', type: 'font-awesome'}}
+              title='Sign Up'
               onPress={this.handleSubmit}
             />
+            ></View>
 
         </View>
       </ImageBackground>
@@ -111,9 +145,13 @@ function mapStateToProps({ auth }) {
 export default connect(mapStateToProps, actions)(AuthScreen);
 
 const styles = {
-  formContainer: {
+  screenContainer: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  formContainer: {
+    flex: 1,
+    backgroundColor: 'blue'
   },
   containerStyle: {
     width: width * .8,

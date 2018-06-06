@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
 
-import { CardSection } from './common'
+import { Avatar, CardSection } from './common'
 
 export default class Comment extends Component {
   render() {
     const { comment } = this.props
-    const { commentsStyle, avatarStyle } = styles
-    console.log(comment)
+    const { commentContainerStyle, avatarStyle } = styles
+
     return (
-      <CardSection style={commentsStyle}>
+      <CardSection id={comment.id} style={commentContainerStyle}>
         <View>
-          <Image
-            id={comment.id}
-            style={[avatarStyle, {marginTop: 5}]}
-            source={{uri: comment.user.user_profile_photo}}
-          />
+          <Avatar url={comment.user.user_profile_photo} custom={[avatarStyle, {marginTop: 5}]}/>
         </View>
         <View style={{padding: 5}}>
           <Text>{comment.body}</Text>
@@ -26,7 +22,7 @@ export default class Comment extends Component {
 }
 
 const styles = {
-  commentsStyle: {
+  commentContainerStyle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',

@@ -26,28 +26,24 @@ export default class VideoPlayer extends Component {
 	}
 
   render() {
+		console.log('This props', this.props)
 		let myArray = [
-			'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-			'https://static.videezy.com/system/resources/previews/000/000/160/original/RoadTrip.mp4',
-			'http://coverr.co/s3/mp4/Brooklyn-run.mp4',
-			'https://static.videezy.com/system/resources/previews/000/002/448/original/slow-motion-drop-hd-stock-video.mp4',
-			'http://coverr.co/s3/mp4/Down-time.mp4',
-			'http://coverr.co/s3/mp4/Moped.mp4',
-			'http://coverr.co/s3/mp4/Squat-it.mp4',
-			'http://coverr.co/s3/mp4/Behind-the-screen.mp4',
-			'http://coverr.co/s3/mp4/Film-set.mp4'
+			'https://i.imgur.com/gHFLves.mp4',
+			'https://i.imgur.com/6hNdBia.mp4',
+			'https://i.imgur.com/GwV55GL.mp4',
+			'https://i.imgur.com/ZXEgLh0.mp4'
 		]
 		var rand = myArray[Math.floor(Math.random() * myArray.length)];
     return (
-				<Video
-					// source={{uri: this.state.videoUrl}}
-					source={{uri: rand}}
-					style={{height: 100, width: 100}}
-					shouldPlay={this.state.shouldPlay}
-					resizeMode="contain"
-					isMuted={this.state.mute}
-
-				/>
+			<Video
+				shouldPlay
+				isLooping
+				isMuted={true}
+				// source={{uri: this.state.videoUrl}}
+				style={{ flex: 1 }}
+				source={{ uri: rand }}
+				resizeMode="contain"
+			/>
 		);
   }
 }

@@ -11,14 +11,13 @@ import {
   Button
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
 import { Avatar, Card, CardSection, SentAt } from '../components/common'
-import CommentContainer from '../containers/CommentContainer'
 import VideoPlayer from '../components/VideoPlayer'
+import CommentContainer from '../containers/CommentContainer'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
@@ -32,7 +31,7 @@ export default class HomeScreen extends Component {
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
-  };
+  }
   state = { posts: [] }
 
   componentWillMount() {
@@ -95,47 +94,53 @@ export default class HomeScreen extends Component {
     return (
       <ScrollView scrollEventThrottle={5}>
         { posts && posts.map(post => {
+            const { user } = post
             return (
               <View key={post.id}>
                 <Card>
                   <CardSection style={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
                       <TouchableOpacity
-                        onPress={() => this.props.navigation.navigate('Profile', {user_id: post.user.id, first_name: post.user.first_name})}
+                          onPress={() => this.props.navigation.navigate('Profile', {
+                              user_id: user.id,
+                              first_name: user.first_name
+                          })}
                       >
-                        <Avatar custom={avatarStyle} url={post.user.avatar_url} />
+                        <Avatar custom={avatarStyle} url={user.avatar_url} />
                       </TouchableOpacity>
                     </View>
                     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                      <Text style={headerTextStyle}>{post.user.full_name}</Text>
+                      <Text style={headerTextStyle}>{user.full_name}</Text>
                       <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
                         <SentAt sentAt={post.created_at} />
                       </View>
                     </View>
                   </CardSection>
                   <CardSection styling={{borderWidth: 0}}>
-                    <Text numberOfLines={5}>
-                      {post.body}
-                    </Text>
+                    <Text numberOfLines={5}>{post.body}</Text>
                   </CardSection>
                     { post.uploads.map((upload, index) => {
                       { if (upload.media_type == 'vid') {
-                          return (
-                            <CardSection key={upload.id}>
-                              <Lightbox
-                                swipeToDismiss={false}
-                                renderContent={() =>
-                                  this.showUploads(post, upload, index)
-                                }>
-                                <VideoPlayer video={upload.url} />
-                              </Lightbox>
-                            </CardSection>
-                          )
+                            return (
+                              <CardSection key={upload.id}>
+                                <Lightbox
+                                  swipeToDismiss={false}
+                                  renderContent={() =>
+                                    this.showUploads(post, upload, index)
+                                  }>
+                                  <VideoPlayer video={upload.url} />
+                                </Lightbox>
+                              </CardSection>
+                            )
                       }}})
                     }
                     <CardSection styling={{justifyContent: 'space-around'}}>
-                      <Button title='Like' onPress={() => console.log('Liked')}/>
-                      <Button title='Comment' onPress={() => console.log('Comment')}/>
+                      <Button title='Like' onPress={() => console.log('Liked')}>
+                        <Text>Like</Text>
+                      </Button>
+                      <Button title='Comment' onPress={() => console.log('Comment')}>
+                        <Text>Comment</Text>
+                      </Button>
                     </CardSection>
                     <CommentContainer comments={post.comments} />
                 </Card>

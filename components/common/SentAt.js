@@ -13,7 +13,7 @@ const SentAt = ({ sentAt }) => {
       <Text style={styles.textStyle}>{sentAt}</Text>
     </View>
   )
-};
+}
 
 export { SentAt }
 

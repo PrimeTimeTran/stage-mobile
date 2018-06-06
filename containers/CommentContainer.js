@@ -20,7 +20,7 @@ export default class CommentContainer extends Component {
     const { comments } = this.state
     return (
       <View>
-        { comments && <View> {comments.map(comment => <Comment comment={comment}/>)}</View> }
+        { comments && <View> {comments.map(comment => <Comment key={comment.id} comment={comment}/>)}</View> }
         <CommentForm onSubmit={this.handleAddComment}/>
       </View>
     )

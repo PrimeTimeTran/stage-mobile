@@ -10,3 +10,5 @@ if (false) {
 }
 
 export const API_ROOT = `${backendHost}/${apiVersion}/`
+
+console.log('Api Root: ', API_ROOT)

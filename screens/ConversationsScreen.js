@@ -52,19 +52,18 @@ export default class ConversationsScreen extends React.Component {
   showStageUploads(conversation, upload, index) {
     return (
       <Carousel
+        delay={10000}
         currentPage={index}
-        autoplay={false}
-        style={{
-          flex: 1,
-          width: WINDOW_WIDTH,
-          height: WINDOW_HEIGHT
-        }}>
+        autoplay={true}
+        style={{ flex: 1 }}
+        >
         {conversation.uploads.map(upload => {
           return (
-            <View key={upload.id}>
+            <View key={upload.id} style={{flex: 1}}>
               <VideoPlayer
                 key={upload.id}
                 source={{uri: upload.url}}
+                carousel={'Go'}
               />
               <Text
                 style={{
@@ -84,6 +83,7 @@ export default class ConversationsScreen extends React.Component {
   }
 
   render() {
+    console.log('Rendered Conversations')
     const { conversations } = this.state
     const { navigation } = this.props
     const {
@@ -103,11 +103,11 @@ export default class ConversationsScreen extends React.Component {
               return (
                 <View key={conversation.id}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('Conversation', {
-                                    conversation_name: conversation.name,
-                                    conversation_id: conversation.id,
-                                    other_user_name: conversation.other_users[0].first_name
-                                  })}
+                      onPress={() => navigation.navigate('Conversation', {
+                          conversation_name: conversation.name,
+                          conversation_id: conversation.id,
+                          other_user_name: conversation.other_users[0].first_name
+                      })}
                   >
                     <View style={headerContainerStyle}>
                       <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
@@ -147,8 +147,8 @@ export default class ConversationsScreen extends React.Component {
                                 renderContent={() =>
                                   this.showStageUploads(conversation, upload, index)
                                 }>
-                                <View style={{flex: 1}}>
-                                  <VideoPlayer isLooping video={upload.url} style={{height: 50, width: 50}} />
+                                <View style={{flex: 1, height: 50, width: 50}}>
+                                  <VideoPlayer video={upload.url}/>
                                   <Text
                                     style={{
                                       color: '#fff',
@@ -162,17 +162,13 @@ export default class ConversationsScreen extends React.Component {
                                   </Text>
                                 </View>
                               </Lightbox>
-                            )
-                          })}
+                          )})}
                         </View>
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-                )
-              }
-            )
-          }
+          )})}
         </ScrollView>
       )
     }

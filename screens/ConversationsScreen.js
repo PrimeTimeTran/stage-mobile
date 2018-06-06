@@ -147,7 +147,7 @@ export default class ConversationsScreen extends React.Component {
                                 renderContent={() =>
                                   this.showStageUploads(conversation, upload, index)
                                 }>
-                                <View style={{flex: 1, height: 50, width: 50}}>
+                                <View style={{flex: 1, height: 100, width: 100}}>
                                   <VideoPlayer video={upload.url}/>
                                   <Text
                                     style={{

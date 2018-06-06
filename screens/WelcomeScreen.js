@@ -19,8 +19,8 @@ const SLIDE_DATA = [
   async componentWillMount() {
     // let token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk1Nzk4MTJ9.yQnmTqPo5kTHOFrkbR5f4YXuYJQo3t5WXkYH8zS-Oa-b6OlridEu9McSlwVMN5yVg9OD8L6t0b6MBbWwonAwVg')
     token = await AsyncStorage.getItem('auth_token')
-    if (token) {
-      this.props.navigation.navigate('Conversations')
+    if (!token) {
+      this.props.navigation.navigate('Auth')
       // this.props.navigation.navigate('Test')
       this.setState({ token })
     } else {
@@ -29,7 +29,7 @@ const SLIDE_DATA = [
   }
 
    onSlidesComplete = () => {
-    this.props.navigation.navigate('Conversations')
+    this.props.navigation.navigate('Auth')
   }
 
   render() {

@@ -16,7 +16,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { Card, CardSection, Avatar, SentAt } from '../components/common'
 
 import client from '../utils/client'
 
@@ -52,20 +52,18 @@ export default class ConversationsScreen extends React.Component {
   showStageUploads(conversation, upload, index) {
     return (
       <Carousel
+        delay={10000}
         currentPage={index}
-        autoplay={false}
-        style={{
-          flex: 1,
-          width: WINDOW_WIDTH,
-          height: WINDOW_HEIGHT
-        }}>
+        autoplay={true}
+        style={{ flex: 1 }}
+        >
         {conversation.uploads.map(upload => {
           return (
-            <View style={{flex: 1}} key={upload.id}>
-              <Image
-                style={{flex: 1, resizeMode: 'cover'}}
+            <View key={upload.id} style={{flex: 1}}>
+              <VideoPlayer
                 key={upload.id}
                 source={{uri: upload.url}}
+                carousel={'Go'}
               />
               <Text
                 style={{
@@ -85,10 +83,10 @@ export default class ConversationsScreen extends React.Component {
   }
 
   render() {
+    console.log('Rendered Conversations')
     const { conversations } = this.state
     const { navigation } = this.props
     const {
-      avatarStyle,
       headerContainerStyle,
       containerContentStyle,
       headerInfoStyle,
@@ -105,19 +103,15 @@ export default class ConversationsScreen extends React.Component {
               return (
                 <View key={conversation.id}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('Conversation', {
-                                    conversation_name: conversation.name,
-                                    conversation_id: conversation.id,
-                                    other_user_name: conversation.other_users[0].first_name
-                                  })}
+                      onPress={() => navigation.navigate('Conversation', {
+                          conversation_name: conversation.name,
+                          conversation_id: conversation.id,
+                          other_user_name: conversation.other_users[0].first_name
+                      })}
                   >
                     <View style={headerContainerStyle}>
                       <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 5}}>
-                        <Image
-                          id={conversation.id}
-                          style={[avatarStyle, {marginTop: 5}]}
-                          source={{uri: avatar_url}}
-                        />
+                        <Avatar url={avatar_url} />
                         { (conversation.is_stage) &&
                             <View style={{ justifyContent: 'space-between', alignItems: 'center'}}>
                               <Text style={stageInfoStyle}>Active</Text>
@@ -140,11 +134,10 @@ export default class ConversationsScreen extends React.Component {
                             <Text style={headerTitleStyle}>{name}</Text>
                           }
                           <View style={headerRightStyle}>
-                            <Icon name='clock' type='material-community' color='black' size={10} />
-                            <Text style={{fontSize: 10, paddingLeft: 5}}>{conversation.last_message.sent_at}</Text>
+                            <SentAt sentAt={conversation.last_message.sent_at} />
                           </View>
                         </View>
-                        <Text numberOfLines={3} style={{color: '#696969', fontSize: 15}}>{conversation.last_message.body}</Text>
+                        <Text numberOfLines={3} style={{color: '#696969', fontSize: 13}}>{conversation.last_message.body}</Text>
                         <View style={{flexDirection: 'row'}}>
                           {conversation.is_stage && conversation.uploads && conversation.uploads.map((upload, index) => {
                             return (
@@ -154,8 +147,8 @@ export default class ConversationsScreen extends React.Component {
                                 renderContent={() =>
                                   this.showStageUploads(conversation, upload, index)
                                 }>
-                                <View style={{flex: 1}}>
-                                  <VideoPlayer isLooping video={upload.url} style={{height: 50, width: 50}} />
+                                <View style={{flex: 1, height: 100, width: 100}}>
+                                  <VideoPlayer video={upload.url}/>
                                   <Text
                                     style={{
                                       color: '#fff',
@@ -169,21 +162,15 @@ export default class ConversationsScreen extends React.Component {
                                   </Text>
                                 </View>
                               </Lightbox>
-                            )
-                          })}
+                          )})}
                         </View>
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
-                )
-              }
-            )
-          }
+          )})}
         </ScrollView>
       )
-    } else {
-      <div>Empty</div>
     }
   }
 }
@@ -213,11 +200,6 @@ const styles = StyleSheet.create({
   headerRightStyle: {
     flexDirection: 'row',
     alignSelf: 'flex-start'
-  },
-  avatarStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25
   },
   stageInfoStyle: {
     color: 'green',

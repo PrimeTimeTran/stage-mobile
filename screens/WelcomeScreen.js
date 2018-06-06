@@ -21,6 +21,7 @@ const SLIDE_DATA = [
     token = await AsyncStorage.getItem('auth_token')
     if (token) {
       this.props.navigation.navigate('Conversations')
+      // this.props.navigation.navigate('Test')
       this.setState({ token })
     } else {
       this.setState({ token: false })

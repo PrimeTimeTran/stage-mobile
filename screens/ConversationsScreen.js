@@ -15,9 +15,9 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
-import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection, Avatar, SentAt } from '../components/common'
 
+import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')

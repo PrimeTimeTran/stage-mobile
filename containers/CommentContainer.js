@@ -13,7 +13,7 @@ export default class CommentContainer extends Component {
   }
 
   handleAddComment = (body) => {
-    this.setState([ ...this.state.comments, body])
+    console.log('Adding Comment')
   }
 
   render() {

@@ -5,9 +5,10 @@ import { Avatar, CardSection } from './common'
 
 export default class Comment extends Component {
   render() {
+
     const { comment } = this.props
     const { commentContainerStyle, avatarStyle } = styles
-
+    console.log('Comment: ', comment)
     return (
       <CardSection id={comment.id} style={commentContainerStyle}>
         <View>

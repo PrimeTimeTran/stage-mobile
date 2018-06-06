@@ -3,8 +3,9 @@ import { View, Text, AsyncStorage, Dimensions, ImageBackground } from 'react-nat
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-
 import { Card, CardSection } from '../components/common'
+import { API_ROOT } from '../constants/ApiConfig'
+import client from '../utils/client'
 
 const image = require('../assets/images/2.png')
 
@@ -19,56 +20,34 @@ class AuthScreen extends Component {
       errorMessage: ''
     }
   }
-
-  componentWillMount() {
-    console.log('Mounted AuthScreen')
-  }
-
   componentDidMount() {
     // AsyncStorage.removeItem('auth_token'); // Remove to signout
     // this.props.facebookLogIn();
     // this.onAuthComplete(this.props)
   }
 
-  componentWillUnMount() {
-    console.log('Unmounted')
-  }
-
-  onAuthComplete(props) {
-    if (props.token) {
-      this.props.navigation.navigate('Conversations')
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.onAuthComplete(nextProps)
-  }
-
   handleSubmit = () => {
     let { email, password } = this.state
 
     emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-    password = password.length >= 6
+    passwordValid = password.length >= 6
 
-
+    if (!passwordValid && !emailValid) {
+      return this.handleInvalidEmailAndPassword()
+    }
     if (!emailValid) {
-      this.handleInvalidEmail()
-      return
+      return this.handleInvalidEmail()
     }
     if (!password) {
-      this.handleInvalidPassword()
-      return
-    }
-    if (!password && !email) {
-      this.handleInvalidEmailAndPassword()
-      return
+      return this.handleInvalidPassword()
     }
 
     this.setState({errorMessage: ''})
+    this.signUp()
   }
 
   handleInvalidEmailAndPassword() {
-    this.setState({errorMessage: 'Invalid email & password'})
+    this.setState({errorMessage: 'Invalid email password'})
   }
 
   handleInvalidEmail() {
@@ -85,6 +64,30 @@ class AuthScreen extends Component {
 
   handlePasswordChange = (password) => {
     this.setState({password})
+  }
+
+  signUp = () => {
+    const request = client()
+    const { email, password } = this.state
+    request
+      .then(api =>
+        api.post(`${API_ROOT}signup`, { email, password }))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setToken(data)
+      })
+      .catch(error => {
+        this.setState({errorMessage: 'We had a problem. Please try again'})
+      })
+  }
+
+  async setToken(token) {
+    let theSetToken
+    theSetToken = await AsyncStorage.setItem('auth_token', token.token)
+    console.log('Props', this.props.navigation)
+    this.props.navigation.navigate('Conversations')
   }
 
   render() {
@@ -138,11 +141,7 @@ class AuthScreen extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { token: auth.token }
-}
-
-export default connect(mapStateToProps, actions)(AuthScreen);
+export default AuthScreen
 
 const styles = {
   screenContainer: {

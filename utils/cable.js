@@ -22,14 +22,9 @@ if (Platform.OS == 'ios') {
 socketType = 'ws'
 
 function createChannel(...args) {
-  // Token used to determine who created the message
-
   // let token = AsyncStorage.getItem('auth_token')
-  // if (!consumer) {
-  //   consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${token}`)
-  // }
-
   let hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk1Nzk4MTJ9.yQnmTqPo5kTHOFrkbR5f4YXuYJQo3t5WXkYH8zS-Oa-b6OlridEu9McSlwVMN5yVg9OD8L6t0b6MBbWwonAwVg'
+
   if (!consumer) {
     consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${hardToken}`)
   }

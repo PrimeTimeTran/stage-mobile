@@ -17,10 +17,14 @@ const SLIDE_DATA = [
   }
 
   async componentWillMount() {
-    // let token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk1Nzk4MTJ9.yQnmTqPo5kTHOFrkbR5f4YXuYJQo3t5WXkYH8zS-Oa-b6OlridEu9McSlwVMN5yVg9OD8L6t0b6MBbWwonAwVg')
+    let token
+    // token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4MjM5NTJ9.1OrZIlYiSPl2bt15NJp_IKXeIN-FGG1VhBTBh-r9ftMzAWa3_l2I8jnJOylwMDiBs44VspBa7aOYwsVSlTjJ3Q')
+    // token = await AsyncStorage.removeItem('auth_token')
     token = await AsyncStorage.getItem('auth_token')
-    if (!token) {
-      this.props.navigation.navigate('Auth')
+
+    console.log('Token is ', token)
+    if (token) {
+      this.props.navigation.navigate('Conversations')
       // this.props.navigation.navigate('Test')
       this.setState({ token })
     } else {

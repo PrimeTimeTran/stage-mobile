@@ -70,15 +70,8 @@ class AuthScreen extends Component {
 
     const keys = [['auth_token', JSON.stringify(data.token)], ['current_user', JSON.stringify(userId)]]
 
-    AsyncStorage.multiSet(keys, (key) => {
-      console.log('Keys in Multi: ', keys);
-      console.log('Key', key);
-    })
+    await AsyncStorage.multiSet(keys, (key) => {console.log('Key', key)})
 
-    console.log('Token: ', token)
-    console.log('User_Id: ', userId)
-
-    // await AsyncStorage.multiSet([['auth_token', token], ['current_user', userId]], console.log('Setting stuff'))
     this.props.navigation.navigate('Conversations')
   }
   async setUser(data) {

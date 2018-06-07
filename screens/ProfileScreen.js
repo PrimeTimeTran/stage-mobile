@@ -1,26 +1,24 @@
 import React from 'react'
 import {
   Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Dimensions,
   Button
 } from 'react-native'
 
 import { Icon } from 'react-native-elements'
-import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { CardSection } from '../components/common'
 
 import client from '../utils/client'
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
+const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -81,11 +79,11 @@ export default class ProfileScreen extends React.Component {
                 style={size}
                 onAnimateNextPage={(p) => console.log(p)}
               >
-                { user.uploads.map(upload => {
+                { user && user.uploads && user.uploads.map(upload => {
                     return (
-                      <View style={this.state.size} key={upload.id}>
+                      <View style={size} key={upload.id}>
                         <Image
-                          style={this.state.size}
+                          style={size}
                           source={{uri: upload.url}}
                         />
                       </View>
@@ -95,25 +93,31 @@ export default class ProfileScreen extends React.Component {
               </Carousel>
             </View>
             <View>
-                <CardSection>
-                  <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={descriptionStyle}>
-                      <Icon name='users' type='font-awesome' color='green' size={10}/>
-                      <Icon name='place' color='black' size={15}/>
-                      <Icon name='mobile' type='font-awesome' color='black' size={17}/>
-                    </View>
-                    <View style={descriptionStyle}>
-                      <Text>{user.full_name}</Text>
-                      <Text>{user.location}</Text>
-                      <Text>{user.occupation}</Text>
-                    </View>
+              <CardSection>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <View style={descriptionStyle}>
+                    <Icon name='users' type='font-awesome' color='green' size={10}/>
+                    <Icon name='place' color='black' size={15}/>
+                    <Icon name='mobile' type='font-awesome' color='black' size={17}/>
                   </View>
-                </CardSection>
+                  <View style={descriptionStyle}>
+                    <Text>{user.full_name}</Text>
+                    <Text>{user.location}</Text>
+                    <Text>{user.occupation}</Text>
+                  </View>
+                </View>
+              </CardSection>
             </View>
         </ScrollView>
         )
     } else {
-      return <Text>Loading</Text>
+      return
+        <View style={size}>
+          <Image
+            style={size}
+            source={{uri: defaultImage}}
+          />
+        </View>
     }
   }
 }

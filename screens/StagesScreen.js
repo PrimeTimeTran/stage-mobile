@@ -1,10 +1,8 @@
 import React from 'react'
 import {
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Image,
   Dimensions,

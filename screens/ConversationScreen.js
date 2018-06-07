@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, Button, Platform, AsyncStorage } from 'react-native'
+import { Button, AsyncStorage } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
-import { StackActions } from 'react-navigation'
-import { Icon } from 'react-native-elements'
 import { sendMessage, setCallback } from '../utils/chat'
 
 import { API_ROOT } from '../constants/ApiConfig'

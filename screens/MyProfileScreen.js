@@ -1,22 +1,18 @@
 import React from 'react'
 import {
   Image,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Dimensions,
-  Button
 } from 'react-native'
 
 import { Icon } from 'react-native-elements'
-import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { CardSection } from '../components/common'
 
 import client from '../utils/client'
 

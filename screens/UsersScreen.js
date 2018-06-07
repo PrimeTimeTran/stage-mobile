@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, View, Text, Button } from 'react-native'
+import { View, Text, Button } from 'react-native'
 
 export default class UsersScreen extends Component {
   static navigationOptions = ({ navigation }) => ({

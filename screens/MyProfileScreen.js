@@ -40,8 +40,8 @@ export default class MyProfileScreen extends React.Component {
     };
   }
 
-  componentWillMount() {
-    const user_id = 1
+  async componentWillMount() {
+    const user_id = await AsyncStorage.AsyncStorage.getItem('current_user')
     const request = client();
     request
       .then(api =>

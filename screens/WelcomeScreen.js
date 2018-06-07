@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, AsyncStorage, ImageBackground } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { AppLoading } from 'expo'
 
 import Slides from '../components/slides'
@@ -11,18 +11,24 @@ const SLIDE_DATA = [
   { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
 ]
 
- class Welcome extends Component {
+class Welcome extends Component {
   state = {
     token: null
   }
 
   async componentWillMount() {
     let token
-    // token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4MjM5NTJ9.1OrZIlYiSPl2bt15NJp_IKXeIN-FGG1VhBTBh-r9ftMzAWa3_l2I8jnJOylwMDiBs44VspBa7aOYwsVSlTjJ3Q')
+    // current_user = await AsyncStorage.removeItem('current_user')
     // token = await AsyncStorage.removeItem('auth_token')
-    token = await AsyncStorage.getItem('auth_token')
 
-    console.log('Token is ', token)
+    // token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4Nzk4OTB9._COA3vWtEtInLfq7fiZTfHWaogmjAC2QgtfZ4FZ1vkD8ogYpRc-53XfLhBqQTLCFz4Gucam2xtYHRMEnyuxGAw')
+    token = await AsyncStorage.getItem('auth_token')
+    console.log('AuthToken in Welcome', token)
+
+    // let current_user
+    // current_user = await AsyncStorage.getItem('current_user')
+    // console.log('UserId', current_user)
+
     if (token) {
       this.props.navigation.navigate('Conversations')
       // this.props.navigation.navigate('Test')

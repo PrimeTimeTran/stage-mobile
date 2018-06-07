@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, AsyncStorage, Dimensions, ImageBackground } from 'react-native'
-import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
-import { connect } from 'react-redux'
-import * as actions from '../actions'
-import { Card, CardSection } from '../components/common'
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
@@ -20,11 +17,6 @@ class AuthScreen extends Component {
       errorMessage: ''
     }
   }
-  componentDidMount() {
-    // AsyncStorage.removeItem('auth_token'); // Remove to signout
-    // this.props.facebookLogIn();
-    // this.onAuthComplete(this.props)
-  }
 
   handleSubmit = () => {
     let { email, password } = this.state
@@ -33,29 +25,16 @@ class AuthScreen extends Component {
     passwordValid = password.length >= 6
 
     if (!passwordValid && !emailValid) {
-      return this.handleInvalidEmailAndPassword()
+      return this.setState({errorMessage: 'Invalid email & password'})
     }
     if (!emailValid) {
-      return this.handleInvalidEmail()
+      return this.setState({errorMessage: 'Invalid email.'})
     }
     if (!password) {
-      return this.handleInvalidPassword()
+      return this.setState({errorMessage: 'Invalid Password. Must be 6 characters'})
     }
-
     this.setState({errorMessage: ''})
     this.signUp()
-  }
-
-  handleInvalidEmailAndPassword() {
-    this.setState({errorMessage: 'Invalid email password'})
-  }
-
-  handleInvalidEmail() {
-    this.setState({errorMessage: 'Invalid email.'})
-  }
-
-  handleInvalidPassword() {
-    this.setState({errorMessage: 'Invalid Password. Must be 6 characters'})
   }
 
   handleEmailChange = (email) => {
@@ -77,23 +56,41 @@ class AuthScreen extends Component {
       })
       .then(data => {
         this.setToken(data)
+        return data
       })
       .catch(error => {
-        this.setState({errorMessage: 'We had a problem. Please try again'})
+        this.setState({errorMessage: 'Password incorrect. Please try again.'})
+        console.log('Error: ', error)
       })
   }
 
-  async setToken(token) {
-    let theSetToken
-    theSetToken = await AsyncStorage.setItem('auth_token', token.token)
-    console.log('Props', this.props.navigation)
+  async setToken(data) {
+    let token = data.token
+    let userId = data.user.id
+
+    const keys = [['auth_token', JSON.stringify(data.token)], ['current_user', JSON.stringify(userId)]]
+
+    AsyncStorage.multiSet(keys, (key) => {
+      console.log('Keys in Multi: ', keys);
+      console.log('Key', key);
+    })
+
+    console.log('Token: ', token)
+    console.log('User_Id: ', userId)
+
+    // await AsyncStorage.multiSet([['auth_token', token], ['current_user', userId]], console.log('Setting stuff'))
+    this.props.navigation.navigate('Conversations')
+  }
+  async setUser(data) {
+    console.log('2nd: ', data.user.id)
+    user = await AsyncStorage.setItem('current_user', data.user.id)
     this.props.navigation.navigate('Conversations')
   }
 
   render() {
-    const { containerStyle, screenContainer, backgroundColor } = styles
+    const { containerStyle, screenContainer } = styles
 
-    if (this.props.token) {
+    if (!!this.props.token) {
       return (
         <View>
           <Button
@@ -107,33 +104,36 @@ class AuthScreen extends Component {
 
       <ImageBackground source={image} style={{ height, width, justifyContent: 'center', alignItems: 'center' }}>
         <View style={screenContainer}>
-          <View style={containerStyle}>
-          <FormLabel>Email</FormLabel>
-            <FormInput
-              name="Email"
-              placeholder="loi@gmail.com"
-              value={this.state.email}
-              onChangeText={this.handleEmailChange}
-            />
 
-          <FormLabel>Password</FormLabel>
-            <FormInput
-              placeholder="**********"
-              secureTextEntry
-              onSubmit={this.handlePasswordChange}
-              value={this.state.password}
-              onChangeText={this.handlePasswordChange}
-            />
+          <View style={containerStyle}>
+            <FormLabel>Email</FormLabel>
+              <FormInput
+                name="Email"
+                placeholder="loi@gmail.com"
+                value={this.state.email}
+                onChangeText={this.handleEmailChange}
+              />
+
+            <FormLabel>Password</FormLabel>
+              <FormInput
+                placeholder="**********"
+                secureTextEntry
+                onSubmit={this.handlePasswordChange}
+                value={this.state.password}
+                onChangeText={this.handlePasswordChange}
+              />
             <View style={{padding: 5, justifyContent: 'center', alignItems: 'center'}}>
-              <Text>{this.state.errorMessage}</Text>
+              <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
             </View>
             <Button
               style={{marginBottom: 10}}
               icon={{name: 'sign-in', type: 'font-awesome'}}
-              title='Sign Up'
+              title='Sign In/Up'
               onPress={this.handleSubmit}
-            />
-            ></View>
+            >
+              <Text>Sign Up/In</Text>
+            </Button>
+          </View>
 
         </View>
       </ImageBackground>

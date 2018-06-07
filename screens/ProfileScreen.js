@@ -48,7 +48,7 @@ export default class ProfileScreen extends React.Component {
   }
 
   componentWillMount() {
-    const user_id = this.props.navigation.state.params.user_id || 1
+    const user_id = this.props.navigation.state.params.user_id
     const request = client();
     request
       .then(api =>

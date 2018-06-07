@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, Platform } from 'react-native'
+import { View, Text, Button, Platform, AsyncStorage } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { StackActions } from 'react-navigation'
 import { Icon } from 'react-native-elements'
@@ -24,9 +24,12 @@ export default class ConversationScreen extends Component {
     )
   })
 
-  state = {messages: []}
+  state = {messages: [], userId: ''}
 
-  componentWillMount() {
+  async componentWillMount() {
+    let userId
+    userId = await AsyncStorage.getItem('current_user')
+    this.setState({userId: userId}, console.log('UserID: ', this.state.userId))
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client()
@@ -45,27 +48,28 @@ export default class ConversationScreen extends Component {
         console.log('Error:', error)
       })
 
-  setCallback(this.onReceive)
+    setCallback(this.onReceive)
   }
 
   onReceive = (data) => {
     const message = JSON.parse(data).gifted_chat
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, message)
-    }))
+
+    if (message.user._id != this.state.userId) {
+      this.setState(previousState => ({
+        messages: GiftedChat.append(previousState.messages, message)
+      }))
+    }
   }
 
   onSend(messages = []) {
     const conversation_id = this.props.navigation.state.params.conversation_id
-
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }))
     sendMessage({
       conversation_id: conversation_id,
       body: messages[0].text
     })
-
-    // this.setState(previousState => ({
-    //   messages: GiftedChat.append(previousState.messages, messages)
-    // }))
   }
 
   renderBubble = props => {
@@ -117,7 +121,7 @@ export default class ConversationScreen extends Component {
   }
 
   render() {
-    const user_id = Platform.OS == 'ios' ? 3 : 1
+    console.log('This State', this.state.userId);
     return (
       <GiftedChat
         onPressAvatar={props => this.handleAvatarClick(props)}
@@ -125,7 +129,7 @@ export default class ConversationScreen extends Component {
         renderBubble={props => this.renderBubble(props)}
         onSend={messages => this.onSend(messages)}
         user={{
-          _id: user_id
+          _id: this.state.userId
         }}
       />
     )

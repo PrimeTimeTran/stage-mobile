@@ -40,7 +40,7 @@ export default class HomeScreen extends Component {
         return response.data
       })
       .then(data => {
-        console.log('Posts:', data);
+        console.log('Posts:', data)
         this.setState({posts: data})
       })
       .catch(error => {
@@ -169,4 +169,4 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 25,
   }
-});
+})

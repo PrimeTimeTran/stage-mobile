@@ -16,7 +16,7 @@ import { CardSection } from '../components/common'
 
 import client from '../utils/client'
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
 
 export default class MyProfileScreen extends React.Component {
   static navigationOptions = {
@@ -25,20 +25,20 @@ export default class MyProfileScreen extends React.Component {
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       size: { width, height: 300 },
       user: {}
-    };
+    }
   }
 
   async componentWillMount() {
     const user_id = await AsyncStorage.AsyncStorage.getItem('current_user')
-    const request = client();
+    const request = client()
     request
       .then(api =>
         api.get(`${API_ROOT}users/${user_id}`))
@@ -54,8 +54,8 @@ export default class MyProfileScreen extends React.Component {
   }
 
   _onLayoutDidChange = (e) => {
-    const layout = e.nativeEvent.layout;
-    this.setState({size: {width: layout.width, height: layout.height}});
+    const layout = e.nativeEvent.layout
+    this.setState({size: {width: layout.width, height: layout.height}})
   }
 
   render() {

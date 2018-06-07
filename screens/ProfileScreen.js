@@ -33,16 +33,16 @@ export default class ProfileScreen extends React.Component {
         onPress={() => navigation.navigate('Settings')}
         color='white'
       />
-    ),
-  });
+    )
+  })
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       size: { width, height: 300 },
       user: {}
-    };
+    }
   }
 
   componentWillMount() {
@@ -64,7 +64,7 @@ export default class ProfileScreen extends React.Component {
 
   _onLayoutDidChange = (e) => {
     const layout = e.nativeEvent.layout;
-    this.setState({size: {width: layout.width, height: layout.height}});
+    this.setState({size: {width: layout.width, height: layout.height}})
   }
 
   render() {
@@ -79,7 +79,7 @@ export default class ProfileScreen extends React.Component {
                 style={size}
                 onAnimateNextPage={(p) => console.log(p)}
               >
-                { user && user.uploads && user.uploads.map(upload => {
+                { user.uploads.map(upload => {
                     return (
                       <View style={size} key={upload.id}>
                         <Image
@@ -121,6 +121,7 @@ export default class ProfileScreen extends React.Component {
     }
   }
 }
+
 const styles = StyleSheet.create({
   descriptionStyle: {
     justifyContent: 'space-between',

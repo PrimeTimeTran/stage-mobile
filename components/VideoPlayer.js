@@ -27,15 +27,15 @@ export default class VideoPlayer extends Component {
 
   render() {
     let myArray = [
-      'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
-      'https://static.videezy.com/system/resources/previews/000/000/160/original/RoadTrip.mp4',
-      'http://coverr.co/s3/mp4/Brooklyn-run.mp4',
-      'https://static.videezy.com/system/resources/previews/000/002/448/original/slow-motion-drop-hd-stock-video.mp4',
-      'http://coverr.co/s3/mp4/Down-time.mp4',
-      'http://coverr.co/s3/mp4/Moped.mp4',
-      'http://coverr.co/s3/mp4/Squat-it.mp4',
-      'http://coverr.co/s3/mp4/Behind-the-screen.mp4',
-      'http://coverr.co/s3/mp4/Film-set.mp4'
+			'https://i.imgur.com/gHFLves.mp4',
+			'https://i.imgur.com/6hNdBia.mp4',
+			'https://i.imgur.com/GwV55GL.mp4',
+			'https://i.imgur.com/ZXEgLh0.mp4',
+			'https://i.imgur.com/RNVhrQa.mp4',
+			'https://i.imgur.com/46IdBXo.mp4',
+			'https://i.imgur.com/U25iofY.mp4',
+			'https://i.imgur.com/XcuP9Qi.mp4',
+			'https://i.imgur.com/h6UO42C.mp4'
     ]
     var rand = myArray[Math.floor(Math.random() * myArray.length)]
     return (

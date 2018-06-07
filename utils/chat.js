@@ -1,6 +1,6 @@
 import createChannel from './cable';
 
-let callback; // declaring a variable that will hold a function later
+let callback // declaring a variable that will hold a function later
 
 const chat = createChannel('ChatChannel', {
   connected() {
@@ -10,7 +10,6 @@ const chat = createChannel('ChatChannel', {
     console.log('Disconnected');
   },
   received( message ) {
-    console.log('Message Received in Cable: ', message)
     if (callback) callback.call(null, message);
   }
 });

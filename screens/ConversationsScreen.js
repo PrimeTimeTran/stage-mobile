@@ -1,12 +1,10 @@
 import React from 'react'
 import {
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image,
   Dimensions
 } from 'react-native'
 
@@ -16,7 +14,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { Avatar, SentAt } from '../components/common'
 
 import client from '../utils/client'
 
@@ -120,11 +118,7 @@ export default class ConversationsScreen extends React.Component {
                           alignItems: 'center',
                           paddingLeft: 5
                         }}>
-                        <Image
-                          id={conversation.id}
-                          style={[avatarStyle, { marginTop: 5 }]}
-                          source={{ uri: avatar_url }}
-                        />
+                        <Avatar custom={[avatarStyle, {marginTop: 5}]} url={avatar_url} />
                         {conversation.is_stage && (
                           <View
                             style={{
@@ -172,14 +166,8 @@ export default class ConversationsScreen extends React.Component {
                             <Text style={headerTitleStyle}>{name}</Text>
                           )}
                           <View style={headerRightStyle}>
-                            <Icon
-                              name="clock"
-                              type="material-community"
-                              color="black"
-                              size={10}
-                            />
                             <Text style={{ fontSize: 10, paddingLeft: 5 }}>
-                              {conversation.last_message.sent_at}
+                              <SentAt sentAt={conversation.last_message.sent_at} />
                             </Text>
                           </View>
                         </View>

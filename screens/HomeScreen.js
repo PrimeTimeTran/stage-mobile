@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import {
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image,
   Dimensions,
   Button
 } from 'react-native'

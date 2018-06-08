@@ -31,6 +31,7 @@ export default class MyProfileScreen extends React.Component {
           type='font-awesome'
           name='gears'
           color='white'
+          size={15}
           onPress={() => navigation.navigate('Users')}/>
       </View>
     )
@@ -81,7 +82,7 @@ export default class MyProfileScreen extends React.Component {
             >
               { user.uploads.map(upload => {
                 return (
-                  <View style={size} key={upload.id}>
+                <View style={size} key={upload.id}>
                   <Image style={size} source={{uri: upload.url}} />
                 </View>
                 )})

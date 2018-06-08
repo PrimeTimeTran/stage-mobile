@@ -22,14 +22,7 @@ export default class ProfileScreen extends React.Component {
     headerTitleStyle: {color: 'white'},
     headerBackTitleStyle: {color: 'white'},
     headerTitle: (navigation.state.params.name || navigation.state.params.first_name),
-    headerStyle: {backgroundColor: '#333333'},
-    headerRight: (
-      <Button
-        title='Settings'
-        onPress={() => navigation.navigate('Settings')}
-        color='white'
-      />
-    )
+    headerStyle: {backgroundColor: '#333333'}
   })
 
   constructor(props) {

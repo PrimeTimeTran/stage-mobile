@@ -79,7 +79,8 @@ styles = {
   },
   cardBackgroundStyle: {
     backgroundColor: '#333333',
-    marginTop: 20
+    marginTop: 20,
+    borderBottomColor: 'yellow',
   },
   cardStyle: {
     flexDirection: 'row'

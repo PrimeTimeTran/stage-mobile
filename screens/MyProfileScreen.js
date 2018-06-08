@@ -34,7 +34,7 @@ let options = {
 }
 
 export default class MyProfileScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Me',
     headerTitleStyle: {color: 'white'},
     headerStyle: { backgroundColor: '#333333'},
@@ -49,8 +49,17 @@ export default class MyProfileScreen extends React.Component {
           size={15}
           onPress={() => navigation.navigate('Users')}/>
       </View>
+    ),
+    headerLeft: (
+      <View style={{paddingLeft: 10}}>
+        <Icon
+          type='entypo'
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}/>
+      </View>
     )
-  }
+  })
 
   constructor(props) {
     super(props)

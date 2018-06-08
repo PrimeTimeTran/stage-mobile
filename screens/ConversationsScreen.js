@@ -21,13 +21,23 @@ import client from '../utils/client'
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class ConversationsScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Messages',
     headerStyle: { backgroundColor: '#333333' },
     headerTitleStyle: { color: 'white' },
     headerBackTitleStyle: { color: 'white' },
-    headerTintColor: 'white'
-  }
+    headerTintColor: 'white',
+    headerLeft: (
+      <View style={{paddingLeft: 10}}>
+        <Icon
+          type='entypo'
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}/>
+      </View>
+    )
+  })
+
   state = { conversations: [] }
 
   componentWillMount() {

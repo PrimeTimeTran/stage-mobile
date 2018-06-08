@@ -1,9 +1,10 @@
 import React from 'react'
-import { Platform } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import { Platform, Text } from 'react-native'
+import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
+
+import Drawer from '../components/Drawer'
 
 import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthScreen from '../screens/AuthScreen'
@@ -116,7 +117,7 @@ const MainTabScreen = createBottomTabNavigator({
   },
 )
 
-export default createBottomTabNavigator(
+const MainDrawNavigation = createBottomTabNavigator(
   {
     Welcome: WelcomeScreen,
     Auth: AuthScreen,
@@ -128,3 +129,23 @@ export default createBottomTabNavigator(
     navigationOptions: { tabBarVisible: false }
   }
 )
+
+const ApplicationDrawer = createDrawerNavigator(
+  {
+    App: MainDrawNavigation
+  },
+  {
+    contentComponent: Drawer
+  }
+)
+
+ApplicationDrawer.navigationOptions = ({ navigation }) => {
+  return {
+    drawerLabel: 'Home',
+    drawerIcon: ({ tintColor }) => (
+      <Text>Go</Text>
+    )
+  }
+}
+
+export default ApplicationDrawer

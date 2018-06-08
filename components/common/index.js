@@ -7,4 +7,5 @@ export * from './Input'
 export * from './SentAt'
 export * from './Spinner'
 export * from './UserDescription'
+export * from './DrawerCard'
 

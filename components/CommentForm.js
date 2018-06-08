@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { View, Text, } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
-import { CardSection, Card } from './common'
+import React, { Component } from 'react'
+import { FormInput, Button } from 'react-native-elements'
+import { CardSection } from './common'
 
 export default class CommentForm extends Component {
   constructor(props) {
@@ -22,20 +21,19 @@ export default class CommentForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection style={{flex: 1}}>
-          <FormInput
-            onSubmit={this.handle}
-            value={this.state.body}
-            onChangeText={e => this.handleCommentBody(e)}
-          />
-          <Button
-            icon={{name: 'cached'}}
-            title='Comment'
-            onPress={this.handleSubmit}
-          />
-        </CardSection>
-      </Card>
-    );
+      <CardSection>
+        <FormInput
+          onSubmit={this.handle}
+          value={this.state.body}
+          onChangeText={e => this.handleCommentBody(e)}
+          placeholder='Say something...'
+        />
+        <Button
+          icon={{name: 'cached'}}
+          title='Comment'
+          onPress={this.handleSubmit}
+        />
+      </CardSection>
+    )
   }
 }

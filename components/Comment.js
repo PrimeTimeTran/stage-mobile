@@ -8,7 +8,7 @@ export default class Comment extends Component {
     const { comment } = this.props
     const { commentContainerStyle, avatarStyle } = styles
     return (
-      <CardSection id={comment.id} styling={commentContainerStyle}>
+      <CardSection id={comment.id} custom={commentContainerStyle}>
         <View>
           <Avatar url={comment.user.user_profile_photo} custom={[avatarStyle, {marginTop: 5}]} />
         </View>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "stage",
+    "name": "Stage",
     "description": "A very interesting project.",
     "slug": "stage",
     "privacy": "public",
@@ -21,7 +21,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "io.stage.stage"
     }
   }
 }

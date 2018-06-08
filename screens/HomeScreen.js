@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,6 +9,8 @@ import {
   Dimensions,
   Button
 } from 'react-native'
+
+import { Icon } from 'react-native-elements'
 
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
@@ -23,13 +26,23 @@ import client from '../utils/client'
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class HomeScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Home',
     headerTitleStyle: {color: 'white'},
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
-  }
+    headerLeft: (
+      <View style={{paddingLeft: 10}}>
+        <Icon
+          type='entypo'
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}/>
+      </View>
+    )
+  })
+
   state = { posts: [] }
 
   componentWillMount() {
@@ -81,6 +94,21 @@ export default class HomeScreen extends Component {
     )
   }
 
+   navigateProfile = async (user) => {
+    const { id } = user
+    const currentUser = await AsyncStorage.getItem('current_user')
+
+    if (parseInt(currentUser) === id) {
+      this.props.navigation.navigate('MyProfile')
+    } else {
+      this.props.navigation.navigate('Profile', {
+        user_id: id,
+        first_name: user.first_name
+      })
+
+    }
+  }
+
   render() {
     const { posts } = this.state
     const {
@@ -98,12 +126,7 @@ export default class HomeScreen extends Component {
                 <Card>
                   <CardSection style={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
-                      <TouchableOpacity
-                          onPress={() => this.props.navigation.navigate('Profile', {
-                              user_id: user.id,
-                              first_name: user.first_name
-                          })}
-                      >
+                      <TouchableOpacity onPress={() => this.navigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
                       </TouchableOpacity>
                     </View>
@@ -114,7 +137,7 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection styling={{borderWidth: 0, padding: 10}}>
+                  <CardSection custom={{borderWidth: 0, padding: 10}}>
                     <Text numberOfLines={5}>{post.body}</Text>
                   </CardSection>
                     { post.uploads.map((upload, index) => {
@@ -132,7 +155,7 @@ export default class HomeScreen extends Component {
                             )
                       }}})
                     }
-                    <CardSection styling={{justifyContent: 'space-around'}}>
+                    <CardSection custom={{justifyContent: 'space-around'}}>
                       <Button title='Like' onPress={() => console.log('Liked')}>
                         <Text>Like</Text>
                       </Button>

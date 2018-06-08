@@ -20,13 +20,22 @@ import client from '../utils/client'
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class StagesScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Stages',
     headerTitleStyle: {color: 'white'},
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
-  }
+    headerLeft: (
+      <View style={{paddingLeft: 10}}>
+        <Icon
+          type='entypo'
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}/>
+      </View>
+    )
+  })
 
   constructor () {
     super()
@@ -116,7 +125,7 @@ export default class StagesScreen extends React.Component {
               return (
                 <View key={stage.id}>
                   <Card>
-                    <CardSection styling={cardHeaderStyle}>
+                    <CardSection custom={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
                         <Icon name='chevron-right' color='white'/>
                         <Text style={headerTextStyle}>

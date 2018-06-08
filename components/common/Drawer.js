@@ -4,7 +4,7 @@ import {
   Dimensions
 } from 'react-native'
 
-import { DrawerCard } from './components/common'
+import { DrawerCard } from './DrawerCard'
 
 let { width, height } = Dimensions.get('window')
 
@@ -23,8 +23,8 @@ class Drawer extends Component {
           <DrawerCard type="font-awesome" name="gift" content="Gifting" />
           <DrawerCard type="material-icon" name="payment" content="Billing" />
         </View>
-        <View>
-          <DrawerCard type="material-community" name="logout" content="Log Out" custom={{borderBottomWidth: 0, paddingBottom: 20}} />
+        <View style={{borderBottomWidth: 0, paddingBottom: 20}}>
+          <DrawerCard type="material-community" name="logout" content="Log Out" />
         </View>
       </View>
     )
@@ -33,7 +33,7 @@ class Drawer extends Component {
 
 export { Drawer }
 
-styles = {
+const styles = {
   drawerStyle: {
     backgroundColor: '#333333',
     height: height,
@@ -41,18 +41,5 @@ styles = {
     paddingTop: 40,
     paddingLeft: 30,
     justifyContent: 'space-between',
-  },
-  cardBackgroundStyle: {
-    backgroundColor: '#333333',
-    marginTop: 20,
-    borderBottomColor: 'yellow',
-  },
-  cardStyle: {
-    flexDirection: 'row'
-  },
-  textStyle: {
-    color: 'white',
-    fontSize: 20,
-    paddingLeft: 15
   }
 }

@@ -3,7 +3,7 @@ import { Platform, Text } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
-import Drawer from '../common/Drawer'
+import { Drawer } from '../components/common'
 
 import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthScreen from '../screens/AuthScreen'

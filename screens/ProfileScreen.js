@@ -2,19 +2,15 @@ import React from 'react'
 import {
   Image,
   ScrollView,
-  StyleSheet,
-  Text,
   View,
   Dimensions,
   Button
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
 import Carousel from 'react-native-looped-carousel'
+import { UserDescription } from '../components/common'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { CardSection } from '../components/common'
-
 import client from '../utils/client'
 
 const { width } = Dimensions.get('window')
@@ -63,56 +59,32 @@ export default class ProfileScreen extends React.Component {
   }
 
   _onLayoutDidChange = (e) => {
-    const layout = e.nativeEvent.layout;
+    const layout = e.nativeEvent.layout
     this.setState({size: {width: layout.width, height: layout.height}})
   }
 
   render() {
-    const { descriptionStyle } = styles
     const { size, user } = this.state
     if (user && user.uploads && user.uploads.length > 0) {
-      console.log('Description: ', user.description)
       return (
         <ScrollView>
-            <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
-              <Carousel
-                autoplay={false}
-                style={size}
-                onAnimateNextPage={(p) => console.log(p)}
-              >
-                { user.uploads.map(upload => {
-                    return (
-                      <View style={size} key={upload.id}>
-                        <Image style={size} source={{uri: upload.url}} />
-                      </View>
-                    )
-                  })
-                }
-              </Carousel>
-            </View>
-            <View>
-              <CardSection>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <View style={descriptionStyle}>
-                    <Icon name='users' type='font-awesome' color='green' size={10}/>
-                    <Icon name='place' color='black' size={15}/>
-                    <Icon name='mobile' type='font-awesome' color='black' size={17}/>
-                  </View>
-                  <View style={descriptionStyle}>
-                    <Text>{user.full_name}</Text>
-                    <Text>{user.location}</Text>
-                    <Text>{user.occupation}</Text>
-                  </View>
-                </View>
-              </CardSection>
-              <CardSection>
-                <View style={{padding: 10}}>
-                  <Text>
-                    {user.description}
-                  </Text>
-                </View>
-              </CardSection>
-            </View>
+          <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
+            <Carousel
+              autoplay={false}
+              style={size}
+              onAnimateNextPage={(p) => console.log(p)}
+            >
+              { user.uploads.map(upload => {
+                  return (
+                    <View style={size} key={upload.id}>
+                      <Image style={size} source={{uri: upload.url}} />
+                    </View>
+                  )
+                })
+              }
+            </Carousel>
+          </View>
+          <UserDescription user={user} />
         </ScrollView>
         )
     } else {
@@ -124,10 +96,3 @@ export default class ProfileScreen extends React.Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  descriptionStyle: {
-    justifyContent: 'space-between',
-    paddingLeft: 5
-  }
-})

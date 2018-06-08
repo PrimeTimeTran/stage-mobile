@@ -3,25 +3,21 @@ import {
   AsyncStorage,
   Image,
   ScrollView,
-  StyleSheet,
-  Text,
   View,
   Dimensions,
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
 import Carousel from 'react-native-looped-carousel'
+import { UserDescription } from '../components/common'
 
 import { API_ROOT } from '../constants/ApiConfig'
-import { CardSection } from '../components/common'
-
 import client from '../utils/client'
 
 const { width } = Dimensions.get('window')
 
 export default class MyProfileScreen extends React.Component {
   static navigationOptions = {
-    title: 'Profile',
+    title: 'Me',
     headerTitleStyle: {color: 'white'},
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
@@ -47,7 +43,7 @@ export default class MyProfileScreen extends React.Component {
         return response.data
       })
       .then(data => {
-        this.setState({user: data}, console.log('User: ', this.state.user))
+        this.setState({user: data})
       })
       .catch(error => {
         console.log('Error:', error)
@@ -60,54 +56,35 @@ export default class MyProfileScreen extends React.Component {
   }
 
   render() {
-    const { descriptionStyle } = styles
     const { size, user } = this.state
 
     if (user && user.uploads && user.uploads.length > 0) {
-      console.log('User: ', user)
       return (
         <ScrollView>
-            <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
-              <Carousel
-                autoplay={false}
-                style={size}
-                onAnimateNextPage={(p) => console.log(p)}
-              >
-                { user.uploads.map(upload => {
-                  return (
-                    <View style={size} key={upload.id}>
-                    <Image style={size} source={{uri: upload.url}} />
-                  </View>
-                  )})
-                }
-              </Carousel>
-            </View>
-            <View>
-                <CardSection>
-                  <View style={{flex: 1, flexDirection: 'row'}}>
-                    <View style={descriptionStyle}>
-                      <Icon name='users' type='font-awesome' color='green' size={10}/>
-                      <Icon name='place' color='black' size={15}/>
-                      <Icon name='mobile' type='font-awesome' color='black' size={17}/>
-                    </View>
-                    <View style={descriptionStyle}>
-                      <Text>{user.full_name}</Text>
-                      <Text>{user.location}</Text>
-                      <Text>{user.occupation}</Text>
-                    </View>
-                  </View>
-                </CardSection>
-            </View>
+          <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
+            <Carousel
+              autoplay={false}
+              style={size}
+              onAnimateNextPage={(p) => console.log(p)}
+            >
+              { user.uploads.map(upload => {
+                return (
+                  <View style={size} key={upload.id}>
+                  <Image style={size} source={{uri: upload.url}} />
+                </View>
+                )})
+              }
+            </Carousel>
+          </View>
+          <UserDescription user={user} />
         </ScrollView>
         )
     } else {
-      return <Text>Loading</Text>
+      return (
+        <View style={size}>
+          <Image style={size} source={{uri: defaultImage}} />
+        </View>
+      )
     }
   }
 }
-const styles = StyleSheet.create({
-  descriptionStyle: {
-    justifyContent: 'space-between',
-    paddingLeft: 5
-  }
-})

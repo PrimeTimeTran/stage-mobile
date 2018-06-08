@@ -1,16 +1,16 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import React from 'react'
+import { Text, TouchableOpacity } from 'react-native'
 
 const Button = ({ onPress, children }) => {
-  const { buttonStyle, textStyle } = styles;
+  const { buttonStyle, textStyle } = styles
   return (
     <TouchableOpacity onPress={onPress} style={buttonStyle}>
       <Text style={textStyle}>
         {children}
       </Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = {
   textStyle: {
@@ -31,5 +31,5 @@ const styles = {
     marginLeft: 5,
     marginRight: 5,
   }
-};
-export { Button }; // Refactored code due to the index.js file needing a different structure
+}
+export { Button }

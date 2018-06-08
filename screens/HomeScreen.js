@@ -98,14 +98,9 @@ export default class HomeScreen extends Component {
     const { id } = user
     const currentUser = await AsyncStorage.getItem('current_user')
 
-    console.log('CurrentUserID: ', currentUser)
-    console.log('userId: ', id)
-
     if (parseInt(currentUser) === id) {
-      console.log('Same User')
       this.props.navigation.navigate('MyProfile')
     } else {
-      console.log('Diff')
       this.props.navigation.navigate('Profile', {
         user_id: id,
         first_name: user.first_name
@@ -142,7 +137,7 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection styling={{borderWidth: 0, padding: 10}}>
+                  <CardSection custom={{borderWidth: 0, padding: 10}}>
                     <Text numberOfLines={5}>{post.body}</Text>
                   </CardSection>
                     { post.uploads.map((upload, index) => {
@@ -160,7 +155,7 @@ export default class HomeScreen extends Component {
                             )
                       }}})
                     }
-                    <CardSection styling={{justifyContent: 'space-around'}}>
+                    <CardSection custom={{justifyContent: 'space-around'}}>
                       <Button title='Like' onPress={() => console.log('Liked')}>
                         <Text>Like</Text>
                       </Button>

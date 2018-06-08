@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Dimensions } from 'react-native'
 import { Video } from 'expo'
-import { MaterialIcons } from '@expo/vector-icons'
-
-const { WINDOW_WIDTH } = Dimensions.get('window')
 
 export default class VideoPlayer extends Component {
   state = {

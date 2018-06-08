@@ -13,9 +13,9 @@ class UserDescription extends Component {
       <CardSection>
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={descriptionStyle}>
-              <Icon type='font-awesome' name='user' color='grey' size={15}/>
-              <Icon type='font-awesome' name='map-marker' color='grey' size={15}/>
-              <Icon type='font-awesome' name='briefcase' color='grey' size={17}/>
+              <Icon type='font-awesome' name='user' color='grey' size={15} />
+              <Icon type='font-awesome' name='map-marker' color='grey' size={15} />
+              <Icon type='font-awesome' name='briefcase' color='grey' size={17} />
             </View>
             <View style={descriptionStyle}>
               <Text style={titleStyle}>{user.full_name}</Text>

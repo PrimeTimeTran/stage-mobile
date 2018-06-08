@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   Dimensions
 } from 'react-native'
 
-import { DrawerCard } from '../components/common'
+import { DrawerCard } from './components/common'
 
 let { width, height } = Dimensions.get('window')
 
-export default class Drawer extends Component {
+class Drawer extends Component {
   render() {
     const { drawerStyle } = styles
     const open = this.props.navigation.state.isDrawerOpen
@@ -31,6 +30,8 @@ export default class Drawer extends Component {
     )
   }
 }
+
+export { Drawer }
 
 styles = {
   drawerStyle: {

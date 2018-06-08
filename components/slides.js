@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, Button, ImageBackground } from 'react-native';
-import { Card, CardSection } from './common';
+import React, { Component } from 'react'
+import { Text, ScrollView, Dimensions, Button, ImageBackground } from 'react-native'
+import { Card, CardSection } from './common'
 
-let SCREEN_WIDTH = Dimensions.get('window').width;
+let SCREEN_WIDTH = Dimensions.get('window').width
 
 export default class Slides extends Component {
   renderLastSlide(idx) {
@@ -20,13 +20,13 @@ export default class Slides extends Component {
 
   renderSlides() {
     return this.props.data.map((slide, idx) => {
-      let image;
+      let image
       if (idx == 0) {
-        image = require('../assets/images/0.png');
+        image = require('../assets/images/0.png')
       } else if (idx == 1) {
-        image = require('../assets/images/1.png');
+        image = require('../assets/images/1.png')
       } else if (idx == 2) {
-        image = require('../assets/images/2.png');
+        image = require('../assets/images/2.png')
       }
       return (
         <ImageBackground
@@ -35,7 +35,7 @@ export default class Slides extends Component {
           style={styles.slideStyle}
         >
           <Card>
-            <CardSection styling={{backgroundColor: '#333333'}}>
+            <CardSection custom={{backgroundColor: '#333333'}}>
               <Text style={styles.slideTextStyle}>
                 {slide.text}
               </Text>
@@ -57,7 +57,7 @@ export default class Slides extends Component {
       >
         {this.renderSlides()}
       </ScrollView>
-    );
+    )
   }
 }
 

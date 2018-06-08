@@ -10,7 +10,7 @@ class DrawerCard extends Component {
     const { cardBackgroundStyle, cardStyle, textStyle } = styles
     return (
       <View>
-        <CardSection styling={[cardBackgroundStyle, this.props.custom]}>
+        <CardSection custom={[cardBackgroundStyle, this.props.custom]}>
           <View style={cardStyle}>
             <Icon type={type} name={name} color='grey' size={20} />
             <Text style={textStyle}>{content}</Text>

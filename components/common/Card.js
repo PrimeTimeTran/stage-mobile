@@ -1,13 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { View } from 'react-native'
 
 const Card = (props) => {
   return (
     <View style={styles.containerStyle}>
       {props.children}
     </View>
-  );
-};
+  )
+}
 
 const styles = {
   containerStyle: {
@@ -22,6 +22,6 @@ const styles = {
     elevation: 1,
     marginTop: 10,
   }
-};
+}
 
-export { Card }; // Refactored code due to the index.js file needing a different structure
+export { Card }

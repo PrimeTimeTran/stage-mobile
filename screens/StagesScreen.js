@@ -125,7 +125,7 @@ export default class StagesScreen extends React.Component {
               return (
                 <View key={stage.id}>
                   <Card>
-                    <CardSection styling={cardHeaderStyle}>
+                    <CardSection custom={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
                         <Icon name='chevron-right' color='white'/>
                         <Text style={headerTextStyle}>

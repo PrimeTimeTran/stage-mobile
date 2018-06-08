@@ -138,7 +138,7 @@ export default class MyProfileScreen extends React.Component {
           </View>
           <UserDescription user={user} />
           <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
-              <Text>Show Image picker</Text>
+            <Text>Show Image picker</Text>
           </TouchableOpacity>
           </ScrollView>
         )
@@ -147,7 +147,7 @@ export default class MyProfileScreen extends React.Component {
         <View style={size}>
           <Image style={size} source={{uri: defaultImage}} />
           <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
-              <Text>Show Image picker</Text>
+            <Text>Show Image picker</Text>
           </TouchableOpacity>
         </View>
       )

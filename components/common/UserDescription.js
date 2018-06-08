@@ -12,16 +12,20 @@ class UserDescription extends Component {
       <View>
       <CardSection>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={descriptionStyle}>
-            <Icon name='users' type='font-awesome' color='green' size={10}/>
-            <Icon name='place' color='black' size={15}/>
-            <Icon name='mobile' type='font-awesome' color='black' size={17}/>
-          </View>
-          <View style={descriptionStyle}>
-            <Text>{user.full_name}</Text>
-            <Text>{user.location}</Text>
-            <Text>{user.occupation}</Text>
-          </View>
+            <View style={descriptionStyle}>
+              <Icon type='font-awesome' name='user' color='red' size={15}/>
+              <Icon type='font-awesome' name='map-marker' color='red' size={15}/>
+              <Icon type='font-awesome' name='briefcase' color='red' size={17}/>
+            </View>
+            <View style={descriptionStyle}>
+              <Text>{user.full_name}</Text>
+              <Text>{user.location}</Text>
+              <Text>{user.occupation}</Text>
+            </View>
+            <View style={{flex: 1, alignItems: 'flex-end', padding: 10, justifyContent: 'center'}}>
+              <Icon type='font-awesome' name='send-o' color='red' />
+              <Icon type='font-awesome' name='gift' color='red' />
+            </View>
         </View>
       </CardSection>
       <CardSection>

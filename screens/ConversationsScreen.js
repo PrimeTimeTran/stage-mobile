@@ -28,7 +28,6 @@ export default class ConversationsScreen extends React.Component {
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white'
   }
-
   state = { conversations: [] }
 
   componentWillMount() {
@@ -176,7 +175,7 @@ export default class ConversationsScreen extends React.Component {
                           style={{ color: '#696969', fontSize: 15 }}>
                           {conversation.last_message.body}
                         </Text>
-                        <View style={{ flexDirection: 'row' }}>
+                        {/* <View style={{ flexDirection: 'row' }}>
                           {conversation.is_stage &&
                             conversation.uploads &&
                             conversation.uploads.map((upload, index) => {
@@ -215,7 +214,7 @@ export default class ConversationsScreen extends React.Component {
                                 </Lightbox>
                               )
                             })}
-                        </View>
+                        </View> */}
                       </View>
                     </View>
                   </TouchableOpacity>

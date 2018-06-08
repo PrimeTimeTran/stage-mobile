@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native'
 
-import { Icon, Button, ButtonGroup } from 'react-native-elements'
+import { Icon, Button } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
@@ -56,6 +56,14 @@ export default class StagesScreen extends React.Component {
       })
   }
 
+  handleGoToStageConversation(stage) {
+    this.props.navigation.navigate('Conversation', {
+      conversation_id: stage.conversation_id,
+      stages: true,
+      conversation_name: stage.name
+    })
+  }
+
   showStageUploads(stage, upload, index) {
     return (
       <Carousel
@@ -97,12 +105,8 @@ export default class StagesScreen extends React.Component {
       cardHeaderStyle,
       descriptionStyle,
       headerContainerStyle,
-      headerTextStyle,
-      thumbnailStyle
+      headerTextStyle
     } = styles
-
-    const buttons = ['Hello', 'World']
-    const { selectedIndex } = this.state
 
     if (stages) {
       return (
@@ -152,7 +156,7 @@ export default class StagesScreen extends React.Component {
                       })}
                     </CardSection>
                     <CardSection>
-                        <View style={{flex: 1, flexDirection: 'row'}}>
+                      <View style={{flex: 1, flexDirection: 'row'}}>
                           <View style={descriptionStyle}>
                             <Icon name='users' type='font-awesome' color='green' size={10}/>
                             <Icon name='place' color='black' size={15}/>
@@ -167,32 +171,25 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
-                        <Text> Works but ugly</Text>
-                        <Button
-                          outline
-                          small
-                          icon={{name: 'info', type: 'feather', color: '#276FBF'}}
-                          title='Info'
-                          style={{width: 100}}
-                          color='#276FBF'
-                          onPress={() => console.log('Get more info')}
-                        />
-                        <Button
-                          outline
-                          small
-                          icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
-                          title='Chat'
-                          style={{width: 100}}
-                          color='#276FBF'
-                          onPress={() => this.props.navigation.navigate('Conversation', {conversation_id: stage.conversation_id, stages: true})}
-                        />
-                      {/* <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={buttons}
-                        color='red'
-                        containerStyle={{backgroundColor: 'red'}}
-                      /> */}
+                          <Text> Works but ugly</Text>
+                          <Button
+                            outline
+                            small
+                            icon={{name: 'info', type: 'feather', color: '#276FBF'}}
+                            title='Info'
+                            style={{width: 100}}
+                            color='#276FBF'
+                            onPress={() => console.log('Get more info')}
+                          />
+                          <Button
+                            outline
+                            small
+                            icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
+                            title='Chat'
+                            style={{width: 100}}
+                            color='#276FBF'
+                            onPress={() => this.handleGoToStageConversation(stage)}
+                          />
                       </View>
                     </CardSection>
                   </Card>
@@ -223,11 +220,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '600',
     color: 'white'
-  },
-  thumbnailStyle: {
-    height: 50,
-    width: 50,
-    borderRadius: 25
   },
   descriptionStyle: {
     justifyContent: 'space-between',

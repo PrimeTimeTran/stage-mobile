@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 
 import Carousel from 'react-native-looped-carousel'
+import { Icon } from 'react-native-elements'
+
 import { UserDescription } from '../components/common'
 
 import { API_ROOT } from '../constants/ApiConfig'
@@ -23,6 +25,15 @@ export default class MyProfileScreen extends React.Component {
     headerStyle: { backgroundColor: '#333333'},
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
+    headerRight: (
+      <View style={{paddingRight: 10}}>
+        <Icon
+          type='font-awesome'
+          name='gears'
+          color='white'
+          onPress={() => navigation.navigate('Users')}/>
+      </View>
+    )
   }
 
   constructor(props) {

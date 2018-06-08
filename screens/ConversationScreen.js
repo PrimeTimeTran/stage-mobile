@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Button, AsyncStorage } from 'react-native'
+import { AsyncStorage, View } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { sendMessage, setCallback } from '../utils/chat'
+
+import { Icon } from 'react-native-elements'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
@@ -14,11 +16,14 @@ export default class ConversationScreen extends Component {
     headerTintColor: 'white',
     headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),
     headerRight: (
-      <Button
-        title="Users"
-        onPress={() => navigation.navigate('Users')}
-        color="white"
-      />
+      <View style={{paddingRight: 10}}>
+        <Icon
+          name='users'
+          color='white'
+          type='font-awesome'
+          size={15}
+          onPress={() => navigation.navigate('Users')}/>
+      </View>
     )
   })
 
@@ -27,7 +32,7 @@ export default class ConversationScreen extends Component {
   async componentWillMount() {
     let userId
     userId = await AsyncStorage.getItem('current_user')
-    this.setState({userId: userId}, console.log('UserID: ', this.state.userId))
+    this.setState({userId: userId})
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client()
@@ -72,7 +77,7 @@ export default class ConversationScreen extends Component {
 
   renderBubble = props => {
     // TODO
-    // Bubble doesn't not render current user's messages on the right on Initial Render
+    // Bubble doesn't not render current user's messages on the right on initial render
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
     return (
@@ -120,7 +125,6 @@ export default class ConversationScreen extends Component {
   }
 
   render() {
-    console.log('This State', this.state.userId);
     return (
       <GiftedChat
         onPressAvatar={props => this.handleAvatarClick(props)}

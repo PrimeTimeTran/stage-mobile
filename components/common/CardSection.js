@@ -1,13 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { View } from 'react-native'
 
 const CardSection = (props) => {
   return (
     <View style={[styles.containerStyle, props.styling]}>
       {props.children}
     </View>
-  );
-};
+  )
+}
 
 const styles = {
   containerStyle: {
@@ -19,6 +19,6 @@ const styles = {
     borderColor: '#ddd',
     position: 'relative'
   }
-};
+}
 
-export { CardSection }; // Refactored code due to the index.js file needing a different structure
+export { CardSection }

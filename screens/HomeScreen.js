@@ -114,7 +114,7 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection styling={{borderWidth: 0}}>
+                  <CardSection styling={{borderWidth: 0, padding: 10}}>
                     <Text numberOfLines={5}>{post.body}</Text>
                   </CardSection>
                     { post.uploads.map((upload, index) => {

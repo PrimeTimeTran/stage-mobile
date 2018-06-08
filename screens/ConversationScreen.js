@@ -71,9 +71,10 @@ export default class ConversationScreen extends Component {
   }
 
   renderBubble = props => {
+    // TODO
+    // Bubble doesn't not render current user's messages on the right on Initial Render
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
-
     return (
       <Bubble
         {...props}

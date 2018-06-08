@@ -14,6 +14,7 @@ import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 const { width } = Dimensions.get('window')
+const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
 
 export default class MyProfileScreen extends React.Component {
   static navigationOptions = {

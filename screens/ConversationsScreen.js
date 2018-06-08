@@ -47,7 +47,6 @@ export default class ConversationsScreen extends React.Component {
   }
 
   showStageUploads(conversation, upload, index) {
-    console.log('Uploads Count:', conversation.uploads.length);
     return (
       <Carousel
         currentPage={index}
@@ -58,7 +57,6 @@ export default class ConversationsScreen extends React.Component {
           height: WINDOW_HEIGHT
         }}>
         {conversation.uploads.map(upload => {
-          console.log('Uploads: ', upload);
           return (
             <View style={{ flex: 1 }} key={upload.id}>
               <VideoPlayer

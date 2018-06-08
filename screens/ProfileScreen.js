@@ -55,7 +55,7 @@ export default class ProfileScreen extends React.Component {
         return response.data
       })
       .then(data => {
-        this.setState({user: data}, console.log('User: ', this.state.user))
+        this.setState({user: data})
       })
       .catch(error => {
         console.log('Error:', error)
@@ -71,6 +71,7 @@ export default class ProfileScreen extends React.Component {
     const { descriptionStyle } = styles
     const { size, user } = this.state
     if (user && user.uploads && user.uploads.length > 0) {
+      console.log('Description: ', user.description)
       return (
         <ScrollView>
             <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
@@ -82,10 +83,7 @@ export default class ProfileScreen extends React.Component {
                 { user.uploads.map(upload => {
                     return (
                       <View style={size} key={upload.id}>
-                        <Image
-                          style={size}
-                          source={{uri: upload.url}}
-                        />
+                        <Image style={size} source={{uri: upload.url}} />
                       </View>
                     )
                   })
@@ -107,17 +105,22 @@ export default class ProfileScreen extends React.Component {
                   </View>
                 </View>
               </CardSection>
+              <CardSection>
+                <View style={{padding: 10}}>
+                  <Text>
+                    {user.description}
+                  </Text>
+                </View>
+              </CardSection>
             </View>
         </ScrollView>
         )
     } else {
-      return
+      return (
         <View style={size}>
-          <Image
-            style={size}
-            source={{uri: defaultImage}}
-          />
+          <Image style={size} source={{uri: defaultImage}} />
         </View>
+      )
     }
   }
 }

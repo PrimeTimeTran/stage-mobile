@@ -40,7 +40,6 @@ export default class HomeScreen extends Component {
         return response.data
       })
       .then(data => {
-        console.log('Posts:', data)
         this.setState({posts: data})
       })
       .catch(error => {

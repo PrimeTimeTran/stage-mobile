@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  AsyncStorage,
   Image,
   ScrollView,
   StyleSheet,
@@ -37,7 +38,7 @@ export default class MyProfileScreen extends React.Component {
   }
 
   async componentWillMount() {
-    const user_id = await AsyncStorage.AsyncStorage.getItem('current_user')
+    const user_id = await AsyncStorage.getItem('current_user')
     const request = client()
     request
       .then(api =>
@@ -63,6 +64,7 @@ export default class MyProfileScreen extends React.Component {
     const { size, user } = this.state
 
     if (user && user.uploads && user.uploads.length > 0) {
+      console.log('User: ', user)
       return (
         <ScrollView>
             <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
@@ -73,12 +75,9 @@ export default class MyProfileScreen extends React.Component {
               >
                 { user.uploads.map(upload => {
                   return (
-                    <View style={this.state.size} key={upload.id}>
-                      <Image
-                        style={this.state.size}
-                        source={{uri: upload.url}}
-                      />
-                    </View>
+                    <View style={size} key={upload.id}>
+                    <Image style={size} source={{uri: upload.url}} />
+                  </View>
                   )})
                 }
               </Carousel>

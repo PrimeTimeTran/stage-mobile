@@ -12,7 +12,7 @@ if (false) {
   if (Platform.OS == 'ios') {
     backendHost = 'http://localhost:3000'
   } else {
-    backendHost = 'http://192.168.1.218:3000'
+    backendHost = BACKEND_API_HOST
   }
 }
 

@@ -10,8 +10,8 @@ import {
 } from 'react-native'
 
 import Carousel from 'react-native-looped-carousel'
-import { Icon } from 'react-native-elements'
 import ImagePicker from 'react-native-image-picker'
+import { Icon } from 'react-native-elements'
 
 import { UserDescription } from '../components/common'
 
@@ -20,7 +20,6 @@ import client from '../utils/client'
 
 const { width } = Dimensions.get('window')
 const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
-
 
 let options = {
   title: 'Select Avatar',
@@ -92,28 +91,28 @@ export default class MyProfileScreen extends React.Component {
     this.setState({size: {width: layout.width, height: layout.height}})
   }
 
-  handleChoosePhoto = () => {
+  handleChoosePhoto(){
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.log('User cancelled image picker')
       }
       else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log('ImagePicker Error: ', response.error)
       }
       else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.log('User tapped custom button: ', response.customButton)
       }
       else {
-        let source = { uri: response.uri };
+        let source = { uri: response.uri }
 
         // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data }
 
         this.setState({
           avatarSource: source
-        });
+        })
       }
-    });
+    })
   }
 
   render() {
@@ -130,23 +129,26 @@ export default class MyProfileScreen extends React.Component {
             >
               { user.uploads.map(upload => {
                 return (
-                <View style={size} key={upload.id}>
-                  <Image style={size} source={{uri: upload.url}} />
-                </View>
+                  <View style={size} key={upload.id}>
+                    <Image style={size} source={{uri: upload.url}} />
+                  </View>
                 )})
               }
             </Carousel>
           </View>
           <UserDescription user={user} />
-          <TouchableOpacity onPress={this.handleChoosePhoto}>
-            <Text>Show Image picker</Text>
+          <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
+              <Text>Show Image picker</Text>
           </TouchableOpacity>
-        </ScrollView>
+          </ScrollView>
         )
     } else {
       return (
         <View style={size}>
           <Image style={size} source={{uri: defaultImage}} />
+          <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
+              <Text>Show Image picker</Text>
+          </TouchableOpacity>
         </View>
       )
     }

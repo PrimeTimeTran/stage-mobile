@@ -7,7 +7,7 @@ import { CardSection } from './CardSection'
 class UserDescription extends Component {
   render() {
     const { user } = this.props
-    const { descriptionStyle } = styles
+    const { descriptionStyle, titleStyle} = styles
     return (
       <View>
       <CardSection>
@@ -18,9 +18,9 @@ class UserDescription extends Component {
               <Icon type='font-awesome' name='briefcase' color='grey' size={17}/>
             </View>
             <View style={descriptionStyle}>
-              <Text>{user.full_name}</Text>
-              <Text>{user.location}</Text>
-              <Text>{user.occupation}</Text>
+              <Text style={titleStyle}>{user.full_name}</Text>
+              <Text style={titleStyle}>{user.location}</Text>
+              <Text style={titleStyle}>{user.occupation}</Text>
             </View>
             <View style={{flex: 1, alignItems: 'flex-end', paddingRight: 10, justifyContent: 'space-between' }}>
               <Icon type='font-awesome' name='send-o' color='grey' size={20} />
@@ -45,6 +45,10 @@ export { UserDescription }
 const styles = StyleSheet.create({
   descriptionStyle: {
     justifyContent: 'space-between',
+    paddingLeft: 5
+  },
+  titleStyle: {
+    fontSize: 18,
     paddingLeft: 5
   }
 })

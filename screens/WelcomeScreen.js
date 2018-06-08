@@ -23,7 +23,7 @@ class Welcome extends Component {
 
     // token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4Nzk4OTB9._COA3vWtEtInLfq7fiZTfHWaogmjAC2QgtfZ4FZ1vkD8ogYpRc-53XfLhBqQTLCFz4Gucam2xtYHRMEnyuxGAw')
     token = await AsyncStorage.getItem('auth_token')
-    console.log('AuthToken in Welcome', token)
+    // console.log('AuthToken in Welcome', token)
 
     // let current_user
     // current_user = await AsyncStorage.getItem('current_user')

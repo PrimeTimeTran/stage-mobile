@@ -46,7 +46,8 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
+  MyProfile: MyProfileScreen
 })
 
 HomeStack.navigationOptions = {

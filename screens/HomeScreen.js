@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   ScrollView,
   StyleSheet,
   Text,
@@ -41,6 +42,7 @@ export default class HomeScreen extends Component {
       </View>
     )
   })
+
   state = { posts: [] }
 
   componentWillMount() {
@@ -92,6 +94,26 @@ export default class HomeScreen extends Component {
     )
   }
 
+   navigateProfile = async (user) => {
+    const { id } = user
+    const currentUser = await AsyncStorage.getItem('current_user')
+
+    console.log('CurrentUserID: ', currentUser)
+    console.log('userId: ', id)
+
+    if (parseInt(currentUser) === id) {
+      console.log('Same User')
+      this.props.navigation.navigate('MyProfile')
+    } else {
+      console.log('Diff')
+      this.props.navigation.navigate('Profile', {
+        user_id: id,
+        first_name: user.first_name
+      })
+
+    }
+  }
+
   render() {
     const { posts } = this.state
     const {
@@ -109,12 +131,7 @@ export default class HomeScreen extends Component {
                 <Card>
                   <CardSection style={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
-                      <TouchableOpacity
-                          onPress={() => this.props.navigation.navigate('Profile', {
-                              user_id: user.id,
-                              first_name: user.first_name
-                          })}
-                      >
+                      <TouchableOpacity onPress={() => this.navigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
                       </TouchableOpacity>
                     </View>

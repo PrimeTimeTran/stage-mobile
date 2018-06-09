@@ -1,5 +1,8 @@
-import React, { Component, View, Text } from 'react'
+import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+
 import { FormInput, Button } from 'react-native-elements'
+
 import { CardSection } from './common'
 
 export default class CommentForm extends Component {
@@ -9,9 +12,10 @@ export default class CommentForm extends Component {
     this.setState({body})
   }
 
-  handleSubmit() {
-    this.setState({body: ''})
+  handleSubmit = () => {
+    this.setState({ body: '' })
     this.props.onSubmit(this.state.body)
+
   }
 
   render() {
@@ -26,11 +30,16 @@ export default class CommentForm extends Component {
           />
         </CardSection>
         <CardSection>
-          <Button
-            onPress={this.handleSubmit}
-          >
-            <Text>Go</Text>
-          </Button>
+          <View style={{flex: 1}}>
+            <Button
+              title='Comment'
+              onPress={this.handleSubmit}
+              iconRight={{name: 'comment-outline', type: 'material-community'}}
+            >
+              <Text>Submit</Text>
+            </Button>
+
+          </View>
         </CardSection>
       </View>
     )

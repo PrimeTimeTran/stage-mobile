@@ -14,7 +14,9 @@ class Drawer extends Component {
   async onLogOut() {
     console.log('TODO: Figure out how to navigate to the Welcome screen after logging out. Navigation props is undefined')
     console.log('This props', this.props)
-    await AsyncStorage.removeItem('auth_token')
+
+    let keys = ['auth_token', 'current_user']
+    AsyncStorage.multiRemove(keys, (err) => { console.log('Logged Out')})
   }
 
 

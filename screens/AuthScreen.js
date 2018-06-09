@@ -104,6 +104,7 @@ class AuthScreen extends Component {
                 value={this.state.password}
                 onChangeText={this.handlePasswordChange}
               />
+
             <View style={{padding: 5, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
             </View>

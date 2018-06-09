@@ -15,7 +15,6 @@ export default class CommentForm extends Component {
   handleSubmit = () => {
     this.setState({ body: '' })
     this.props.onSubmit(this.state.body)
-
   }
 
   render() {

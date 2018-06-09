@@ -36,7 +36,6 @@ export default class CommentContainer extends Component {
 
   render() {
     const { comments } = this.state
-    console.log('Comment', comments[0]);
     return (
       <View>
         { comments && <View> {comments.map(comment => <Comment key={comment.id} comment={comment}/>)}</View> }

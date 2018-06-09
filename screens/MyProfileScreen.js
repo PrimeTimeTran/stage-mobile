@@ -46,7 +46,7 @@ export default class MyProfileScreen extends React.Component {
           name='gears'
           color='white'
           size={15}
-          onPress={() => navigation.navigate('Users')}/>
+          onPress={() => console.log('Settings') }/>
       </View>
     ),
     headerLeft: (

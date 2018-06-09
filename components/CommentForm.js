@@ -22,10 +22,9 @@ export default class CommentForm extends Component {
       <View>
         <CardSection>
           <FormInput
-            onSubmit={this.handle}
+            placeholder='Say something...'
             value={this.state.body}
             onChangeText={e => this.handleCommentBody(e)}
-            placeholder='Say something...'
           />
         </CardSection>
         <CardSection>

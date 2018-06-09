@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  AsyncStorage,
   ScrollView,
   StyleSheet,
   Text,
@@ -16,12 +15,14 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
+import PostForm from '../components/PostForm'
 import { Avatar, Card, CardSection, SentAt } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
 
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
+import CurrentUser from '../utils/CurrentUser'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
@@ -46,7 +47,7 @@ export default class HomeScreen extends Component {
   state = { posts: [] }
 
   componentWillMount() {
-    const request = client();
+    const request = client()
     request
       .then(api => api.get(`${API_ROOT}posts`))
       .then(response => {
@@ -96,7 +97,7 @@ export default class HomeScreen extends Component {
 
    navigateProfile = async (user) => {
     const { id } = user
-    const currentUser = await AsyncStorage.getItem('current_user')
+    const currentUser = await CurrentUser()
 
     if (parseInt(currentUser) === id) {
       this.props.navigation.navigate('MyProfile')
@@ -109,6 +110,24 @@ export default class HomeScreen extends Component {
     }
   }
 
+  onAddPost = (body) => {
+    const request = client()
+    request
+      .then(api =>
+        api.post(`${API_ROOT}posts/`, {body: body, }))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        let newArray = this.state.posts.slice()
+        newArray.unshift(data)
+        this.setState({posts: newArray})
+      })
+      .catch(error => {
+        console.log('Error')
+      })
+  }
+
   render() {
     const { posts } = this.state
     const {
@@ -119,6 +138,7 @@ export default class HomeScreen extends Component {
 
     return (
       <ScrollView scrollEventThrottle={5}>
+        <PostForm onSubmit={this.onAddPost}/>
         { posts && posts.map(post => {
             const { user, id } = post
             return (
@@ -140,19 +160,19 @@ export default class HomeScreen extends Component {
                   <CardSection custom={{borderWidth: 0, padding: 10}}>
                     <Text numberOfLines={5}>{post.body}</Text>
                   </CardSection>
-                    { post.uploads.map((upload, index) => {
+                    { post.uploads && post.uploads.map((upload, index) => {
                       { if (upload.media_type == 'vid') {
-                            return (
-                              <CardSection key={upload.id}>
-                                <Lightbox
-                                  swipeToDismiss={false}
-                                  renderContent={() =>
-                                    this.showUploads(post, upload, index)
-                                  }>
-                                  <VideoPlayer video={upload.url} />
-                                </Lightbox>
-                              </CardSection>
-                            )
+                          return (
+                            <CardSection key={upload.id}>
+                              <Lightbox
+                                swipeToDismiss={false}
+                                renderContent={() =>
+                                  this.showUploads(post, upload, index)
+                                }>
+                                <VideoPlayer video={upload.url} />
+                              </Lightbox>
+                            </CardSection>
+                          )
                       }}})
                     }
                     <CardSection custom={{justifyContent: 'space-around'}}>

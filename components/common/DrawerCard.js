@@ -1,26 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { CardSection } from './CardSection'
 
-const DrawerCard = ({ type, name, content }) => {
-  const {
-    cardBackgroundStyle,
-    cardStyle,
-    textStyle
-  } = styles
+export default class DrawerCard extends Component {
+  render() {
+    const {
+      cardBackgroundStyle,
+      cardStyle,
+      textStyle
+    } = styles
 
-  return (
-    <View>
-      <CardSection custom={cardBackgroundStyle}>
-        <View style={cardStyle}>
-          <Icon type={type} name={name} color='grey' size={20} />
-          <Text style={textStyle}>{content}</Text>
-        </View>
-      </CardSection>
-    </View>
-  )
+    const {
+      type,
+      name,
+      content
+    } = this.props
+
+    return (
+      <View>
+        <CardSection custom={cardBackgroundStyle}>
+          <View style={cardStyle}>
+            <Icon type={type} name={name} color='grey' size={20} />
+            <Text style={textStyle}>{content}</Text>
+          </View>
+        </CardSection>
+      </View>
+    )
+  }
 }
 
 export { DrawerCard }

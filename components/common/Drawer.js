@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {
+  AsyncStorage,
   View,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native'
 
 import { DrawerCard } from './DrawerCard'
@@ -9,6 +11,13 @@ import { DrawerCard } from './DrawerCard'
 let { width, height } = Dimensions.get('window')
 
 class Drawer extends Component {
+  async onLogOut() {
+    console.log('TODO: Figure out how to navigate to the Welcome screen after logging out. Navigation props is undefined')
+    console.log('This props', this.props)
+    await AsyncStorage.removeItem('auth_token')
+  }
+
+
   render() {
     const { drawerStyle } = styles
     const open = this.props.navigation.state.isDrawerOpen
@@ -24,7 +33,9 @@ class Drawer extends Component {
           <DrawerCard type="material-icon" name="payment" content="Billing" />
         </View>
         <View style={{borderBottomWidth: 0, paddingBottom: 20}}>
-          <DrawerCard type="material-community" name="logout" content="Log Out" />
+          <TouchableOpacity onPress={this.onLogOut}>
+            <DrawerCard type="material-community" name="logout" content="Log Out" />
+          </TouchableOpacity>
         </View>
       </View>
     )

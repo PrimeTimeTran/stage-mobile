@@ -28,13 +28,13 @@ class AuthScreen extends Component {
       return this.setState({errorMessage: 'Invalid email & password'})
     }
     if (!emailValid) {
-      return this.setState({errorMessage: 'Invalid email.'})
+      return this.setState({errorMessage: 'Invalid email'})
     }
-    if (!password) {
+    if (!passwordValid) {
       return this.setState({errorMessage: 'Invalid Password. Must be 6 characters'})
     }
     this.setState({errorMessage: ''})
-    this.signUp()
+    this.onSignUpOrIn()
   }
 
   handleEmailChange = (email) => {
@@ -45,7 +45,7 @@ class AuthScreen extends Component {
     this.setState({password})
   }
 
-  signUp = () => {
+  onSignUpOrIn = () => {
     const request = client()
     const { email, password } = this.state
     request
@@ -55,28 +55,17 @@ class AuthScreen extends Component {
         return response.data
       })
       .then(data => {
-        this.setToken(data)
+        this.setUserData(data)
         return data
       })
       .catch(error => {
-        this.setState({errorMessage: 'Password incorrect. Please try again.'})
-        console.log('Error: ', error)
+        this.setState({errorMessage: `Password incorrect for \n${email}. \nPlease try again.`})
       })
   }
 
-  async setToken(data) {
-    let token = data.token
-    let userId = data.user.id
-
-    const keys = [['auth_token', JSON.stringify(data.token)], ['current_user', JSON.stringify(userId)]]
-
+  async setUserData(data) {
+    const keys = [['auth_token', JSON.stringify(data.token)], ['current_user', JSON.stringify(data.user.id)]]
     await AsyncStorage.multiSet(keys, (key) => {console.log('Key', key)})
-
-    this.props.navigation.navigate('Conversations')
-  }
-  async setUser(data) {
-    console.log('2nd: ', data.user.id)
-    user = await AsyncStorage.setItem('current_user', data.user.id)
     this.props.navigation.navigate('Conversations')
   }
 

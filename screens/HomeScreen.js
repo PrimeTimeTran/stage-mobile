@@ -120,9 +120,9 @@ export default class HomeScreen extends Component {
     return (
       <ScrollView scrollEventThrottle={5}>
         { posts && posts.map(post => {
-            const { user } = post
+            const { user, id } = post
             return (
-              <View key={post.id}>
+              <View key={id}>
                 <Card>
                   <CardSection style={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
@@ -163,7 +163,7 @@ export default class HomeScreen extends Component {
                         <Text>Comment</Text>
                       </Button>
                     </CardSection>
-                    <CommentContainer comments={post.comments} />
+                    <CommentContainer comments={post.comments} postId={id}/>
                 </Card>
               </View>
               )

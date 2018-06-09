@@ -22,7 +22,7 @@ export default class ConversationScreen extends Component {
           color='white'
           type='font-awesome'
           size={15}
-          onPress={() => navigation.navigate('Users')}/>
+          onPress={() => navigation.navigate('Users')} />
       </View>
     )
   })
@@ -30,9 +30,8 @@ export default class ConversationScreen extends Component {
   state = {messages: [], userId: ''}
 
   async componentWillMount() {
-    let userId
-    userId = await AsyncStorage.getItem('current_user')
-    this.setState({userId: userId})
+    const userId = await AsyncStorage.getItem('current_user')
+    this.setState({ userId })
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client()

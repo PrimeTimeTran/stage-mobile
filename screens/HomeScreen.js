@@ -176,22 +176,20 @@ export default class HomeScreen extends Component {
                       }}})
                     }
                     <Socials reactions_count={reactions_count} comments_count={comments_count} />
-                    <CardSection custom={{justifyContent: 'space-around'}}>
+                    <CardSection custom={{ justifyContent: 'space-around' }}>
                       <Button
                         title="Like"
                         color={Colors.themeColor.toString()}
                         icon={{ type:"evilicon", name: 'like', color: Colors.themeColor.toString() }}
-                        buttonStyle={{ backgroundColor: 'white' }}
+                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
                         onPress={() => console.log("Liked")}
                       >
-                        <Text>Like</Text>
                       </Button>
                       <Button
                         title="Comment"
                         color={Colors.themeColor.toString()}
                         icon={{ type:"evilicon", name: 'comment', color: Colors.themeColor.toString() }}
-                        buttonStyle={{ backgroundColor: 'white' }}
-                        backgroundColor="none"
+                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
                       >
                         <Text>Comment</Text>
                       </Button>

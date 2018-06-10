@@ -19,12 +19,10 @@ export default class DrawerCard extends Component {
       content
     } = this.props
 
-    const color = Color.themeColor
-
     return (
       <CardSection custom={[cardBackgroundStyle, this.props.custom]}>
         <View style={cardStyle}>
-          <Icon type={type} name={name} color={color} size={20} />
+          <Icon type={type} name={name} color={Color.themeColor.toString()} size={20} />
           <Text style={textStyle}>{content}</Text>
         </View>
   a   </CardSection>

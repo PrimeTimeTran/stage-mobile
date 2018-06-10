@@ -77,25 +77,43 @@ export default class ConversationScreen extends Component {
   }
 
   renderBubble = props => {
-    // TODO
-    // Bubble doesn't not render current user's messages on the right on initial render
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
-    return (
-      <Bubble
-        {...props}
-        textStyle={{
-          right: {
-            color: 'white'
-          }
-        }}
-        wrapperStyle={{
-          left: {
-            backgroundColor: color
-          }
-        }}
-      />
-    )
+    if (this.state.userId == props.currentMessage.user._id) {
+      return (
+        <Bubble
+          {...props}
+          position='right'
+          textStyle={{
+            right: {
+              color: 'white'
+            }
+          }}
+          wrapperStyle={{
+            left: {
+              backgroundColor: color
+            }
+          }}
+        />
+      )
+    } else {
+      return (
+        <Bubble
+          {...props}
+          textStyle={{
+            right: {
+              color: 'white'
+            }
+          }}
+          wrapperStyle={{
+            left: {
+              backgroundColor: color
+            }
+          }}
+        />
+      )
+
+    }
   }
 
   getColor(username) {

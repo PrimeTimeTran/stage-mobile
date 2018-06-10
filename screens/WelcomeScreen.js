@@ -27,6 +27,7 @@ class Welcome extends Component {
 
     // current_user = await AsyncStorage.getItem('current_user')
     token = await AsyncStorage.getItem('auth_token')
+    console.log('JWT Token: ', token)
 
     // console.log('AuthToken in Welcome', token)
     // console.log('UserId', current_user)

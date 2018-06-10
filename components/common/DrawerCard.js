@@ -19,14 +19,12 @@ export default class DrawerCard extends Component {
     } = this.props
 
     return (
-      <View>
-        <CardSection custom={cardBackgroundStyle}>
-          <View style={cardStyle}>
-            <Icon type={type} name={name} color='grey' size={20} />
-            <Text style={textStyle}>{content}</Text>
-          </View>
-        </CardSection>
-      </View>
+      <CardSection custom={cardBackgroundStyle}>
+        <View style={cardStyle}>
+          <Icon type={type} name={name} color='grey' size={20} />
+          <Text style={textStyle}>{content}</Text>
+        </View>
+      </CardSection>
     )
   }
 }

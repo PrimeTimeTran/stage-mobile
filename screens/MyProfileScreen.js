@@ -13,10 +13,11 @@ import Carousel from 'react-native-looped-carousel'
 import ImagePicker from 'react-native-image-picker'
 import { Icon } from 'react-native-elements'
 
-import { UserDescription } from '../components/common'
-
+import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
+
+import { UserDescription } from '../components/common'
 
 const { width } = Dimensions.get('window')
 const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
@@ -36,8 +37,7 @@ export default class MyProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Me',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333'},
-    headerBackTitleStyle: {color: 'white'},
+    headerStyle: { backgroundColor: Colors.themeColor },
     headerTintColor: 'white',
     headerRight: (
       <View style={{paddingRight: 10}}>

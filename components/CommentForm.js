@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 
 import { FormInput, Button } from 'react-native-elements'
 
+import Colors from '../constants/Colors'
 import { CardSection } from './common'
 
 export default class CommentForm extends Component {
@@ -32,6 +33,7 @@ export default class CommentForm extends Component {
             <Button
               title='Comment'
               onPress={this.handleSubmit}
+              backgroundColor={Colors.themeColor.toString()}
               iconRight={{name: 'comment-outline', type: 'material-community'}}
             >
               <Text>Submit</Text>

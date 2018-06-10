@@ -3,15 +3,16 @@ import {
   Image,
   ScrollView,
   View,
-  Dimensions,
-  Button
+  Dimensions
 } from 'react-native'
 
 import Carousel from 'react-native-looped-carousel'
-import { UserDescription } from '../components/common'
 
+import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
+
+import { UserDescription } from '../components/common'
 
 const { width } = Dimensions.get('window')
 const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
@@ -19,10 +20,10 @@ const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTintColor: 'white',
-    headerTitleStyle: {color: 'white'},
-    headerBackTitleStyle: {color: 'white'},
+    headerTitleStyle: { color: 'white' },
+    headerBackTitleStyle: { color: 'white' },
     headerTitle: (navigation.state.params.name || navigation.state.params.first_name),
-    headerStyle: {backgroundColor: '#333333'}
+    headerStyle: { backgroundColor: Colors.themeColor }
   })
 
   constructor(props) {

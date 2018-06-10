@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 
+import Colors from '../constants/Colors'
 import { Avatar, CardSection } from './common'
 
 export default class Comment extends Component {
@@ -13,7 +14,7 @@ export default class Comment extends Component {
           <Avatar url={comment.user.user_profile_photo} custom={[avatarStyle, {marginTop: 5}]} />
         </View>
         <View style={{padding: 5, marginRight: 10}}>
-          <Text style={{color: 'blue'}}>{comment.user.full_name}</Text>
+          <Text style={{color: Colors.themeColor}}>{comment.user.full_name}</Text>
           <View>
             <Text style={{marginRight: 10}}>{comment.body}</Text>
           </View>

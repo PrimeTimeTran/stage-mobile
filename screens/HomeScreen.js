@@ -5,18 +5,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
-  Button
+  Dimensions
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
-
+import Colors from '../constants/Colors'
 import PostForm from '../components/PostForm'
-import { Avatar, Card, CardSection, SentAt } from '../components/common'
+import { Avatar, Card, CardSection, SentAt, Socials } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
 
@@ -30,14 +29,15 @@ export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Home',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333'},
+    headerStyle: { backgroundColor: Colors.themeColor },
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
     headerLeft: (
       <View style={{paddingLeft: 10}}>
         <Icon
-          type='entypo'
-          name='menu'
+          type="entypo"
+          name="menu"
+          color="white"
           onPress={() => navigation.openDrawer()}/>
       </View>
     )
@@ -123,7 +123,7 @@ export default class HomeScreen extends Component {
         this.setState({posts: newArray})
       })
       .catch(error => {
-        console.log('Error')
+        console.log('Error', error)
       })
   }
 
@@ -139,11 +139,12 @@ export default class HomeScreen extends Component {
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost}/>
         { posts && posts.map(post => {
-            const { user, id } = post
+          console.log('Post ', post);
+            const { id, user, reactions_count, comments_count } = post
             return (
               <View key={id}>
                 <Card>
-                  <CardSection style={{borderBottomWidth: 0}}>
+                  <CardSection custom={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
                       <TouchableOpacity onPress={() => this.navigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
@@ -156,8 +157,8 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection custom={{borderWidth: 0, padding: 10}}>
-                    <Text numberOfLines={5}>{post.body}</Text>
+                  <CardSection custom={{borderBottomWidth: 0, padding: 10}}>
+                    <Text numberOfLines={5} style={{fontSize: 13}}>{post.body}</Text>
                   </CardSection>
                     { post.uploads && post.uploads.map((upload, index) => {
                       { if (upload.media_type == 'vid') {
@@ -174,11 +175,24 @@ export default class HomeScreen extends Component {
                           )
                       }}})
                     }
+                    <Socials reactions_count={reactions_count} comments_count={comments_count} />
                     <CardSection custom={{justifyContent: 'space-around'}}>
-                      <Button title='Like' onPress={() => console.log('Liked')}>
+                      <Button
+                        title="Like"
+                        color={Colors.themeColor.toString()}
+                        icon={{ type:"evilicon", name: 'like', color: Colors.themeColor.toString() }}
+                        buttonStyle={{ backgroundColor: 'white' }}
+                        onPress={() => console.log("Liked")}
+                      >
                         <Text>Like</Text>
                       </Button>
-                      <Button title='Comment' onPress={() => console.log('Comment')}>
+                      <Button
+                        title="Comment"
+                        color={Colors.themeColor.toString()}
+                        icon={{ type:"evilicon", name: 'comment', color: Colors.themeColor.toString() }}
+                        buttonStyle={{ backgroundColor: 'white' }}
+                        backgroundColor="none"
+                      >
                         <Text>Comment</Text>
                       </Button>
                     </CardSection>

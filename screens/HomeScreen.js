@@ -5,11 +5,10 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
-  Button
+  Dimensions
 } from 'react-native'
 
-import { Icon } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
@@ -124,7 +123,7 @@ export default class HomeScreen extends Component {
         this.setState({posts: newArray})
       })
       .catch(error => {
-        console.log('Error')
+        console.log('Error', error)
       })
   }
 
@@ -179,16 +178,20 @@ export default class HomeScreen extends Component {
                     <Socials reactions_count={reactions_count} comments_count={comments_count} />
                     <CardSection custom={{justifyContent: 'space-around'}}>
                       <Button
-                        title='Like'
-                        onPress={() => console.log('Liked')}
+                        title="Like"
                         color={Colors.themeColor.toString()}
+                        icon={{ type:"evilicon", name: 'like', color: Colors.themeColor.toString() }}
+                        buttonStyle={{ backgroundColor: 'white' }}
+                        onPress={() => console.log("Liked")}
                       >
                         <Text>Like</Text>
                       </Button>
                       <Button
-                        title='Comment'
-                        onPress={() => console.log('Comment')}
+                        title="Comment"
                         color={Colors.themeColor.toString()}
+                        icon={{ type:"evilicon", name: 'comment', color: Colors.themeColor.toString() }}
+                        buttonStyle={{ backgroundColor: 'white' }}
+                        backgroundColor="none"
                       >
                         <Text>Comment</Text>
                       </Button>

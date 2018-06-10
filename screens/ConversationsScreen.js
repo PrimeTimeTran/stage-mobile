@@ -100,7 +100,6 @@ export default class ConversationsScreen extends React.Component {
       containerContentStyle,
       headerInfoStyle,
       headerTitleStyle,
-      headerRightStyle,
       stageInfoStyle
     } = styles
 
@@ -174,11 +173,7 @@ export default class ConversationsScreen extends React.Component {
                           ) : (
                             <Text style={headerTitleStyle}>{name}</Text>
                           )}
-                          <View style={headerRightStyle}>
-                            <Text style={{ fontSize: 10, paddingLeft: 5 }}>
-                              <SentAt sentAt={conversation.last_message.sent_at} />
-                            </Text>
-                          </View>
+                            <SentAt sentAt={conversation.last_message.sent_at} />
                         </View>
                         <Text
                           numberOfLines={3}
@@ -260,10 +255,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
-  },
-  headerRightStyle: {
-    flexDirection: 'row',
-    alignSelf: 'flex-start'
   },
   avatarStyle: {
     height: 50,

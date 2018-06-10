@@ -12,6 +12,7 @@ import { Icon, Button } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
+import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection } from '../components/common'
 
@@ -23,7 +24,7 @@ export default class StagesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Stages',
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333'},
+    headerStyle: { backgroundColor: Colors.themeColor },
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
     headerLeft: (
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#333333',
+    backgroundColor: Colors.themeColor,
     position: 'relative'
   },
   headerContainerStyle: {

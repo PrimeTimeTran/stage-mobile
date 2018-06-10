@@ -33,7 +33,7 @@ class Welcome extends Component {
     // console.log('UserId', current_user)
 
     if (token) {
-      this.props.navigation.navigate('Conversations')
+      this.props.navigation.navigate('Home')
       // this.props.navigation.navigate('Test')
       this.setState({ token })
     } else {

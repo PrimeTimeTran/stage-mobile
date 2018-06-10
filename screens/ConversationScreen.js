@@ -8,21 +8,23 @@ import { Icon } from 'react-native-elements'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
+import Colors from '../constants/Colors'
+
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: '#333333'},
+    headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerBackTitleStyle: {color: 'white'},
     headerTintColor: 'white',
     headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),
     headerRight: (
       <View style={{paddingRight: 10}}>
         <Icon
-          name='users'
+          name='account-multiple'
+          type='material-community'
           color='white'
-          type='font-awesome'
-          size={15}
-          onPress={() => navigation.navigate('Users')} />
+          size={28}
+          onPress={() => navigation.navigate('Users')}/>
       </View>
     )
   })

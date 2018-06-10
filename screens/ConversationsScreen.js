@@ -14,6 +14,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import { API_ROOT } from '../constants/ApiConfig'
+import Colors from '../constants/Colors'
 import { Avatar, SentAt } from '../components/common'
 
 import client from '../utils/client'
@@ -23,17 +24,18 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Messages',
-    headerStyle: { backgroundColor: '#333333' },
+    headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerTitleStyle: { color: 'white' },
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
     headerLeft: (
-      <View style={{paddingLeft: 10}}>
+      <View style={{ paddingLeft: 10 }}>
         <Icon
-          type='entypo'
-          name='menu'
-          color='white'
-          onPress={() => navigation.openDrawer()}/>
+          type="entypo"
+          name="menu"
+          color="white"
+          onPress={() => navigation.openDrawer()}
+        />
       </View>
     )
   })
@@ -96,6 +98,7 @@ export default class ConversationsScreen extends React.Component {
     const { navigation } = this.props
     const {
       avatarStyle,
+      conversationContainerStyle,
       headerContainerStyle,
       containerContentStyle,
       headerInfoStyle,
@@ -110,7 +113,7 @@ export default class ConversationsScreen extends React.Component {
             conversations.map(conversation => {
               const { name, avatar_url } = conversation.last_message_from_user
               return (
-                <View key={conversation.id}>
+                <View key={conversation.id} style={conversationContainerStyle}>
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate('Conversation', {
@@ -124,25 +127,42 @@ export default class ConversationsScreen extends React.Component {
                         style={{
                           justifyContent: 'center',
                           alignItems: 'center',
-                          paddingLeft: 5
+                          paddingLeft: 5,
+                          borderBottom: 1
                         }}>
-                        <Avatar custom={[avatarStyle, {marginTop: 5}]} url={avatar_url} />
+                        <Avatar
+                          custom={[avatarStyle, { marginTop: 5 }]}
+                          url={avatar_url}
+                        />
                         {conversation.is_stage && (
                           <View
                             style={{
-                              justifyContent: 'space-between',
-                              alignItems: 'center'
+                              justifyContent: 'flex-start',
+                              alignItems: 'center',
+                              marginTop: 5
                             }}>
                             <Text style={stageInfoStyle}>Active</Text>
-                            <Icon
-                              name="users"
-                              type="font-awesome"
-                              color="green"
-                              size={10}
-                            />
-                            <Text style={stageInfoStyle}>
-                              {Math.floor(Math.random() * Math.floor(1000))}
-                            </Text>
+                            <View
+                              style={{
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 2
+                              }}>
+                              <Text
+                                style={[
+                                  stageInfoStyle,
+                                  { marginRight: 5, marginTop: 0 }
+                                ]}>
+                                {Math.floor(Math.random() * Math.floor(1000))}
+                              </Text>
+                              <Icon
+                                name="account-multiple"
+                                type="material-community"
+                                color={Colors.activeStageColor.toString()}
+                                style={{ borderWidth: 1, borderColor: '#c00' }}
+                                size={14}
+                              />
+                            </View>
                           </View>
                         )}
                       </View>
@@ -150,21 +170,20 @@ export default class ConversationsScreen extends React.Component {
                         <View style={headerInfoStyle}>
                           {conversation.name ? (
                             <View>
-                              <Text
-                                style={[
-                                  headerTitleStyle,
-                                  { textDecorationLine: 'underline' }
-                                ]}>
+                              <Text style={[headerTitleStyle]}>
                                 {conversation.name}
                               </Text>
                               <View
                                 style={{
                                   flexDirection: 'row',
-                                  alignItems: 'center'
+                                  alignItems: 'center',
+                                  marginBottom: 5,
+                                  marginTop: 5
                                 }}>
                                 <Icon
                                   name="chevron-right"
-                                  color="#7EA172"
+                                  type="material-community"
+                                  color={Colors.activeStageColor.toString()}
                                   size={15}
                                 />
                                 <Text style={stageInfoStyle}>{name}</Text>
@@ -173,7 +192,13 @@ export default class ConversationsScreen extends React.Component {
                           ) : (
                             <Text style={headerTitleStyle}>{name}</Text>
                           )}
-                            <SentAt sentAt={conversation.last_message.sent_at} />
+                          <View>
+                            <Text style={{ fontSize: 10, paddingLeft: 5 }}>
+                              <SentAt
+                                sentAt={conversation.last_message.sent_at}
+                              />
+                            </Text>
+                          </View>
                         </View>
                         <Text
                           numberOfLines={3}
@@ -241,10 +266,20 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: 'white'
   },
+  conversationContainerStyle: {
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    paddingBottom: 8,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 8
+  },
   containerContentStyle: {
     flex: 1,
     padding: 5,
-    margin: 5
+    margin: 5,
+    marginLeft: 10
   },
   headerTitleStyle: {
     fontSize: 20,
@@ -262,7 +297,7 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   stageInfoStyle: {
-    color: 'green',
+    color: Colors.activeStageColor,
     fontSize: 12
   }
 })

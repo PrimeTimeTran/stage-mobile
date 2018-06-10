@@ -1,6 +1,10 @@
 import React from 'react'
-import { Platform, Text } from 'react-native'
-import { createStackNavigator, createBottomTabNavigator, createDrawerNavigator } from 'react-navigation'
+import { Platform, Text, StyleSheet } from 'react-native'
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+  createDrawerNavigator
+} from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
 import { Drawer } from '../components/common'
@@ -21,7 +25,7 @@ import ProfileScreen from '../screens/ProfileScreen'
 import MyProfileScreen from '../screens/MyProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 
-import TestScreen from '../screens/TestScreen'
+import Colors from '../constants/Colors'
 
 const ConversationsStack = createStackNavigator({
   Conversations: ConversationsScreen,
@@ -32,14 +36,11 @@ const ConversationsStack = createStackNavigator({
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: 'Messages',
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Messages</Text>,
     tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-        focused={focused}
-        name={Platform.OS === 'ios' ? `ios-mail${focused ? '' : '-outline'}` : 'md-chatboxes'}
-      />
+      <TabBarIcon focused={focused} name="message-processing" />
     ),
-    tabBarVisible: (navigation.state.index == 0) ? true : false
+    tabBarVisible: navigation.state.index == 0 ? true : false
   }
 }
 
@@ -50,32 +51,34 @@ const HomeStack = createStackNavigator({
 })
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Home</Text>,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-archive'}
+      active={focused}
+      style={{ color: '#000' }}
+      name={`home-variant`}
     />
-  ),
+  )
 }
 
 const StagesStack = createStackNavigator({
   Stages: StagesScreen,
   Stage: StageScreen,
   Conversation: ConversationScreen,
-  Profile: ProfileScreen,
+  Profile: ProfileScreen
 })
 
 StagesStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: 'Stages',
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Stages</Text>,
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-people${focused ? '' : '-outline'}` : 'md-flag'}
+        name='stadium'
       />
     ),
-    tabBarVisible: (navigation.state.index == 0) ? true : false
+    tabBarVisible: navigation.state.index == 0 ? true : false
   }
 }
 
@@ -86,18 +89,19 @@ const ProfileStack = createStackNavigator({
 
 ProfileStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: 'Profile',
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Profile</Text>,
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
+        name={'account-box'}
       />
     ),
-    tabBarVisible: (navigation.state.index == 0) ? true : false
+    tabBarVisible: navigation.state.index == 0 ? true : false
   }
 }
 
-const MainTabScreen = createBottomTabNavigator({
+const MainTabScreen = createBottomTabNavigator(
+  {
     ConversationsStack,
     HomeStack,
     StagesStack,
@@ -106,23 +110,22 @@ const MainTabScreen = createBottomTabNavigator({
   {
     tabBarOptions: {
       activeTintColor: 'white',
-      inactiveTintColor: 'lightgray',
+      inactiveTintColor: '#ffffff99',
       style: {
-        backgroundColor: '#333333',
+        backgroundColor: Colors.themeColor,
         borderTopWidth: 1,
         borderTopColor: 'white',
         padding: 5
-      },
-    },
-  },
+      }
+    }
+  }
 )
 
 const MainDrawNavigation = createBottomTabNavigator(
   {
     Welcome: WelcomeScreen,
     Auth: AuthScreen,
-    Main: MainTabScreen,
-    Test: TestScreen
+    Main: MainTabScreen
   },
   {
     lazy: true,
@@ -135,17 +138,25 @@ const ApplicationDrawer = createDrawerNavigator(
     App: MainDrawNavigation
   },
   {
-    contentComponent: Drawer
+    contentComponent: props => {
+      return <Drawer {...props} />
+    }
   }
 )
 
 ApplicationDrawer.navigationOptions = ({ navigation }) => {
   return {
     drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => (
-      <Text>Go</Text>
-    )
+    drawerIcon: ({ tintColor }) => <Text>Go</Text>
   }
 }
+
+const styles = StyleSheet.create({
+  tabBarLabelStyle: {
+    color: '#fff',
+    marginTop: 0,
+    fontSize: 12
+  }
+})
 
 export default ApplicationDrawer

@@ -1,15 +1,12 @@
 import React from 'react'
-import {
-  Text,
-  View
-} from 'react-native'
+import { Text, View } from 'react-native'
 
 import { Icon } from 'react-native-elements'
 
 const SentAt = ({ sentAt }) => {
   return (
     <View style={styles.headerRightStyle}>
-      <Icon name='clock' type='material-community' color='black' size={10} />
+      <Icon name="clock" type="material-community" color="#999" size={12} />
       <Text style={styles.textStyle}>{sentAt}</Text>
     </View>
   )
@@ -23,7 +20,8 @@ const styles = {
     alignSelf: 'flex-start'
   },
   textStyle: {
-    fontSize: 10,
+    fontSize: 12,
+    color: '#999',
     paddingLeft: 5
   }
 }

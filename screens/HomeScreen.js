@@ -38,7 +38,6 @@ export default class HomeScreen extends Component {
         <Icon
           type='entypo'
           name='menu'
-          color='white'
           onPress={() => navigation.openDrawer()}/>
       </View>
     )

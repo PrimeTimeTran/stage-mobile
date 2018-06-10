@@ -8,7 +8,7 @@ import { CardSection } from './CardSection'
 class UserDescription extends Component {
   render() {
     const { user } = this.props
-    const { descriptionStyle, titleStyle} = styles
+    const { descriptionStyle, titleStyle } = styles
     return (
       <View>
       <CardSection>

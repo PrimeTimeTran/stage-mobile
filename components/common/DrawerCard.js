@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Icon } from 'react-native-elements'
 
+import Color from '../../constants/Colors'
 import { CardSection } from './CardSection'
 
 export default class DrawerCard extends Component {
@@ -18,10 +19,12 @@ export default class DrawerCard extends Component {
       content
     } = this.props
 
+    const color = Color.themeColor
+
     return (
-      <CardSection custom={cardBackgroundStyle}>
+      <CardSection custom={[cardBackgroundStyle, this.props.custom]}>
         <View style={cardStyle}>
-          <Icon type={type} name={name} color='grey' size={20} />
+          <Icon type={type} name={name} color={color} size={20} />
           <Text style={textStyle}>{content}</Text>
         </View>
   a   </CardSection>
@@ -34,7 +37,8 @@ export { DrawerCard }
 const styles = {
   cardBackgroundStyle: {
     marginTop: 20,
-    borderBottomWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: Color.themeColor,
     paddingLeft: 30
   },
   cardStyle: {

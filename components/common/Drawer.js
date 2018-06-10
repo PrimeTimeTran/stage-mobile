@@ -21,6 +21,8 @@ class Drawer extends Component {
     const { drawerStyle, drawerHeaderStyle, drawerContentStyle } = styles
     const open = this.props.navigation.state.isDrawerOpen
     const style = open ? drawerStyle : ''
+    const user = CurrentUser()
+
     return (
       <View style={style}>
         <View style={drawerHeaderStyle}>
@@ -38,12 +40,13 @@ class Drawer extends Component {
           <DrawerCard type="font-awesome" name="gift" content="Gifting" />
           <DrawerCard type="material-icon" name="payment" content="Billing" />
         </View>
-        <View style={{ borderBottomWidth: 0, paddingBottom: 20 }}>
+        <View style={{ paddingBottom: 20 }}>
           <TouchableOpacity onPress={() => this.onLogOut()}>
             <DrawerCard
               type="material-community"
               name="logout"
               content="Log Out"
+              custom={{ borderBottomWidth: 0 }}
             />
           </TouchableOpacity>
         </View>

@@ -128,7 +128,7 @@ export default class ConversationsScreen extends React.Component {
                           justifyContent: 'center',
                           alignItems: 'center',
                           paddingLeft: 5,
-                          borderBottom: 1
+
                         }}>
                         <Avatar
                           custom={[avatarStyle, { marginTop: 5 }]}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Icon } from 'react-native-elements'
 
+import Colors from '../../constants/Colors'
 import { CardSection } from './CardSection'
 
 class UserDescription extends Component {
@@ -49,7 +50,9 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 18,
-    paddingLeft: 5
+    paddingLeft: 5,
+    fontWeight: 'bold',
+    color: Colors.themeColor
   }
 })
 

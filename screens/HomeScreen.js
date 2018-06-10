@@ -16,7 +16,7 @@ import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 import Colors from '../constants/Colors'
 import PostForm from '../components/PostForm'
-import { Avatar, Card, CardSection, SentAt, Reactions } from '../components/common'
+import { Avatar, Card, CardSection, SentAt, Socials } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
 
@@ -140,11 +140,12 @@ export default class HomeScreen extends Component {
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost}/>
         { posts && posts.map(post => {
-            const { id, user, reactions_count } = post
+          console.log('Post ', post);
+            const { id, user, reactions_count, comments_count } = post
             return (
               <View key={id}>
                 <Card>
-                  <CardSection style={{borderBottomWidth: 0}}>
+                  <CardSection custom={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
                       <TouchableOpacity onPress={() => this.navigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
@@ -157,7 +158,7 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection custom={{borderWidth: 0, padding: 10}}>
+                  <CardSection custom={{borderBottomWidth: 0, padding: 10}}>
                     <Text numberOfLines={5} style={{fontSize: 13}}>{post.body}</Text>
                   </CardSection>
                     { post.uploads && post.uploads.map((upload, index) => {
@@ -175,7 +176,7 @@ export default class HomeScreen extends Component {
                           )
                       }}})
                     }
-                    <Reactions count={reactions_count}/>
+                    <Socials reactions_count={reactions_count} comments_count={comments_count} />
                     <CardSection custom={{justifyContent: 'space-around'}}>
                       <Button
                         title='Like'

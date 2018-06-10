@@ -192,17 +192,13 @@ export default class ConversationsScreen extends React.Component {
                           ) : (
                             <Text style={headerTitleStyle}>{name}</Text>
                           )}
-                          <View>
-                            <Text style={{ fontSize: 10, paddingLeft: 5 }}>
-                              <SentAt
-                                sentAt={conversation.last_message.sent_at}
-                              />
-                            </Text>
+                          <View style={{ alignSelf: 'flex-start' }}>
+                            <SentAt sentAt={conversation.last_message.sent_at} />
                           </View>
                         </View>
                         <Text
                           numberOfLines={3}
-                          style={{ color: '#696969', fontSize: 15 }}>
+                          style={{ color: '#696969', fontSize: 13 }}>
                           {conversation.last_message.body}
                         </Text>
                         {/* <View style={{ flexDirection: 'row' }}>

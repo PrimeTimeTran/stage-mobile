@@ -79,6 +79,7 @@ export default class ConversationScreen extends Component {
   renderBubble = props => {
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
+
     if (this.state.userId == props.currentMessage.user._id) {
       return (
         <Bubble

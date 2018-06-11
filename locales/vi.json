@@ -1,0 +1,10 @@
+{
+  "login": {
+    "welcome": "Chào mừng",
+    "login_button": "Login",
+    "signup_button": "Sign Up"
+  },
+  "user_profile": {
+    "title": "Your Profile"
+  }
+}

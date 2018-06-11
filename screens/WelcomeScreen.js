@@ -3,10 +3,12 @@ import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 import { AppLoading } from 'expo'
 
+import { strings } from '../locales/i18n'
+
 import Slides from '../components/slides'
 
 const SLIDE_DATA = [
-  { text: 'Welcome', color: '#03A9F4', path: '../assets/images/0.png' },
+  { text: strings('login.welcome'), color: '#03A9F4', path: '../assets/images/0.png' },
   { text: "Meet amazing people!", color: '#009688', path: '../assets/images/1.png' },
   { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
 ]

@@ -15,21 +15,14 @@ I18n.translations = {
 
 const currentLocale = I18n.currentLocale()
 
-// I expect language for the user to be set on line 11.
-// The welcome screen still prints English though.
-
 I18n.locale = 'en'
-const getLanguage = async() => {
+
+const getLanguage = async () => {
   const choice = await Expo.Util.getCurrentLocaleAsync()
+  I18n.locale = choice
   return choice.substr(0, 2)
 }
 
-getLanguage().then(resolve => {
-  I18n.locale = resolve
-  return resolve
-})
-
-console.log(I18n.t('welcome.first'))
 
 
 export const isRTL = currentLocale.indexOf('he') === 0 || currentLocale.indexOf('ar') === 0
@@ -37,6 +30,7 @@ export const isRTL = currentLocale.indexOf('he') === 0 || currentLocale.indexOf(
 ReactNative.I18nManager.allowRTL(isRTL)
 
 export function strings(name, params = {}) {
+  getLanguage()
   return I18n.t(name, params)
 }
 

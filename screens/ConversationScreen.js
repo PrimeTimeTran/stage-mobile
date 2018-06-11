@@ -24,7 +24,7 @@ export default class ConversationScreen extends Component {
           type='material-community'
           color='white'
           size={28}
-          onPress={() => navigation.navigate('Users')}/>
+          onPress={() => navigation.navigate('Users', { conversation_id: navigation.state.params.conversation_id })}/>
       </View>
     )
   })

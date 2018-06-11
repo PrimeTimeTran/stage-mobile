@@ -80,41 +80,23 @@ export default class ConversationScreen extends Component {
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
 
-    if (this.state.userId == props.currentMessage.user._id) {
-      return (
-        <Bubble
-          {...props}
-          position='right'
-          textStyle={{
-            right: {
-              color: 'white'
-            }
-          }}
-          wrapperStyle={{
-            left: {
-              backgroundColor: color
-            }
-          }}
-        />
-      )
-    } else {
-      return (
-        <Bubble
-          {...props}
-          textStyle={{
-            right: {
-              color: 'white'
-            }
-          }}
-          wrapperStyle={{
-            left: {
-              backgroundColor: color
-            }
-          }}
-        />
-      )
-
-    }
+    let side = this.state.userId == props.currentMessage.user._id ? 'right' : 'left'
+    return (
+      <Bubble
+        {...props}
+        position={side}
+        textStyle={{
+          right: {
+            color: 'white'
+          }
+        }}
+        wrapperStyle={{
+          left: {
+            backgroundColor: color
+          }
+        }}
+      />
+    )
   }
 
   getColor(username) {

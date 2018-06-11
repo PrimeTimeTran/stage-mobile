@@ -30,14 +30,9 @@ export default class ConversationsScreen extends React.Component {
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
     headerLeft: (
-      <View style={{ paddingLeft: 10 }}>
-        <Icon
-          type="entypo"
-          name="menu"
-          color="white"
-          onPress={() => navigation.openDrawer()}
-        />
-      </View>
+      <TouchableOpacity style={{ padding: 10 }} onPress={() => navigation.openDrawer()}>
+        <Icon type="material-community" name="menu" size={26} color="white" />
+      </TouchableOpacity>
     )
   })
 

@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
-import { AsyncStorage, View, Dimensions, TouchableOpacity } from 'react-native'
+import {
+  AsyncStorage,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+  Text
+} from 'react-native'
 import { Avatar } from '../../components/common'
 import CurrentUser from '../../utils/CurrentUser'
+import Moment from 'moment'
 
 import { DrawerCard } from './DrawerCard'
 import Color from '../../constants/Colors'
 
 let { width, height } = Dimensions.get('window')
 class Drawer extends Component {
+  state = {
+    currentUser: null
+  }
   onLogOut() {
     let keys = ['auth_token', 'current_user']
     AsyncStorage.multiRemove(keys, err => {
@@ -17,16 +28,59 @@ class Drawer extends Component {
     })
   }
 
+  componentDidMount() {
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+    })
+  }
+
+  getCurrentUserFullName() {
+    if (this.state.currentUser) {
+      return [
+        this.state.currentUser.first_name,
+        this.state.currentUser.last_name
+      ].join(' ')
+    }
+    return ''
+  }
+
+  getCurrentUserJoinedSince() {
+    if (this.state.currentUser) {
+      return Moment(this.state.currentUser.created_at).format('MMM YYYY')
+    }
+    return ''
+  }
+
   render() {
-    const { drawerStyle, drawerHeaderStyle, drawerContentStyle } = styles
+    const {
+      drawerStyle,
+      drawerHeaderStyle,
+      drawerContentStyle,
+      headerTextStyle,
+      headerSubTextStyle,
+      avatarStyle
+    } = styles
     const open = this.props.navigation.state.isDrawerOpen
     const style = open ? drawerStyle : ''
-    const user = CurrentUser()
+    const user = CurrentUser.get()
 
     return (
       <View style={style}>
         <View style={drawerHeaderStyle}>
-          <Avatar url={CurrentUser().avatar_url} />
+          <Image
+            source={require('../../assets/images/avatar.png')}
+            style={avatarStyle}
+          />
+          {this.state.currentUser && (
+            <View>
+              <Text style={headerTextStyle}>
+                {this.getCurrentUserFullName()}
+              </Text>
+              <Text style={headerSubTextStyle}>
+                Joined since {this.getCurrentUserJoinedSince()}
+              </Text>
+            </View>
+          )}
         </View>
         <View style={drawerContentStyle}>
           <DrawerCard type="entypo" name="user" content="Profile" />
@@ -58,9 +112,30 @@ class Drawer extends Component {
 export { Drawer }
 
 const styles = {
+  headerTextStyle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5
+  },
+  avatarStyle: {
+    width: 60,
+    height: 60,
+    marginRight: 20,
+    borderBottomWidth: 1,
+    borderColor: '#c00'
+  },
+  headerSubTextStyle: {
+    color: '#fff',
+    fontSize: 13
+  },
   drawerHeaderStyle: {
     backgroundColor: Color.themeColor,
-    height: 161
+    height: 161,
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingTop: 20,
+    flexDirection: 'row'
   },
   drawerContentStyle: {
     flex: 1,

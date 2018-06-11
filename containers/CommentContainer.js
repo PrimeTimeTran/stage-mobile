@@ -15,19 +15,24 @@ export default class CommentContainer extends Component {
     }
   }
 
-  onAddComment = (body) => {
+  onAddComment = body => {
     const { postId } = this.props
     const request = client()
     request
       .then(api =>
-        api.post(`${API_ROOT}posts/${postId}/comments`, {body: body, commentable_type: 'Post', commentable_id: postId}))
+        api.post(`${API_ROOT}posts/${postId}/comments`, {
+          body: body,
+          commentable_type: 'Post',
+          commentable_id: postId
+        })
+      )
       .then(response => {
         return response.data
       })
       .then(data => {
         let newArray = this.state.comments.slice()
-        newArray.push(data);
-        this.setState({comments: newArray})
+        newArray.push(data)
+        this.setState({ comments: newArray })
       })
       .catch(error => {
         console.log('Error', error)
@@ -38,7 +43,14 @@ export default class CommentContainer extends Component {
     const { comments } = this.state
     return (
       <View>
-        { comments && <View> {comments.map(comment => <Comment key={comment.id} comment={comment}/>)}</View> }
+        {comments && (
+          <View>
+            {' '}
+            {comments.map(comment => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+          </View>
+        )}
         <CommentForm onSubmit={this.onAddComment} />
       </View>
     )

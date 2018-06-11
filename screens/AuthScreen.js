@@ -12,6 +12,7 @@ import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import { t } from '../locales/i18n'
+import db from '../utils/PouchDB'
 
 const image = require('../assets/images/2.png')
 
@@ -77,7 +78,10 @@ class AuthScreen extends Component {
       ['current_user', JSON.stringify(data.user.id)]
     ]
     await AsyncStorage.multiSet(keys, key => {
-      console.log('Key', key)
+      db.put({
+        _id: 'current_user',
+        data: data.user
+      })
     })
     this.props.navigation.navigate('Conversations')
   }

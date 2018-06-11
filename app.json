@@ -23,6 +23,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "io.stage.stage"
+    },
+    "androidStatusBar": {
+      barStyle: 'light-content'
     }
   }
 }

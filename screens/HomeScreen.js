@@ -14,7 +14,6 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
-import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
@@ -27,21 +26,21 @@ import CommentContainer from '../containers/CommentContainer'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
+import Colors from '../constants/Colors'
+
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Home',
-    headerTitleStyle: {color: 'white'},
-    headerStyle: { backgroundColor: Colors.themeColor },
-    headerBackTitleStyle: {color: 'white'},
+    title: 'Newsfeed',
+    headerTitleStyle: { color: 'white' },
+    headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
+    headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
     headerLeft: (
-      <View style={{paddingLeft: 10}}>
-        <Icon
-          type="entypo"
-          name="menu"
-          color="white"
-          onPress={() => navigation.openDrawer()}/>
-      </View>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        onPress={() => navigation.openDrawer()}>
+        <Icon name="menu" type="material-community" color="white" size={26} />
+      </TouchableOpacity>
     )
   })
 
@@ -55,7 +54,7 @@ export default class HomeScreen extends Component {
         return response.data
       })
       .then(data => {
-        this.setState({posts: data})
+        this.setState({ posts: data })
       })
       .catch(error => {
         console.log('Error:', error)
@@ -74,11 +73,8 @@ export default class HomeScreen extends Component {
         }}>
         {post.uploads.map(upload => {
           return (
-            <View style={{flex: 1}} key={upload.id}>
-              <Video
-                key={upload.id}
-                source={{uri: upload.url}}
-              />
+            <View style={{ flex: 1 }} key={upload.id}>
+              <Video key={upload.id} source={{ uri: upload.url }} />
               <Text
                 style={{
                   color: '#fff',
@@ -96,7 +92,7 @@ export default class HomeScreen extends Component {
     )
   }
 
-   navigateProfile = async (user) => {
+  navigateProfile = async user => {
     const { id } = user
     const currentUser = await CurrentUser()
 
@@ -107,22 +103,20 @@ export default class HomeScreen extends Component {
         user_id: id,
         first_name: user.first_name
       })
-
     }
   }
 
-  onAddPost = (body) => {
+  onAddPost = body => {
     const request = client()
     request
-      .then(api =>
-        api.post(`${API_ROOT}posts/`, {body: body, }))
+      .then(api => api.post(`${API_ROOT}posts/`, { body: body }))
       .then(response => {
         return response.data
       })
       .then(data => {
         let newArray = this.state.posts.slice()
         newArray.unshift(data)
-        this.setState({posts: newArray})
+        this.setState({ posts: newArray })
       })
       .catch(error => {
         console.log('Error', error)
@@ -131,11 +125,7 @@ export default class HomeScreen extends Component {
 
   render() {
     const { posts } = this.state
-    const {
-      headerContainerStyle,
-      headerTextStyle,
-      avatarStyle
-    } = styles
+    const { headerContainerStyle, headerTextStyle, avatarStyle } = styles
 
     return (
       <ScrollView scrollEventThrottle={5}>
@@ -148,13 +138,27 @@ export default class HomeScreen extends Component {
                 <Card>
                   <CardSection custom={{borderBottomWidth: 0}}>
                     <View style={headerContainerStyle}>
-                      <TouchableOpacity onPress={() => this.navigateProfile(user)}>
+                      <TouchableOpacity
+                        onPress={() => this.navigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
                       </TouchableOpacity>
                     </View>
-                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                      }}>
                       <Text style={headerTextStyle}>{user.full_name}</Text>
-                      <View style={{flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start'}}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          alignSelf: 'flex-start',
+                          paddingTop: 5,
+                          paddingRight: 5
+                        }}>
                         <SentAt sentAt={post.created_at} />
                       </View>
                     </View>
@@ -162,8 +166,10 @@ export default class HomeScreen extends Component {
                   <CardSection custom={{borderBottomWidth: 0, padding: 10}}>
                     <Text numberOfLines={5} style={{fontSize: 13}}>{post.body}</Text>
                   </CardSection>
-                    { post.uploads && post.uploads.map((upload, index) => {
-                      { if (upload.media_type == 'vid') {
+                  {post.uploads &&
+                    post.uploads.map((upload, index) => {
+                      {
+                        if (upload.media_type == 'vid') {
                           return (
                             <CardSection key={upload.id}>
                               <Lightbox
@@ -175,34 +181,45 @@ export default class HomeScreen extends Component {
                               </Lightbox>
                             </CardSection>
                           )
-                      }}})
-                    }
-                    <Socials reactions_count={reactions_count} comments_count={comments_count} />
-                    <CardSection custom={{ justifyContent: 'space-around' }}>
-                      <Button
-                        title="Like"
-                        color={Colors.themeColor.toString()}
-                        icon={{ type:"evilicon", name: 'like', color: Colors.themeColor.toString() }}
-                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
-                        onPress={() => console.log("Liked")}
-                      >
-                      </Button>
-                      <Button
-                        title="Comment"
-                        color={Colors.themeColor.toString()}
-                        icon={{ type:"evilicon", name: 'comment', color: Colors.themeColor.toString() }}
-                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
-                      >
-                        <Text>Comment</Text>
-                      </Button>
-                    </CardSection>
-                    <CommentContainer comments={post.comments} postId={id}/>
+                        }
+                      }
+                    })}
+
+                  <Socials reactions_count={reactions_count} comments_count={comments_count} />
+                  <CardSection
+                    custom={{ justifyContent: 'space-around', padding: 0 }}>
+                    <Button
+                      title="Like"
+                      color={Colors.buttonColor.toString()}
+                      fontSize={14}
+                      icon={{
+                        name: 'thumb-up',
+                        color: Colors.buttonColor.toString()
+                      }}
+                      buttonStyle={{
+                        backgroundColor: 'transparent'
+                      }}
+                      onPress={() => console.log('Liked')}
+                    />
+                    <Button
+                      title="Comment"
+                      color={Colors.buttonColor.toString()}
+                      fontSize={14}
+                      icon={{
+                        name: 'comment',
+                        color: Colors.buttonColor.toString()
+                      }}
+                      buttonStyle={{
+                        backgroundColor: 'transparent'
+                      }}
+                      onPress={() => console.log('Comment')}
+                    />
+                  </CardSection>
+                  <CommentContainer comments={post.comments} postId={id} />
                 </Card>
               </View>
-              )
-            }
-          )
-        }
+            )
+          })}
       </ScrollView>
     )
   }
@@ -210,11 +227,11 @@ export default class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   headerContainerStyle: {
-    flexDirection: 'column',
     justifyContent: 'space-around'
   },
   headerTextStyle: {
     fontSize: 15,
+    marginLeft: 10,
     fontWeight: '600',
     color: '#333333',
     paddingLeft: 5
@@ -222,6 +239,6 @@ const styles = StyleSheet.create({
   avatarStyle: {
     height: 50,
     width: 50,
-    borderRadius: 25,
+    borderRadius: 25
   }
 })

@@ -33,21 +33,9 @@ class Welcome extends Component {
     let token
     let current_user
 
-    // token = await AsyncStorage.setItem('auth_token', 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4Nzk4OTB9._COA3vWtEtInLfq7fiZTfHWaogmjAC2QgtfZ4FZ1vkD8ogYpRc-53XfLhBqQTLCFz4Gucam2xtYHRMEnyuxGAw')
-
-    // current_user = await AsyncStorage.removeItem('current_user')
-    // token = await AsyncStorage.removeItem('auth_token')
-
-    // current_user = await AsyncStorage.getItem('current_user')
     token = await AsyncStorage.getItem('auth_token')
-    console.log('JWT Token: ', token)
-
-    // console.log('AuthToken in Welcome', token)
-    // console.log('UserId', current_user)
-
     if (token) {
       this.props.navigation.navigate('Conversations')
-      // this.props.navigation.navigate('Test')
       this.setState({ token })
     } else {
       this.setState({ token: false })

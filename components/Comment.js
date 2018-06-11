@@ -10,13 +10,18 @@ export default class Comment extends Component {
     const { commentContainerStyle, avatarStyle } = styles
     return (
       <CardSection id={comment.id} custom={commentContainerStyle}>
-        <View>
-          <Avatar url={comment.user.user_profile_photo} custom={[avatarStyle, {marginTop: 5}]} />
+        <View style={{ marginRight: 5 }}>
+          <Avatar
+            url={comment.user.user_profile_photo}
+            custom={[avatarStyle, { marginTop: 5 }]}
+          />
         </View>
-        <View style={{padding: 5, marginRight: 10}}>
-          <Text style={{color: Colors.themeColor}}>{comment.user.full_name}</Text>
-          <View>
-            <Text style={{marginRight: 10}}>{comment.body}</Text>
+        <View style={{ padding: 5, marginRight: 20 }}>
+          <Text style={{ color: Colors.commentorColor }}>
+            {comment.user.full_name}
+          </Text>
+          <View style={{ marginTop: 5 }}>
+            <Text style={{ marginRight: 10 }}>{comment.body}</Text>
           </View>
         </View>
       </CardSection>

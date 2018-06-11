@@ -1,8 +1,10 @@
 import { AsyncStorage } from 'react-native'
+import db from '../utils/PouchDB'
 
-const CurrentUser = () => {
-  const currentUser = AsyncStorage.getItem('current_user')
-  return currentUser
+const get = () => {
+  return db.get('current_user').then((doc) => {
+    return doc.data
+  })
 }
 
-export default CurrentUser
+export default { get: get }

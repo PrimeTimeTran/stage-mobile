@@ -51,13 +51,13 @@ const HomeStack = createStackNavigator({
 })
 
 HomeStack.navigationOptions = {
-  tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Home</Text>,
+  tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Newsfeed</Text>,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       active={focused}
       style={{ color: '#000' }}
-      name={`home-variant`}
+      name='newspaper'
     />
   )
 }

@@ -24,7 +24,7 @@ export default class ConversationScreen extends Component {
           type='material-community'
           color='white'
           size={28}
-          onPress={() => navigation.navigate('Users')}/>
+          onPress={() => navigation.navigate('Users', { conversation_id: navigation.state.params.conversation_id })}/>
       </View>
     )
   })
@@ -79,6 +79,7 @@ export default class ConversationScreen extends Component {
   renderBubble = props => {
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
+
     if (this.state.userId == props.currentMessage.user._id) {
       return (
         <Bubble

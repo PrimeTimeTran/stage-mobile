@@ -30,7 +30,7 @@ export default class CommentContainer extends Component {
         this.setState({comments: newArray})
       })
       .catch(error => {
-        console.log('Error')
+        console.log('Error', error)
       })
   }
 

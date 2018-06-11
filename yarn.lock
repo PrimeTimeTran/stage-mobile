@@ -2559,6 +2559,10 @@ eventemitter3@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
 
+ex-react-native-i18n@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/ex-react-native-i18n/-/ex-react-native-i18n-0.0.4.tgz#a6685f87652880b6a7e5a6b7c81c40253a81103f"
+
 exec-async@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/exec-async/-/exec-async-2.2.0.tgz#c7c5ad2eef3478d38390c6dd3acfe8af0efc8301"
@@ -3330,6 +3334,10 @@ https-proxy-agent@^2.2.1:
   dependencies:
     agent-base "^4.1.0"
     debug "^3.1.0"
+
+i18n-js@^3.0.3:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/i18n-js/-/i18n-js-3.0.8.tgz#3f15aa1bc63fdec9dd3c6feb48ffc89c51a00442"
 
 iconv-lite@0.4.19:
   version "0.4.19"
@@ -5703,6 +5711,12 @@ react-native-gifted-chat@^0.4.3:
     react-native-parsed-text "^0.0.20"
     shallowequal "1.0.2"
     uuid "3.2.1"
+
+react-native-i18n@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-2.0.12.tgz#4a503cc73b2fe55e8518f6d4a1340d3b449d8d1a"
+  dependencies:
+    i18n-js "^3.0.3"
 
 react-native-image-picker@^0.26.10:
   version "0.26.10"

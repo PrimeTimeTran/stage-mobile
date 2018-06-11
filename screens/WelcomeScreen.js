@@ -3,15 +3,25 @@ import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 import { AppLoading } from 'expo'
 
-import { strings } from '../locales/i18n'
+import { t } from '../locales/i18n'
 
 import Slides from '../components/slides'
 
-const SLIDE_DATA = [
-  { text: strings('welcome.first'), color: '#03A9F4', path: '../assets/images/0.png' },
-  { text: "Meet amazing people!", color: '#009688', path: '../assets/images/1.png' },
-  { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
-]
+const SLIDE_DATA = () => {
+  return [
+    {
+      text: t('welcome.first'),
+      color: '#03A9F4',
+      path: '../assets/images/0.png'
+    },
+    {
+      text: 'Meet amazing people!',
+      color: '#009688',
+      path: '../assets/images/1.png'
+    },
+    { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
+  ]
+}
 
 class Welcome extends Component {
   state = {
@@ -43,7 +53,7 @@ class Welcome extends Component {
     }
   }
 
-   onSlidesComplete = () => {
+  onSlidesComplete = () => {
     this.props.navigation.navigate('Auth')
   }
 
@@ -51,12 +61,7 @@ class Welcome extends Component {
     if (_.isNull(this.state.token)) {
       return <AppLoading />
     }
-    return (
-      <Slides
-        data={SLIDE_DATA}
-        onComplete={this.onSlidesComplete}
-      />
-    );
+    return <Slides data={SLIDE_DATA()} onComplete={this.onSlidesComplete} />
   }
 }
 

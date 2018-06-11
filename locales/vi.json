@@ -1,8 +1,11 @@
 {
   "welcome": {
     "first": "Chào mừng",
-    "login_button": "Login",
-    "signup_button": "Sign Up"
+    "login_button": "Đăng nhập",
+    "signup_button": "Đăng kí"
+  },
+  "auth": {
+    "sign_in_up": 'Đăng nhập/Đăng kí'
   },
   "user_profile": {
     "title": "Your Profile"

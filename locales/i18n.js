@@ -19,18 +19,16 @@ I18n.locale = 'en'
 
 const getLanguage = async () => {
   const choice = await Expo.Util.getCurrentLocaleAsync()
-  I18n.locale = choice
-  return choice.substr(0, 2)
+  I18n.locale = choice.substr(0, 2)
+  I18n.initAsync()
 }
-
-
+getLanguage()
 
 export const isRTL = currentLocale.indexOf('he') === 0 || currentLocale.indexOf('ar') === 0
 
 ReactNative.I18nManager.allowRTL(isRTL)
 
-export function strings(name, params = {}) {
-  getLanguage()
+export function t(name, params = {}) {
   return I18n.t(name, params)
 }
 

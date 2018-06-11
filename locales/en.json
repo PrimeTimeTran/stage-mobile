@@ -4,6 +4,9 @@
     "login_button": "Login",
     "signup_button": "Sign Up"
   },
+  "auth": {
+    "sign_in_up": 'Sign in/up'
+  },
   "user_profile": {
     "title": "Your Profile"
   }

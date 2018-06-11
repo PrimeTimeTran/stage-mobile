@@ -1,6 +1,6 @@
 {
-  "login": {
-    "welcome": "Chào mừng",
+  "welcome": {
+    "first": "Chào mừng",
     "login_button": "Login",
     "signup_button": "Sign Up"
   },

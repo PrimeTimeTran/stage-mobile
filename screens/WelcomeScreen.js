@@ -8,7 +8,7 @@ import { strings } from '../locales/i18n'
 import Slides from '../components/slides'
 
 const SLIDE_DATA = [
-  { text: strings('login.welcome'), color: '#03A9F4', path: '../assets/images/0.png' },
+  { text: strings('welcome.first'), color: '#03A9F4', path: '../assets/images/0.png' },
   { text: "Meet amazing people!", color: '#009688', path: '../assets/images/1.png' },
   { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
 ]

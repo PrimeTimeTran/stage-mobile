@@ -1,6 +1,6 @@
 {
-  "login": {
-    "welcome": "Welcome!",
+  "welcome": {
+    "first": "Welcome!",
     "login_button": "Login",
     "signup_button": "Sign Up"
   },

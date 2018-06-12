@@ -3,6 +3,7 @@ import { Text, ScrollView, Dimensions, Button, ImageBackground } from 'react-nat
 import { Card, CardSection } from './common'
 
 let SCREEN_WIDTH = Dimensions.get('window').width
+import Colors from '../constants/Colors'
 
 export default class Slides extends Component {
   renderLastSlide(idx) {
@@ -19,6 +20,7 @@ export default class Slides extends Component {
   }
 
   renderSlides() {
+    const { cardStyle, slideStyle, slideTextStyle } = styles
     return this.props.data.map((slide, idx) => {
       let image
       if (idx == 0) {
@@ -32,11 +34,11 @@ export default class Slides extends Component {
         <ImageBackground
           source={image}
           key={slide.text}
-          style={styles.slideStyle}
+          style={slideStyle}
         >
           <Card>
-            <CardSection custom={{backgroundColor: '#333333'}}>
-              <Text style={styles.slideTextStyle}>
+            <CardSection custom={cardStyle}>
+              <Text style={slideTextStyle}>
                 {slide.text}
               </Text>
               {this.renderLastSlide(idx)}
@@ -70,10 +72,17 @@ const styles = {
   },
   slideTextStyle: {
     fontSize: 30,
-    color: 'white'
+    color: 'black',
+    textAlign: 'center'
   },
   buttonStyle: {
     backgroundColor: '#0288D1',
-    marginTop: 15,
+    marginTop: 15
+  },
+  cardStyle: {
+    backgroundColor: 'white',
+    borderColor: Colors.themeColor,
+    borderWidth: 5,
+    borderBottomWidth: 5
   }
 }

@@ -15,11 +15,11 @@ const SLIDE_DATA = () => {
       path: '../assets/images/0.png'
     },
     {
-      text: 'Meet amazing people!',
+      text: t('welcome.second'),
       color: '#009688',
       path: '../assets/images/1.png'
     },
-    { text: 'Get on Stage!', color: '#03A9F4', path: '../assets/images/2.png' }
+    { text: t('welcome.third'), color: '#03A9F4', path: '../assets/images/2.png' }
   ]
 }
 

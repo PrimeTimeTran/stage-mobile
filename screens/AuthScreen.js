@@ -7,6 +7,8 @@ import {
   ImageBackground
 } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
+
+import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import { t } from '../locales/i18n'
@@ -32,15 +34,13 @@ class AuthScreen extends Component {
     passwordValid = password.length >= 6
 
     if (!passwordValid && !emailValid) {
-      return this.setState({ errorMessage: 'Invalid email & password' })
+      return this.setState({ errorMessage: t('auth.errors.email_password') })
     }
     if (!emailValid) {
-      return this.setState({ errorMessage: 'Invalid email' })
+      return this.setState({ errorMessage: t('auth.errors.email') })
     }
     if (!passwordValid) {
-      return this.setState({
-        errorMessage: 'Invalid Password. Must be 6 characters'
-      })
+      return this.setState({ errorMessage: t('auth.errors.password') })
     }
     this.setState({ errorMessage: '' })
     this.onSignUpOrIn()
@@ -67,9 +67,7 @@ class AuthScreen extends Component {
         return data
       })
       .catch(error => {
-        this.setState({
-          errorMessage: `Password incorrect for \n${email}. \nPlease try again.`
-        })
+        this.setState({ errorMessage: t('auth.errors.password_incorrect') })
       })
   }
 
@@ -108,15 +106,15 @@ class AuthScreen extends Component {
         }}>
         <View style={screenContainer}>
           <View style={containerStyle}>
-            <FormLabel>Email</FormLabel>
+            <FormLabel labelStyle={{color: Colors.themeColor}}>Email</FormLabel>
             <FormInput
               name="Email"
-              placeholder="loi@gmail.com"
+              placeholder="johndoe@gmail.com"
               value={this.state.email}
               onChangeText={this.handleEmailChange}
             />
 
-            <FormLabel>Password</FormLabel>
+            <FormLabel labelStyle={{color: Colors.themeColor}}>{t('auth.password')}</FormLabel>
             <FormInput
               placeholder="**********"
               secureTextEntry
@@ -134,11 +132,13 @@ class AuthScreen extends Component {
               <Text style={{ color: 'red' }}>{this.state.errorMessage}</Text>
             </View>
             <Button
+              title={t('auth.sign_in_up')}
+              outline
               style={{ marginBottom: 10 }}
               icon={{ name: 'sign-in', type: 'font-awesome' }}
-              title={t('auth.sign_in_up')}
+              color={Colors.themeColor.toString()}
               onPress={this.handleSubmit}>
-              <Text>Sign Up/In</Text>
+              <Text>{t('auth.sign_in_up')}</Text>
             </Button>
           </View>
         </View>
@@ -162,6 +162,7 @@ const styles = {
     width: width * 0.8,
     backgroundColor: 'white',
     borderWidth: 5,
-    borderBottomWidth: 5
+    borderBottomWidth: 5,
+    borderColor: Colors.themeColor,
   }
 }

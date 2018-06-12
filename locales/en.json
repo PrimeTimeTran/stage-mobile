@@ -1,13 +1,17 @@
 {
   "welcome": {
     "first": "Welcome!",
-    "login_button": "Login",
-    "signup_button": "Sign Up"
+    "second": "Meet Amazing People!",
+    "third": "Get on Stage!"
   },
   "auth": {
-    "sign_in_up": 'Sign in/up'
-  },
-  "user_profile": {
-    "title": "Your Profile"
+    "password": "Password",
+    "sign_in_up": "Login/Signup",
+    "errors": {
+      "email_password": "Email & Password invalid",
+      "email": "Invalid Email",
+      "password": "Password invalid. Must be 6 characters",
+      "password_incorrect": "Password incorrect for email"
+    }
   }
 }

@@ -13,15 +13,17 @@ import { Button, Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
+
 import Colors from '../constants/Colors'
+import { API_ROOT } from '../constants/ApiConfig'
+import client from '../utils/client'
+import CurrentUser from '../utils/CurrentUser'
+
 import PostForm from '../components/PostForm'
 import { Avatar, Card, CardSection, SentAt, Socials } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
 
-import { API_ROOT } from '../constants/ApiConfig'
-import client from '../utils/client'
-import CurrentUser from '../utils/CurrentUser'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 

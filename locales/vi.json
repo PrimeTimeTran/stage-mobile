@@ -1,13 +1,17 @@
 {
   "welcome": {
     "first": "Chào mừng",
-    "login_button": "Đăng nhập",
-    "signup_button": "Đăng kí"
+    "second": "Gặp gỡ những\n người tuyệt vời!",
+    "third": "Lên Stage!"
   },
   "auth": {
-    "sign_in_up": 'Đăng nhập/Đăng kí'
-  },
-  "user_profile": {
-    "title": "Your Profile"
+    "password": "Mật khẩu",
+    "sign_in_up": "Đăng nhập/Đăng kí",
+    "errors": {
+      "email_password": "Email và mật khẩu không hợp lệ",
+      "email": "Email không hợp lệ",
+      "password": "Mật khẩu không hợp lệ. Phải có 6 ký tự",
+      "password_incorrect": "Mật khẩu không đúng"
+    }
   }
 }

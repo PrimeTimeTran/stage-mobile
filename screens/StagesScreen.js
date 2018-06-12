@@ -185,19 +185,27 @@ export default class StagesScreen extends React.Component {
                           <Button
                             outline
                             small
-                            icon={{name: 'info', type: 'feather', color: '#276FBF'}}
+                            icon={{
+                              name: 'info',
+                              type: 'feather',
+                              color: Colors.themeColor.toString()
+                            }}
                             title='Info'
                             style={{width: 100}}
-                            color='#276FBF'
+                            color={Colors.themeColor}
                             onPress={() => console.log('Get more info')}
                           />
                           <Button
                             outline
                             small
-                            icon={{name: 'message-circle', type: 'feather', color: '#276FBF'}}
+                            icon={{
+                              name: 'message-circle',
+                              type: 'feather',
+                              color: Colors.themeColor.toString()
+                            }}
                             title='Chat'
                             style={{width: 100}}
-                            color='#276FBF'
+                            color={Colors.themeColor}
                             onPress={() => this.handleGoToStageConversation(stage)}
                           />
                       </View>

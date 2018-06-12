@@ -25,7 +25,7 @@ export default class UsersScreen extends Component {
     )
   })
 
-  state = { users: [] }
+  state = { users: [], conversation: {} }
 
   componentWillMount() {
     conversationId = this.props.navigation.state.params.conversation_id
@@ -38,18 +38,35 @@ export default class UsersScreen extends Component {
       .catch(error => {
         console.log('Error: ', error)
       })
+
+    request
+      .then(api => api.get(`${API_ROOT}conversations/${conversationId}`))
+      .then(response => {
+        this.setState({ conversation: response.data}, () => console.log('State', this.state))
+      })
+      .catch(error => {
+        console.log('Error: ', error)
+      })
   }
 
   render() {
-    const { users } = this.state
+    const { users, conversation } = this.state
     const { userContainerStyle, avatarStyle } = styles
     return (
       <ScrollView>
+        <CardSection custom={{ paddingLeft: 15 }}>
+          <View style={{ flex: 1 }}>
+            <Text>{conversation.stage_name}</Text>
+          </View>
+          <View>
+            <Text>{conversation.user_count}</Text>
+          </View>
+        </CardSection>
         { users &&
             users.map(user => {
               console.log('User', user)
               return (
-                <CardSection id={user.id} custom={userContainerStyle}>
+                <CardSection key={user.id} custom={userContainerStyle}>
                   <View>
                     <Avatar url={user.avatar_url} custom={[avatarStyle, { marginTop: 5 }]} />
                   </View>
@@ -58,7 +75,7 @@ export default class UsersScreen extends Component {
                     {/* <Icon type="evilicon" name='like' /> */}
                     <Text style={{ marginRight: 15 }}>{user.occupation}</Text>
                     <View>
-                      <Text numberOfLines={2} style={{ marginRight: 20 }}>{user.description}</Text>
+                      <Text numberOfLines={2} style={{ marginRight: 50 }}>{user.description}</Text>
                     </View>
                   </View>
                 </CardSection>

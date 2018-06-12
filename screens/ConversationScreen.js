@@ -5,10 +5,10 @@ import { sendMessage, setCallback } from '../utils/chat'
 
 import { Icon } from 'react-native-elements'
 
+import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-import Colors from '../constants/Colors'
 
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -24,12 +24,15 @@ export default class ConversationScreen extends Component {
           type='material-community'
           color='white'
           size={28}
-          onPress={() => navigation.navigate('Users', { conversation_id: navigation.state.params.conversation_id })}/>
+          onPress={() =>
+            navigation.navigate('Users', {
+              conversation_id: navigation.state.params.conversation_id
+        })}/>
       </View>
     )
   })
 
-  state = {messages: [], userId: ''}
+  state = { messages: [], userId: '' }
 
   async componentWillMount() {
     const userId = await AsyncStorage.getItem('current_user')

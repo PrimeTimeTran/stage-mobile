@@ -54,11 +54,11 @@ export default class UsersScreen extends Component {
                     <Avatar url={user.avatar_url} custom={[avatarStyle, { marginTop: 5 }]} />
                   </View>
                   <View style={{ padding: 5, marginRight: 10 }}>
-                    <Text style={{ color: Colors.themeColor, fontSize: 20 }}>{user.full_name}</Text>
-                    <Icon type="evilicon" name='like' />
+                    <Text style={{ color: Colors.themeColor, fontSize: 20 }}>{user.full_name}, {user.age}</Text>
+                    {/* <Icon type="evilicon" name='like' /> */}
                     <Text style={{ marginRight: 15 }}>{user.occupation}</Text>
                     <View>
-                      <Text numberOfLines={3} style={{ marginRight: 20 }}>{user.description}</Text>
+                      <Text numberOfLines={2} style={{ marginRight: 20 }}>{user.description}</Text>
                     </View>
                   </View>
                 </CardSection>

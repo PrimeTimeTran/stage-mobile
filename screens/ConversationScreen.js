@@ -76,6 +76,11 @@ export default class ConversationScreen extends Component {
     })
   }
 
+  onLongPress = (context, message) => {
+    console.log('Long Pressed context:', context)
+    console.log('Long Pressed message:', message)
+  }
+
   renderBubble = props => {
     let username = props.currentMessage.user.name
     let color = this.getColor(username)
@@ -148,6 +153,7 @@ export default class ConversationScreen extends Component {
       <GiftedChat
         onPressAvatar={props => this.handleAvatarClick(props)}
         messages={this.state.messages}
+        onLongPress={this.onLongPress}
         renderBubble={props => this.renderBubble(props)}
         onSend={messages => this.onSend(messages)}
         user={{

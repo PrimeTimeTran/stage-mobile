@@ -19,7 +19,7 @@ class UserDescription extends Component {
               <Icon type='font-awesome' name='briefcase' color='grey' size={17} />
             </View>
             <View style={descriptionStyle}>
-              <Text style={titleStyle}>{user.full_name}</Text>
+              <Text style={titleStyle}>{user.full_name}, {user.age}</Text>
               <Text style={titleStyle}>{user.location}</Text>
               <Text style={titleStyle}>{user.occupation}</Text>
             </View>

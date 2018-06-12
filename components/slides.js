@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, Dimensions, Button, ImageBackground } from 'react-native'
+import { Text, ScrollView, Dimensions, ImageBackground, View } from 'react-native'
+import { Button } from 'react-native-elements'
 import { Card, CardSection } from './common'
 
 let SCREEN_WIDTH = Dimensions.get('window').width
 import Colors from '../constants/Colors'
+import { t } from '../locales/i18n'
 
 export default class Slides extends Component {
   renderLastSlide(idx) {
@@ -11,8 +13,8 @@ export default class Slides extends Component {
       return (
         <Button
           raised
-          title='Join'
-          buttonStyle={styles.buttonStyle}
+          title={t('welcome.join')}
+          backgroundColor={Colors.themeColor}
           onPress={this.props.onComplete}
         />
       )
@@ -41,7 +43,10 @@ export default class Slides extends Component {
               <Text style={slideTextStyle}>
                 {slide.text}
               </Text>
+              <View>
               {this.renderLastSlide(idx)}
+              </View>
+
             </CardSection>
           </Card>
         </ImageBackground>
@@ -72,17 +77,16 @@ const styles = {
   },
   slideTextStyle: {
     fontSize: 30,
-    color: 'black',
-    textAlign: 'center'
-  },
-  buttonStyle: {
-    backgroundColor: '#0288D1',
-    marginTop: 15
+    color: Colors.themeColor,
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   cardStyle: {
+    padding: 20,
+    flexDirection: 'column',
     backgroundColor: 'white',
     borderColor: Colors.themeColor,
     borderWidth: 5,
-    borderBottomWidth: 5
+    borderBottomWidth: 5,
   }
 }

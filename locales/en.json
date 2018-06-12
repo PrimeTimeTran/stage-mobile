@@ -2,7 +2,8 @@
   "welcome": {
     "first": "Welcome!",
     "second": "Meet Amazing People!",
-    "third": "Get on Stage!"
+    "third": "Get on Stage!",
+    "join": "Join!"
   },
   "auth": {
     "password": "Password",

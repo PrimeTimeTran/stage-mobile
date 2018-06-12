@@ -1,11 +1,12 @@
 {
   "welcome": {
-    "first": "Chào mừng",
-    "second": "Gặp gỡ những\n người tuyệt vời!",
-    "third": "Lên Stage!"
+    "first": "Chào Mừng",
+    "second": "Gặp Gỡ Những\n Bgười Tuyệt Vời!",
+    "third": "Lên Stage!",
+    "join": "Tham Gia"
   },
   "auth": {
-    "password": "Mật khẩu",
+    "password": "Mật Khẩu",
     "sign_in_up": "Đăng nhập/Đăng kí",
     "errors": {
       "email_password": "Email và mật khẩu không hợp lệ",

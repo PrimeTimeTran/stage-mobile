@@ -192,7 +192,7 @@ export default class StagesScreen extends React.Component {
                             }}
                             title='Info'
                             style={{width: 100}}
-                            color={Colors.themeColor}
+                            color={Colors.themeColor.toString()}
                             onPress={() => console.log('Get more info')}
                           />
                           <Button
@@ -205,7 +205,7 @@ export default class StagesScreen extends React.Component {
                             }}
                             title='Chat'
                             style={{width: 100}}
-                            color={Colors.themeColor}
+                            color={Colors.themeColor.toString()}
                             onPress={() => this.handleGoToStageConversation(stage)}
                           />
                       </View>

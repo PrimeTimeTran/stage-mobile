@@ -121,7 +121,7 @@ const MainTabScreen = createBottomTabNavigator(
   }
 )
 
-const MainDrawNavigation = createBottomTabNavigator(
+const MainDrawerNavigation = createBottomTabNavigator(
   {
     Welcome: WelcomeScreen,
     Auth: AuthScreen,
@@ -135,7 +135,7 @@ const MainDrawNavigation = createBottomTabNavigator(
 
 const ApplicationDrawer = createDrawerNavigator(
   {
-    App: MainDrawNavigation
+    App: MainDrawerNavigation
   },
   {
     contentComponent: props => {

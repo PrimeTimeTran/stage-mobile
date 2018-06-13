@@ -6,11 +6,11 @@ import {
   ScrollView,
   View,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native'
 
 import Carousel from 'react-native-looped-carousel'
-import ImagePicker from 'react-native-image-picker'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
@@ -18,15 +18,16 @@ import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import { UserDescription } from '../components/common'
+import { Permissions, ImagePicker } from 'expo'
+import ActionSheet from 'react-native-actionsheet'
 
 const { width } = Dimensions.get('window')
-const defaultImage = 'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
+const defaultImage =
+  'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
 
 let options = {
   title: 'Select Avatar',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
+  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
   storageOptions: {
     skipBackup: true,
     path: 'images'
@@ -36,26 +37,28 @@ let options = {
 export default class MyProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Me',
-    headerTitleStyle: {color: 'white'},
+    headerTitleStyle: { color: 'white' },
     headerStyle: { backgroundColor: Colors.themeColor },
     headerTintColor: 'white',
     headerRight: (
-      <View style={{paddingRight: 10}}>
+      <View style={{ paddingRight: 10 }}>
         <Icon
-          type='font-awesome'
-          name='gears'
-          color='white'
+          type="font-awesome"
+          name="gears"
+          color="white"
           size={15}
-          onPress={() => console.log('Settings') }/>
+          onPress={() => console.log('Settings')}
+        />
       </View>
     ),
     headerLeft: (
-      <View style={{paddingLeft: 10}}>
+      <View style={{ paddingLeft: 10 }}>
         <Icon
-          type='entypo'
-          name='menu'
-          color='white'
-          onPress={() => navigation.openDrawer()}/>
+          type="entypo"
+          name="menu"
+          color="white"
+          onPress={() => navigation.openDrawer()}
+        />
       </View>
     )
   })
@@ -73,36 +76,58 @@ export default class MyProfileScreen extends React.Component {
     const user_id = await AsyncStorage.getItem('current_user')
     const request = client()
     request
-      .then(api =>
-        api.get(`${API_ROOT}users/${user_id}`))
+      .then(api => api.get(`${API_ROOT}users/${user_id}`))
       .then(response => {
         return response.data
       })
       .then(data => {
-        this.setState({user: data})
+        this.setState({ user: data })
       })
       .catch(error => {
         console.log('Error:', error)
       })
   }
 
-  _onLayoutDidChange = (e) => {
+  _onLayoutDidChange = e => {
     const layout = e.nativeEvent.layout
-    this.setState({size: {width: layout.width, height: layout.height}})
+    this.setState({ size: { width: layout.width, height: layout.height } })
   }
 
-  handleChoosePhoto(){
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
+  async askPhotoPermission() {
+    const cameraStatus = await Permissions.askAsync(Permissions.CAMERA)
+    const cameraRollStatus = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+    return {
+      cameraStatus: cameraStatus.status,
+      cameraRollStatus: cameraRollStatus.status
+    }
+  }
+
+  async takePhoto() {
+    const { cameraStatus, cameraRollStatus } = await this.askPhotoPermission()
+    if (cameraStatus === 'granted' && cameraRollStatus === 'granted') {
+      // bug in expo, need to request for again
+      await Permissions.getAsync(Permissions.CAMERA)
+      let response = await ImagePicker.launchCameraAsync(options)
+      if (response.cancelled) {
         console.log('User cancelled image picker')
+      } else {
+        let source = { uri: response.uri }
+
+        this.setState({
+          avatarSource: source
+        })
       }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton)
-      }
-      else {
+    }
+  }
+
+  async choosePhotoFromCameraRoll() {
+    const { cameraStatus, cameraRollStatus } = await this.askPhotoPermission()
+    if (cameraRollStatus === 'granted') {
+      // bug in expo, need to request for again
+      let response = await ImagePicker.launchImageLibraryAsync(options)
+      if (response.cancelled) {
+        console.log('User cancelled image picker')
+      } else {
         let source = { uri: response.uri }
 
         // You can also display the image using data:
@@ -112,7 +137,51 @@ export default class MyProfileScreen extends React.Component {
           avatarSource: source
         })
       }
-    })
+    }
+  }
+
+  handleChoosePhoto() {
+    this.photoChoosingActionSheet.show()
+  }
+
+  renderActionSheetForPhoto() {
+    return (
+      <ActionSheet
+        ref={o => (this.photoChoosingActionSheet = o)}
+        title={'Select Avatar'}
+        options={['Take Photo...', 'Choose from Library...', 'Cancel']}
+        cancelButtonIndex={2}
+        onPress={index => {
+          if (index === 0) {
+            this.takePhoto()
+          } else if (index === 1) {
+            this.choosePhotoFromCameraRoll()
+          }
+        }}
+      />
+    )
+  }
+
+  renderAvatar() {}
+
+  renderPhotoButton() {
+    return (
+      <TouchableOpacity
+        style={styles.photoButtonStyle}
+        onPress={() => this.handleChoosePhoto()}>
+        <Icon
+          name="camera"
+          type="material-community"
+          color="#000"
+          size={20}
+          containerStyle={{
+            marginTop: 3,
+            padding: 0
+          }}
+        />
+        <Text style={{ color: '#000' }}>Edit</Text>
+      </TouchableOpacity>
+    )
   }
 
   render() {
@@ -121,36 +190,58 @@ export default class MyProfileScreen extends React.Component {
     if (user && user.uploads && user.uploads.length > 0) {
       return (
         <ScrollView>
-          <View style={{flex: 1}} onLayout={this._onLayoutDidChange}>
+          <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
             <Carousel
               autoplay={false}
               style={size}
-              onAnimateNextPage={(p) => console.log(p)}
-            >
-              { user.uploads.map(upload => {
+              onAnimateNextPage={p => console.log(p)}>
+              {user.uploads.map(upload => {
                 return (
                   <View style={size} key={upload.id}>
-                    <Image style={size} source={{uri: upload.url}} />
+                    <Image style={size} source={{ uri: upload.url }} />
                   </View>
-                )})
-              }
+                )
+              })}
             </Carousel>
           </View>
           <UserDescription user={user} />
-          <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
-            <Text>Show Image picker</Text>
-          </TouchableOpacity>
-          </ScrollView>
-        )
+
+          {this.renderPhotoButton()}
+          {this.renderActionSheetForPhoto()}
+        </ScrollView>
+      )
     } else {
       return (
         <View style={size}>
-          <Image style={size} source={{uri: defaultImage}} />
-          <TouchableOpacity onPress={this.handleChoosePhoto.bind(this)}>
-            <Text>Show Image picker</Text>
-          </TouchableOpacity>
+          <Image
+            style={[size, { resizeMode: 'cover' }]}
+            source={
+              this.state.avatarSource
+                ? this.state.avatarSource
+                : { uri: defaultImage }
+            }
+          />
+          {this.renderPhotoButton()}
+          {this.renderActionSheetForPhoto()}
         </View>
       )
     }
   }
 }
+
+const styles = StyleSheet.create({
+  photoButtonStyle: {
+    backgroundColor: '#eeeeeeaa',
+    width: 80,
+    borderTopLeftRadius: 5,
+    bottom: 0,
+    right: 0,
+    padding: 4,
+    paddingLeft: 8,
+    paddingRight: 8,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row'
+  }
+})

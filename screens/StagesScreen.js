@@ -5,7 +5,7 @@ import {
   Text,
   View,
   Image,
-  Dimensions,
+  Dimensions
 } from 'react-native'
 
 import { Icon, Button } from 'react-native-elements'
@@ -23,22 +23,23 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 export default class StagesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Stages',
-    headerTitleStyle: {color: 'white'},
+    headerTitleStyle: { color: 'white' },
     headerStyle: { backgroundColor: Colors.themeColor },
-    headerBackTitleStyle: {color: 'white'},
+    headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
     headerLeft: (
-      <View style={{paddingLeft: 10}}>
+      <View style={{ paddingLeft: 10 }}>
         <Icon
-          type='entypo'
-          name='menu'
-          color='white'
-          onPress={() => navigation.openDrawer()}/>
+          type="entypo"
+          name="menu"
+          color="white"
+          onPress={() => navigation.openDrawer()}
+        />
       </View>
     )
   })
 
-  constructor () {
+  constructor() {
     super()
     this.state = {
       selectedIndex: 2,
@@ -48,7 +49,7 @@ export default class StagesScreen extends React.Component {
   }
 
   updateIndex(selectedIndex) {
-    this.setState({selectedIndex})
+    this.setState({ selectedIndex })
   }
 
   componentWillMount() {
@@ -128,12 +129,10 @@ export default class StagesScreen extends React.Component {
                   <Card>
                     <CardSection custom={cardHeaderStyle}>
                       <View style={headerContainerStyle}>
-                        <Icon name='chevron-right' color='white'/>
-                        <Text style={headerTextStyle}>
-                          {stage.name}
-                        </Text>
+                        <Icon name="chevron-right" color="white" />
+                        <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      <Icon name='heart' type='evilicon' color='white'/>
+                      <Icon name="heart" type="evilicon" color="white" />
                     </CardSection>
 
                     <CardSection>
@@ -158,7 +157,8 @@ export default class StagesScreen extends React.Component {
                                   right: 2,
                                   fontWeight: 'bold'
                                 }}>
-                                {Math.floor(Math.random() * Math.floor(200))} likes
+                                {Math.floor(Math.random() * Math.floor(200))}{' '}
+                                likes
                               </Text>
                             </View>
                           </Lightbox>
@@ -166,48 +166,68 @@ export default class StagesScreen extends React.Component {
                       })}
                     </CardSection>
                     <CardSection>
-                      <View style={{flex: 1, flexDirection: 'row'}}>
-                          <View style={descriptionStyle}>
-                            <Icon name='users' type='font-awesome' color='green' size={10}/>
-                            <Icon name='place' color='black' size={15}/>
-                            <Icon name='mobile' type='font-awesome' color='black' size={17}/>
-                          </View>
-                          <View style={descriptionStyle}>
-                            <Text style={{color: 'green'}}>{Math.floor(Math.random() * Math.floor(1000))} Active Users</Text>
-                            <Text>{stage.business_address}</Text>
-                            <Text>{stage.phone}</Text>
-                          </View>
+                      <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <View style={descriptionStyle}>
+                          <Icon
+                            name="users"
+                            type="font-awesome"
+                            color="green"
+                            size={10}
+                          />
+                          <Icon name="place" color="black" size={15} />
+                          <Icon
+                            name="mobile"
+                            type="font-awesome"
+                            color="black"
+                            size={17}
+                          />
+                        </View>
+                        <View style={descriptionStyle}>
+                          <Text style={{ color: 'green' }}>
+                            {Math.floor(Math.random() * Math.floor(1000))}{' '}
+                            Active Users
+                          </Text>
+                          <Text>{stage.business_address}</Text>
+                          <Text>{stage.phone}</Text>
+                        </View>
                       </View>
                     </CardSection>
                     <CardSection>
-                      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around'}} >
-                          <Text> Works but ugly</Text>
-                          <Button
-                            outline
-                            small
-                            icon={{
-                              name: 'info',
-                              type: 'feather',
-                              color: Colors.themeColor.toString()
-                            }}
-                            title='Info'
-                            style={{width: 100}}
-                            color={Colors.themeColor.toString()}
-                            onPress={() => console.log('Get more info')}
-                          />
-                          <Button
-                            outline
-                            small
-                            icon={{
-                              name: 'message-circle',
-                              type: 'feather',
-                              color: Colors.themeColor.toString()
-                            }}
-                            title='Chat'
-                            style={{width: 100}}
-                            color={Colors.themeColor.toString()}
-                            onPress={() => this.handleGoToStageConversation(stage)}
-                          />
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'space-around'
+                        }}>
+                        <Text> Works but ugly</Text>
+                        <Button
+                          outline
+                          small
+                          icon={{
+                            name: 'info',
+                            type: 'feather',
+                            color: Colors.themeColor.toString()
+                          }}
+                          title="Info"
+                          style={{ width: 100 }}
+                          color={Colors.themeColor.toString()}
+                          onPress={() => console.log('Get more info')}
+                        />
+                        <Button
+                          outline
+                          small
+                          icon={{
+                            name: 'message-circle',
+                            type: 'feather',
+                            color: Colors.themeColor.toString()
+                          }}
+                          title="Chat"
+                          style={{ width: 100 }}
+                          color={Colors.themeColor}
+                          onPress={() =>
+                            this.handleGoToStageConversation(stage)
+                          }
+                        />
                       </View>
                     </CardSection>
                   </Card>

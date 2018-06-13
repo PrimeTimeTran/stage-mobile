@@ -3335,10 +3335,6 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-i18n-js@^3.0.3:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/i18n-js/-/i18n-js-3.0.8.tgz#3f15aa1bc63fdec9dd3c6feb48ffc89c51a00442"
-
 iconv-lite@0.4.19:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
@@ -5650,6 +5646,10 @@ react-native-actioncable@0.0.3:
   dependencies:
     actioncable "^5.0.0"
 
+react-native-actionsheet@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-actionsheet/-/react-native-actionsheet-2.4.2.tgz#6a00dd51a75ef2c8974312130e405af73191500f"
+
 react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
@@ -5711,16 +5711,6 @@ react-native-gifted-chat@^0.4.3:
     react-native-parsed-text "^0.0.20"
     shallowequal "1.0.2"
     uuid "3.2.1"
-
-react-native-i18n@^2.0.12:
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-2.0.12.tgz#4a503cc73b2fe55e8518f6d4a1340d3b449d8d1a"
-  dependencies:
-    i18n-js "^3.0.3"
-
-react-native-image-picker@^0.26.10:
-  version "0.26.10"
-  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.10.tgz#0bb9ab928984948c67aee0b9e64216bee007a9fc"
 
 react-native-invertible-scroll-view@^1.1.0:
   version "1.1.1"

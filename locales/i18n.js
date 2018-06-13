@@ -1,5 +1,5 @@
 import ReactNative from 'react-native'
-import I18n from 'react-native-i18n'
+import I18n from 'ex-react-native-i18n'
 
 import en from './en.json'
 import he from './he.json'
@@ -18,13 +18,18 @@ const currentLocale = I18n.currentLocale()
 I18n.locale = 'en'
 
 const getLanguage = async () => {
-  const choice = await Expo.Util.getCurrentLocaleAsync()
-  I18n.locale = choice.substr(0, 2)
-  I18n.initAsync()
+  try {
+    const choice = await Expo.Utils.getCurrentLocaleAsync()
+    I18n.locale = choice.substr(0, 2)
+    I18n.initAsync()
+  } catch (error) {
+    console.log('Unable to get current locale')
+  }
 }
 getLanguage()
 
-export const isRTL = currentLocale.indexOf('he') === 0 || currentLocale.indexOf('ar') === 0
+export const isRTL =
+  currentLocale.indexOf('he') === 0 || currentLocale.indexOf('ar') === 0
 
 ReactNative.I18nManager.allowRTL(isRTL)
 

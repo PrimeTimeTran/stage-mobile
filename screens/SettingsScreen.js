@@ -7,6 +7,6 @@ export default class SettingsScreen extends Component {
       <View>
         <Text> textInComponent </Text>
       </View>
-    );
+    )
   }
 }

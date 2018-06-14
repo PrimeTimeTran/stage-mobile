@@ -7,6 +7,6 @@ export default class StageScreen extends Component {
       <View>
         <Text> StageScreen </Text>
       </View>
-    );
+    )
   }
 }

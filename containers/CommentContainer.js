@@ -26,7 +26,7 @@ export default class CommentContainer extends Component {
       })
       .then(data => {
         let newArray = this.state.comments.slice()
-        newArray.push(data);
+        newArray.push(data)
         this.setState({comments: newArray})
       })
       .catch(error => {

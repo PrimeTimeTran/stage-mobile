@@ -90,8 +90,9 @@ class AuthScreen extends Component {
         <View>
           <Button
             title="Sign Out"
-            onPress={() => this.props.facebookLogOut()}
-          ><Text>Sign Out</Text></Button>
+            onPress={() => this.props.facebookLogOut()}>
+            <Text>Sign Out</Text>
+          </Button>
         </View>
       )
     }

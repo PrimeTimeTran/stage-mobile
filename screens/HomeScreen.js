@@ -141,7 +141,6 @@ export default class HomeScreen extends Component {
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost}/>
         { posts && posts.map(post => {
-          console.log('Post ', post);
             const { id, user, reactions_count, comments_count } = post
             return (
               <View key={id}>

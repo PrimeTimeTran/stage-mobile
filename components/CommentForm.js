@@ -34,11 +34,9 @@ export default class CommentForm extends Component {
               title='Comment'
               onPress={this.handleSubmit}
               backgroundColor={Colors.themeColor.toString()}
-              iconRight={{name: 'comment-outline', type: 'material-community'}}
-            >
+              iconRight={{name: 'comment-outline', type: 'material-community'}}>
               <Text>Submit</Text>
             </Button>
-
           </View>
         </CardSection>
       </View>

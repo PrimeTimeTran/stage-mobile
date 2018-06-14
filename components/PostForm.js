@@ -33,8 +33,7 @@ export default class PostForm extends Component {
                 title="Create Post"
                 outline
                 onPress={this.handleSubmit}
-                color={Colors.themeColor.toString()}
-              >
+                color={Colors.themeColor.toString()}>
               <Text>Submit</Text>
             </Button>
           </View>

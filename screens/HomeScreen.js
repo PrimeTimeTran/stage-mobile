@@ -184,15 +184,14 @@ export default class HomeScreen extends Component {
                         color={Colors.themeColor.toString()}
                         icon={{ type:"evilicon", name: 'like', color: Colors.themeColor.toString() }}
                         buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
-                        onPress={() => console.log("Liked")}
-                      >
+                        onPress={() => console.log("Liked")}>
+                        <Text>Like</Text>
                       </Button>
                       <Button
                         title="Comment"
                         color={Colors.themeColor.toString()}
                         icon={{ type:"evilicon", name: 'comment', color: Colors.themeColor.toString() }}
-                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}
-                      >
+                        buttonStyle={{ backgroundColor: 'white', paddingTop: 0, paddingBottom: 0 }}>
                         <Text>Comment</Text>
                       </Button>
                     </CardSection>

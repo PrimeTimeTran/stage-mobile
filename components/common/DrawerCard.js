@@ -25,7 +25,7 @@ export default class DrawerCard extends Component {
           <Icon type={type} name={name} color={Color.themeColor.toString()} size={20} />
           <Text style={textStyle}>{content}</Text>
         </View>
-  a   </CardSection>
+      </CardSection>
     )
   }
 }

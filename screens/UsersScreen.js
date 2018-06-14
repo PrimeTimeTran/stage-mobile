@@ -20,8 +20,9 @@ export default class UsersScreen extends Component {
       <Button
         title="Users"
         onPress={() => navigation.navigate('Users')}
-        color="white"
-      />
+        color="white">
+        <Text>Go</Text>
+      </Button>
     )
   })
 
@@ -64,7 +65,6 @@ export default class UsersScreen extends Component {
         </CardSection>
         { users &&
             users.map(user => {
-              console.log('User', user)
               return (
                 <CardSection key={user.id} custom={userContainerStyle}>
                   <View>

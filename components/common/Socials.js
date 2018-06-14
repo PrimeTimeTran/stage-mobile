@@ -8,10 +8,10 @@ class Socials extends Component {
     return (
       <CardSection>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-          { reactions_count &&
+          { reactions_count > 0 &&
               <Text style={{paddingLeft: 10}}>{reactions_count} Likes</Text>
           }
-          { comments_count &&
+          { comments_count > 0 &&
               <Text style={{paddingRight: 10}}>{comments_count} Comments</Text>
           }
         </View>

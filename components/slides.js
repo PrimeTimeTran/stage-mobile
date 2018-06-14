@@ -15,8 +15,9 @@ export default class Slides extends Component {
           raised
           title={t('welcome.join')}
           backgroundColor={Colors.themeColor.toString()}
-          onPress={this.props.onComplete}
-        />
+          onPress={this.props.onComplete}>
+            <Text>{t('welcome.join')}</Text>
+        </Button>
       )
     }
   }

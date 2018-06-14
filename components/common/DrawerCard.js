@@ -36,7 +36,7 @@ const styles = {
   cardBackgroundStyle: {
     marginTop: 20,
     borderBottomWidth: 1,
-    borderBottomColor: Color.themeColor,
+    borderBottomColor: Color.themeColor.lighten(0.7),
     paddingLeft: 30
   },
   cardStyle: {

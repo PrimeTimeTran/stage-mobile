@@ -18,5 +18,6 @@ export default {
   commentorColor: themeColor.darken(0.05),
   buttonColor: themeColor.darken(0.1),
   themeColor: themeColor,
+  lightTextColor: '#999',
   navigationHeaderBackgroundColor: themeColor
 }

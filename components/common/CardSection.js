@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import Colors from '../../constants/Colors'
 
 const CardSection = (props) => {
   return (
@@ -16,7 +17,7 @@ const styles = {
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    borderColor: '#ddd',
+    borderColor: '#dddddd99',
     position: 'relative'
   }
 }

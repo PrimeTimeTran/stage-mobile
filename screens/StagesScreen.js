@@ -5,7 +5,8 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native'
 
 import { Icon, Button } from 'react-native-elements'
@@ -18,24 +19,23 @@ import { Card, CardSection } from '../components/common'
 
 import client from '../utils/client'
 
+let SCREEN_WIDTH = Dimensions.get('window').width
+
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class StagesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Stages',
     headerTitleStyle: { color: 'white' },
-    headerStyle: { backgroundColor: Colors.themeColor },
+    headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
     headerLeft: (
-      <View style={{ paddingLeft: 10 }}>
-        <Icon
-          type="entypo"
-          name="menu"
-          color="white"
-          onPress={() => navigation.openDrawer()}
-        />
-      </View>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        onPress={() => navigation.openDrawer()}>
+        <Icon name="menu" type="material-community" color="white" size={26} />
+      </TouchableOpacity>
     )
   })
 
@@ -136,59 +136,97 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
 
                     <CardSection>
-                      {stage.uploads.map((upload, index) => {
-                        return (
-                          <Lightbox
-                            key={upload.id}
-                            swipeToDismiss={false}
-                            renderContent={() =>
-                              this.showStageUploads(stage, upload, index)
-                            }>
-                            <View>
-                              <Image
-                                style={{ height: 100, width: 100 }}
-                                source={{ uri: upload.url }}
-                              />
-                              <Text
+                      <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}>
+                        {stage.uploads.map((upload, index) => {
+                          return (
+                            <Lightbox
+                              key={upload.id}
+                              swipeToDismiss={false}
+                              renderContent={() =>
+                                this.showStageUploads(stage, upload, index)
+                              }>
+                              <View
                                 style={{
-                                  color: '#fff',
-                                  position: 'absolute',
-                                  bottom: 2,
-                                  right: 2,
-                                  fontWeight: 'bold'
+                                  marginRight: 10
                                 }}>
-                                {Math.floor(Math.random() * Math.floor(200))}{' '}
-                                likes
-                              </Text>
-                            </View>
-                          </Lightbox>
-                        )
-                      })}
+                                <Image
+                                  style={{
+                                    height: 100,
+                                    width: 100,
+                                    borderRadius: 5
+                                  }}
+                                  source={{ uri: upload.url }}
+                                />
+                                <View
+                                  style={{
+                                    backgroundColor: '#000000aa',
+                                    position: 'absolute',
+                                    height: 32,
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    borderBottomRightRadius: 5,
+                                    borderBottomLeftRadius: 5
+                                  }}>
+                                  <Text
+                                    style={{
+                                      color: '#fff',
+                                      position: 'absolute',
+                                      bottom: 8,
+                                      right: 8,
+                                      fontWeight: 'bold'
+                                    }}>
+                                    {Math.floor(
+                                      Math.random() * Math.floor(200)
+                                    )}{' '}
+                                    likes
+                                  </Text>
+                                </View>
+                              </View>
+                            </Lightbox>
+                          )
+                        })}
+                      </ScrollView>
                     </CardSection>
                     <CardSection>
-                      <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <View style={descriptionStyle}>
+                      <View style={{ flex: 1, flexDirection: 'column' }}>
+                        <View style={[descriptionStyle, { marginTop: 0 }]}>
                           <Icon
-                            name="users"
-                            type="font-awesome"
-                            color="green"
-                            size={10}
+                            name="account-multiple"
+                            type="material-community"
+                            color={Colors.themeColor.darken(0.2)}
+                            size={14}
                           />
-                          <Icon name="place" color="black" size={15} />
-                          <Icon
-                            name="mobile"
-                            type="font-awesome"
-                            color="black"
-                            size={17}
-                          />
-                        </View>
-                        <View style={descriptionStyle}>
-                          <Text style={{ color: 'green' }}>
+                          <Text
+                            style={{
+                              color: Colors.themeColor.darken(0.2).toString(),
+                              marginLeft: 10
+                            }}>
                             {Math.floor(Math.random() * Math.floor(1000))}{' '}
                             Active Users
                           </Text>
-                          <Text>{stage.business_address}</Text>
-                          <Text>{stage.phone}</Text>
+                        </View>
+                        <View style={descriptionStyle}>
+                          <Icon
+                            name="map-marker"
+                            color="black"
+                            size={14}
+                            type="material-community"
+                          />
+                          <Text style={{ marginLeft: 10 }}>
+                            {stage.business_address}
+                          </Text>
+                        </View>
+                        <View style={descriptionStyle}>
+                          <Icon
+                            name="cellphone"
+                            type="material-community"
+                            color="black"
+                            size={14}
+                          />
+                          <Text style={{ marginLeft: 10 }}>{stage.phone}</Text>
                         </View>
                       </View>
                     </CardSection>
@@ -197,36 +235,51 @@ export default class StagesScreen extends React.Component {
                         style={{
                           flex: 1,
                           flexDirection: 'row',
-                          justifyContent: 'space-around'
+                          justifyContent: 'space-around',
+                          alignItems: 'center',
+                          height: 20
                         }}>
-                        <Text> Works but ugly</Text>
                         <Button
-                          outline
-                          small
                           icon={{
-                            name: 'info',
-                            type: 'feather',
-                            color: Colors.themeColor.toString()
+                            name: 'information',
+                            type: 'material-community',
+                            color: Colors.themeColor
                           }}
                           title="Info"
-                          style={{ width: 100 }}
-                          color={Colors.themeColor.toString()}
+                          textStyle={{ fontSize: 16, fontWeight: 'bold' }}
+                          color={Colors.themeColor}
                           onPress={() => console.log('Get more info')}
+                          buttonStyle={{
+                            width: SCREEN_WIDTH / 2,
+                            backgroundColor: 'transparent',
+                            height: 45,
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            borderRadius: 5
+                          }}
                         />
                         <Button
-                          outline
                           small
                           icon={{
-                            name: 'message-circle',
-                            type: 'feather',
-                            color: Colors.themeColor.toString()
+                            name: 'message-processing',
+                            type: 'material-community',
+                            color: Colors.themeColor
                           }}
                           title="Chat"
-                          style={{ width: 100 }}
+                          textStyle={{ fontSize: 16, fontWeight: 'bold' }}
                           color={Colors.themeColor}
                           onPress={() =>
                             this.handleGoToStageConversation(stage)
                           }
+                          containerStyle={{ width: SCREEN_WIDTH / 2 }}
+                          buttonStyle={{
+                            width: SCREEN_WIDTH / 2,
+                            backgroundColor: 'transparent',
+                            height: 45,
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            borderRadius: 5
+                          }}
                         />
                       </View>
                     </CardSection>
@@ -247,7 +300,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: Colors.themeColor,
+    backgroundColor: Colors.themeColor.darken(0.2),
     position: 'relative'
   },
   headerContainerStyle: {
@@ -255,12 +308,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   headerTextStyle: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: '600',
     color: 'white'
   },
   descriptionStyle: {
-    justifyContent: 'space-between',
-    paddingLeft: 5
+    justifyContent: 'flex-start',
+    paddingLeft: 5,
+    flexDirection: 'row',
+    marginTop: 5
   }
 })

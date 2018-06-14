@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, View } from 'react-native'
+import { AsyncStorage, View, TouchableOpacity } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { sendMessage, setCallback } from '../utils/chat'
 
@@ -9,26 +9,32 @@ import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitleStyle: {color: 'white'},
+    headerTitleStyle: { color: 'white' },
     headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
-    headerTitle: (navigation.state.params.conversation_name || navigation.state.params.other_user_name ),
+    headerTitle:
+      navigation.state.params.conversation_name ||
+      navigation.state.params.other_user_name,
     headerRight: (
-      <View style={{ paddingRight: 10 }}>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        onPress={() =>
+          navigation.navigate('Users', {
+            conversation_id: navigation.state.params.conversation_id
+          })
+        }>
+        {' '}
+        navigation.openDrawer()}>
         <Icon
-          name='account-multiple'
-          type='material-community'
-          color='white'
+          name="account-multiple"
+          type="material-community"
+          color="white"
           size={28}
-          onPress={() =>
-            navigation.navigate('Users', {
-              conversation_id: navigation.state.params.conversation_id
-        })}/>
-      </View>
+        />
+      </TouchableOpacity>
     )
   })
 
@@ -58,7 +64,7 @@ export default class ConversationScreen extends Component {
     setCallback(this.onReceive)
   }
 
-  onReceive = (data) => {
+  onReceive = data => {
     const message = JSON.parse(data).gifted_chat
 
     if (message.user._id != this.state.userId) {
@@ -71,7 +77,7 @@ export default class ConversationScreen extends Component {
   onSend(messages = []) {
     const conversation_id = this.props.navigation.state.params.conversation_id
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
+      messages: GiftedChat.append(previousState.messages, messages)
     }))
     sendMessage({
       conversation_id: conversation_id,
@@ -86,21 +92,25 @@ export default class ConversationScreen extends Component {
 
   renderBubble = props => {
     let username = props.currentMessage.user.name
-    let color = this.getColor(username)
+    const [color, textColor] = this.getColor(username)
 
     if (this.state.userId == props.currentMessage.user._id) {
       return (
         <Bubble
           {...props}
-          position='right'
+          position="right"
           textStyle={{
             right: {
               color: 'white'
+            },
+            left: {
+              color: textColor
             }
           }}
           wrapperStyle={{
             left: {
-              backgroundColor: color
+              backgroundColor: color,
+              padding: 5
             }
           }}
         />
@@ -112,11 +122,15 @@ export default class ConversationScreen extends Component {
           textStyle={{
             right: {
               color: 'white'
+            },
+            left: {
+              color: textColor
             }
           }}
           wrapperStyle={{
             left: {
-              backgroundColor: color
+              backgroundColor: color,
+              padding: 5
             }
           }}
         />
@@ -135,34 +149,51 @@ export default class ConversationScreen extends Component {
       sumChars += username.charCodeAt(i)
     }
 
-    const colors = [
-      'rgb(225, 255, 163)', // carrot
-      'rgb(181, 226, 255)', // emerald
-      'rgb(252, 156, 206)', // peter river
-      'rgb(107, 183, 234)', // wisteria
-      'rgb(252, 212, 189)', // alizarin
-      'rgb(252, 255, 178)', // turquoise
-      'rgb(122, 153, 226)' // midnight blue
+    let colors = [
+      '#d5c0ab',
+      '#e8e8e8',
+      '#e9aaa8',
+      '#e3efda',
+      '#5596d6',
+      '#f7eccf',
+      '#a68cd6'
     ]
-    return colors[sumChars % colors.length]
+    let textColor = ['#444', '#444', '#444', '#444', '#fff', '#444', '#fff']
+    // const colors = [
+    //   'rgb(225, 255, 163)', // carrot
+    //   'rgb(181, 226, 255)', // emerald
+    //   'rgb(252, 156, 206)', // peter river
+    //   'rgb(107, 183, 234)', // wisteria
+    //   'rgb(252, 212, 189)', // alizarin
+    //   'rgb(252, 255, 178)', // turquoise
+    //   'rgb(122, 153, 226)' // midnight blue
+    // ]
+    let index = sumChars % colors.length
+    return [colors[index], textColor[index]]
   }
 
   handleAvatarClick = props => {
-    this.props.navigation.navigate('Profile', {user_id: props._id, name: props.name})
+    this.props.navigation.navigate('Profile', {
+      user_id: props._id,
+      name: props.name
+    })
   }
 
   render() {
     return (
-      <GiftedChat
-        onPressAvatar={props => this.handleAvatarClick(props)}
-        messages={this.state.messages}
-        onLongPress={this.onLongPress}
-        renderBubble={props => this.renderBubble(props)}
-        onSend={messages => this.onSend(messages)}
-        user={{
-          _id: this.state.userId
-        }}
-      />
+      <View style={{ backgroundColor: '#fff', flex: 1 }}>
+        <GiftedChat
+          style={{ backgroundColor: '#fff' }}
+          onPressAvatar={props => this.handleAvatarClick(props)}
+          messages={this.state.messages}
+          onLongPress={this.onLongPress}
+          renderBubble={props => this.renderBubble(props)}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: this.state.userId
+          }}
+        />
+      </View>
     )
   }
 }

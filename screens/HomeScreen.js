@@ -19,10 +19,15 @@ import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
 
 import PostForm from '../components/PostForm'
-import { Avatar, Card, CardSection, SentAt, Socials } from '../components/common'
+import {
+  Avatar,
+  Card,
+  CardSection,
+  SentAt,
+  Socials
+} from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
-
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
@@ -129,14 +134,14 @@ export default class HomeScreen extends Component {
 
     return (
       <ScrollView scrollEventThrottle={5}>
-        <PostForm onSubmit={this.onAddPost}/>
-        { posts && posts.map(post => {
-          console.log('Post ', post);
+        <PostForm onSubmit={this.onAddPost} />
+        {posts &&
+          posts.map(post => {
             const { id, user, reactions_count, comments_count } = post
             return (
               <View key={id}>
                 <Card>
-                  <CardSection custom={{borderBottomWidth: 0}}>
+                  <CardSection custom={{ borderBottomWidth: 0 }}>
                     <View style={headerContainerStyle}>
                       <TouchableOpacity
                         onPress={() => this.navigateProfile(user)}>
@@ -163,8 +168,10 @@ export default class HomeScreen extends Component {
                       </View>
                     </View>
                   </CardSection>
-                  <CardSection custom={{borderBottomWidth: 0, padding: 10}}>
-                    <Text numberOfLines={5} style={{fontSize: 13}}>{post.body}</Text>
+                  <CardSection custom={{ borderBottomWidth: 0, padding: 10 }}>
+                    <Text numberOfLines={5} style={{ fontSize: 13 }}>
+                      {post.body}
+                    </Text>
                   </CardSection>
                   {post.uploads &&
                     post.uploads.map((upload, index) => {
@@ -185,7 +192,10 @@ export default class HomeScreen extends Component {
                       }
                     })}
 
-                  <Socials reactions_count={reactions_count} comments_count={comments_count} />
+                  <Socials
+                    reactions_count={reactions_count}
+                    comments_count={comments_count}
+                  />
                   <CardSection
                     custom={{ justifyContent: 'space-around', padding: 0 }}>
                     <Button

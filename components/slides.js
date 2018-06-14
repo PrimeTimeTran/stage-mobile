@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { Text, ScrollView, Dimensions, ImageBackground, View } from 'react-native'
+import {
+  Text,
+  ScrollView,
+  Dimensions,
+  ImageBackground,
+  View
+} from 'react-native'
 import { Button } from 'react-native-elements'
 import { Card, CardSection } from './common'
 
@@ -11,12 +17,14 @@ export default class Slides extends Component {
   renderLastSlide(idx) {
     if (idx === this.props.data.length - 1) {
       return (
-        <Button
-          raised
-          title={t('welcome.join')}
-          backgroundColor={Colors.themeColor.toString()}
-          onPress={this.props.onComplete}
-        />
+        <View style={{ marginTop: 10 }}>
+          <Button
+            raised
+            title={t('welcome.join')}
+            backgroundColor={Colors.themeColor.toString()}
+            onPress={this.props.onComplete}
+          />
+        </View>
       )
     }
   }
@@ -33,20 +41,11 @@ export default class Slides extends Component {
         image = require('../assets/images/2.png')
       }
       return (
-        <ImageBackground
-          source={image}
-          key={slide.text}
-          style={slideStyle}
-        >
+        <ImageBackground source={image} key={slide.text} style={slideStyle}>
           <Card>
             <CardSection custom={cardStyle}>
-              <Text style={slideTextStyle}>
-                {slide.text}
-              </Text>
-              <View>
-              {this.renderLastSlide(idx)}
-              </View>
-
+              <Text style={slideTextStyle}>{slide.text}</Text>
+              <View>{this.renderLastSlide(idx)}</View>
             </CardSection>
           </Card>
         </ImageBackground>
@@ -60,8 +59,7 @@ export default class Slides extends Component {
         horizontal
         pagingEnabled
         style={{ flex: 1 }}
-        showsHorizontalScrollIndicator={false}
-      >
+        showsHorizontalScrollIndicator={false}>
         {this.renderSlides()}
       </ScrollView>
     )
@@ -87,6 +85,6 @@ const styles = {
     backgroundColor: 'white',
     borderColor: Colors.themeColor,
     borderWidth: 5,
-    borderBottomWidth: 5,
+    borderBottomWidth: 5
   }
 }

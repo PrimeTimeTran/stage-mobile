@@ -38,28 +38,26 @@ export default class MyProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Me',
     headerTitleStyle: { color: 'white' },
-    headerStyle: { backgroundColor: Colors.themeColor },
+    headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerTintColor: 'white',
     headerRight: (
-      <View style={{ paddingRight: 10 }}>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        onPress={() => console.log('Settings')}>
         <Icon
-          type="font-awesome"
-          name="gears"
+          type="material-community"
+          name="settings"
           color="white"
-          size={15}
-          onPress={() => console.log('Settings')}
+          size={26}
         />
-      </View>
+      </TouchableOpacity>
     ),
     headerLeft: (
-      <View style={{ paddingLeft: 10 }}>
-        <Icon
-          type="entypo"
-          name="menu"
-          color="white"
-          onPress={() => navigation.openDrawer()}
-        />
-      </View>
+      <TouchableOpacity
+        style={{ padding: 10 }}
+        onPress={() => navigation.openDrawer()}>
+        <Icon name="menu" type="material-community" color="white" size={26} />
+      </TouchableOpacity>
     )
   })
 

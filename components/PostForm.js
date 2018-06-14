@@ -40,7 +40,11 @@ export default class PostForm extends Component {
           onPress={this.handleSubmit}
           containerStyle={{ marginLeft: 0 }}
           buttonStyle={{ marginLeft: 0, width: '100%' }}
-          containerViewStyle={{ marginLeft: 10, marginRight: 10, marginBottom: 5 }}
+          containerViewStyle={{
+            marginLeft: 10,
+            marginRight: 10,
+            marginBottom: 10
+          }}
           iconRight={{ name: 'share', type: 'material-community' }}>
           <Text>Submit</Text>
         </Button>

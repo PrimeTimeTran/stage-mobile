@@ -44,12 +44,9 @@ export default class CommentContainer extends Component {
     return (
       <View>
         {comments && (
-          <View>
-            {' '}
-            {comments.map(comment => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
-          </View>
+          comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))
         )}
         <CommentForm onSubmit={this.onAddComment} />
       </View>

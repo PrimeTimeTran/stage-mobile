@@ -73,9 +73,13 @@ class AuthScreen extends Component {
   }
 
   async setUserData(data) {
+
+    // console.log('Db', db);
+    // console.log('Data', data.user);
+    // CurrentUser.put(data.user).
     const keys = [
       ['auth_token', JSON.stringify(data.token)],
-      ['current_user', JSON.stringify(data.user.id)]
+      ['current_user', JSON.stringify(data.user)]
     ]
     await AsyncStorage.multiSet(keys, key => {
       db.put({

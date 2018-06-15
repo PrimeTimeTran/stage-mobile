@@ -14,9 +14,13 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
+
+
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
+
+import db from '../utils/PouchDB'
 
 import PostForm from '../components/PostForm'
 import {
@@ -49,7 +53,16 @@ export default class HomeScreen extends Component {
     )
   })
 
-  state = { posts: [] }
+  state = {
+    posts: [],
+    currentUser: null
+  }
+
+  componentDidMount() {
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+    })
+  }
 
   componentWillMount() {
     const request = client()
@@ -98,17 +111,19 @@ export default class HomeScreen extends Component {
   }
 
   navigateProfile = async user => {
+    console.log('User', user)
     const { id } = user
-    const currentUser = await CurrentUser()
-
-    if (parseInt(currentUser) === id) {
-      this.props.navigation.navigate('MyProfile')
-    } else {
-      this.props.navigation.navigate('Profile', {
-        user_id: id,
-        first_name: user.first_name
-      })
-    }
+    CurrentUser.get().then(currentUser => {
+      console.log('CurrentUser: ', currentUser)
+      if (parseInt(currentUser.id) == id) {
+        this.props.navigation.navigate('MyProfile')
+      } else {
+        this.props.navigation.navigate('Profile', {
+          user_id: id,
+          first_name: user.first_name
+        })
+      }
+    })
   }
 
   onAddPost = body => {
@@ -210,7 +225,7 @@ export default class HomeScreen extends Component {
                         backgroundColor: 'transparent'
                       }}
                       onPress={() => console.log('Liked')}
-                    />
+                    ><Text>Like</Text></Button>
                     <Button
                       title="Comment"
                       color={Colors.buttonColor.toString()}
@@ -223,7 +238,7 @@ export default class HomeScreen extends Component {
                         backgroundColor: 'transparent'
                       }}
                       onPress={() => console.log('Comment')}
-                    />
+                      ><Text>Comment</Text></Button>
                   </CardSection>
                   <CommentContainer comments={post.comments} postId={id} />
                 </Card>

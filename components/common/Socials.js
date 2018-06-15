@@ -15,13 +15,13 @@ class Socials extends Component {
             justifyContent: 'space-between',
             marginBottom: 10
           }}>
-          {reactions_count && (
+          {reactions_count > 0 && (
             <Text
               style={{ paddingLeft: 10, color: Colors.lightTextColor }}>
               {reactions_count} Likes
             </Text>
           )}
-          {comments_count && (
+          {comments_count > 0 && (
             <Text
               style={{
                 paddingRight: 10,

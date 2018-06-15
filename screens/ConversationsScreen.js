@@ -197,8 +197,8 @@ export default class ConversationsScreen extends React.Component {
                           style={{ color: '#696969', fontSize: 13 }}>
                           {conversation.last_message.body}
                         </Text>
-                        {/* <View style={{ flexDirection: 'row' }}>
-                          {conversation.is_stage &&
+                        <View style={{ flexDirection: 'row' }}>
+                          {/* {conversation.is_stage &&
                             conversation.uploads &&
                             conversation.uploads.map((upload, index) => {
                               return (
@@ -235,8 +235,8 @@ export default class ConversationsScreen extends React.Component {
                                   </View>
                                 </Lightbox>
                               )
-                            })}
-                        </View> */}
+                            })} */}
+                        </View>
                       </View>
                     </View>
                   </TouchableOpacity>

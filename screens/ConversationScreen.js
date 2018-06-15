@@ -27,7 +27,6 @@ export default class ConversationScreen extends Component {
           })
         }>
         {' '}
-        navigation.openDrawer()}>
         <Icon
           name="account-multiple"
           type="material-community"

@@ -7,4 +7,11 @@ const get = () => {
   })
 }
 
-export default { get: get }
+const put = currentUser => {
+  console.log('Putting!', currentUser);
+  return db.put('current_user', currentUser).then((doc) => {
+    return doc.data
+  })
+}
+
+export default { get: get, put: put }

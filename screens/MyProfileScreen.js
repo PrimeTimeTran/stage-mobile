@@ -15,6 +15,7 @@ import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
+import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 
 import { UserDescription } from '../components/common'
@@ -66,24 +67,24 @@ export default class MyProfileScreen extends React.Component {
 
     this.state = {
       size: { width, height: 300 },
-      user: {}
+      currentUser: {}
     }
   }
 
   async componentWillMount() {
-    const user_id = await AsyncStorage.getItem('current_user')
-    const request = client()
-    request
-      .then(api => api.get(`${API_ROOT}users/${user_id}`))
-      .then(response => {
-        return response.data
-      })
-      .then(data => {
-        this.setState({ user: data })
-      })
-      .catch(error => {
-        console.log('Error:', error)
-      })
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+      const request = client()
+        request
+          .then(api => api.get(`${API_ROOT}users/${this.state.currentUser.id}`))
+          .then(response => {
+            this.setState({ currentUser: response.data })
+            return response.data
+          })
+          .catch(error => {
+            console.log('Error:', error)
+          })
+    })
   }
 
   _onLayoutDidChange = e => {
@@ -183,9 +184,10 @@ export default class MyProfileScreen extends React.Component {
   }
 
   render() {
-    const { size, user } = this.state
+    const { size, currentUser } = this.state
+    console.log('CurrentUser', currentUser);
 
-    if (user && user.uploads && user.uploads.length > 0) {
+    if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
       return (
         <ScrollView>
           <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
@@ -193,7 +195,7 @@ export default class MyProfileScreen extends React.Component {
               autoplay={false}
               style={size}
               onAnimateNextPage={p => console.log(p)}>
-              {user.uploads.map(upload => {
+              {currentUser.uploads.map(upload => {
                 return (
                   <View style={size} key={upload.id}>
                     <Image style={size} source={{ uri: upload.url }} />
@@ -202,7 +204,7 @@ export default class MyProfileScreen extends React.Component {
               })}
             </Carousel>
           </View>
-          <UserDescription user={user} />
+          <UserDescription user={currentUser} />
 
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}

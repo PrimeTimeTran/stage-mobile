@@ -7,12 +7,14 @@ import {
   Image,
   Text
 } from 'react-native'
-import { Avatar } from '../../components/common'
-import CurrentUser from '../../utils/CurrentUser'
+
 import Moment from 'moment'
 
-import { DrawerCard } from './DrawerCard'
 import Color from '../../constants/Colors'
+import CurrentUser from '../../utils/CurrentUser'
+
+import { Avatar } from '../../components/common'
+import { DrawerCard } from './DrawerCard'
 
 let { width, height } = Dimensions.get('window')
 class Drawer extends Component {
@@ -21,6 +23,9 @@ class Drawer extends Component {
   }
   onLogOut() {
     let keys = ['auth_token', 'current_user']
+
+    // TODO: How to properly remove user?
+    CurrentUser.remove()
     AsyncStorage.multiRemove(keys, err => {
       let { navigation } = this.props.descriptors.App
       navigation.closeDrawer()
@@ -29,7 +34,9 @@ class Drawer extends Component {
   }
 
   componentDidMount() {
+    console.log("TODO: Doesn't fetch the correct current_user even though it's set")
     CurrentUser.get().then(currentUser => {
+      console.log('Current User in Drawer: ', currentUser)
       this.setState({ currentUser })
     })
   }

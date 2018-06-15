@@ -73,10 +73,8 @@ class AuthScreen extends Component {
   }
 
   async setUserData(data) {
-
-    // console.log('Db', db);
-    // console.log('Data', data.user);
-    // CurrentUser.put(data.user).
+    console.log('TODO: Fix this so it sets the global current_user')
+    console.log('Data: ', data)
     const keys = [
       ['auth_token', JSON.stringify(data.token)],
       ['current_user', JSON.stringify(data.user)]

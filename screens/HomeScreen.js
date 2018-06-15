@@ -14,13 +14,9 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
-
-
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
-
-import db from '../utils/PouchDB'
 
 import PostForm from '../components/PostForm'
 import {
@@ -111,7 +107,6 @@ export default class HomeScreen extends Component {
   }
 
   navigateProfile = async user => {
-    console.log('User', user)
     const { id } = user
     CurrentUser.get().then(currentUser => {
       console.log('CurrentUser: ', currentUser)

@@ -55,39 +55,51 @@ export default class UsersScreen extends Component {
     const { userContainerStyle, avatarStyle } = styles
     return (
       <ScrollView>
+        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
         {users &&
           users.map(user => {
             return (
-              <CardSection key={user.id} custom={userContainerStyle}>
-                <View style={{ marginRight: 15 }}>
-                  <Avatar
-                    url={user.avatar_url}
-                    custom={[avatarStyle, { marginTop: 5 }]}
-                  />
-                </View>
-                <View style={{ padding: 5, marginRight: 10 }}>
-                  <Text style={{ color: Colors.themeColor, fontSize: 20 }}>
-                    {[user.full_name, user.age].filter(n => n).join(', ')}
-                  </Text>
-                  {/* <Icon type="evilicon" name='like' /> */}
-                  <Text
-                    style={{
-                      marginRight: 15,
-                      marginBottom: 10,
-                      marginTop: 2,
-                      color: '#999'
-                    }}>
-                    {user.occupation}
-                  </Text>
-                  <View>
-                    <Text numberOfLines={2} style={{ marginRight: 70 }}>
-                      {user.description}
-                    </Text>
-                  </View>
-                </View>
-              </CardSection>
+              <View style={{ alignItems: 'center' }}>
+                <Avatar
+                  url={user.avatar_url}
+                  custom={[avatarStyle, { marginTop: 5 }]}
+                />
+                <Text>{user.first_name}</Text>
+                <Text>{user.age}</Text>
+              </View>
             )
+
+            // return (
+            //   <CardSection key={user.id} custom={userContainerStyle}>
+            //     <View style={{ marginRight: 15 }}>
+            //       <Avatar
+            //         url={user.avatar_url}
+            //         custom={[avatarStyle, { marginTop: 5 }]}
+            //       />
+            //     </View>
+            //     <View style={{ padding: 5, marginRight: 10 }}>
+            //       <Text style={{ color: Colors.themeColor, fontSize: 20 }}>
+            //         {[user.full_name, user.age].filter(n => n).join(', ')}
+            //       </Text>
+            //       <Text
+            //         style={{
+            //           marginRight: 15,
+            //           marginBottom: 10,
+            //           marginTop: 2,
+            //           color: '#999'
+            //         }}>
+            //         {user.occupation}
+            //       </Text>
+            //       <View>
+            //         <Text numberOfLines={2} style={{ marginRight: 70 }}>
+            //           {user.description}
+            //         </Text>
+            //       </View>
+            //     </View>
+            //   </CardSection>
+            // )
           })}
+          </View>
       </ScrollView>
     )
   }
@@ -101,8 +113,8 @@ const styles = {
   },
   avatarStyle: {
     padding: 5,
-    height: 50,
-    width: 50,
-    borderRadius: 25
+    height: 90,
+    width: 90,
+    borderRadius: 50
   }
 }

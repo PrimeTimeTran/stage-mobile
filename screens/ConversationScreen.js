@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, View, TouchableOpacity } from 'react-native'
+import { AsyncStorage, View, TouchableOpacity, Text } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { sendMessage, setCallback } from '../utils/chat'
 
@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements'
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
+import CurrentUser from '../utils/CurrentUser'
 
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -26,22 +27,23 @@ export default class ConversationScreen extends Component {
             conversation_id: navigation.state.params.conversation_id
           })
         }>
-        {' '}
-        <Icon
+        {/* <Icon
           name="account-multiple"
           type="material-community"
           color="white"
           size={28}
-        />
+        /><Text>Go</Text> */}
       </TouchableOpacity>
     )
   })
 
-  state = { messages: [], userId: '' }
+  state = { messages: [], currentUser: null }
 
   async componentWillMount() {
-    const userId = await AsyncStorage.getItem('current_user')
-    this.setState({ userId })
+    CurrentUser.get().then(currentUser => {
+      console.log('Current User in CurrentUser utils is: ', currentUser);
+      this.setState({ currentUser })
+    })
     const conversation_id = this.props.navigation.state.params.conversation_id
 
     const request = client()
@@ -66,7 +68,7 @@ export default class ConversationScreen extends Component {
   onReceive = data => {
     const message = JSON.parse(data).gifted_chat
 
-    if (message.user._id != this.state.userId) {
+    if (message.user._id != this.state.currentUser.id) {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }))
@@ -93,7 +95,10 @@ export default class ConversationScreen extends Component {
     let username = props.currentMessage.user.name
     const [color, textColor] = this.getColor(username)
 
-    if (this.state.userId == props.currentMessage.user._id) {
+    console.log('Current User Id in RenderBubble', this.state.currentUser)
+    console.log('Props user Id in RenderBubble', props.currentMessage.user._id)
+
+    if (this.state.currentUser.id == props.currentMessage.user._id) {
       return (
         <Bubble
           {...props}

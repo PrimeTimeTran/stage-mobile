@@ -18,9 +18,9 @@ if (Platform.OS == 'ios') {
   // Christine's Token
   hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4ODI2NjR9.-3gL9QuAuM0UGbanEr8RtruvLK-WGHYq7PeyQMLwrR8OiDYH4QBzJiNvdCvePRSKJF1HXeLd5Fl-CycFP1FjFw'
 } else {
-  backendHost = '192.168.1.218:3000'
+  backendHost = '192.168.1.6:3000'
   // Loi's token
-  hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjAxMjgwODh9.F2iiLnBJ6o2fbhjsqQXc-K18gLNZgVZdYv9i5EeGWByN1R_cf9p_V13E3Du5PHMKC-Gd5Fb38cHhlgBwUBqW5g'
+  hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjA3MDg4MTl9.fLoOpqCnWH0UPp-sjXak33ktOESkJo_vZU6fsRcKal5J4HgoI4YtiBwy8qt1lsAebonRj_zXd8TXBBhVYxsEsw'
 }
 
 socketType = 'ws'

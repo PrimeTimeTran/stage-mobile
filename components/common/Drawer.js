@@ -34,9 +34,7 @@ class Drawer extends Component {
   }
 
   componentDidMount() {
-    console.log("TODO: Doesn't fetch the correct current_user even though it's set")
     CurrentUser.get().then(currentUser => {
-      console.log('Current User in Drawer: ', currentUser)
       this.setState({ currentUser })
     })
   }

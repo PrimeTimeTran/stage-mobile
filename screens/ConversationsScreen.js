@@ -19,7 +19,6 @@ import client from '../utils/client'
 
 import { Avatar, SentAt } from '../components/common'
 
-
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class ConversationsScreen extends React.Component {
@@ -147,14 +146,14 @@ export default class ConversationsScreen extends React.Component {
                               <Text
                                 style={[
                                   stageInfoStyle,
-                                  { marginRight: 5, marginTop: 0 }
+                                  { marginRight: 5, marginTop: 0, color: 'green' }
                                 ]}>
                                 {Math.floor(Math.random() * Math.floor(1000))}
                               </Text>
                               <Icon
                                 name="account-multiple"
                                 type="material-community"
-                                color={Colors.activeStageColor.toString()}
+                                color='green'
                                 style={{ borderWidth: 1, borderColor: '#c00' }}
                                 size={14}
                               />
@@ -197,8 +196,8 @@ export default class ConversationsScreen extends React.Component {
                           style={{ color: '#696969', fontSize: 13 }}>
                           {conversation.last_message.body}
                         </Text>
-                        <View style={{ flexDirection: 'row' }}>
-                          {/* {conversation.is_stage &&
+                        {/* <View style={{ flexDirection: 'row' }}>
+                          {conversation.is_stage &&
                             conversation.uploads &&
                             conversation.uploads.map((upload, index) => {
                               return (
@@ -235,8 +234,8 @@ export default class ConversationsScreen extends React.Component {
                                   </View>
                                 </Lightbox>
                               )
-                            })} */}
-                        </View>
+                            })}
+                        </View> */}
                       </View>
                     </View>
                   </TouchableOpacity>

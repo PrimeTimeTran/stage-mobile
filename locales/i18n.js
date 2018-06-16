@@ -26,6 +26,7 @@ const getLanguage = async () => {
     console.log('Unable to get current locale')
   }
 }
+
 getLanguage()
 
 export const isRTL =

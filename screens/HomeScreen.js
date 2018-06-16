@@ -145,6 +145,48 @@ export default class HomeScreen extends Component {
     return (
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost} />
+        <CardSection
+          custom={{ justifyContent: 'space-around', padding: 0, marginBottom: 10 }}>
+          <Button
+            title="Photo"
+            color={Colors.buttonColor.toString()}
+            fontSize={14}
+            icon={{
+              name: 'thumb-up',
+              color: Colors.buttonColor.toString()
+            }}
+            buttonStyle={{
+              backgroundColor: 'transparent'
+            }}
+            onPress={() => console.log('Liked')}
+          ><Text>Photo</Text></Button>
+          <Button
+            title="Video"
+            color={Colors.buttonColor.toString()}
+            fontSize={14}
+            icon={{
+              name: 'comment',
+              color: Colors.buttonColor.toString()
+            }}
+            buttonStyle={{
+              backgroundColor: 'transparent'
+            }}
+            onPress={() => console.log('Comment')}
+            ><Text>Video</Text></Button>
+          <Button
+            title="Comment"
+            color={Colors.buttonColor.toString()}
+            fontSize={14}
+            icon={{
+              name: 'comment',
+              color: Colors.buttonColor.toString()
+            }}
+            buttonStyle={{
+              backgroundColor: 'transparent'
+            }}
+            onPress={() => console.log('Comment')}
+            ><Text>Comment</Text></Button>
+        </CardSection>
         {posts &&
           posts.map(post => {
             const { id, user, reactions_count, comments_count } = post

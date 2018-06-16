@@ -23,3 +23,5 @@ function setCallback(fn) {
 }
 
 export { sendMessage, setCallback }
+
+// Create a class, export it, let the class wrap the methods.

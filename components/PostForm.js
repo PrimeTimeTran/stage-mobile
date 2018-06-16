@@ -3,7 +3,6 @@ import { View, Text } from 'react-native'
 
 import { Button, FormInput } from 'react-native-elements'
 import Colors from '../constants/Colors'
-import { CardSection } from './common'
 export default class PostForm extends Component {
   state = { body: '' }
 
@@ -18,7 +17,7 @@ export default class PostForm extends Component {
 
   render() {
     return (
-      <View style={{ paddingTop: 10 }}>
+      <View style={{ paddingTop: 10, backgroundColor: 'white' }}>
         <FormInput
           value={this.state.body}
           inputStyle={{ fontSize: 16 }}
@@ -29,9 +28,10 @@ export default class PostForm extends Component {
             marginLeft: 10,
             marginRight: 10,
             marginBottom: 10,
-            paddingLeft: 10
+            paddingLeft: 10,
+            backgroundColor: 'white'
           }}
-          inputStyle={{ color: 'white' }}
+          inputStyle={{ color: Colors.buttonColor.toString() }}
         />
         <Button
           title="Create Post"
@@ -41,8 +41,7 @@ export default class PostForm extends Component {
           buttonStyle={{ marginLeft: 0, width: '100%' }}
           containerViewStyle={{
             marginLeft: 10,
-            marginRight: 10,
-            marginBottom: 10
+            marginRight: 10
           }}
           iconRight={{ name: 'share', type: 'material-community' }}>
           <Text>Submit</Text>

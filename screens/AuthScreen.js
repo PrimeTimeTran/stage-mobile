@@ -73,8 +73,8 @@ class AuthScreen extends Component {
   }
 
   async setUserData(data) {
-    console.log('TODO: Fix this so it sets the global current_user')
-    console.log('Data: ', data)
+    console.log('TODO: Rerender Drawer component after user creation/login. Will show no value in the avatar area')
+
     const keys = [
       ['auth_token', JSON.stringify(data.token)],
       ['current_user', JSON.stringify(data.user)]

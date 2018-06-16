@@ -13,8 +13,9 @@ const put = currentUser => {
 }
 
 const remove = () => {
-  console.log('DB', db);
-  return db.remove('current_user')
+  db.get('current_user').then(function (doc) {
+    return db.remove(doc)
+  })
 }
 
 export default { get: get, put: put, remove: remove }

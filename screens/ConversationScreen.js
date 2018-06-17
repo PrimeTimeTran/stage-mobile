@@ -27,12 +27,12 @@ export default class ConversationScreen extends Component {
             conversation_id: navigation.state.params.conversation_id
           })
         }>
-        {/* <Icon
+        <Icon
           name="account-multiple"
           type="material-community"
           color="white"
           size={28}
-        /><Text>Go</Text> */}
+        />
       </TouchableOpacity>
     )
   })
@@ -41,7 +41,6 @@ export default class ConversationScreen extends Component {
 
   async componentWillMount() {
     CurrentUser.get().then(currentUser => {
-      console.log('Current User in CurrentUser utils is: ', currentUser);
       this.setState({ currentUser })
     })
     const conversation_id = this.props.navigation.state.params.conversation_id
@@ -94,9 +93,6 @@ export default class ConversationScreen extends Component {
   renderBubble = props => {
     let username = props.currentMessage.user.name
     const [color, textColor] = this.getColor(username)
-
-    console.log('Current User Id in RenderBubble', this.state.currentUser)
-    console.log('Props user Id in RenderBubble', props.currentMessage.user._id)
 
     if (this.state.currentUser.id == props.currentMessage.user._id) {
       return (

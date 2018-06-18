@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 
 import { Icon, Button } from 'react-native-elements'
+import call from 'react-native-phone-call'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
@@ -73,6 +74,15 @@ export default class StagesScreen extends React.Component {
       stages: true,
       conversation_name: stage.name
     })
+  }
+
+  handleCallStage = phone => {
+    console.log('Phone Number: ', phone)
+    const args = {
+      number: '0964359305',
+      prompt: false
+    }
+    call(args).catch(console.error)
   }
 
   showStageUploads(stage, upload, index) {
@@ -226,7 +236,7 @@ export default class StagesScreen extends React.Component {
                             color="black"
                             size={14}
                           />
-                          <Text style={{ marginLeft: 10 }}>{stage.phone}</Text>
+                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.handleCallStage(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
                         </View>
                       </View>
                     </CardSection>

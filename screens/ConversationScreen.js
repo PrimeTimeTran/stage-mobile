@@ -190,7 +190,7 @@ export default class ConversationScreen extends Component {
           renderBubble={props => this.renderBubble(props)}
           onSend={messages => this.onSend(messages)}
           user={{
-            _id: this.state.userId
+            _id: this.state.currentUser.id
           }}
         />
       </View>

@@ -21,21 +21,21 @@ class Drawer extends Component {
   state = {
     currentUser: null
   }
+
+  componentDidMount() {
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+    })
+  }
+
   onLogOut() {
     let keys = ['auth_token', 'current_user']
 
-    // TODO: How to properly remove user?
     CurrentUser.remove()
     AsyncStorage.multiRemove(keys, err => {
       let { navigation } = this.props.descriptors.App
       navigation.closeDrawer()
       navigation.navigate('Welcome')
-    })
-  }
-
-  componentDidMount() {
-    CurrentUser.get().then(currentUser => {
-      this.setState({ currentUser })
     })
   }
 
@@ -54,6 +54,10 @@ class Drawer extends Component {
       return Moment(this.state.currentUser.created_at).format('MMM YYYY')
     }
     return ''
+  }
+
+  handleEditProfile = () => {
+    this.props.navigation.navigate('EditProfile')
   }
 
   render() {
@@ -88,7 +92,9 @@ class Drawer extends Component {
           )}
         </View>
         <View style={drawerContentStyle}>
-          <DrawerCard type="entypo" name="user" content="Profile" />
+          <TouchableOpacity onPress={this.handleEditProfile}>
+            <DrawerCard type="entypo" name="user" content="Profile" />
+          </TouchableOpacity>
           <DrawerCard type="entypo" name="users" content="Friends" />
           <DrawerCard
             type="material-icon"

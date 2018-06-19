@@ -8,6 +8,7 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon'
 import { Drawer } from '../components/common'
+import EditProfileScreen from '../screens/EditProfileScreen'
 
 import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthScreen from '../screens/AuthScreen'
@@ -133,9 +134,14 @@ const MainDrawerNavigation = createBottomTabNavigator(
   }
 )
 
+const EditProfileStack = createStackNavigator({
+  EditProfile: EditProfileScreen
+})
+
 const ApplicationDrawer = createDrawerNavigator(
   {
-    App: MainDrawerNavigation
+    App: MainDrawerNavigation,
+    EditProfile: EditProfileStack
   },
   {
     contentComponent: props => {

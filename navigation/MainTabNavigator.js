@@ -15,6 +15,7 @@ import AuthScreen from '../screens/AuthScreen'
 
 import ConversationsScreen from '../screens/ConversationsScreen'
 import ConversationScreen from '../screens/ConversationScreen'
+import SearchConversationsScreen from '../screens/SearchConversationsScreen'
 
 import HomeScreen from '../screens/HomeScreen'
 import UsersScreen from '../screens/UsersScreen'
@@ -27,13 +28,46 @@ import MyProfileScreen from '../screens/MyProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 
 import Colors from '../constants/Colors'
+import CardStackStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator'
 
-const ConversationsStack = createStackNavigator({
-  Conversations: ConversationsScreen,
-  Conversation: ConversationScreen,
-  Users: UsersScreen,
-  Profile: ProfileScreen
-})
+let ConversationsTransitionConfiguration = () => {
+  return {
+    screenInterpolator: sceneProps => {
+      const { position, scene } = sceneProps
+      const { index, route } = scene
+      const params = route.params || {}
+      let transition = params.transition || 'default'
+      const last = sceneProps.scenes[sceneProps.scenes.length - 1];
+
+      if (last.route.routeName === 'SearchConversations') {
+        return CardStackStyleInterpolator.forFade(sceneProps);
+      }
+
+      return CardStackStyleInterpolator.forHorizontal(sceneProps)
+    }
+  }
+}
+
+const ConversationsStack = createStackNavigator(
+  {
+    Conversations: {
+      screen: ConversationsScreen,
+      navigationOptions: {
+        title: 'Messages'
+      }
+    },
+    SearchConversations: SearchConversationsScreen,
+    Conversation: ConversationScreen,
+    Users: UsersScreen,
+    Profile: ProfileScreen
+  },
+  {
+    transitionConfig: ConversationsTransitionConfiguration,
+    cardStyle: {
+      backgroundColor: 'transparent'
+    }
+  }
+)
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
@@ -58,7 +92,7 @@ HomeStack.navigationOptions = {
       focused={focused}
       active={focused}
       style={{ color: '#000' }}
-      name='newspaper'
+      name="newspaper"
     />
   )
 }
@@ -74,10 +108,7 @@ StagesStack.navigationOptions = ({ navigation }) => {
   return {
     tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Stages</Text>,
     tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-        focused={focused}
-        name='stadium'
-      />
+      <TabBarIcon focused={focused} name="stadium" />
     ),
     tabBarVisible: navigation.state.index == 0 ? true : false
   }
@@ -92,10 +123,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
   return {
     tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Profile</Text>,
     tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-        focused={focused}
-        name={'account-box'}
-      />
+      <TabBarIcon focused={focused} name={'account-box'} />
     ),
     tabBarVisible: navigation.state.index == 0 ? true : false
   }
@@ -160,6 +188,7 @@ ApplicationDrawer.navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   tabBarLabelStyle: {
     color: '#fff',
+    textAlign: 'center',
     marginTop: 0,
     fontSize: 12
   }

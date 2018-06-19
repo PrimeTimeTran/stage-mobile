@@ -17,6 +17,7 @@ export default {
   activeStageColor: themeColor.darken(0.05),
   commentorColor: themeColor.darken(0.05),
   buttonColor: themeColor.darken(0.1),
+  highlightedColor: '#4da567',
   themeColor: themeColor,
   lightTextColor: '#999',
   navigationHeaderBackgroundColor: themeColor

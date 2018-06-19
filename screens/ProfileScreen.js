@@ -57,7 +57,7 @@ export default class ProfileScreen extends React.Component {
     const { size, user } = this.state
     if (user && user.uploads && user.uploads.length > 0) {
       return (
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: '#fff' }}>
           <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
             <Carousel
               autoplay={false}

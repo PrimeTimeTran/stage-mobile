@@ -162,15 +162,6 @@ export default class ConversationScreen extends Component {
       '#a68cd6'
     ]
     let textColor = ['#444', '#444', '#444', '#444', '#fff', '#444', '#fff']
-    // const colors = [
-    //   'rgb(225, 255, 163)', // carrot
-    //   'rgb(181, 226, 255)', // emerald
-    //   'rgb(252, 156, 206)', // peter river
-    //   'rgb(107, 183, 234)', // wisteria
-    //   'rgb(252, 212, 189)', // alizarin
-    //   'rgb(252, 255, 178)', // turquoise
-    //   'rgb(122, 153, 226)' // midnight blue
-    // ]
     let index = sumChars % colors.length
     return [colors[index], textColor[index]]
   }

@@ -29,7 +29,7 @@
     "react-native-phone-call": "^1.0.6",
     "react-native-scripts": "^1.14.0",
     "react-native-video": "^2.1.1",
-    "react-navigation": "2.0.0",
+    "react-navigation": "2.3.0",
     "react-redux": "^5.0.7",
     "redux-thunk": "^2.3.0"
   },

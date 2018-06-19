@@ -7,7 +7,9 @@ import {
   View,
   Dimensions,
   Platform,
-  Button
+  Button,
+  Modal,
+  TextInput
 } from 'react-native'
 
 import { Icon, SearchBar } from 'react-native-elements'
@@ -15,7 +17,6 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 import SearchHeader from '../components/SearchHeader'
-import SearchConversationsScreen from './SearchConversationsScreen'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
@@ -30,43 +31,41 @@ const isIphoneX = () => {
   return Platform.OS === 'ios' && (height === 812 || width === 812)
 }
 
-export default class ConversationsScreen extends React.Component {
+export default class SearchConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
+    header: () => {
+      return (
+        <SearchHeader
+          navigation={navigation}
+          performSearch={text => navigation.state.params.performSearch(text)}
+        />
+      )
+    },
     headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerTitleStyle: { color: 'white' },
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white',
-    headerRight: (
-      <TouchableOpacity
-        style={{ padding: 10, paddingLeft: 10 }}
-        onPress={() => {
-          navigation.navigate('SearchConversations', {
-            transition: 'cross_fade'
-          })
-        }}>
-        <Icon
-          type="material-community"
-          name="magnify"
-          color="white"
-          size={26}
-        />
-      </TouchableOpacity>
-    ),
-    headerLeft: (
-      <TouchableOpacity
-        style={{ padding: 10 }}
-        onPress={() => navigation.openDrawer()}>
-        <Icon type="material-community" name="menu" size={26} color="white" />
-      </TouchableOpacity>
-    )
+    headerMode: 'none',
+    headerTitle: false,
+    headerLeft: null,
+    headerRight: null
   })
 
-  state = { conversations: [] }
+  state = { conversations: [], performedSearch: false }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.props.navigation.setParams({
+      performSearch: text => this.search(text)
+    })
+  }
+
+  search(text) {
     const request = client()
+    this.setState({ performedSearch: true })
     request
-      .then(api => api.get(`${API_ROOT}conversations`))
+      .then(api =>
+        api.get(`${API_ROOT}conversations`, { params: { keyword: text } })
+      )
       .then(response => {
         return response.data
       })
@@ -129,9 +128,25 @@ export default class ConversationsScreen extends React.Component {
 
     if (conversations) {
       return (
-        <View style={{ backgroundColor: '#fff', flex: 1 }}>
-          <ScrollView>
-            {conversations &&
+        <View style={{ backgroundColor: 'transparent', flex: 1 }}>
+          <ScrollView
+            style={{
+              backgroundColor: this.state.performedSearch ? '#fff' : '#000000cc'
+            }}>
+            {conversations.length == 0 &&
+              this.state.performedSearch && (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100%',
+                    height: 200
+                  }}>
+                  <Text>No Messages found</Text>
+                </View>
+              )}
+            {conversations.length > 0 &&
               conversations.map(conversation => {
                 const { name, avatar_url } = conversation.last_message_from_user
                 return (

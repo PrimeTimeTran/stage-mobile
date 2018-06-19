@@ -65,9 +65,11 @@ export default class ConversationScreen extends Component {
   }
 
   onReceive = data => {
+    const conversationId = this.props.navigation.state.params.id
     const message = JSON.parse(data).gifted_chat
+    const isSameConversation = message.conversation_id == conversationId
 
-    if (message.user._id != this.state.currentUser.id) {
+    if (message.user._id != this.state.currentUser.id && isSameConversation) {
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }))
@@ -199,7 +201,9 @@ export default class ConversationScreen extends Component {
         </View>
       )
     } else {
-      <Text>Loading</Text>
+      return (
+        <Text>Loading</Text>
+      )
     }
   }
 }

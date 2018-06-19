@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import { sendMessage, setCallback } from '../utils/chat'
 
@@ -180,20 +180,26 @@ export default class ConversationScreen extends Component {
   }
 
   render() {
-    return (
-      <View style={{ backgroundColor: '#fff', flex: 1 }}>
-        <GiftedChat
-          style={{ backgroundColor: '#fff' }}
-          onPressAvatar={props => this.handleAvatarClick(props)}
-          messages={this.state.messages}
-          onLongPress={this.onLongPress}
-          renderBubble={props => this.renderBubble(props)}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: this.state.currentUser.id
-          }}
-        />
-      </View>
-    )
+    const { currentUser } = this.state
+
+    if (currentUser) {
+      return (
+        <View style={{ backgroundColor: '#fff', flex: 1 }}>
+          <GiftedChat
+            style={{ backgroundColor: '#fff' }}
+            onPressAvatar={props => this.handleAvatarClick(props)}
+            messages={this.state.messages}
+            onLongPress={this.onLongPress}
+            renderBubble={props => this.renderBubble(props)}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: this.state.currentUser.id
+            }}
+          />
+        </View>
+      )
+    } else {
+      <Text>Loading</Text>
+    }
   }
 }

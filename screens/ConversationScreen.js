@@ -65,7 +65,6 @@ export default class ConversationScreen extends Component {
   }
 
   onReceive = data => {
-    console.log('Data is ', data)
     const conversationId = this.props.navigation.state.params.conversation_id
     const message = JSON.parse(data).gifted_chat
     const isSameConversation = JSON.parse(data).conversation_id == conversationId
@@ -194,7 +193,16 @@ export default class ConversationScreen extends Component {
       )
     } else {
       return (
-        <Text>Loading</Text>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 200
+          }}>
+          <Text>Loading</Text>
+        </View>
       )
     }
   }

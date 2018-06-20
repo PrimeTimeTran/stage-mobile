@@ -6,13 +6,10 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
-  Platform,
-  Button,
-  Modal,
-  TextInput
+  Platform
 } from 'react-native'
 
-import { Icon, SearchBar } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
@@ -25,11 +22,6 @@ import client from '../utils/client'
 import { Avatar, SentAt } from '../components/common'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
-
-const isIphoneX = () => {
-  const { height, width } = Dimensions.get('window')
-  return Platform.OS === 'ios' && (height === 812 || width === 812)
-}
 
 export default class SearchConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({

@@ -18,4 +18,8 @@ const remove = () => {
   })
 }
 
-export default { get: get, put: put, remove: remove }
+export default {
+  get: get,
+  put: put,
+  remove: remove
+}

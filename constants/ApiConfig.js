@@ -10,7 +10,7 @@ if (false) {
 
   // Requirement for Loi's local development
   if (Platform.OS == 'ios') {
-    backendHost = 'http://localhost:3000'
+    backendHost = 'http://22.19.198.86:3000'
   } else {
     backendHost = BACKEND_API_HOST
   }

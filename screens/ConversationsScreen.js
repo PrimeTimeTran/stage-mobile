@@ -284,7 +284,18 @@ export default class ConversationsScreen extends React.Component {
         </View>
       )
     } else {
-      return <div>Empty</div>
+      return (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 200
+          }}>
+          <Text>Loading</Text>
+        </View>
+      )
     }
   }
 }

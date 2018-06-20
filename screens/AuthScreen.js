@@ -28,7 +28,7 @@ class AuthScreen extends Component {
     }
   }
 
-  handleSubmit = () => {
+  onSubmit = () => {
     let { email, password } = this.state
 
     emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
@@ -47,11 +47,11 @@ class AuthScreen extends Component {
     this.onSignUpOrIn()
   }
 
-  handleEmailChange = email => {
+  onEmailChange = email => {
     this.setState({ email })
   }
 
-  handlePasswordChange = password => {
+  onPasswordChange = password => {
     this.setState({ password })
   }
 
@@ -89,16 +89,6 @@ class AuthScreen extends Component {
   render() {
     const { containerStyle, screenContainer } = styles
 
-    if (!!this.props.token) {
-      return (
-        <View>
-          <Button
-            title="Sign Out"
-            onPress={() => this.props.facebookLogOut()}
-          />
-        </View>
-      )
-    }
     return (
       <ImageBackground
         source={image}
@@ -113,18 +103,17 @@ class AuthScreen extends Component {
             <FormLabel labelStyle={{color: Colors.themeColor}}>Email</FormLabel>
             <FormInput
               name="Email"
-              placeholder="johndoe@gmail.com"
+              placeholder="loi@gmail.com"
               value={this.state.email}
-              onChangeText={this.handleEmailChange}
+              onChangeText={this.onEmailChange}
             />
 
             <FormLabel labelStyle={{color: Colors.themeColor}}>{t('auth.password')}</FormLabel>
             <FormInput
               placeholder="**********"
               secureTextEntry
-              onSubmit={this.handlePasswordChange}
               value={this.state.password}
-              onChangeText={this.handlePasswordChange}
+              onChangeText={this.onPasswordChange}
             />
 
             <View
@@ -141,7 +130,7 @@ class AuthScreen extends Component {
               style={{ marginBottom: 10 }}
               icon={{ name: 'sign-in', type: 'font-awesome' }}
               color={Colors.themeColor.toString()}
-              onPress={this.handleSubmit}>
+              onPress={this.onSubmit}>
               <Text>{t('auth.sign_in_up')}</Text>
             </Button>
           </View>

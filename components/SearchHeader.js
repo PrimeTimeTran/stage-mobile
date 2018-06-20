@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
   Dimensions,
   Platform
@@ -12,7 +8,7 @@ import { Button } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
 
-import { Icon, SearchBar } from 'react-native-elements'
+import { SearchBar } from 'react-native-elements'
 const isIphoneX = () => {
   const { height, width } = Dimensions.get('window')
   return Platform.OS === 'ios' && (height === 812 || width === 812)

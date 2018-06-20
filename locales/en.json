@@ -24,6 +24,17 @@
   "drawer": {
     "joined": "Joined since",
     "profile": "Profile",
+      "editprofile": {
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email",
+        "city": "City",
+        "country": "Country",
+        "occupation": "Occupation",
+        "description": "Description",
+        "age": "Age",
+        "phone_number": "Phone Number"
+      },
     "friends": "Friends",
     "photos": "Photos",
     "map": "Map",

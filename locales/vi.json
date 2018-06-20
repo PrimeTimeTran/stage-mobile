@@ -24,6 +24,17 @@
   "drawer": {
     "joined": "Đã Tham Gia Kể Từ",
     "profile": "Hồ Sơ",
+      "editprofile": {
+        "first_name": "Tên Đầu Tiên",
+        "last_name": "Tên Họ",
+        "email": "Email",
+        "city": "Thành Phố",
+        "country": "Quốc Gia",
+        "occupation": "Nghề Nghiệp",
+        "description": "Sự Miêu Tả",
+        "age": "Tuổi Tác",
+        "phone_number": "Số Điện Thoại"
+      },
     "friends": "Bạn Bè",
     "photos": "Ảnh",
     "map": "Bản Đồ",

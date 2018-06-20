@@ -12,6 +12,7 @@ import Moment from 'moment'
 
 import Color from '../../constants/Colors'
 import CurrentUser from '../../utils/CurrentUser'
+import { t } from '../../locales/i18n'
 
 import { Avatar } from '../../components/common'
 import { DrawerCard } from './DrawerCard'
@@ -86,31 +87,31 @@ class Drawer extends Component {
                 {this.getCurrentUserFullName()}
               </Text>
               <Text style={headerSubTextStyle}>
-                Joined since {this.getCurrentUserJoinedSince()}
+              {t('drawer.joined')} {this.getCurrentUserJoinedSince()}
               </Text>
             </View>
           )}
         </View>
         <View style={drawerContentStyle}>
           <TouchableOpacity onPress={this.handleEditProfile}>
-            <DrawerCard type="entypo" name="user" content="Profile" />
+            <DrawerCard type="entypo" name="user" content={ t('drawer.profile') } />
           </TouchableOpacity>
-          <DrawerCard type="entypo" name="users" content="Friends" />
+          <DrawerCard type="entypo" name="users" content={ t('drawer.friends') } />
           <DrawerCard
             type="material-icon"
             name="photo-library"
-            content="Photos"
+            content={ t('drawer.photos') }
           />
-          <DrawerCard type="font-awesome" name="map" content="Map" />
-          <DrawerCard type="font-awesome" name="gift" content="Gifting" />
-          <DrawerCard type="material-icon" name="payment" content="Billing" />
+          <DrawerCard type="font-awesome" name="map" content={ t('drawer.map') } />
+          <DrawerCard type="font-awesome" name="gift" content={ t('drawer.gifting') } />
+          <DrawerCard type="material-icon" name="payment" content={ t('drawer.billing') } />
         </View>
         <View style={{ paddingBottom: 20 }}>
           <TouchableOpacity onPress={() => this.onLogOut()}>
             <DrawerCard
               type="material-community"
               name="logout"
-              content="Log Out"
+              content={ t('drawer.logout') }
               custom={{ borderBottomWidth: 0 }}
             />
           </TouchableOpacity>

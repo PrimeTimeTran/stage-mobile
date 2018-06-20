@@ -1,10 +1,12 @@
 import React from 'react'
-import { Platform, Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import {
   createStackNavigator,
   createBottomTabNavigator,
   createDrawerNavigator
 } from 'react-navigation'
+
+import { t } from '../locales/i18n'
 
 import TabBarIcon from '../components/TabBarIcon'
 import { Drawer } from '../components/common'
@@ -71,7 +73,7 @@ const ConversationsStack = createStackNavigator(
 
 ConversationsStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Messages</Text>,
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>{t('tab.messages')}</Text>,
     tabBarIcon: ({ focused }) => (
       <TabBarIcon focused={focused} name="message-processing" />
     ),
@@ -86,7 +88,7 @@ const HomeStack = createStackNavigator({
 })
 
 HomeStack.navigationOptions = {
-  tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Newsfeed</Text>,
+  tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>{t('tab.newsfeed')}</Text>,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -106,7 +108,7 @@ const StagesStack = createStackNavigator({
 
 StagesStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Stages</Text>,
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>{t('tab.stages')}</Text>,
     tabBarIcon: ({ focused }) => (
       <TabBarIcon focused={focused} name="stadium" />
     ),
@@ -121,7 +123,7 @@ const ProfileStack = createStackNavigator({
 
 ProfileStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>Profile</Text>,
+    tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>{t('tab.profile')}</Text>,
     tabBarIcon: ({ focused }) => (
       <TabBarIcon focused={focused} name={'account-box'} />
     ),

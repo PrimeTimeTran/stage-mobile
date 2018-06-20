@@ -2,14 +2,12 @@ import ReactNative from 'react-native'
 import I18n from 'ex-react-native-i18n'
 
 import en from './en.json'
-import he from './he.json'
 import vi from './vi.json'
 
 I18n.fallbacks = true
 
 I18n.translations = {
   en,
-  he,
   vi
 }
 

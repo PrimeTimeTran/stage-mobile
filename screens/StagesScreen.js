@@ -78,11 +78,11 @@ export default class StagesScreen extends React.Component {
 
   handleCallStage = phone => {
     console.log('Phone Number: ', phone)
-    const args = {
-      number: '0964359305',
-      prompt: false
-    }
-    call(args).catch(console.error)
+    // const args = {
+    //   number: '0964359305',
+    //   prompt: false
+    // }
+    // call(args).catch(console.error)
   }
 
   showStageUploads(stage, upload, index) {
@@ -142,7 +142,11 @@ export default class StagesScreen extends React.Component {
                         <Icon name="chevron-right" color="white" />
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      <Icon name="heart" type="evilicon" color="white" />
+                      {stage.is_following ? (
+                        <Icon name="heart" type="font-awesome" color="red" />
+                      ) : (
+                        <Icon name="heart" type="evilicon" color="white" />
+                      )}
                     </CardSection>
 
                     <CardSection>

@@ -5,6 +5,12 @@
     "third": "Lên Stage!",
     "join": "Tham Gia"
   },
+  "tab": {
+    "messages": "Tin Nhắn",
+    "newsfeed": "Bảng Tin",
+    "stages": "Stages",
+    "profile": "Hồ Sơ"
+  },
   "auth": {
     "password": "Mật Khẩu",
     "sign_in_up": "Đăng nhập/Đăng kí",
@@ -14,5 +20,15 @@
       "password": "Mật khẩu không hợp lệ. Phải có 6 ký tự",
       "password_incorrect": "Mật khẩu không đúng"
     }
+  },
+  "drawer": {
+    "joined": "Đã Tham Gia Kể Từ",
+    "profile": "Hồ Sơ",
+    "friends": "Bạn Bè",
+    "photos": "Ảnh",
+    "map": "Bản Đồ",
+    "gifting": "Tặng Quà",
+    "billing": "Thanh Toán",
+    "logout": "Đăng Xuất"
   }
 }

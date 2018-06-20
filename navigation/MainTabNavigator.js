@@ -19,7 +19,7 @@ import ConversationsScreen from '../screens/ConversationsScreen'
 import ConversationScreen from '../screens/ConversationScreen'
 import SearchConversationsScreen from '../screens/SearchConversationsScreen'
 
-import HomeScreen from '../screens/HomeScreen'
+import NewsFeedScreen from '../screens/NewsFeedScreen'
 import UsersScreen from '../screens/UsersScreen'
 
 import StagesScreen from '../screens/StagesScreen'
@@ -81,13 +81,13 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
   }
 }
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+const NewsFeedStack = createStackNavigator({
+  Home: NewsFeedScreen,
   Profile: ProfileScreen,
   MyProfile: MyProfileScreen
 })
 
-HomeStack.navigationOptions = {
+NewsFeedStack.navigationOptions = {
   tabBarLabel: () => <Text style={styles.tabBarLabelStyle}>{t('tab.newsfeed')}</Text>,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -134,7 +134,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
 const MainTabScreen = createBottomTabNavigator(
   {
     ConversationsStack,
-    HomeStack,
+    NewsFeedStack,
     StagesStack,
     ProfileStack
   },

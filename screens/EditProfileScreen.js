@@ -79,7 +79,7 @@ export default class EditProfileScreen extends Component {
   }
 
   onChangeLastName = (e) => {
-    if (!/[^a-zA-Z]/.test(e)) {
+    if (!/[^a-zA-Za-eghik-vxyàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđ₫A-EGHIK-VXYÂĐỔÔÚỨ]/.test(e)) {
       this.setState({ last_name: e })
       this.setState({ errorLastName: null })
     } else {
@@ -138,7 +138,7 @@ export default class EditProfileScreen extends Component {
             <FormInput name="description" placeholder="I love coding!" value={description} />
 
             <FormLabel labelStyle={{color: Colors.themeColor}}>{t('drawer.editprofile.age')}</FormLabel>
-            <FormInput name="age" placeholder="18" value={age} />
+            <FormInput name="age" placeholder="18" value={age.toString()} />
 
             <FormLabel labelStyle={{color: Colors.themeColor}}>{t('drawer.editprofile.phone_number')}</FormLabel>
             <FormInput name="phone_number" placeholder="0964359305" value={phone_number} />

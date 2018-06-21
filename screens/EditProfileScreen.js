@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
-import { Icon, FormLabel, FormInput } from 'react-native-elements'
+import { Icon, FormLabel, FormInput, Button } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import Colors from '../constants/Colors'
@@ -36,7 +36,9 @@ export default class EditProfileScreen extends Component {
     occupation: null,
     description: null,
     age: null,
-    phone_number: null
+    phone_number: null,
+    saved: null,
+    saved_text: null
   }
 
   componentWillMount() {
@@ -65,6 +67,11 @@ export default class EditProfileScreen extends Component {
         phone_number
       })
     })
+  }
+
+  onSubmit = () => {
+    console.log('Submitted')
+    this.setState({ saved: true, saved_text: 'Saved' })
   }
 
   onChangeFirstName = e => {
@@ -148,6 +155,18 @@ export default class EditProfileScreen extends Component {
 
             <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.phone_number')}</FormLabel>
             <FormInput name="phone_number" placeholder="0964359305" value={phone_number} />
+
+            <Button
+              title={this.state.saved_text ? 'Saved' : 'Update'}
+              backgroundColor={this.state.saved ? Colors.buttonColor.toString() : 'red'}
+              onPress={this.onSubmit}
+              icon={{
+                name: this.state.saved_text ? 'check-circle' : 'update',
+                type: this.state.saved_text ? 'feather' : 'material-icons'
+              }}>
+              <Text>{this.state.saved_text ? 'Saved' : 'Update'}</Text>
+            </Button>
+
           </KeyboardAwareScrollView>
         </View>
       )

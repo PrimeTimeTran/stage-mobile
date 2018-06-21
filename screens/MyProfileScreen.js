@@ -185,7 +185,6 @@ export default class MyProfileScreen extends React.Component {
 
   render() {
     const { size, currentUser } = this.state
-    console.log('CurrentUser', currentUser);
 
     if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
       return (

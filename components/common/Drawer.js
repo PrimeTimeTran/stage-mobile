@@ -57,8 +57,8 @@ class Drawer extends Component {
     return ''
   }
 
-  handleEditProfile = () => {
-    this.props.navigation.navigate('EditProfile')
+  onEditProfile = () => {
+    this.props.navigation.navigate('EditProfile', { profile_screen: 'Drawer' })
   }
 
   render() {
@@ -93,7 +93,7 @@ class Drawer extends Component {
           )}
         </View>
         <View style={drawerContentStyle}>
-          <TouchableOpacity onPress={this.handleEditProfile}>
+          <TouchableOpacity onPress={this.onEditProfile}>
             <DrawerCard type="entypo" name="user" content={ t('drawer.profile') } />
           </TouchableOpacity>
           <DrawerCard type="entypo" name="users" content={ t('drawer.friends') } />

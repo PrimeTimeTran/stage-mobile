@@ -44,7 +44,9 @@ export default class MyProfileScreen extends React.Component {
     headerRight: (
       <TouchableOpacity
         style={{ padding: 10 }}
-        onPress={() => console.log('Settings')}>
+        onPress={() =>
+          navigation.navigate('EditProfile', { profile_screen: 'MyProfile' })
+        }>
         <Icon
           type="material-community"
           name="settings"

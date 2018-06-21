@@ -1,5 +1,5 @@
 import cable from 'react-native-actioncable'
-import { Platform } from 'react-native'
+import { AsyncStorage, Platform } from 'react-native'
 
 let consumer
 let backendHost
@@ -25,10 +25,11 @@ if (Platform.OS == 'ios') {
 
 socketType = 'ws'
 
-function createChannel(...args) {
-  // let token = AsyncStorage.getItem('auth_token')
+const createChannel = async (...args) => {
+  let token = await AsyncStorage.getItem('auth_token')
+  token = token.slice(1, -1)
   if (!consumer) {
-    consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${hardToken}`)
+    consumer = cable.createConsumer(`${socketType}://${backendHost}/cable?token=${token}`)
   }
   return consumer.subscriptions.create(...args)
 }

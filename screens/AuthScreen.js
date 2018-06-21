@@ -83,6 +83,9 @@ class AuthScreen extends Component {
         data: data.user
       })
     })
+
+    // Is there anyway to refresh the entire Drawer component here?
+    console.log('Props:', this.props.navigation)
     this.props.navigation.navigate('Conversations')
   }
 

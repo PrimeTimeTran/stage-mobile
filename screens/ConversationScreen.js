@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { GiftedChat, Bubble } from 'react-native-gifted-chat'
-import { sendMessage, setCallback } from '../utils/chat'
-
 import { Icon } from 'react-native-elements'
 
+import { sendMessage, setCallback } from '../utils/chat'
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'

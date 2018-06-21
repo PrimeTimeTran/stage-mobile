@@ -12,6 +12,8 @@ const chat = createChannel('ChatChannel', {
   received( message ) {
     if (callback) callback.call(null, message)
   }
+}).then(channel => {
+  chat = channel
 })
 
 function sendMessage(data) {
@@ -23,5 +25,3 @@ function setCallback(fn) {
 }
 
 export { sendMessage, setCallback }
-
-// Create a class, export it, let the class wrap the methods.

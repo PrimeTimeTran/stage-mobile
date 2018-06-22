@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "Stage",
-    "description": "A very interesting project.",
-    "slug": "stage",
+    "description": "Know those around you",
+    "slug": "get-on-stage",
     "privacy": "public",
     "sdkVersion": "27.0.0",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -22,10 +22,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "io.stage.stage"
+      "bundleIdentifier": "com.getonstageapp.app"
+    },
+    "android": {
+      "package": "com.getonstageapp.app"
     },
     "androidStatusBar": {
-      barStyle: 'light-content'
+      "barStyle": "light-content"
     }
   }
 }

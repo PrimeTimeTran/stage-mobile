@@ -109,7 +109,6 @@ export default class HomeScreen extends Component {
   navigateProfile = async user => {
     const { id } = user
     CurrentUser.get().then(currentUser => {
-      console.log('CurrentUser: ', currentUser)
       if (parseInt(currentUser.id) == id) {
         this.props.navigation.navigate('MyProfile')
       } else {
@@ -189,7 +188,14 @@ export default class HomeScreen extends Component {
         </CardSection>
         {posts &&
           posts.map(post => {
-            const { id, user, reactions_count, comments_count } = post
+            const {
+              id,
+              user,
+              reactions,
+              reactions_count,
+              comments_count,
+            } = post
+            console.log('Posts', post)
             return (
               <View key={id}>
                 <Card>
@@ -247,6 +253,7 @@ export default class HomeScreen extends Component {
                   <Socials
                     reactions_count={reactions_count}
                     comments_count={comments_count}
+                    reactions={reactions}
                   />
                   <CardSection
                     custom={{ justifyContent: 'space-around', padding: 0 }}>

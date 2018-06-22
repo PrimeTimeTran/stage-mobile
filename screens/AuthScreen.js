@@ -7,6 +7,7 @@ import {
   ImageBackground
 } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
+import RNRestart from 'react-native-restart'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
@@ -83,6 +84,21 @@ class AuthScreen extends Component {
         data: data.user
       })
     })
+
+    // Is there anyway to refresh the entire Drawer component here? This will fix the cable as well as Drawer bug
+    // https://trello.com/c/W8Amt4Ow/11-refresh-maindrawercomponent
+
+    // Also strange, RNRestart keeps being undefined for me. https://github.com/avishayil/react-native-restart
+    // I installed the library. npm install react-native-restart --save
+    // I tried npm install react-native-restart --save
+    // I tried npm install -g rnpm && rnpm link react-native-restart
+    // I tried react-native link react-native-restart
+    // I tried deleting node_modules
+
+    console.log('About to rs', RNRestart);
+    RNRestart.Restart()
+
+    console.log('Done rsing')
     this.props.navigation.navigate('Conversations')
   }
 

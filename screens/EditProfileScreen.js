@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
-import { Icon, FormLabel, FormInput } from 'react-native-elements'
+import { Icon, FormLabel, FormInput, Button } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import Colors from '../constants/Colors'
@@ -15,7 +15,11 @@ export default class EditProfileScreen extends Component {
     headerLeft: (
       <TouchableOpacity
         style={{ padding: 10 }}
-        onPress={() => navigation.navigate('Conversations')}>
+        onPress={() => {
+          console.log('Navigation', navigation)
+          console.log('Drawer?', navigation.state.params.profile_screen === 'Drawer')
+          navigation.state.params.profile_screen === 'Drawer' ? navigation.navigate('App') : navigation.navigate('MyProfileScreen')
+        }}>
         <Icon name="chevron-left" type="entypo" color="white" size={26} />
       </TouchableOpacity>
     ),
@@ -36,7 +40,9 @@ export default class EditProfileScreen extends Component {
     occupation: null,
     description: null,
     age: null,
-    phone_number: null
+    phone_number: null,
+    saved: null,
+    saved_text: null
   }
 
   componentWillMount() {
@@ -67,10 +73,14 @@ export default class EditProfileScreen extends Component {
     })
   }
 
+  onSubmit = () => {
+    console.log('Submitted')
+    this.setState({ saved: true, saved_text: 'Saved' })
+  }
+
   onChangeFirstName = e => {
     if (!/[^a-zA-Za-eghik-vxyàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđ₫A-EGHIK-VXYÂĐỔÔÚỨ]/.test(e)) {
-      this.setState({ first_name: e })
-      this.setState({ errorFirstName: null })
+      this.setState({ first_name: e, errorFirstName: null })
     } else {
       this.setState({ errorFirstName: 'First name can only contain letters' })
     }
@@ -78,8 +88,7 @@ export default class EditProfileScreen extends Component {
 
   onChangeLastName = e => {
     if (!/[^a-zA-Za-eghik-vxyàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđ₫A-EGHIK-VXYÂĐỔÔÚỨ]/.test(e)) {
-      this.setState({ last_name: e })
-      this.setState({ errorLastName: null })
+      this.setState({ last_name: e, errorLastName: null })
     } else {
       this.setState({ errorLastName: 'Last name can only contain letters' })
     }
@@ -87,8 +96,7 @@ export default class EditProfileScreen extends Component {
 
   onChangeEmail = e => {
     if (e.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-      this.setState({ email: e })
-      this.setState({ errorEmail: null })
+      this.setState({ email: e, errorEmail: null })
     } else {
       this.setState({ errorEmail: 'Invalid Email'})
     }
@@ -116,6 +124,7 @@ export default class EditProfileScreen extends Component {
     } = styles
 
     if (first_name) {
+      console.log('Navigation', this.props.navigation)
       return (
         <View>
           <KeyboardAwareScrollView>
@@ -148,6 +157,18 @@ export default class EditProfileScreen extends Component {
 
             <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.phone_number')}</FormLabel>
             <FormInput name="phone_number" placeholder="0964359305" value={phone_number} />
+
+            <Button
+              title={this.state.saved_text ? 'Saved' : 'Update'}
+              backgroundColor={this.state.saved ? Colors.buttonColor.toString() : 'red'}
+              onPress={this.onSubmit}
+              icon={{
+                name: this.state.saved_text ? 'check-circle' : 'update',
+                type: this.state.saved_text ? 'feather' : 'material-icons'
+              }}>
+              <Text>{this.state.saved_text ? 'Saved' : 'Update'}</Text>
+            </Button>
+
           </KeyboardAwareScrollView>
         </View>
       )

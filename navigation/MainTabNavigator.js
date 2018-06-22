@@ -118,7 +118,7 @@ StagesStack.navigationOptions = ({ navigation }) => {
 
 const ProfileStack = createStackNavigator({
   MyProfileScreen: MyProfileScreen,
-  Settings: SettingsScreen
+  EditMyProfile: EditProfileScreen
 })
 
 ProfileStack.navigationOptions = ({ navigation }) => {
@@ -171,7 +171,7 @@ const EditProfileStack = createStackNavigator({
 const ApplicationDrawer = createDrawerNavigator(
   {
     App: MainDrawerNavigation,
-    EditProfile: EditProfileStack
+    Edit: EditProfileStack
   },
   {
     contentComponent: props => {

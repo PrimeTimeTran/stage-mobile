@@ -28,6 +28,7 @@
     "react-native-lightbox": "^0.7.0",
     "react-native-looped-carousel": "^0.1.13",
     "react-native-phone-call": "^1.0.6",
+    "react-native-restart": "0.0.6",
     "react-native-scripts": "^1.14.0",
     "react-native-video": "^2.1.1",
     "react-navigation": "2.3.0",

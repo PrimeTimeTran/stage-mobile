@@ -43,7 +43,9 @@ export default class MyProfileScreen extends React.Component {
     headerRight: (
       <TouchableOpacity
         style={{ padding: 10 }}
-        onPress={() => console.log('Settings')}>
+        onPress={() =>
+          navigation.navigate('EditProfile', { profile_screen: 'MyProfile' })
+        }>
         <Icon
           type="material-community"
           name="settings"
@@ -184,7 +186,6 @@ export default class MyProfileScreen extends React.Component {
 
   render() {
     const { size, currentUser } = this.state
-    console.log('CurrentUser', currentUser);
 
     if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
       return (

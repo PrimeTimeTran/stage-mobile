@@ -157,7 +157,7 @@ export default class HomeScreen extends Component {
             buttonStyle={{
               backgroundColor: 'transparent'
             }}
-            onPress={() => console.log('Liked')}
+            onPress={() => console.log('Photo')}
           ><Text>Photo</Text></Button>
           <Button
             title="Video"
@@ -170,7 +170,7 @@ export default class HomeScreen extends Component {
             buttonStyle={{
               backgroundColor: 'transparent'
             }}
-            onPress={() => console.log('Comment')}
+            onPress={() => console.log('Video')}
             ><Text>Video</Text></Button>
           <Button
             title="Comment"
@@ -195,7 +195,6 @@ export default class HomeScreen extends Component {
               reactions_count,
               comments_count,
             } = post
-            console.log('Posts', post)
             return (
               <View key={id}>
                 <Card>

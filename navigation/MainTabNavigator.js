@@ -6,10 +6,13 @@ import {
   createDrawerNavigator
 } from 'react-navigation'
 
-import { t } from '../locales/i18n'
+import CardStackStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator'
 
+import { t } from '../locales/i18n'
 import TabBarIcon from '../components/TabBarIcon'
 import { Drawer } from '../components/common'
+import Colors from '../constants/Colors'
+
 import EditProfileScreen from '../screens/EditProfileScreen'
 
 import WelcomeScreen from '../screens/WelcomeScreen'
@@ -27,16 +30,12 @@ import StageScreen from '../screens/StageScreen'
 
 import ProfileScreen from '../screens/ProfileScreen'
 import MyProfileScreen from '../screens/MyProfileScreen'
-import SettingsScreen from '../screens/SettingsScreen'
-
-import Colors from '../constants/Colors'
-import CardStackStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator'
 
 let ConversationsTransitionConfiguration = () => {
   return {
     screenInterpolator: sceneProps => {
-      const { position, scene } = sceneProps
-      const { index, route } = scene
+      const { scene } = sceneProps
+      const { route } = scene
       const params = route.params || {}
       let transition = params.transition || 'default'
       const last = sceneProps.scenes[sceneProps.scenes.length - 1];

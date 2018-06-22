@@ -210,7 +210,7 @@ export default class StagesScreen extends React.Component {
                           <Icon
                             name="account-multiple"
                             type="material-community"
-                            color={Colors.themeColor.darken(0.2)}
+                            color={Colors.themeColor.darken(0.2).toString()}
                             size={14}
                           />
                           <Text
@@ -257,11 +257,11 @@ export default class StagesScreen extends React.Component {
                           icon={{
                             name: 'information',
                             type: 'material-community',
-                            color: Colors.themeColor
+                            color: Colors.themeColor.toString()
                           }}
                           title="Info"
                           textStyle={{ fontSize: 16, fontWeight: 'bold' }}
-                          color={Colors.themeColor}
+                          color={Colors.themeColor.toString()}
                           onPress={() => console.log('Get more info')}
                           buttonStyle={{
                             width: SCREEN_WIDTH / 2,
@@ -277,11 +277,11 @@ export default class StagesScreen extends React.Component {
                           icon={{
                             name: 'message-processing',
                             type: 'material-community',
-                            color: Colors.themeColor
+                            color: Colors.themeColor.toString()
                           }}
                           title="Chat"
                           textStyle={{ fontSize: 16, fontWeight: 'bold' }}
-                          color={Colors.themeColor}
+                          color={Colors.themeColor.toString()}
                           onPress={() =>
                             this.handleGoToStageConversation(stage)
                           }

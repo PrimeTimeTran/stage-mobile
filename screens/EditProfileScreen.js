@@ -7,6 +7,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Colors from '../constants/Colors'
 import CurrentUser from '../utils/CurrentUser'
 import { t } from '../locales/i18n'
+import { API_ROOT } from '../constants/ApiConfig'
+import client from '../utils/client'
 
 export default class EditProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -16,8 +18,8 @@ export default class EditProfileScreen extends Component {
       <TouchableOpacity
         style={{ padding: 10 }}
         onPress={() => {
-          console.log('Navigation', navigation)
-          console.log('Drawer?', navigation.state.params.profile_screen === 'Drawer')
+          // console.log('Navigation', navigation)
+          // console.log('Drawer?', navigation.state.params.profile_screen === 'Drawer')
           navigation.state.params.profile_screen === 'Drawer' ? navigation.navigate('App') : navigation.navigate('MyProfileScreen')
         }}>
         <Icon name="chevron-left" type="entypo" color="white" size={26} />
@@ -29,6 +31,7 @@ export default class EditProfileScreen extends Component {
   })
 
   state = {
+    id: null,
     first_name: null,
     errorFirstName: null,
     last_name: null,
@@ -48,6 +51,7 @@ export default class EditProfileScreen extends Component {
   componentWillMount() {
     CurrentUser.get().then(currentUser => {
       const {
+        id,
         first_name,
         last_name,
         email,
@@ -60,6 +64,7 @@ export default class EditProfileScreen extends Component {
       } = currentUser
 
       this.setState({
+        id,
         first_name,
         last_name,
         email,
@@ -74,8 +79,52 @@ export default class EditProfileScreen extends Component {
   }
 
   onSubmit = () => {
-    console.log('Submitted')
-    this.setState({ saved: true, saved_text: 'Saved' })
+    const {
+      id,
+      first_name,
+      last_name,
+      email,
+      city,
+      country,
+      occupation,
+      description,
+      age,
+      phone_number
+    } = this.state
+
+    const request = client()
+    request
+      .then(api => api.put(`${API_ROOT}users/${id}`, {user: {
+        first_name,
+        last_name,
+        email,
+        city,
+        country,
+        occupation,
+        description,
+        age: 28,
+        phone_number
+      }}))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setUserData(data)
+      })
+      .catch(error => {
+        console.log('Error', error)
+      })
+      this.setState({ saved: true, saved_text: 'Saved' })
+  }
+
+  setUserData(data) {
+    CurrentUser.put({
+      _id: 'current_user',
+      data: data
+    })
+    .then(response => {
+      console.log('Response from CurrentUser', response);
+    })
   }
 
   onChangeFirstName = e => {
@@ -124,7 +173,7 @@ export default class EditProfileScreen extends Component {
     } = styles
 
     if (first_name) {
-      console.log('Navigation', this.props.navigation)
+      // console.log('Navigation', this.props.navigation)
       return (
         <View>
           <KeyboardAwareScrollView>

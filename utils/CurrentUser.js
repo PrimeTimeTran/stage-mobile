@@ -7,13 +7,17 @@ const get = () => {
 }
 
 const put = currentUser => {
-  return db.put('current_user', currentUser).then((doc) => {
-    return doc.data
+  db.get('current_user').then(doc => {
+    return db.put({
+      _id: currentUser._id,
+      _rev: doc._rev,
+      data: currentUser.data
+    })
   })
 }
 
 const remove = () => {
-  db.get('current_user').then(function (doc) {
+  db.get('current_user').then(doc => {
     return db.remove(doc)
   })
 }

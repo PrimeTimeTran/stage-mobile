@@ -57,8 +57,8 @@ class AuthScreen extends Component {
   }
 
   onSignUpOrIn = () => {
-    const request = client()
     const { email, password } = this.state
+    const request = client()
     request
       .then(api => api.post(`${API_ROOT}signup`, { email, password }))
       .then(response => {
@@ -95,10 +95,10 @@ class AuthScreen extends Component {
     // I tried react-native link react-native-restart
     // I tried deleting node_modules
 
-    console.log('About to rs', RNRestart);
-    RNRestart.Restart()
+    // console.log('About to rs', RNRestart);
+    // RNRestart.Restart()
 
-    console.log('Done rsing')
+    // console.log('Done rsing')
     this.props.navigation.navigate('Conversations')
   }
 

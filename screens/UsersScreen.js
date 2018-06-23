@@ -65,7 +65,7 @@ export default class UsersScreen extends Component {
           {users &&
             users.map(user => {
               return (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center' }} key={user.id}>
                   <Avatar
                     url={user.avatar_url}
                     custom={[avatarStyle, { marginTop: 5 }]}

@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +16,7 @@ import Carousel from 'react-native-looped-carousel'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
-import { Card, CardSection } from '../components/common'
+import { Card, CardSection, Spinner } from '../components/common'
 
 import client from '../utils/client'
 
@@ -301,17 +300,7 @@ export default class StagesScreen extends React.Component {
       )
     } else {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: 200,
-            backgroundColor: 'white'
-          }}>
-          <ActivityIndicator size="large" color={Colors.themeColor.toString()} />
-        </View>
+        <Spinner />
       )
     }
   }

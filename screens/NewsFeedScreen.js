@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -25,6 +24,7 @@ import {
   Card,
   CardSection,
   SentAt,
+  Spinner,
   Socials
 } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
@@ -294,17 +294,7 @@ export default class HomeScreen extends Component {
     )
     } else {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: 200,
-            backgroundColor: 'white'
-          }}>
-          <ActivityIndicator size="large" color={Colors.themeColor.toString()} />
-        </View>
+        <Spinner />
       )
     }
   }

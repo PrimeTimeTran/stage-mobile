@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, ScrollView } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 
 import { Icon } from 'react-native-elements'
 
@@ -7,7 +7,7 @@ import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-import { Avatar, CardSection } from '../components/common'
+import { Avatar } from '../components/common'
 
 export default class UsersScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -50,11 +50,19 @@ export default class UsersScreen extends Component {
       })
   }
 
+  onAvatarPress = (user, name) => {
+    this.props.navigation.navigate('Profile', {
+      user_id: user,
+      name: name
+    })
+  }
+
   render() {
     const { users, conversation } = this.state
-    const { userContainerStyle, avatarStyle } = styles
+    const { avatarStyle } = styles
     return (
       <ScrollView style={{ backgroundColor: '#fff' }}>
+      <Text>Go</Text>
         <View
           style={{
             flex: 1,
@@ -65,45 +73,19 @@ export default class UsersScreen extends Component {
           {users &&
             users.map(user => {
               return (
-                <View style={{ alignItems: 'center' }} key={user.id}>
+                <TouchableOpacity
+                  key={user.id}
+                  style={{ alignItems: 'center' }}
+                  onPress={() => this.onAvatarPress(user.id, user.first_name)}
+                >
                   <Avatar
                     url={user.avatar_url}
                     custom={[avatarStyle, { marginTop: 5 }]}
                   />
                   <Text>{user.first_name}</Text>
                   <Text>{user.age}</Text>
-                </View>
+                </TouchableOpacity>
               )
-
-              // return (
-              //   <CardSection key={user.id} custom={userContainerStyle}>
-              //     <View style={{ marginRight: 15 }}>
-              //       <Avatar
-              //         url={user.avatar_url}
-              //         custom={[avatarStyle, { marginTop: 5 }]}
-              //       />
-              //     </View>
-              //     <View style={{ padding: 5, marginRight: 10 }}>
-              //       <Text style={{ color: Colors.themeColor, fontSize: 20 }}>
-              //         {[user.full_name, user.age].filter(n => n).join(', ')}
-              //       </Text>
-              //       <Text
-              //         style={{
-              //           marginRight: 15,
-              //           marginBottom: 10,
-              //           marginTop: 2,
-              //           color: '#999'
-              //         }}>
-              //         {user.occupation}
-              //       </Text>
-              //       <View>
-              //         <Text numberOfLines={2} style={{ marginRight: 70 }}>
-              //           {user.description}
-              //         </Text>
-              //       </View>
-              //     </View>
-              //   </CardSection>
-              // )
             })}
         </View>
       </ScrollView>
@@ -112,11 +94,6 @@ export default class UsersScreen extends Component {
 }
 
 const styles = {
-  userContainerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    backgroundColor: 'white'
-  },
   avatarStyle: {
     padding: 5,
     height: 90,

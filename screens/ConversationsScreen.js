@@ -14,6 +14,7 @@ import Carousel from 'react-native-looped-carousel'
 import VideoPlayer from '../components/VideoPlayer'
 
 import Colors from '../constants/Colors'
+import { t } from '../locales/i18n'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
@@ -23,6 +24,7 @@ const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
+    title: t('tab.messages'),
     headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerTitleStyle: { color: 'white' },
     headerBackTitleStyle: { color: 'white' },

@@ -164,7 +164,7 @@ export default class ConversationScreen extends Component {
     return [colors[index], textColor[index]]
   }
 
-  handleAvatarClick = props => {
+  onAvatarPress = props => {
     this.props.navigation.navigate('Profile', {
       user_id: props._id,
       name: props.name
@@ -179,7 +179,7 @@ export default class ConversationScreen extends Component {
         <View style={{ backgroundColor: '#fff', flex: 1 }}>
           <GiftedChat
             style={{ backgroundColor: '#fff' }}
-            onPressAvatar={props => this.handleAvatarClick(props)}
+            onPressAvatar={props => this.onAvatarPress(props)}
             messages={this.state.messages}
             onLongPress={this.onLongPress}
             renderBubble={props => this.renderBubble(props)}

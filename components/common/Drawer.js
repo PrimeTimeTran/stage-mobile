@@ -61,6 +61,14 @@ class Drawer extends Component {
     this.props.navigation.navigate('EditProfile', { profile_screen: 'Drawer' })
   }
 
+  onFriends = () => {
+    this.props.navigation.navigate('Friends')
+  }
+
+  onMedia = () => {
+    this.props.navigation.navigate('Media')
+  }
+
   render() {
     const {
       drawerStyle,
@@ -96,12 +104,16 @@ class Drawer extends Component {
           <TouchableOpacity onPress={this.onEditProfile}>
             <DrawerCard type="entypo" name="user" content={ t('drawer.profile') } />
           </TouchableOpacity>
-          <DrawerCard type="entypo" name="users" content={ t('drawer.friends') } />
-          <DrawerCard
-            type="material-icon"
-            name="photo-library"
-            content={ t('drawer.photos') }
-          />
+          <TouchableOpacity onPress={this.onFriends}>
+            <DrawerCard type="entypo" name="users" content={ t('drawer.friends') } />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onMedia}>
+            <DrawerCard
+              type="material-icon"
+              name="photo-library"
+              content={ t('drawer.photos') }
+            />
+          </TouchableOpacity>
           <DrawerCard type="font-awesome" name="map" content={ t('drawer.map') } />
           <DrawerCard type="font-awesome" name="gift" content={ t('drawer.gifting') } />
           <DrawerCard type="material-icon" name="payment" content={ t('drawer.billing') } />

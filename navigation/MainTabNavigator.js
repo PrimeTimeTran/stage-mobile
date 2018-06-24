@@ -8,12 +8,14 @@ import {
 
 import CardStackStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator'
 
+import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
 import TabBarIcon from '../components/TabBarIcon'
 import { Drawer } from '../components/common'
-import Colors from '../constants/Colors'
 
 import EditProfileScreen from '../screens/EditProfileScreen'
+import FriendsScreen from '../screens/FriendsScreen'
+import MediaScreen from '../screens/MediaScreen'
 
 import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthScreen from '../screens/AuthScreen'
@@ -51,12 +53,7 @@ let ConversationsTransitionConfiguration = () => {
 
 const ConversationsStack = createStackNavigator(
   {
-    Conversations: {
-      screen: ConversationsScreen,
-      navigationOptions: {
-        title: 'Messages'
-      }
-    },
+    Conversations: ConversationsScreen,
     SearchConversations: SearchConversationsScreen,
     Conversation: ConversationScreen,
     Users: UsersScreen,
@@ -167,10 +164,20 @@ const EditProfileStack = createStackNavigator({
   EditProfile: EditProfileScreen
 })
 
+const FriendsStack = createStackNavigator({
+  Friends: FriendsScreen
+})
+
+const MediaStack = createStackNavigator({
+  Media: MediaScreen
+})
+
 const ApplicationDrawer = createDrawerNavigator(
   {
     App: MainDrawerNavigation,
-    Edit: EditProfileStack
+    Edit: EditProfileStack,
+    Friends: FriendsStack,
+    Media: MediaStack
   },
   {
     contentComponent: props => {

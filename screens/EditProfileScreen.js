@@ -33,11 +33,8 @@ export default class EditProfileScreen extends Component {
   state = {
     id: null,
     first_name: null,
-    errorFirstName: null,
     last_name: null,
-    errorLastName: null,
     email: null,
-    errorEmail: null,
     city: null,
     country: null,
     occupation: null,
@@ -45,7 +42,11 @@ export default class EditProfileScreen extends Component {
     age: null,
     phone_number: null,
     saved: null,
-    saved_text: null
+    saved_text: null,
+    errorLastName: null,
+    errorFirstName: null,
+    errorEmail: null,
+    errorAge: null
   }
 
   componentWillMount() {
@@ -102,7 +103,7 @@ export default class EditProfileScreen extends Component {
         country,
         occupation,
         description,
-        age: 28,
+        age,
         phone_number
       }}))
       .then(response => {
@@ -147,12 +148,21 @@ export default class EditProfileScreen extends Component {
     if (e.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       this.setState({ email: e, errorEmail: null })
     } else {
-      this.setState({ errorEmail: 'Invalid Email'})
+      this.setState({ errorEmail: 'Invalid Email' })
+    }
+  }
+
+  onChangeAge = e => {
+    if (/^\d+$/.test(e)) {
+      this.setState({ age: e, errorAge: null })
+    } else {
+      this.setState({ errorEmail: 'Invalid Age' })
     }
   }
 
   render() {
     const {
+      id,
       first_name,
       errorFirstName,
       last_name,
@@ -172,7 +182,7 @@ export default class EditProfileScreen extends Component {
       errorStyle
     } = styles
 
-    if (first_name) {
+    if (id) {
       // console.log('Navigation', this.props.navigation)
       return (
         <View>
@@ -199,7 +209,7 @@ export default class EditProfileScreen extends Component {
             <FormInput name="occupation" placeholder="Chief Technical Officer" value={occupation} />
 
             <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.description')}</FormLabel>
-            <FormInput name="description" placeholder="I love coding!" value={description} />
+            <FormInput name="description" placeholder="I love coding!" value={description} onChangeText={this.onChangeAge} />
 
             <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.age')}</FormLabel>
             <FormInput name="age" placeholder="18" value={age.toString()} />

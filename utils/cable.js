@@ -14,7 +14,8 @@ let hardToken
 // http :3000/v1/posts Accept:"application/vnd.posts.v1+json" Authorization:"eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoyMSwiZXhwIjoxNTU5NTI3MTI3fQ.06c2qq-LSx3WekKrOcvuhGLiNTPndu394pTHc53qgTgBJM3dK1LFFgToaXoCxhBK92oESkygzBmhTAzjDDeY1A"
 
 if (Platform.OS == 'ios') {
-  backendHost = 'localhost:3000'
+  backendHost = 'staging.getonstageapp.com'
+  // backendHost = 'localhost:3000'
   // Christine's Token
   hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1NTk4ODI2NjR9.-3gL9QuAuM0UGbanEr8RtruvLK-WGHYq7PeyQMLwrR8OiDYH4QBzJiNvdCvePRSKJF1HXeLd5Fl-CycFP1FjFw'
 } else {
@@ -23,7 +24,8 @@ if (Platform.OS == 'ios') {
   hardToken = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1NjA3MDg4MTl9.fLoOpqCnWH0UPp-sjXak33ktOESkJo_vZU6fsRcKal5J4HgoI4YtiBwy8qt1lsAebonRj_zXd8TXBBhVYxsEsw'
 }
 
-socketType = 'ws'
+// socketType = 'ws'
+socketType = 'wss'
 
 function createChannel(...args) {
   // let token = AsyncStorage.getItem('auth_token')

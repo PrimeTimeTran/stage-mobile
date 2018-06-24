@@ -20,7 +20,12 @@ export default class EditProfileScreen extends Component {
         onPress={() => {
           // console.log('Navigation', navigation)
           // console.log('Drawer?', navigation.state.params.profile_screen === 'Drawer')
-          navigation.state.params.profile_screen === 'Drawer' ? navigation.navigate('App') : navigation.navigate('MyProfileScreen')
+          if (navigation.state.params.profile_screen === 'Drawer') {
+            navigation.navigate('App')
+            navigation.openDrawer()
+          } else {
+            navigation.navigate('MyProfileScreen')
+          }
         }}>
         <Icon name="chevron-left" type="entypo" color="white" size={26} />
       </TouchableOpacity>

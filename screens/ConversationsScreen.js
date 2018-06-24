@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -54,7 +55,7 @@ export default class ConversationsScreen extends React.Component {
     )
   })
 
-  state = { conversations: [] }
+  state = { conversations: null }
 
   componentWillMount() {
     const request = client()
@@ -284,9 +285,10 @@ export default class ConversationsScreen extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             width: '100%',
-            height: 200
+            height: 200,
+            backgroundColor: 'white'
           }}>
-          <Text>Loading</Text>
+          <ActivityIndicator size="large" color={Colors.themeColor.toString()} />
         </View>
       )
     }

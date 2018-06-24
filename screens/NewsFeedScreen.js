@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -50,7 +51,7 @@ export default class HomeScreen extends Component {
   })
 
   state = {
-    posts: [],
+    posts: null,
     currentUser: null
   }
 
@@ -141,7 +142,8 @@ export default class HomeScreen extends Component {
     const { posts } = this.state
     const { headerContainerStyle, headerTextStyle, avatarStyle } = styles
 
-    return (
+    if (posts) {
+      return (
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost} />
         <CardSection
@@ -290,6 +292,21 @@ export default class HomeScreen extends Component {
           })}
       </ScrollView>
     )
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 200,
+            backgroundColor: 'white'
+          }}>
+          <ActivityIndicator size="large" color={Colors.themeColor.toString()} />
+        </View>
+      )
+    }
   }
 }
 

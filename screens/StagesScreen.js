@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -44,13 +45,8 @@ export default class StagesScreen extends React.Component {
     super()
     this.state = {
       selectedIndex: 2,
-      stages: []
+      stages: null
     }
-    this.updateIndex = this.updateIndex.bind(this)
-  }
-
-  updateIndex(selectedIndex) {
-    this.setState({ selectedIndex })
   }
 
   componentWillMount() {
@@ -68,7 +64,7 @@ export default class StagesScreen extends React.Component {
       })
   }
 
-  handleGoToStageConversation(stage) {
+  onGoToStageConversation(stage) {
     this.props.navigation.navigate('Conversation', {
       conversation_id: stage.conversation_id,
       stages: true,
@@ -76,7 +72,7 @@ export default class StagesScreen extends React.Component {
     })
   }
 
-  handleCallStage = phone => {
+  onStageCall = phone => {
     console.log('Phone Number: ', phone)
     // const args = {
     //   number: '0964359305',
@@ -85,7 +81,7 @@ export default class StagesScreen extends React.Component {
     // call(args).catch(console.error)
   }
 
-  showStageUploads(stage, upload, index) {
+  onShowStageUploads(stage, upload, index) {
     return (
       <Carousel
         currentPage={index}
@@ -159,7 +155,7 @@ export default class StagesScreen extends React.Component {
                               key={upload.id}
                               swipeToDismiss={false}
                               renderContent={() =>
-                                this.showStageUploads(stage, upload, index)
+                                this.onShowStageUploads(stage, upload, index)
                               }>
                               <View
                                 style={{
@@ -240,7 +236,7 @@ export default class StagesScreen extends React.Component {
                             color="black"
                             size={14}
                           />
-                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.handleCallStage(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
+                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.onStageCall(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
                         </View>
                       </View>
                     </CardSection>
@@ -283,7 +279,7 @@ export default class StagesScreen extends React.Component {
                           textStyle={{ fontSize: 16, fontWeight: 'bold' }}
                           color={Colors.themeColor.toString()}
                           onPress={() =>
-                            this.handleGoToStageConversation(stage)
+                            this.onGoToStageConversation(stage)
                           }
                           containerStyle={{ width: SCREEN_WIDTH / 2 }}
                           buttonStyle={{
@@ -304,7 +300,19 @@ export default class StagesScreen extends React.Component {
         </ScrollView>
       )
     } else {
-      return <div>Empty</div>
+      return (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 200,
+            backgroundColor: 'white'
+          }}>
+          <ActivityIndicator size="large" color={Colors.themeColor.toString()} />
+        </View>
+      )
     }
   }
 }

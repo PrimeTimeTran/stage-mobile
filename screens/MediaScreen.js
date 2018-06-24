@@ -11,7 +11,10 @@ export default class MediaScreen extends Component {
     headerLeft: (
       <TouchableOpacity
         style={{ padding: 10 }}
-        onPress={() => navigation.navigate('App')}>
+        onPress={() => {
+          navigation.navigate('App')
+          navigation.openDrawer()
+        }}>
         <Icon name="chevron-left" type="entypo" color="white" size={26} />
       </TouchableOpacity>
     ),

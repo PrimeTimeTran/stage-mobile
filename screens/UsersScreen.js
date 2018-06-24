@@ -7,7 +7,7 @@ import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-import { Avatar } from '../components/common'
+import { Avatar, Spinner } from '../components/common'
 
 export default class UsersScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,7 +22,7 @@ export default class UsersScreen extends Component {
         : navigation.state.params.title
   })
 
-  state = { users: [], conversation: {} }
+  state = { users: null, conversation: {} }
 
   componentWillMount() {
     conversationId = this.props.navigation.state.params.conversation_id
@@ -60,36 +60,43 @@ export default class UsersScreen extends Component {
   render() {
     const { users, conversation } = this.state
     const { avatarStyle } = styles
-    return (
-      <ScrollView style={{ backgroundColor: '#fff' }}>
-      <Text>Go</Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignItems: 'center'
-          }}>
-          {users &&
-            users.map(user => {
-              return (
-                <TouchableOpacity
-                  key={user.id}
-                  style={{ alignItems: 'center' }}
-                  onPress={() => this.onAvatarPress(user.id, user.first_name)}
-                >
-                  <Avatar
-                    url={user.avatar_url}
-                    custom={[avatarStyle, { marginTop: 5 }]}
-                  />
-                  <Text>{user.first_name}</Text>
-                  <Text>{user.age}</Text>
-                </TouchableOpacity>
-              )
-            })}
-        </View>
-      </ScrollView>
-    )
+
+    if (users) {
+      return (
+        <ScrollView style={{ backgroundColor: '#fff' }}>
+        <Text>Go</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'center'
+            }}>
+            {users &&
+              users.map(user => {
+                return (
+                  <TouchableOpacity
+                    key={user.id}
+                    style={{ alignItems: 'center' }}
+                    onPress={() => this.onAvatarPress(user.id, user.first_name)}
+                  >
+                    <Avatar
+                      url={user.avatar_url}
+                      custom={[avatarStyle, { marginTop: 5 }]}
+                    />
+                    <Text>{user.first_name}</Text>
+                    <Text>{user.age}</Text>
+                  </TouchableOpacity>
+                )
+              })}
+          </View>
+        </ScrollView>
+      )
+    } else {
+      return (
+        <Spinner />
+      )
+    }
   }
 }
 

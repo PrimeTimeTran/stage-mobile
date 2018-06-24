@@ -22,7 +22,7 @@ export default class UsersScreen extends Component {
         : navigation.state.params.title
   })
 
-  state = { users: null, conversation: {} }
+  state = { users: null, conversation: null }
 
   componentWillMount() {
     conversationId = this.props.navigation.state.params.conversation_id
@@ -58,7 +58,7 @@ export default class UsersScreen extends Component {
   }
 
   render() {
-    const { users, conversation } = this.state
+    const { users } = this.state
     const { avatarStyle } = styles
 
     if (users) {

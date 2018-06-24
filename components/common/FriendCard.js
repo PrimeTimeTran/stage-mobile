@@ -25,7 +25,7 @@ const FriendCard = ({ friend, navigation }) => {
   }
   return (
     <TouchableOpacity onPress={() => onAvatarPress(id, first_name)}>
-      <CardSection style={{ flexDirection: 'row' }}>
+      <CardSection style={{ flexDirection: 'row', backgroundColor: 'red' }}>
         <Image style={avatarStyle} source={{ uri: avatar_url}}/>
         <View>
           <Text style={{ fontWeight: '900' }}>{full_name}</Text>

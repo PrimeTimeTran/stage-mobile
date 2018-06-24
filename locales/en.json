@@ -1,4 +1,7 @@
 {
+  "general": {
+    "cancel":  "Cancel"
+  },
   "welcome": {
     "first": "Welcome!",
     "second": "Meet Amazing People!",
@@ -9,7 +12,8 @@
     "messages": "Messages",
     "newsfeed": "NewsFeed",
     "stages": "Stages",
-    "profile": "Profile"
+    "profile": "Profile",
+    "me": "Me"
   },
   "auth": {
     "password": "Password",

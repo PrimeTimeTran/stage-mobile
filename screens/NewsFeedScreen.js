@@ -15,6 +15,7 @@ import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
 import { API_ROOT } from '../constants/ApiConfig'
+import { t } from '../locales/i18n'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
 
@@ -36,7 +37,7 @@ import Colors from '../constants/Colors'
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Newsfeed',
+    title: t('tab.newsfeed'),
     headerTitleStyle: { color: 'white' },
     headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerBackTitleStyle: { color: 'white' },

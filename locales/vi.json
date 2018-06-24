@@ -1,4 +1,7 @@
 {
+  "general": {
+    "cancel":  "Hủy bỏ"
+  },
   "welcome": {
     "first": "Chào Mừng",
     "second": "Gặp Gỡ Những\n Bgười Tuyệt Vời!",
@@ -9,7 +12,8 @@
     "messages": "Tin Nhắn",
     "newsfeed": "Bảng Tin",
     "stages": "Stages",
-    "profile": "Hồ Sơ"
+    "profile": "Hồ Sơ",
+    "me": "Tôi"
   },
   "auth": {
     "password": "Mật Khẩu",

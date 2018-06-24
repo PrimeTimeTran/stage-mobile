@@ -51,9 +51,6 @@ export default class FriendsScreen extends Component {
     } = this.state
 
     if (friends) {
-      if( friends[0]) {
-        console.log('Friend', friends[0])
-      }
       return (
         <ScrollView>
           {friends.map(friend => {

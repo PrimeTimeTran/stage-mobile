@@ -15,6 +15,7 @@ import { Permissions, ImagePicker } from 'expo'
 import ActionSheet from 'react-native-actionsheet'
 
 import Colors from '../constants/Colors'
+import { t } from '../locales/i18n'
 import { API_ROOT } from '../constants/ApiConfig'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
@@ -36,7 +37,7 @@ let options = {
 
 export default class MyProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Me',
+    title: t('tab.me'),
     headerTitleStyle: { color: 'white' },
     headerStyle: { backgroundColor: Colors.navigationHeaderBackgroundColor },
     headerTintColor: 'white',

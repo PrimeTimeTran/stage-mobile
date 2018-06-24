@@ -7,6 +7,7 @@ import {
 import { Button } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
+import { t } from '../locales/i18n'
 
 import { SearchBar } from 'react-native-elements'
 const isIphoneX = () => {
@@ -77,7 +78,7 @@ export default class SearchHeader extends Component {
           />
           <Button
             onPress={() => this.props.navigation.goBack()}
-            title="Cancel"
+            title={ t('general.cancel') }
             buttonStyle={{
               color: '#c00',
               backgroundColor: 'transparent'

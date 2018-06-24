@@ -162,8 +162,6 @@ export default class MyProfileScreen extends React.Component {
     )
   }
 
-  renderAvatar() {}
-
   renderPhotoButton() {
     return (
       <TouchableOpacity

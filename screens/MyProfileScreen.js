@@ -11,15 +11,15 @@ import {
 
 import Carousel from 'react-native-looped-carousel'
 import { Icon } from 'react-native-elements'
+import { Permissions, ImagePicker } from 'expo'
+import ActionSheet from 'react-native-actionsheet'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 
-import { UserDescription } from '../components/common'
-import { Permissions, ImagePicker } from 'expo'
-import ActionSheet from 'react-native-actionsheet'
+import { Spinner, UserDescription } from '../components/common'
 
 const { width } = Dimensions.get('window')
 const defaultImage =
@@ -68,7 +68,7 @@ export default class MyProfileScreen extends React.Component {
 
     this.state = {
       size: { width, height: 300 },
-      currentUser: {}
+      currentUser: null
     }
   }
 
@@ -184,7 +184,7 @@ export default class MyProfileScreen extends React.Component {
     )
   }
 
-  render() {
+  renderCurrentUser() {
     const { size, currentUser } = this.state
 
     if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
@@ -226,6 +226,14 @@ export default class MyProfileScreen extends React.Component {
         </View>
       )
     }
+  }
+
+  render() {
+   if (this.state.currentUser)  {
+     return this.renderCurrentUser()
+   } else {
+     return <Spinner />
+   }
   }
 }
 

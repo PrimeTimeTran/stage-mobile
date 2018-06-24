@@ -24,6 +24,7 @@ import {
   Card,
   CardSection,
   SentAt,
+  Spinner,
   Socials
 } from '../components/common'
 import VideoPlayer from '../components/VideoPlayer'
@@ -50,7 +51,7 @@ export default class HomeScreen extends Component {
   })
 
   state = {
-    posts: [],
+    posts: null,
     currentUser: null
   }
 
@@ -141,7 +142,8 @@ export default class HomeScreen extends Component {
     const { posts } = this.state
     const { headerContainerStyle, headerTextStyle, avatarStyle } = styles
 
-    return (
+    if (posts) {
+      return (
       <ScrollView scrollEventThrottle={5}>
         <PostForm onSubmit={this.onAddPost} />
         <CardSection
@@ -290,6 +292,11 @@ export default class HomeScreen extends Component {
           })}
       </ScrollView>
     )
+    } else {
+      return (
+        <Spinner />
+      )
+    }
   }
 }
 

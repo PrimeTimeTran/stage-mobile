@@ -18,7 +18,7 @@ import { t } from '../locales/i18n'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-import { Avatar, SentAt } from '../components/common'
+import { Avatar, SentAt, Spinner } from '../components/common'
 
 const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
 
@@ -54,7 +54,7 @@ export default class ConversationsScreen extends React.Component {
     )
   })
 
-  state = { conversations: [] }
+  state = { conversations: null }
 
   componentWillMount() {
     const request = client()
@@ -278,16 +278,7 @@ export default class ConversationsScreen extends React.Component {
       )
     } else {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: 200
-          }}>
-          <Text>Loading</Text>
-        </View>
+        <Spinner />
       )
     }
   }

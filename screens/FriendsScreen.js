@@ -36,7 +36,7 @@ export default class FriendsScreen extends Component {
       request
         .then(api => api.get(`${API_ROOT}friendships`))
         .then(response => {
-          this.setState({ friends: response.data }, () => { console.log('Friends', this.state.friends)})
+          this.setState({ friends: response.data })
           return response.data
         })
         .catch(error => {
@@ -51,15 +51,14 @@ export default class FriendsScreen extends Component {
     } = this.state
 
     if (friends) {
+      if( friends[0]) {
+        console.log('Friend', friends[0])
+      }
       return (
         <ScrollView>
           {friends.map(friend => {
-            console.log('Friend', friend);
-            return (
-              <FriendCard url={friend.avatar_url} />
-            )
-          })
-          }
+            return <FriendCard key={friend.id} friend={friend} navigation={this.props.navigation}/>
+          })}
         </ScrollView>
       )
     } else {

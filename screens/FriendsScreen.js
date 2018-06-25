@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ScrollView } from 'react-native';
+import { TouchableOpacity, ScrollView, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
@@ -51,13 +51,22 @@ export default class FriendsScreen extends Component {
     } = this.state
 
     if (friends) {
-      return (
-        <ScrollView>
-          {friends.map(friend => {
-            return <FriendCard key={friend.id} friend={friend} navigation={this.props.navigation}/>
-          })}
-        </ScrollView>
-      )
+      if (friends.length == 0) {
+        return (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Get on Stage and make some friends!</Text>
+          </View>
+        )
+      } else {
+        return (
+          <ScrollView>
+            {friends.map(friend => {
+              return <FriendCard key={friend.id} friend={friend} navigation={this.props.navigation}/>
+            })}
+          </ScrollView>
+        )
+      }
+
     } else {
       return <Spinner />
     }

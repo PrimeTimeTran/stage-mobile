@@ -220,6 +220,7 @@ export default class MyProfileScreen extends React.Component {
                 : { uri: defaultImage }
             }
           />
+          <UserDescription user={currentUser} />
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}
         </View>

@@ -12,7 +12,7 @@ import client from '../utils/client'
 
 export default class EditProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Profile',
+    title: t('drawer.editprofile.title'),
     headerTitleStyle: { color: 'white' },
     headerLeft: (
       <TouchableOpacity
@@ -48,6 +48,7 @@ export default class EditProfileScreen extends Component {
     phone_number: null,
     saved: null,
     saved_text: null,
+
     errorLastName: null,
     errorFirstName: null,
     errorEmail: null,
@@ -169,17 +170,18 @@ export default class EditProfileScreen extends Component {
     const {
       id,
       first_name,
-      errorFirstName,
       last_name,
-      errorLastName,
       email,
-      errorEmail,
       city,
       country,
       occupation,
       description,
       age,
-      phone_number
+      phone_number,
+
+      errorFirstName,
+      errorLastName,
+      errorEmail
     } = this.state
 
     const {
@@ -188,7 +190,6 @@ export default class EditProfileScreen extends Component {
     } = styles
 
     if (id) {
-      // console.log('Navigation', this.props.navigation)
       return (
         <View>
           <KeyboardAwareScrollView>

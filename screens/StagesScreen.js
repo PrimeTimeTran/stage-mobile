@@ -115,21 +115,46 @@ export default class StagesScreen extends React.Component {
     )
   }
 
-  onToggleFollowing = () => {
-    console.log('Toggling')
+  onStartFollowing = stageId => {
+    const params = { stageId: stageId }
+    const request = client()
+    request
+      .then(api => api.post(`${API_ROOT}user_conversations`, params))
+      .then(response => {
+        console.log('Response Data from StartFollowing', response.data)
+        return response.data
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
-  followingStageConversation = following => {
+  onStopFollowing = stageId => {
+    const request = client()
+    request
+      .then(api => api.delete(`${API_ROOT}user_conversations/${stageId}`))
+      .then(response => {
+        console.log('Response Data from stopFollowing', response.data)
+        return response.data
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
+  }
+
+  followingStageConversation = (following, stageId) => {
     if (following) {
       return (
-        <TouchableOpacity onPress={this.onToggleFollowing}>
+        <TouchableOpacity onPress={() => this.onStopFollowing(stageId)}>
           <Icon name="heart" type="font-awesome" color="red" />
         </TouchableOpacity>
       )
     } else {
-      <TouchableOpacity onPress={this.onToggleFollowing}>
-        <Icon name="heart" type="evilicon" color="white" />
-      </TouchableOpacity>
+      return (
+        <TouchableOpacity onPress={() => this.onStartFollowing(stageId)}>
+          <Icon name="heart" type="evilicon" color="white" />
+        </TouchableOpacity>
+        )
     }
   }
 
@@ -155,7 +180,7 @@ export default class StagesScreen extends React.Component {
                         <Icon name="chevron-right" color="white" />
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      {this.followingStageConversation(stage.is_following)}
+                      {this.followingStageConversation(stage.is_following, stage.id)}
                     </CardSection>
 
                     <CardSection>

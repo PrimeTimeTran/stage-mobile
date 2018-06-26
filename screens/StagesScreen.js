@@ -115,6 +115,24 @@ export default class StagesScreen extends React.Component {
     )
   }
 
+  onToggleFollowing = () => {
+    console.log('Toggling')
+  }
+
+  followingStageConversation = following => {
+    if (following) {
+      return (
+        <TouchableOpacity onPress={this.onToggleFollowing}>
+          <Icon name="heart" type="font-awesome" color="red" />
+        </TouchableOpacity>
+      )
+    } else {
+      <TouchableOpacity onPress={this.onToggleFollowing}>
+        <Icon name="heart" type="evilicon" color="white" />
+      </TouchableOpacity>
+    }
+  }
+
   render() {
     const { stages } = this.state
     const {
@@ -137,11 +155,7 @@ export default class StagesScreen extends React.Component {
                         <Icon name="chevron-right" color="white" />
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      {stage.is_following ? (
-                        <Icon name="heart" type="font-awesome" color="red" />
-                      ) : (
-                        <Icon name="heart" type="evilicon" color="white" />
-                      )}
+                      {this.followingStageConversation(stage.is_following)}
                     </CardSection>
 
                     <CardSection>

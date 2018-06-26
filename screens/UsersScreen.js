@@ -22,7 +22,7 @@ export default class UsersScreen extends Component {
         : navigation.state.params.title
   })
 
-  state = { users: null, conversation: null }
+  state = { users: null, stage: null }
 
   componentWillMount() {
     conversationId = this.props.navigation.state.params.conversation_id
@@ -39,9 +39,10 @@ export default class UsersScreen extends Component {
     request
       .then(api => api.get(`${API_ROOT}conversations/${conversationId}`))
       .then(response => {
-        this.setState({ conversation: response.data }, () => {
+        console.log('Response: ddd', response)
+        this.setState({ stage: response.data }, () => {
           this.props.navigation.setParams({
-            title: `${this.state.conversation.user_count} Members`
+            title: `${this.state.stage.user_count} Members`
           })
         })
       })
@@ -58,13 +59,16 @@ export default class UsersScreen extends Component {
   }
 
   render() {
-    const { users } = this.state
+    const { users, stage } = this.state
     const { avatarStyle } = styles
+    console.log('Stage', stage)
 
     if (users) {
       return (
         <ScrollView style={{ backgroundColor: '#fff' }}>
-        <Text>Go</Text>
+          {/* <View style={{ flex: 1, backgroundColor: 'red' }}>
+            <Text>{stage.stage_name}</Text>
+          </View> */}
           <View
             style={{
               flex: 1,

@@ -172,7 +172,7 @@ export default class ConversationScreen extends Component {
   }
 
   render() {
-    const { currentUser } = this.state
+    const { currentUser, messages } = this.state
 
     if (currentUser) {
       return (
@@ -180,12 +180,12 @@ export default class ConversationScreen extends Component {
           <GiftedChat
             style={{ backgroundColor: '#fff' }}
             onPressAvatar={props => this.onAvatarPress(props)}
-            messages={this.state.messages}
+            messages={messages}
             onLongPress={this.onLongPress}
             renderBubble={props => this.renderBubble(props)}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: this.state.currentUser.id
+              _id: currentUser.id
             }}
           />
         </View>

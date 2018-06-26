@@ -122,7 +122,7 @@ export default class HomeScreen extends Component {
     })
   }
 
-  onAddPost = body => {
+  onCreatePost = body => {
     const request = client()
     request
       .then(api => api.post(`${API_ROOT}posts/`, { body: body }))
@@ -140,55 +140,13 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { posts } = this.state
+    const { posts, currentUser } = this.state
     const { headerContainerStyle, headerTextStyle, avatarStyle } = styles
 
     if (posts) {
       return (
       <ScrollView scrollEventThrottle={5}>
-        <PostForm onSubmit={this.onAddPost} />
-        <CardSection
-          custom={{ justifyContent: 'space-around', padding: 0, marginBottom: 10 }}>
-          <Button
-            title="Photo"
-            color={Colors.buttonColor.toString()}
-            fontSize={14}
-            icon={{
-              name: 'thumb-up',
-              color: Colors.buttonColor.toString()
-            }}
-            buttonStyle={{
-              backgroundColor: 'transparent'
-            }}
-            onPress={() => console.log('Photo')}
-          ><Text>Photo</Text></Button>
-          <Button
-            title="Video"
-            color={Colors.buttonColor.toString()}
-            fontSize={14}
-            icon={{
-              name: 'comment',
-              color: Colors.buttonColor.toString()
-            }}
-            buttonStyle={{
-              backgroundColor: 'transparent'
-            }}
-            onPress={() => console.log('Video')}
-            ><Text>Video</Text></Button>
-          <Button
-            title="Comment"
-            color={Colors.buttonColor.toString()}
-            fontSize={14}
-            icon={{
-              name: 'comment',
-              color: Colors.buttonColor.toString()
-            }}
-            buttonStyle={{
-              backgroundColor: 'transparent'
-            }}
-            onPress={() => console.log('Comment')}
-            ><Text>Comment</Text></Button>
-        </CardSection>
+        <PostForm onSubmit={this.onCreatePost} name={currentUser.first_name}/>
         {posts &&
           posts.map(post => {
             const {

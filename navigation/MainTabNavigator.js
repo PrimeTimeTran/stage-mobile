@@ -148,18 +148,6 @@ const MainTabScreen = createBottomTabNavigator(
   }
 )
 
-const MainDrawerNavigation = createBottomTabNavigator(
-  {
-    Welcome: WelcomeScreen,
-    Auth: AuthScreen,
-    Main: MainTabScreen
-  },
-  {
-    lazy: true,
-    navigationOptions: { tabBarVisible: false }
-  }
-)
-
 const EditProfileStack = createStackNavigator({
   EditProfile: EditProfileScreen
 })
@@ -174,7 +162,7 @@ const MediaStack = createStackNavigator({
 
 const ApplicationDrawer = createDrawerNavigator(
   {
-    App: MainDrawerNavigation,
+    App: MainTabScreen,
     Edit: EditProfileStack,
     Friends: FriendsStack,
     Media: MediaStack
@@ -193,6 +181,20 @@ ApplicationDrawer.navigationOptions = ({ navigation }) => {
   }
 }
 
+const MainNavigation = createBottomTabNavigator(
+  {
+    Welcome: WelcomeScreen,
+    Auth: AuthScreen,
+    Main: ApplicationDrawer
+  },
+  {
+    lazy: true,
+    navigationOptions: { tabBarVisible: false }
+  }
+)
+
+
+
 const styles = StyleSheet.create({
   tabBarLabelStyle: {
     color: '#fff',
@@ -202,4 +204,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ApplicationDrawer
+export default MainNavigation

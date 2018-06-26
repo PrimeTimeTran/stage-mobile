@@ -17,6 +17,7 @@ import Carousel from 'react-native-looped-carousel'
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection, Spinner } from '../components/common'
+import FollowingStage from '../components/FollowingStage'
 
 import client from '../utils/client'
 
@@ -71,7 +72,7 @@ export default class StagesScreen extends React.Component {
     })
   }
 
-  onStageCall = phone => {
+  onCallStage = phone => {
     console.log('Phone Number: ', phone)
     // const args = {
     //   number: '0964359305',
@@ -121,7 +122,6 @@ export default class StagesScreen extends React.Component {
     request
       .then(api => api.post(`${API_ROOT}user_conversations`, params))
       .then(response => {
-        console.log('Response Data from StartFollowing', response.data)
         return response.data
       })
       .catch(error => {
@@ -134,7 +134,6 @@ export default class StagesScreen extends React.Component {
     request
       .then(api => api.delete(`${API_ROOT}user_conversations/${stageId}`))
       .then(response => {
-        console.log('Response Data from stopFollowing', response.data)
         return response.data
       })
       .catch(error => {
@@ -180,7 +179,8 @@ export default class StagesScreen extends React.Component {
                         <Icon name="chevron-right" color="white" />
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      {this.followingStageConversation(stage.is_following, stage.id)}
+                      <FollowingStage following={stage.is_following} stageId={stage.id} unFollow={this.onStopFollowing} follow={this.onStartFollowing} />
+                      {/* {this.followingStageConversation(stage.is_following, stage.id)} */}
                     </CardSection>
 
                     <CardSection>
@@ -274,7 +274,7 @@ export default class StagesScreen extends React.Component {
                             color="black"
                             size={14}
                           />
-                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.onStageCall(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
+                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.onCallStage(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
                         </View>
                       </View>
                     </CardSection>

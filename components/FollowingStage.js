@@ -7,6 +7,10 @@ export default class FollowingStage extends Component {
     following: this.props.following
   }
 
+  toggleFollowing() {
+    this.setState({ following: !this.state.following })
+  }
+
   follow = stageId => {
     this.toggleFollowing()
     this.props.follow(stageId)
@@ -15,10 +19,6 @@ export default class FollowingStage extends Component {
   unFollow = stageId => {
     this.toggleFollowing()
     this.props.unFollow(stageId)
-  }
-
-  toggleFollowing() {
-    this.setState({ following: !this.state.following })
   }
 
   render() {

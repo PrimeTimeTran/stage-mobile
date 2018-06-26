@@ -141,22 +141,6 @@ export default class StagesScreen extends React.Component {
       })
   }
 
-  followingStageConversation = (following, stageId) => {
-    if (following) {
-      return (
-        <TouchableOpacity onPress={() => this.onStopFollowing(stageId)}>
-          <Icon name="heart" type="font-awesome" color="red" />
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-        <TouchableOpacity onPress={() => this.onStartFollowing(stageId)}>
-          <Icon name="heart" type="evilicon" color="white" />
-        </TouchableOpacity>
-        )
-    }
-  }
-
   render() {
     const { stages } = this.state
     const {

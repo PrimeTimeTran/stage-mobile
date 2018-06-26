@@ -9,6 +9,8 @@ import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
 
+import { Spinner } from '../components/common'
+
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitleStyle: { color: 'white' },
@@ -176,7 +178,7 @@ export default class ConversationScreen extends Component {
 
     if (currentUser) {
       return (
-        <View style={{ backgroundColor: '#fff', flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
           <GiftedChat
             style={{ backgroundColor: '#fff' }}
             onPressAvatar={props => this.onAvatarPress(props)}
@@ -192,16 +194,7 @@ export default class ConversationScreen extends Component {
       )
     } else {
       return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: 200
-          }}>
-          <Text>Loading</Text>
-        </View>
+        <Spinner />
       )
     }
   }

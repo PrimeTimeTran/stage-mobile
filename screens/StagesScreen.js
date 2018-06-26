@@ -147,7 +147,9 @@ export default class StagesScreen extends React.Component {
       cardHeaderStyle,
       descriptionStyle,
       headerContainerStyle,
-      headerTextStyle
+      headerTextStyle,
+      stageButtonStyle,
+      buttonTextStyle
     } = styles
 
     if (stages) {
@@ -163,8 +165,14 @@ export default class StagesScreen extends React.Component {
                         <Icon name="chevron-right" color="white" />
                         <Text style={headerTextStyle}>{stage.name}</Text>
                       </View>
-                      <FollowingStage following={stage.is_following} stageId={stage.id} unFollow={this.onStopFollowing} follow={this.onStartFollowing} />
-                      {/* {this.followingStageConversation(stage.is_following, stage.id)} */}
+                      <FollowingStage
+                        following={stage.is_following}
+                        stageId={stage.id}
+                        follow={this.onStartFollowing}
+                        unFollow={this.onStopFollowing}
+                        navigation={this.props.navigation}
+                        stage={stage}
+                      />
                     </CardSection>
 
                     <CardSection>
@@ -258,7 +266,14 @@ export default class StagesScreen extends React.Component {
                             color="black"
                             size={14}
                           />
-                          <TouchableOpacity style={{ marginLeft: 10 }} onPress={this.onCallStage(stage.phone)}><Text>{stage.phone}</Text></TouchableOpacity>
+                          <TouchableOpacity
+                            style={{ marginLeft: 10 }}
+                            onPress={this.onCallStage(stage.phone)}
+                          >
+                            <Text>
+                              {stage.phone}
+                            </Text>
+                          </TouchableOpacity>
                         </View>
                       </View>
                     </CardSection>
@@ -278,17 +293,10 @@ export default class StagesScreen extends React.Component {
                             color: Colors.themeColor.toString()
                           }}
                           title="Info"
-                          textStyle={{ fontSize: 16, fontWeight: 'bold' }}
+                          textStyle={buttonTextStyle}
                           color={Colors.themeColor.toString()}
                           onPress={() => console.log('Get more info')}
-                          buttonStyle={{
-                            width: SCREEN_WIDTH / 2,
-                            backgroundColor: 'transparent',
-                            height: 45,
-                            borderColor: 'transparent',
-                            borderWidth: 0,
-                            borderRadius: 5
-                          }}
+                          buttonStyle={stageButtonStyle}
                         />
                         <Button
                           small
@@ -298,20 +306,10 @@ export default class StagesScreen extends React.Component {
                             color: Colors.themeColor.toString()
                           }}
                           title="Chat"
-                          textStyle={{ fontSize: 16, fontWeight: 'bold' }}
+                          textStyle={buttonTextStyle}
                           color={Colors.themeColor.toString()}
-                          onPress={() =>
-                            this.onGoToStageConversation(stage)
-                          }
-                          containerStyle={{ width: SCREEN_WIDTH / 2 }}
-                          buttonStyle={{
-                            width: SCREEN_WIDTH / 2,
-                            backgroundColor: 'transparent',
-                            height: 45,
-                            borderColor: 'transparent',
-                            borderWidth: 0,
-                            borderRadius: 5
-                          }}
+                          onPress={() => this.onGoToStageConversation(stage)}
+                          buttonStyle={stageButtonStyle}
                         />
                       </View>
                     </CardSection>
@@ -351,5 +349,17 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     flexDirection: 'row',
     marginTop: 5
+  },
+  stageButtonStyle: {
+    width: SCREEN_WIDTH / 2,
+    backgroundColor: 'transparent',
+    height: 45,
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 5
+  },
+  buttonTextStyle: {
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 })

@@ -7,7 +7,6 @@ import {
   ImageBackground
 } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
-import RNRestart from 'react-native-restart'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'

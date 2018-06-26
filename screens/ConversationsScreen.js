@@ -49,7 +49,12 @@ export default class ConversationsScreen extends React.Component {
       <TouchableOpacity
         style={{ padding: 10 }}
         onPress={() => navigation.openDrawer()}>
-        <Icon type="material-community" name="menu" size={26} color="white" />
+        <Icon
+          type="material-community"
+          name="menu"
+          color="white"
+          size={26}
+        />
       </TouchableOpacity>
     )
   })
@@ -121,6 +126,13 @@ export default class ConversationsScreen extends React.Component {
     } = styles
 
     if (conversations) {
+      if (conversations.length == 0 ){
+        return (
+          <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Make some friends!</Text>
+          </View>
+        )
+      }
       return (
         <View style={{ backgroundColor: '#fff', flex: 1 }}>
           <ScrollView>

@@ -94,14 +94,14 @@ export default class MyProfileScreen extends React.Component {
   onSubmit = () => {
     const { avatarSource, currentUser } = this.state
     const uri = avatarSource.uri
-    const apiUrl = `http://localhost:3000/v1/uploads`
+    const apiUrl = `http://localhost:3000/v1/uploads?userId=${currentUser.id}`
     const uriParts = uri.split('.')
     const fileType = uriParts[uriParts.length - 1];
     const formData = new FormData()
         formData.append('photo', {
           uri,
           name: `photo.${fileType}`,
-          type: `image/${fileType}`,
+          type: `image/${fileType}`
         });
     const options = {
           method: 'POST',

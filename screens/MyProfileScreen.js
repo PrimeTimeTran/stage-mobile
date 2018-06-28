@@ -20,7 +20,7 @@ import { API_ROOT } from '../constants/ApiConfig'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 
-import { Spinner, UserDescription } from '../components/common'
+import { Spinner, UserDescription, UploadButton } from '../components/common'
 
 const { width } = Dimensions.get('window')
 const defaultImage =
@@ -70,7 +70,6 @@ export default class MyProfileScreen extends React.Component {
     this.state = {
       avatarSource: null,
       currentUser: null,
-      image: null,
       size: { width, height: 300 }
     }
   }
@@ -153,6 +152,7 @@ export default class MyProfileScreen extends React.Component {
       if (response.cancelled) {
         console.log('User cancelled image picker')
       } else {
+        console.log('Chose Photo');
         let source = { uri: response.uri }
 
         // You can also display the image using data:
@@ -188,11 +188,29 @@ export default class MyProfileScreen extends React.Component {
   }
 
   renderPhotoButton() {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ flex: 1, height: 100, width: 100, backgroundColor: 'red'}}>
+    if (this.state.avatarSource) {
+      return (
+      <TouchableOpacity
+        onPress={() => this.onSubmit()}
+        style={styles.photoButtonStyle}>
+        <Icon
+          name="save"
+          type="font-awesome"
+          color="#000"
+          size={20}
+          containerStyle={{
+            marginTop: 3,
+            padding: 0
+          }}
+        />
+        <Text style={{ color: '#000' }}>Save</Text>
+      </TouchableOpacity>
+      )
+    } else {
+      return (
         <TouchableOpacity
-          onPress={() => this.handleChoosePhoto()}>
+          onPress={() => this.handleChoosePhoto()}
+          style={styles.photoButtonStyle}>
           <Icon
             name="camera"
             type="material-community"
@@ -203,81 +221,76 @@ export default class MyProfileScreen extends React.Component {
               padding: 0
             }}
           />
-          <Text style={{ color: '#000' }}>Edit</Text>
+          <Text style={{ color: '#000' }}>Upload</Text>
         </TouchableOpacity>
-        </View>
-        <View style={{ flex: 1, height: 100, width: 100, backgroundColor: 'blue' }}>
-          <TouchableOpacity
-            onPress={() => this.onSubmit()}>
-            <Icon
-              name="camera"
-              type="material-community"
-              color="#000"
-              size={20}
-              containerStyle={{
-                marginTop: 3,
-                padding: 0
-              }}
-            />
-            <Text style={{ color: '#000' }}>Upload</Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    )
-  }
-
-  renderCurrentUser() {
-    const { size, currentUser } = this.state
-
-    if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
-      return (
-        <ScrollView>
-          <View style={{ flex: 1 }}>
-            <Carousel
-              autoplay={false}
-              style={size}
-              onAnimateNextPage={p => console.log(p)}>
-              {currentUser.uploads.map(upload => {
-                return (
-                  <View style={size} key={upload.id}>
-                    <Image style={size} source={{ uri: upload.url }} />
-                  </View>
-                )
-              })}
-            </Carousel>
-          </View>
-          <UserDescription user={currentUser} />
-
-          {this.renderPhotoButton()}
-          {this.renderActionSheetForPhoto()}
-        </ScrollView>
-      )
-    } else {
-      return (
-        <View style={size}>
-          <Image
-            style={[size, { resizeMode: 'cover' }]}
-            source={
-              this.state.avatarSource
-                ? this.state.avatarSource
-                : { uri: defaultImage }
-            }
-          />
-          <UserDescription user={currentUser} />
-          {this.renderPhotoButton()}
-          {this.renderActionSheetForPhoto()}
-        </View>
       )
     }
   }
 
+  renderCurrentUser() {
+    const { size, currentUser, avatarSource } = this.state
+
+    if (avatarSource) {
+      return (
+        <View style={size}>
+          <Image
+            style={[size, { resizeMode: 'cover' }]}
+            source={avatarSource}
+          />
+        </View>
+      )
+    } else {
+      if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
+        return (
+          <ScrollView>
+            <View style={{ flex: 1 }}>
+              <Carousel
+                autoplay={false}
+                style={size}
+                onAnimateNextPage={p => console.log(p)}>
+                {currentUser.uploads.map(upload => {
+                  return (
+                    <View style={size} key={upload.id}>
+                      <Image style={size} source={{ uri: upload.url }} />
+                    </View>
+                  )
+                })}
+              </Carousel>
+            </View>
+          </ScrollView>
+        )
+      } else {
+        return (
+          <View style={size}>
+            <Image
+              style={[size, { resizeMode: 'cover' }]}
+              source={
+                avatarSource
+                  ? avatarSource
+                  : { uri: defaultImage }
+              }
+            />
+          </View>
+        )
+      }
+    }
+  }
+
   render() {
-   if (this.state.currentUser)  {
-     return this.renderCurrentUser()
-   } else {
-     return <Spinner />
-   }
+    const { currentUser} = this.state
+
+    if (currentUser)  {
+      return (
+        <View>
+          {this.renderCurrentUser()}
+          <UserDescription user={currentUser} />
+          {this.renderPhotoButton()}
+          {this.renderActionSheetForPhoto()}
+        </View>
+      )
+    } else {
+      return <Spinner />
+    }
   }
 }
 

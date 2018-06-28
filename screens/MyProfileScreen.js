@@ -68,9 +68,10 @@ export default class MyProfileScreen extends React.Component {
     super(props)
 
     this.state = {
-      photo: null,
-      size: { width, height: 300 },
-      currentUser: null
+      avatarSource: null,
+      currentUser: null,
+      image: null,
+      size: { width, height: 300 }
     }
   }
 
@@ -92,22 +93,30 @@ export default class MyProfileScreen extends React.Component {
 
   onSubmit = () => {
     const { avatarSource } = this.state
-
-    const data = new FormData();
-    data.append('upload', avatarSource)
+    const apiUrl = `http://localhost:3000/v1/uploads`
+    const uri = avatarSource.uri
+    const uriParts = uri.split('.')
+    const fileType = uriParts[uriParts.length - 1];
+    const formData = new FormData()
+        formData.append('photo', {
+          uri,
+          name: `photo.${fileType}`,
+          type: `image/${fileType}`,
+        });
+    const options = {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+    return fetch(apiUrl, options)
 
     const request = client()
     request
-      .then(api => api.post(`${API_ROOT}uploads`, { data: data }))
-      .then(response => {
-        return response.data
-      })
-      .then(data => {
-        this.setState({ conversations: data })
-      })
-      .catch(error => {
-        console.log('Error:', error)
-      })
+      .then(api => api.post(`${API_ROOT}uploads`, { data: data }, options))
+      return fetch(apiUrl, options);
   }
 
   async askPhotoPermission() {

@@ -69,8 +69,7 @@ export default class MyProfileScreen extends React.Component {
 
     this.state = {
       avatarSource: null,
-      currentUser: null,
-      size: { width, height: 300 }
+      currentUser: null
     }
   }
 
@@ -152,7 +151,6 @@ export default class MyProfileScreen extends React.Component {
       if (response.cancelled) {
         console.log('User cancelled image picker')
       } else {
-        console.log('Chose Photo');
         let source = { uri: response.uri }
 
         // You can also display the image using data:
@@ -188,24 +186,25 @@ export default class MyProfileScreen extends React.Component {
   }
 
   renderPhotoButton() {
-    if (this.state.avatarSource) {
+    const{ avatarSource } = this.state
+    if (avatarSource) {
       return (
-      <TouchableOpacity
-        onPress={() => this.onSubmit()}
-        style={styles.photoButtonStyle}>
-        <Icon
-          name="save"
-          type="font-awesome"
-          color="#000"
-          size={20}
-          containerStyle={{
-            marginTop: 3,
-            padding: 0
-          }}
-        />
-        <Text style={{ color: '#000' }}>Save</Text>
-      </TouchableOpacity>
-      )
+        <TouchableOpacity
+          onPress={() => this.onSubmit()}
+          style={styles.photoButtonStyle}>
+          <Icon
+            name="save"
+            type="font-awesome"
+            color="#000"
+            size={20}
+            containerStyle={{
+              marginTop: 3,
+              padding: 0
+            }}
+          />
+          <Text style={{ color: '#000' }}>Save</Text>
+        </TouchableOpacity>
+        )
     } else {
       return (
         <TouchableOpacity
@@ -228,65 +227,65 @@ export default class MyProfileScreen extends React.Component {
   }
 
   renderCurrentUser() {
-    const { size, currentUser, avatarSource } = this.state
+    const { currentUser, avatarSource } = this.state
+    const { size, photoStyle } = styles
 
     if (avatarSource) {
       return (
-        <View style={size}>
-          <Image
-            style={[size, { resizeMode: 'cover' }]}
-            source={avatarSource}
-          />
-        </View>
+        <Image
+          style={photoStyle}
+          source={avatarSource}
+        />
       )
     } else {
       if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
-        return (
-          <ScrollView>
-            <View style={{ flex: 1 }}>
-              <Carousel
-                autoplay={false}
-                style={size}
-                onAnimateNextPage={p => console.log(p)}>
-                {currentUser.uploads.map(upload => {
-                  return (
-                    <View style={size} key={upload.id}>
-                      <Image style={size} source={{ uri: upload.url }} />
-                    </View>
-                  )
-                })}
-              </Carousel>
-            </View>
-          </ScrollView>
-        )
+        if (currentUser.uploads.length === 1 ) {
+          return (
+            <Image
+              style={photoStyle}
+              source={{ uri: currentUser.uploads[0].url }}
+            />
+          )
+        } else {
+          return (
+            <Carousel
+              autoplay={false}
+              style={size}
+              onAnimateNextPage={p => console.log(p)}>
+              {currentUser.uploads.map(upload => {
+                return (
+                  <Image
+                    key={upload.id}
+                    style={photoStyle}
+                    source={{ uri: upload.url }}
+                  />
+                )
+              })}
+            </Carousel>
+          )
+        }
       } else {
         return (
-          <View style={size}>
-            <Image
-              style={[size, { resizeMode: 'cover' }]}
-              source={
-                avatarSource
-                  ? avatarSource
-                  : { uri: defaultImage }
-              }
-            />
-          </View>
+          <Image
+            style={photoStyle}
+            source={{ uri: defaultImage }}
+          />
         )
       }
     }
   }
 
   render() {
-    const { currentUser} = this.state
+    const { currentUser } = this.state
 
     if (currentUser)  {
       return (
-        <View>
+        <ScrollView>
           {this.renderCurrentUser()}
           <UserDescription user={currentUser} />
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}
-        </View>
+        </ScrollView>
       )
     } else {
       return <Spinner />
@@ -295,6 +294,15 @@ export default class MyProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  size: {
+    width,
+    height: 300
+  },
+  photoStyle: {
+    width,
+    height: 300,
+    resizeMode: 'cover'
+  },
   photoButtonStyle: {
     backgroundColor: '#eeeeeeaa',
     width: 80,

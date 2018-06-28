@@ -251,10 +251,6 @@ export default class MyProfileScreen extends React.Component {
 
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}
-
-          <TouchableOpacity onPress={this.onSubmit} >
-            <Text>Submit</Text>
-          </TouchableOpacity>
         </ScrollView>
       )
     } else {
@@ -268,13 +264,6 @@ export default class MyProfileScreen extends React.Component {
                 : { uri: defaultImage }
             }
           />
-
-
-          <TouchableOpacity onPress={this.onSubmit} >
-            <Text>Submit</Text>
-          </TouchableOpacity>
-
-
           <UserDescription user={currentUser} />
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}

@@ -9,7 +9,20 @@ import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
 
+import { Permissions, ImagePicker } from 'expo'
+import MessageImage from '../components/MessageImage'
+
+import ActionSheet from 'react-native-actionsheet'
 import { Spinner } from '../components/common'
+
+let options = {
+  title: 'Select Upload',
+  customButtons: [{ name: 'fb', title: 'Choose Photo' }],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+}
 
 export default class ConversationScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -68,7 +81,8 @@ export default class ConversationScreen extends Component {
   onReceive = data => {
     const conversationId = this.props.navigation.state.params.conversation_id
     const message = JSON.parse(data).gifted_chat
-    const isSameConversation = JSON.parse(data).conversation_id == conversationId
+    const isSameConversation =
+      JSON.parse(data).conversation_id == conversationId
 
     if (message.user._id != this.state.currentUser.id && isSameConversation) {
       this.setState(previousState => ({
@@ -95,6 +109,7 @@ export default class ConversationScreen extends Component {
 
   renderBubble = props => {
     let username = props.currentMessage.user.name
+    let isImage = props.currentMessage.image != null
     const [color, textColor] = this.getColor(username)
 
     if (this.state.currentUser.id == props.currentMessage.user._id) {
@@ -114,6 +129,10 @@ export default class ConversationScreen extends Component {
             left: {
               backgroundColor: color,
               padding: 5
+            },
+            right: {
+              borderColor: '#c00',
+              backgroundColor: isImage ? Colors.transparent : Colors.defaultBlue
             }
           }}
         />
@@ -173,6 +192,107 @@ export default class ConversationScreen extends Component {
     })
   }
 
+  handleOpenAttachment() {
+    this.photoChoosingActionSheet.show()
+  }
+
+  async takePhoto() {
+    const { cameraStatus, cameraRollStatus } = await this.askPhotoPermission()
+    if (cameraStatus === 'granted' && cameraRollStatus === 'granted') {
+      // bug in expo, need to request for again
+      await Permissions.getAsync(Permissions.CAMERA)
+      let response = await ImagePicker.launchCameraAsync(options)
+      if (response.cancelled) {
+        console.log('User cancelled image picker')
+      } else {
+        let source = { uri: response.uri }
+
+        this.setState({
+          avatarSource: source
+        })
+      }
+    }
+  }
+
+  async askPhotoPermission() {
+    const cameraStatus = await Permissions.askAsync(Permissions.CAMERA)
+    const cameraRollStatus = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+    return {
+      cameraStatus: cameraStatus.status,
+      cameraRollStatus: cameraRollStatus.status
+    }
+  }
+
+  async choosePhotoFromCameraRoll() {
+    const { cameraStatus, cameraRollStatus } = await this.askPhotoPermission()
+    if (cameraRollStatus === 'granted') {
+      // bug in expo, need to request for again
+      let response = await ImagePicker.launchImageLibraryAsync(options)
+      if (response.cancelled) {
+        console.log('User cancelled image picker')
+      } else {
+        let source = { uri: response.uri }
+        console.log(response.uri)
+        this.appendPendingUploadMessage(response.uri)
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data }
+
+        this.setState({
+          avatarSource: source
+        })
+      }
+    }
+  }
+
+  appendPendingUploadMessage(photoURI) {
+    let message = {
+      _id: Math.random()
+        .toString(36)
+        .substr(2, 9),
+      isSending: true,
+      created_at: new Date().toISOString(),
+      image: photoURI,
+      user: {
+        _id: this.state.currentUser.id,
+        name: this.state.currentUser.first_name
+      }
+    }
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, message)
+    }))
+  }
+
+  renderActionSheetForPhoto() {
+    return (
+      <ActionSheet
+        ref={o => (this.photoChoosingActionSheet = o)}
+        title={'Select Avatar'}
+        options={['Take Photo...', 'Choose from Library...', 'Cancel']}
+        cancelButtonIndex={2}
+        onPress={index => {
+          if (index === 0) {
+            this.takePhoto()
+          } else if (index === 1) {
+            this.choosePhotoFromCameraRoll()
+          }
+        }}
+      />
+    )
+  }
+
+  cancelInProgressUpload(data) {
+    let { currentMessage } = data
+    this.setState(previousState => {
+      let messages = previousState.messages.filter(item => {
+        return item._id != currentMessage._id
+      })
+      return {
+        messages: messages
+      }
+    })
+  }
+
   render() {
     const { currentUser, messages } = this.state
 
@@ -183,19 +303,53 @@ export default class ConversationScreen extends Component {
             style={{ backgroundColor: '#fff' }}
             onPressAvatar={props => this.onAvatarPress(props)}
             messages={messages}
+            alwaysShowSend={true}
             onLongPress={this.onLongPress}
             renderBubble={props => this.renderBubble(props)}
+            renderMessageImage={messageImageProps => {
+              return (
+                <MessageImage
+                  {...messageImageProps}
+                  cancelInProgressUpload={() =>
+                    this.cancelInProgressUpload(messageImageProps)
+                  }
+                />
+              )
+            }}
             onSend={messages => this.onSend(messages)}
             user={{
               _id: currentUser.id
             }}
+            renderActions={() => {
+              return (
+                <TouchableOpacity
+                  onPress={() => this.handleOpenAttachment()}
+                  style={{
+                    paddingLeft: 7,
+                    paddingRight: 7,
+                    height: 43,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}>
+                  <Icon
+                    containerStyle={{
+                      transform: [{ rotate: '140deg' }]
+                    }}
+                    name="attachment"
+                    type="community-material"
+                    color={Colors.themeColor.lighten(0.3).toString()}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              )
+            }}
           />
+
+          {this.renderActionSheetForPhoto()}
         </View>
       )
     } else {
-      return (
-        <Spinner />
-      )
+      return <Spinner />
     }
   }
 }

@@ -80,7 +80,6 @@ export default class SearchHeader extends Component {
             onPress={() => this.props.navigation.goBack()}
             title={ t('general.cancel') }
             buttonStyle={{
-              color: '#c00',
               backgroundColor: 'transparent'
             }}
             style={{

@@ -92,9 +92,9 @@ export default class MyProfileScreen extends React.Component {
   }
 
   onSubmit = () => {
-    const { avatarSource } = this.state
-    const apiUrl = `http://localhost:3000/v1/uploads`
+    const { avatarSource, currentUser } = this.state
     const uri = avatarSource.uri
+    const apiUrl = `http://localhost:3000/v1/uploads`
     const uriParts = uri.split('.')
     const fileType = uriParts[uriParts.length - 1];
     const formData = new FormData()
@@ -108,15 +108,14 @@ export default class MyProfileScreen extends React.Component {
           body: formData,
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data'
           },
         };
     return fetch(apiUrl, options)
 
-    const request = client()
-    request
-      .then(api => api.post(`${API_ROOT}uploads`, { data: data }, options))
-      return fetch(apiUrl, options);
+    // request()
+    //   .then(api => api.post(`${API_ROOT}uploads`, options))
+    //   // return fetch(apiUrl, options);
   }
 
   async askPhotoPermission() {
@@ -190,21 +189,41 @@ export default class MyProfileScreen extends React.Component {
 
   renderPhotoButton() {
     return (
-      <TouchableOpacity
-        style={styles.photoButtonStyle}
-        onPress={() => this.handleChoosePhoto()}>
-        <Icon
-          name="camera"
-          type="material-community"
-          color="#000"
-          size={20}
-          containerStyle={{
-            marginTop: 3,
-            padding: 0
-          }}
-        />
-        <Text style={{ color: '#000' }}>Edit</Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ flex: 1, height: 100, width: 100, backgroundColor: 'red'}}>
+        <TouchableOpacity
+          onPress={() => this.handleChoosePhoto()}>
+          <Icon
+            name="camera"
+            type="material-community"
+            color="#000"
+            size={20}
+            containerStyle={{
+              marginTop: 3,
+              padding: 0
+            }}
+          />
+          <Text style={{ color: '#000' }}>Edit</Text>
+        </TouchableOpacity>
+        </View>
+        <View style={{ flex: 1, height: 100, width: 100, backgroundColor: 'blue' }}>
+          <TouchableOpacity
+            onPress={() => this.onSubmit()}>
+            <Icon
+              name="camera"
+              type="material-community"
+              color="#000"
+              size={20}
+              containerStyle={{
+                marginTop: 3,
+                padding: 0
+              }}
+            />
+            <Text style={{ color: '#000' }}>Upload</Text>
+          </TouchableOpacity>
+        </View>
+
+      </View>
     )
   }
 

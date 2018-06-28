@@ -232,7 +232,7 @@ export default class StagesScreen extends React.Component {
                     </CardSection>
                     <CardSection>
                       <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <View style={[descriptionStyle, { marginTop: 0 }]}>
+                        <View style={descriptionStyle}>
                           <Icon
                             name="account-multiple"
                             type="material-community"

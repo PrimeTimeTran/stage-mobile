@@ -68,6 +68,7 @@ export default class MyProfileScreen extends React.Component {
     super(props)
 
     this.state = {
+      photo: null,
       size: { width, height: 300 },
       currentUser: null
     }
@@ -89,9 +90,24 @@ export default class MyProfileScreen extends React.Component {
     })
   }
 
-  _onLayoutDidChange = e => {
-    const layout = e.nativeEvent.layout
-    this.setState({ size: { width: layout.width, height: layout.height } })
+  onSubmit = () => {
+    const { avatarSource } = this.state
+
+    const data = new FormData();
+    data.append('upload', avatarSource)
+
+    const request = client()
+    request
+      .then(api => api.post(`${API_ROOT}uploads`, { data: data }))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setState({ conversations: data })
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
   async askPhotoPermission() {
@@ -189,7 +205,7 @@ export default class MyProfileScreen extends React.Component {
     if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
       return (
         <ScrollView>
-          <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
+          <View style={{ flex: 1 }}>
             <Carousel
               autoplay={false}
               style={size}
@@ -207,6 +223,10 @@ export default class MyProfileScreen extends React.Component {
 
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}
+
+          <TouchableOpacity onPress={this.onSubmit} >
+            <Text>Submit</Text>
+          </TouchableOpacity>
         </ScrollView>
       )
     } else {
@@ -220,6 +240,13 @@ export default class MyProfileScreen extends React.Component {
                 : { uri: defaultImage }
             }
           />
+
+
+          <TouchableOpacity onPress={this.onSubmit} >
+            <Text>Submit</Text>
+          </TouchableOpacity>
+
+
           <UserDescription user={currentUser} />
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}

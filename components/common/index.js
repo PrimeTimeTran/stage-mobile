@@ -11,4 +11,5 @@ export * from './Socials'
 export * from './Drawer'
 export * from './DrawerCard'
 export * from './FriendCard'
+export * from './UserProfilePhotos'
 

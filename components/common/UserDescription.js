@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../../constants/Colors'
@@ -51,7 +51,9 @@ class UserDescription extends Component {
                 bottom: 5,
                 justifyContent: 'space-between'
               }}>
-              <Icon type="font-awesome" name="send-o" color="grey" size={20} />
+              <TouchableOpacity onPress={() => console.log('Test')}>
+                <Icon type="font-awesome" name="send-o" color="grey" size={20} />
+              </TouchableOpacity>
               <Icon type="font-awesome" name="gift" color="grey" size={20} />
             </View>
           </View>

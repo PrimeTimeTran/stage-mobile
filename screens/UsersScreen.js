@@ -39,7 +39,6 @@ export default class UsersScreen extends Component {
     request
       .then(api => api.get(`${API_ROOT}conversations/${conversationId}`))
       .then(response => {
-        console.log('Response: ddd', response)
         this.setState({ stage: response.data }, () => {
           this.props.navigation.setParams({
             title: `${this.state.stage.user_count} Members`
@@ -54,7 +53,8 @@ export default class UsersScreen extends Component {
   onAvatarPress = (user, name) => {
     this.props.navigation.navigate('Profile', {
       user_id: user,
-      name: name
+      name: name,
+      navigation: this.props.navigation
     })
   }
 

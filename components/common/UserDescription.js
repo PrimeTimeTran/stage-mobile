@@ -3,9 +3,44 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../../constants/Colors'
+import { API_ROOT } from '../../constants/ApiConfig'
+import client from '../../utils/client'
 import { CardSection } from './CardSection'
 
 class UserDescription extends Component {
+  state = { conversationId: null, otherUserName: null }
+
+  async componentWillMount() {
+    const otherUserId = this.props.user.id
+    const request = client()
+    request
+      .then(api =>
+        api.get(`${API_ROOT}conversations/present?otherUserId=${otherUserId}`)
+      )
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setState({
+          conversationId: data.conversation_id,
+          otherUserName: data.other_user_name
+        })
+      })
+      .catch(error => {
+        console.log('Error', error)
+      })
+  }
+
+  onGoToConversation = () => {
+    const { conversationId, otherUserName } = this.state
+    if (conversationId) {
+      this.props.navigation.navigate('PrivateConversation', {
+        conversation_id: conversationId,
+        other_user_name: otherUserName
+      })
+    }
+  }
+
   render() {
     const { user } = this.props
     const { descriptionStyle, titleStyle } = styles
@@ -51,7 +86,7 @@ class UserDescription extends Component {
                 bottom: 5,
                 justifyContent: 'space-between'
               }}>
-              <TouchableOpacity onPress={() => console.log('Test')}>
+              <TouchableOpacity onPress={this.onGoToConversation}>
                 <Icon type="font-awesome" name="send-o" color="grey" size={20} />
               </TouchableOpacity>
               <Icon type="font-awesome" name="gift" color="grey" size={20} />

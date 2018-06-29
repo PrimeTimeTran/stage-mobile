@@ -61,7 +61,6 @@ export default class ConversationScreen extends Component {
       .catch(error => {
         console.log('Error:', error)
       })
-
     setCallback(this.onReceive)
   }
 

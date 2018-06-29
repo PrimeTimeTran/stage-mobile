@@ -57,7 +57,8 @@ const ConversationsStack = createStackNavigator(
     SearchConversations: SearchConversationsScreen,
     Conversation: ConversationScreen,
     Users: UsersScreen,
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    PrivateConversation: ConversationScreen,
   },
   {
     transitionConfig: ConversationsTransitionConfiguration,

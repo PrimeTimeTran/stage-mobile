@@ -50,7 +50,7 @@ export default class ProfileScreen extends React.Component {
       return (
         <ScrollView style={containerStyle}>
           <UserProfilePhotos user={user} />
-          <UserDescription user={user}/>
+          <UserDescription user={user} navigation={this.props.navigation} />
         </ScrollView>
       )
     } else {

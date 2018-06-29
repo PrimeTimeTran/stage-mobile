@@ -61,7 +61,6 @@ export default class UsersScreen extends Component {
   render() {
     const { users, stage } = this.state
     const { avatarStyle } = styles
-    console.log('Stage', stage)
 
     if (users) {
       return (

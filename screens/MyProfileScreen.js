@@ -3,13 +3,11 @@ import {
   Text,
   Image,
   ScrollView,
-  View,
   Dimensions,
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
 
-import Carousel from 'react-native-looped-carousel'
 import { Icon } from 'react-native-elements'
 import { Permissions, ImagePicker } from 'expo'
 import ActionSheet from 'react-native-actionsheet'
@@ -20,11 +18,9 @@ import { API_ROOT } from '../constants/ApiConfig'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 
-import { Spinner, UserDescription, UploadButton } from '../components/common'
+import { UserProfilePhotos, UserDescription, Spinner } from '../components/common'
 
 const { width } = Dimensions.get('window')
-const defaultImage =
-  'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
 
 let options = {
   title: 'Select Avatar',
@@ -228,7 +224,7 @@ export default class MyProfileScreen extends React.Component {
 
   renderCurrentUser() {
     const { currentUser, avatarSource } = this.state
-    const { size, photoStyle } = styles
+    const { photoStyle } = styles
 
     if (avatarSource) {
       return (
@@ -238,40 +234,7 @@ export default class MyProfileScreen extends React.Component {
         />
       )
     } else {
-      if (currentUser && currentUser.uploads && currentUser.uploads.length > 0) {
-        if (currentUser.uploads.length === 1 ) {
-          return (
-            <Image
-              style={photoStyle}
-              source={{ uri: currentUser.uploads[0].url }}
-            />
-          )
-        } else {
-          return (
-            <Carousel
-              autoplay={false}
-              style={size}
-              onAnimateNextPage={p => console.log(p)}>
-              {currentUser.uploads.map(upload => {
-                return (
-                  <Image
-                    key={upload.id}
-                    style={photoStyle}
-                    source={{ uri: upload.url }}
-                  />
-                )
-              })}
-            </Carousel>
-          )
-        }
-      } else {
-        return (
-          <Image
-            style={photoStyle}
-            source={{ uri: defaultImage }}
-          />
-        )
-      }
+      return <UserProfilePhotos user={currentUser} />
     }
   }
 
@@ -294,10 +257,6 @@ export default class MyProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  size: {
-    width,
-    height: 300
-  },
   photoStyle: {
     width,
     height: 300,

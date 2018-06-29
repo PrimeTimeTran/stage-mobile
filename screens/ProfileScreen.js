@@ -1,17 +1,13 @@
 import React from 'react'
-import { Image, ScrollView, View, Dimensions } from 'react-native'
-
-import Carousel from 'react-native-looped-carousel'
+import { ScrollView, Dimensions } from 'react-native'
 
 import Colors from '../constants/Colors'
 import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
-import { UserDescription } from '../components/common'
+import { UserProfilePhotos, UserDescription, Spinner } from '../components/common'
 
-const { width } = Dimensions.get('window')
-const defaultImage =
-  'https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-512.png'
+const { height } = Dimensions.get('window')
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -27,8 +23,7 @@ export default class ProfileScreen extends React.Component {
     super(props)
 
     this.state = {
-      size: { width, height: 300 },
-      user: {}
+      user: null
     }
   }
 
@@ -48,39 +43,25 @@ export default class ProfileScreen extends React.Component {
       })
   }
 
-  _onLayoutDidChange = e => {
-    const layout = e.nativeEvent.layout
-    this.setState({ size: { width: layout.width, height: layout.height } })
-  }
-
   render() {
-    const { size, user } = this.state
-    if (user && user.uploads && user.uploads.length > 0) {
+    const { user } = this.state
+    const { containerStyle } = styles
+    if (user) {
       return (
-        <ScrollView style={{ backgroundColor: '#fff' }}>
-          <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
-            <Carousel
-              autoplay={false}
-              style={size}
-              onAnimateNextPage={p => console.log(p)}>
-              {user.uploads.map(upload => {
-                return (
-                  <View style={size} key={upload.id}>
-                    <Image style={size} source={{ uri: upload.url }} />
-                  </View>
-                )
-              })}
-            </Carousel>
-          </View>
-          <UserDescription user={user} />
+        <ScrollView style={containerStyle}>
+          <UserProfilePhotos user={user} />
+          <UserDescription user={user}/>
         </ScrollView>
       )
     } else {
-      return (
-        <View style={size}>
-          <Image style={size} source={{ uri: defaultImage }} />
-        </View>
-      )
+      return <Spinner />
     }
+  }
+}
+
+const styles = {
+  containerStyle: {
+    minHeight: height,
+    backgroundColor: 'white'
   }
 }

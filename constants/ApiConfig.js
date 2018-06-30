@@ -10,7 +10,9 @@ if (false) {
 
   // Requirement for Loi's local development
   if (Platform.OS == 'ios') {
-    backendHost = 'http://localhost:3000'
+    backendHost = 'http://192.168.20.104:3000'
+    // backendHost = 'http://localhost:3000'
+    // backendHost = 'https://staging.getonstageapp.com'
   } else {
     backendHost = BACKEND_API_HOST
   }

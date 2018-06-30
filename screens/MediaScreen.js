@@ -3,7 +3,8 @@ import { Image, Dimensions, TouchableOpacity, View, Text } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
-import CurrentUser from '../utils/CurrentUser'
+import { API_ROOT } from '../constants/ApiConfig'
+import client from '../utils/client'
 
 import {
   Spinner
@@ -30,12 +31,21 @@ export default class MediaScreen extends Component {
     headerTintColor: 'white'
   })
 
-  state = { currentUser: null, selected: [] }
+  state = { uploads: null, selected: [] }
 
-  componentWillMount() {
-    CurrentUser.get().then(currentUser => {
-      this.setState({ currentUser })
-    })
+  async componentWillMount() {
+    const request = client()
+    request
+      .then(api => api.get(`${API_ROOT}uploads`))
+      .then(response => {
+        return response.data
+      })
+      .then(data => {
+        this.setState({ uploads: data })
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
   onToggleSelectUpload = id => {
@@ -53,8 +63,8 @@ export default class MediaScreen extends Component {
   }
 
   render() {
-    const { currentUser } = this.state
-    if (currentUser) {
+    const { uploads } = this.state
+    if (uploads) {
       return (
         <View style={{ flex: 1, width }}>
           <View
@@ -63,7 +73,7 @@ export default class MediaScreen extends Component {
               flexWrap: 'wrap',
               justifyContent: 'center'
             }}>
-            {currentUser.uploads.map(upload => {
+            {uploads.map(upload => {
               let selected = this.state.selected.includes(upload.id) ? 'red' : 'transparent'
               return (
                 <TouchableOpacity onPress={() => this.onToggleSelectUpload(upload.id)}>

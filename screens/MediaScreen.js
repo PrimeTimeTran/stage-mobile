@@ -3,7 +3,6 @@ import { Image, Dimensions, TouchableOpacity, View, Text } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import {
@@ -36,7 +35,7 @@ export default class MediaScreen extends Component {
   async componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}uploads`))
+      .then(api => api.get(`uploads`))
       .then(response => {
         return response.data
       })
@@ -51,10 +50,10 @@ export default class MediaScreen extends Component {
   onToggleSelectUpload = id => {
     const { selected } = this.state
     if (selected.includes(id)) {
-      const unSelected = selected.filter(uploadId => uploadId != id)
-      this.setState({ selected: unSelected })
+      const isStillSelected = selected.filter(uploadId => uploadId != id)
+      this.setState({ selected: isStillSelected })
     } else {
-      this.setState({ selected: [...selected, id]})
+      this.setState({ selected: [...selected, id] })
     }
   }
 
@@ -95,10 +94,9 @@ export default class MediaScreen extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-              )
-            })}
+            )})}
           </View>
-          { this.state.selected.length > 0 &&
+          {this.state.selected.length > 0 &&
             <Button
               title="Delete"
               fontSize={14}
@@ -111,8 +109,7 @@ export default class MediaScreen extends Component {
                 backgroundColor: Colors.buttonColor.toString()
               }}
               onPress={this.onRemoveUploads}
-            ><Text>Delete</Text></Button>
-          }
+            ><Text>Delete</Text></Button>}
         </View>
       )
     } else {

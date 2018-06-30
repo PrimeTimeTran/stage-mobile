@@ -4,7 +4,6 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import { Avatar, Spinner } from '../components/common'
@@ -28,7 +27,7 @@ export default class UsersScreen extends Component {
     conversationId = this.props.navigation.state.params.conversation_id
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}conversations/${conversationId}/users`))
+      .then(api => api.get(`conversations/${conversationId}/users`))
       .then(response => {
         this.setState({ users: response.data })
       })
@@ -37,7 +36,7 @@ export default class UsersScreen extends Component {
       })
 
     request
-      .then(api => api.get(`${API_ROOT}conversations/${conversationId}`))
+      .then(api => api.get(`conversations/${conversationId}`))
       .then(response => {
         this.setState({ stage: response.data }, () => {
           this.props.navigation.setParams({

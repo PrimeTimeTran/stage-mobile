@@ -7,7 +7,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Colors from '../constants/Colors'
 import CurrentUser from '../utils/CurrentUser'
 import { t } from '../locales/i18n'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 export default class EditProfileScreen extends Component {
@@ -101,7 +100,7 @@ export default class EditProfileScreen extends Component {
 
     const request = client()
     request
-      .then(api => api.put(`${API_ROOT}users/${id}`, {user: {
+      .then(api => api.put(`users/${id}`, {user: {
         first_name,
         last_name,
         email,

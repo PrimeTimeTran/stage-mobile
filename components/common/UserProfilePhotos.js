@@ -17,10 +17,10 @@ class UserProfilePhotos extends Component {
     if (user && user.uploads && user.uploads.length > 0) {
       if (user.uploads.length === 1 ) {
         return (
-            <Image
-              style={photoStyle}
-              source={{ uri: user.uploads[0].url }}
-            />
+          <Image
+            style={photoStyle}
+            source={{ uri: user.uploads[0].url }}
+          />
         )
       } else {
         return (
@@ -41,9 +41,7 @@ class UserProfilePhotos extends Component {
         )
       }
     } else {
-      return (
-        <Image style={size} source={{ uri: defaultImage }} />
-      )
+      return <Image style={size} source={{ uri: defaultImage }} />
     }
   }
 }

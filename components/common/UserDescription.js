@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../../constants/Colors'
-import { API_ROOT } from '../../constants/ApiConfig'
 import client from '../../utils/client'
 import { CardSection } from './CardSection'
 
@@ -15,7 +14,7 @@ class UserDescription extends Component {
     const request = client()
     request
       .then(api =>
-        api.get(`${API_ROOT}conversations/present?otherUserId=${otherUserId}`)
+        api.get(`conversations/present?otherUserId=${otherUserId}`)
       )
       .then(response => {
         return response.data

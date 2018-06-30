@@ -1,21 +1,20 @@
 import { Platform } from 'react-native'
-import { BACKEND_API_HOST } from 'react-native-dotenv'
+import {
+  BACKEND_API_HOST,
+  BACKEND_HOST_IOS
+} from 'react-native-dotenv'
 
 let backendHost
 const apiVersion = 'v1'
 
-if (false) {
-  backendHost = `https://${hostname}`
-} else {
+// Requirement for Loi's local development
+// TODO: Add conditional for staging & production
+// STAGING API 'https://staging.getonstageapp.com'
 
-  // Requirement for Loi's local development
-  if (Platform.OS == 'ios') {
-    backendHost = 'http://192.168.20.104:3000'
-    // backendHost = 'http://localhost:3000'
-    // backendHost = 'https://staging.getonstageapp.com'
-  } else {
-    backendHost = BACKEND_API_HOST
-  }
+if (Platform.OS == 'ios') {
+  backendHost = BACKEND_HOST_IOS
+} else {
+  backendHost = BACKEND_API_HOST
 }
 
 export const API_ROOT = `${backendHost}/${apiVersion}/`

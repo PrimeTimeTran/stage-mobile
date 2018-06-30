@@ -3,7 +3,6 @@ import { TouchableOpacity, ScrollView, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import { FriendCard, Spinner } from '../components/common'
@@ -34,7 +33,7 @@ export default class FriendsScreen extends Component {
   async componentWillMount() {
     const request = client()
       request
-        .then(api => api.get(`${API_ROOT}friendships`))
+        .then(api => api.get(`friendships`))
         .then(response => {
           this.setState({ friends: response.data })
           return response.data
@@ -78,7 +77,6 @@ export default class FriendsScreen extends Component {
 // import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 // import Colors from '../constants/Colors'
-// import { API_ROOT } from '../constants/ApiConfig'
 // import client from '../utils/client'
 
 // import { FriendCard, Spinner } from '../components/common'
@@ -126,7 +124,7 @@ export default class FriendsScreen extends Component {
 //   async componentWillMount() {
 //     const request = client()
 //       request
-//         .then(api => api.get(`${API_ROOT}friendships`))
+//         .then(api => api.get(`friendships`))
 //         .then(response => {
 //           this.setState({ friends: response.data })
 //           return response.data

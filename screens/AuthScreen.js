@@ -9,7 +9,6 @@ import {
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import { t } from '../locales/i18n'
 import db from '../utils/PouchDB'
@@ -59,7 +58,7 @@ class AuthScreen extends Component {
     const { email, password } = this.state
     const request = client()
     request
-      .then(api => api.post(`${API_ROOT}signup`, { email, password }))
+      .then(api => api.post(`signup`, { email, password }))
       .then(response => {
         return response.data
       })

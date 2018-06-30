@@ -5,7 +5,6 @@ import { Icon } from 'react-native-elements'
 
 import { sendMessage, setCallback } from '../utils/chat'
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
 
@@ -49,7 +48,7 @@ export default class ConversationScreen extends Component {
     const request = client()
     request
       .then(api =>
-        api.get(`${API_ROOT}conversations/${conversation_id}/messages`)
+        api.get(`conversations/${conversation_id}/messages`)
       )
       .then(response => {
         return response.data

@@ -14,7 +14,6 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
 
-import { API_ROOT } from '../constants/ApiConfig'
 import { t } from '../locales/i18n'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
@@ -65,7 +64,7 @@ export default class HomeScreen extends Component {
   componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}posts`))
+      .then(api => api.get(`posts`))
       .then(response => {
         return response.data
       })
@@ -125,7 +124,7 @@ export default class HomeScreen extends Component {
   onCreatePost = body => {
     const request = client()
     request
-      .then(api => api.post(`${API_ROOT}posts/`, { body: body }))
+      .then(api => api.post(`posts/`, { body: body }))
       .then(response => {
         return response.data
       })

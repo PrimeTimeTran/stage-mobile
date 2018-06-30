@@ -14,7 +14,6 @@ import ActionSheet from 'react-native-actionsheet'
 
 import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
-import { API_ROOT } from '../constants/ApiConfig'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 
@@ -74,7 +73,7 @@ export default class MyProfileScreen extends React.Component {
       this.setState({ currentUser })
       const request = client()
         request
-          .then(api => api.get(`${API_ROOT}users/${this.state.currentUser.id}`))
+          .then(api => api.get(`users/${this.state.currentUser.id}`))
           .then(response => {
             this.setState({ currentUser: response.data })
             return response.data
@@ -108,7 +107,7 @@ export default class MyProfileScreen extends React.Component {
     return fetch(apiUrl, options)
 
     // request()
-    //   .then(api => api.post(`${API_ROOT}uploads`, options))
+    //   .then(api => api.post(`uploads`, options))
     //   // return fetch(apiUrl, options);
   }
 

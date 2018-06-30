@@ -15,7 +15,6 @@ import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import { Card, CardSection, Spinner } from '../components/common'
 import FollowingStage from '../components/FollowingStage'
 
@@ -52,7 +51,7 @@ export default class StagesScreen extends React.Component {
   componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}stages`))
+      .then(api => api.get(`stages`))
       .then(response => {
         return response.data
       })
@@ -120,7 +119,7 @@ export default class StagesScreen extends React.Component {
     const params = { stageId: stageId }
     const request = client()
     request
-      .then(api => api.post(`${API_ROOT}user_conversations`, params))
+      .then(api => api.post(`user_conversations`, params))
       .then(response => {
         return response.data
       })
@@ -132,7 +131,7 @@ export default class StagesScreen extends React.Component {
   onStopFollowing = stageId => {
     const request = client()
     request
-      .then(api => api.delete(`${API_ROOT}user_conversations/${stageId}`))
+      .then(api => api.delete(`user_conversations/${stageId}`))
       .then(response => {
         return response.data
       })

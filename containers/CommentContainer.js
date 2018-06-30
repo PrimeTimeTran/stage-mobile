@@ -4,7 +4,6 @@ import { View } from 'react-native'
 import Comment from '../components/Comment'
 import CommentForm from '../components/CommentForm'
 
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 export default class CommentContainer extends Component {
@@ -20,7 +19,7 @@ export default class CommentContainer extends Component {
     const request = client()
     request
       .then(api =>
-        api.post(`${API_ROOT}posts/${postId}/comments`, {
+        api.post(`posts/${postId}/comments`, {
           body: body,
           commentable_type: 'Post',
           commentable_id: postId

@@ -15,7 +15,6 @@ import VideoPlayer from '../components/VideoPlayer'
 
 import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import { Avatar, SentAt, Spinner } from '../components/common'
@@ -64,7 +63,7 @@ export default class ConversationsScreen extends React.Component {
   componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}conversations`))
+      .then(api => api.get(`conversations`))
       .then(response => {
         return response.data
       })

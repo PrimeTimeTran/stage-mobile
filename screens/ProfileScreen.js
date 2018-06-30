@@ -2,7 +2,6 @@ import React from 'react'
 import { ScrollView, Dimensions } from 'react-native'
 
 import Colors from '../constants/Colors'
-import { API_ROOT } from '../constants/ApiConfig'
 import client from '../utils/client'
 
 import { UserProfilePhotos, UserDescription, Spinner } from '../components/common'
@@ -31,7 +30,7 @@ export default class ProfileScreen extends React.Component {
     const user_id = this.props.navigation.state.params.user_id
     const request = client()
     request
-      .then(api => api.get(`${API_ROOT}users/${user_id}`))
+      .then(api => api.get(`users/${user_id}`))
       .then(response => {
         return response.data
       })

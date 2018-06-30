@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Image, Dimensions, TouchableOpacity, View } from 'react-native'
-import { Icon } from 'react-native-elements'
+import { Image, Dimensions, TouchableOpacity, View, Text } from 'react-native'
+import { Button, Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
 import CurrentUser from '../utils/CurrentUser'
@@ -48,6 +48,10 @@ export default class MediaScreen extends Component {
     }
   }
 
+  onRemoveUploads = () => {
+    console.log('Removing Uploads')
+  }
+
   render() {
     const { currentUser } = this.state
     if (currentUser) {
@@ -84,6 +88,21 @@ export default class MediaScreen extends Component {
               )
             })}
           </View>
+          { this.state.selected.length > 0 &&
+            <Button
+              title="Delete"
+              fontSize={14}
+              icon={{
+                type: 'feather',
+                name: 'save'
+              }}
+              buttonStyle={{
+                marginTop: 10,
+                backgroundColor: Colors.buttonColor.toString()
+              }}
+              onPress={this.onRemoveUploads}
+            ><Text>Delete</Text></Button>
+          }
         </View>
       )
     } else {

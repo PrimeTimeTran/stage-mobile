@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, View, Text, } from 'react-native';
+import React, { Component } from 'react'
+import { Image, Dimensions, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
+import CurrentUser from '../utils/CurrentUser'
+
+import {
+  Spinner
+} from '../components/common'
+
+const { width } = Dimensions.get('window')
 
 export default class MediaScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,11 +29,65 @@ export default class MediaScreen extends Component {
     headerBackTitleStyle: { color: 'white' },
     headerTintColor: 'white'
   })
+
+  state = { currentUser: null, selected: [] }
+
+  componentWillMount() {
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+    })
+  }
+
+  onToggleSelectUpload = id => {
+    const { selected } = this.state
+    if (selected.includes(id)) {
+      const unSelected = selected.filter(uploadId => uploadId != id)
+      this.setState({ selected: unSelected })
+    } else {
+      this.setState({ selected: [...selected, id]})
+    }
+  }
+
   render() {
-    return (
-      <View>
-        <Text> MediaScreen </Text>
-      </View>
-    );
+    const { currentUser } = this.state
+    if (currentUser) {
+      return (
+        <View style={{ flex: 1, width }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center'
+            }}>
+            {currentUser.uploads.map(upload => {
+              let selected = this.state.selected.includes(upload.id) ? 'red' : 'transparent'
+              return (
+                <TouchableOpacity onPress={() => this.onToggleSelectUpload(upload.id)}>
+                  <View
+                    style={{
+                      marginTop: 10,
+                      marginLeft: 10,
+                      borderColor: selected,
+                      borderWidth: 3,
+                      borderRadius: 5
+                    }}>
+                    <Image
+                      style={{
+                        height: 100,
+                        width: 100,
+                        borderRadius: 3
+                      }}
+                      source={{ uri: upload.url }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              )
+            })}
+          </View>
+        </View>
+      )
+    } else {
+      return <Spinner />
+    }
   }
 }

@@ -57,11 +57,11 @@ export default class MediaScreen extends Component {
     }
   }
 
-  onRemoveUploads = () => {
+  onDeleteUploads = () => {
     const { selected } = this.state
     const request = client()
     request
-      .then(api => api.delete('uploads/1', { params: { selectedUploads: selected }}))
+      .then(api => api.delete('uploads/1', { params: { uploadIds: selected }}))
       .then(response => {
         return response.data
       })
@@ -87,7 +87,7 @@ export default class MediaScreen extends Component {
           marginTop: 10,
           backgroundColor: Colors.buttonColor.toString()
         }}
-        onPress={this.onRemoveUploads}
+        onPress={this.onDeleteUploads}
       ><Text>Delete</Text></Button>
     )
   }

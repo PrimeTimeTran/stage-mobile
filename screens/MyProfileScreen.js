@@ -18,7 +18,7 @@ import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
 import { API_ROOT } from '../constants/ApiConfig'
 
-import { UserProfilePhotos, UserDescription, Spinner } from '../components/common'
+import { UserProfilePhotos, UserDescription, Spinner, PromptModal } from '../components/common'
 
 const { width } = Dimensions.get('window')
 
@@ -65,7 +65,8 @@ export default class MyProfileScreen extends React.Component {
 
     this.state = {
       avatarSource: null,
-      currentUser: null
+      currentUser: null,
+      modalVisible: false
     }
   }
 
@@ -104,7 +105,9 @@ export default class MyProfileScreen extends React.Component {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'
           },
-        };
+        }
+    this.setModalVisible(true)
+    setInterval(() => this.setModalVisible(false), 1500)
     return fetch(apiUrl, options)
   }
 
@@ -234,8 +237,15 @@ export default class MyProfileScreen extends React.Component {
     }
   }
 
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
   render() {
-    const { currentUser } = this.state
+    const {
+      currentUser,
+      modalVisible
+    } = this.state
 
     if (currentUser)  {
       return (
@@ -244,6 +254,8 @@ export default class MyProfileScreen extends React.Component {
           <UserDescription user={currentUser} />
           {this.renderPhotoButton()}
           {this.renderActionSheetForPhoto()}
+
+          <PromptModal modalVisible={modalVisible} />
         </ScrollView>
       )
     } else {

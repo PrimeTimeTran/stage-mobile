@@ -16,6 +16,7 @@ import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
 import CurrentUser from '../utils/CurrentUser'
 import client from '../utils/client'
+import { API_ROOT } from '../constants/ApiConfig'
 
 import { UserProfilePhotos, UserDescription, Spinner } from '../components/common'
 
@@ -87,7 +88,7 @@ export default class MyProfileScreen extends React.Component {
   onSubmit = () => {
     const { avatarSource, currentUser } = this.state
     const uri = avatarSource.uri
-    const apiUrl = `http://localhost:3000/v1/uploads?userId=${currentUser.id}`
+    const apiUrl = `${API_ROOT}uploads?userId=${currentUser.id}`
     const uriParts = uri.split('.')
     const fileType = uriParts[uriParts.length - 1];
     const formData = new FormData()
@@ -105,10 +106,6 @@ export default class MyProfileScreen extends React.Component {
           },
         };
     return fetch(apiUrl, options)
-
-    // request()
-    //   .then(api => api.post(`uploads`, options))
-    //   // return fetch(apiUrl, options);
   }
 
   async askPhotoPermission() {

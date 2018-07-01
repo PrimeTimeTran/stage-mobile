@@ -55,7 +55,7 @@ export default class SearchConversationsScreen extends React.Component {
     this.setState({ performedSearch: true })
     request
       .then(api =>
-        api.get(`conversations`, { params: { keyword: text } })
+        api.get('conversations', { params: { keyword: text } })
       )
       .then(response => {
         return response.data

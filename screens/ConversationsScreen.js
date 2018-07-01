@@ -63,7 +63,7 @@ export default class ConversationsScreen extends React.Component {
   componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`conversations`))
+      .then(api => api.get('conversations'))
       .then(response => {
         return response.data
       })

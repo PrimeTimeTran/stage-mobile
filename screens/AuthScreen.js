@@ -58,7 +58,7 @@ class AuthScreen extends Component {
     const { email, password } = this.state
     const request = client()
     request
-      .then(api => api.post(`signup`, { email, password }))
+      .then(api => api.post('signup', { email, password }))
       .then(response => {
         return response.data
       })

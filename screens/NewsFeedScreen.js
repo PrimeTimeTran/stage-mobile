@@ -64,7 +64,7 @@ export default class HomeScreen extends Component {
   componentWillMount() {
     const request = client()
     request
-      .then(api => api.get(`posts`))
+      .then(api => api.get('posts'))
       .then(response => {
         return response.data
       })

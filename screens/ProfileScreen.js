@@ -18,13 +18,7 @@ export default class ProfileScreen extends React.Component {
     headerStyle: { backgroundColor: Colors.themeColor }
   })
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      user: null
-    }
-  }
+  state = { user: null }
 
   componentWillMount() {
     const user_id = this.props.navigation.state.params.user_id

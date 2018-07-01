@@ -58,9 +58,10 @@ export default class MediaScreen extends Component {
   }
 
   onRemoveUploads = () => {
+    const { selected } = this.state
     const request = client()
     request
-      .then(api => api.delete('uploads/1'))
+      .then(api => api.delete('uploads/1', { params: { selectedUploads: selected }}))
       .then(response => {
         return response.data
       })
@@ -97,9 +98,10 @@ export default class MediaScreen extends Component {
       containerStyle,
       multiImageContainer,
       multiImageStyle,
-      singleImageStyle,
+      singleUploadStyle,
       individualImageStyle
     } = styles
+
     if (uploads && uploads.length) {
       return (
         <View style={containerStyle}>
@@ -140,7 +142,7 @@ export default class MediaScreen extends Component {
                     marginLeft: 10
                   }}>
                   <Image
-                    style={[singleImageStyle, { borderColor: selected }]}
+                    style={[singleUploadStyle, { borderColor: selected }]}
                     source={{ uri: uploads.url }}
                   />
                 </View>
@@ -176,7 +178,7 @@ const styles = {
     width: 100,
     borderRadius: 3
   },
-  singleImageStyle: {
+  singleUploadStyle: {
     height: 100,
     width: 100,
     borderRadius: 3,

@@ -58,7 +58,6 @@ export default class MediaScreen extends Component {
   }
 
   onRemoveUploads = () => {
-    console.log('Removing Uploads')
     const request = client()
     request
       .then(api => api.delete('uploads/1'))
@@ -66,7 +65,6 @@ export default class MediaScreen extends Component {
         return response.data
       })
       .then(data => {
-        console.log('Data', data)
         this.setState({ uploads: data, selected: [] })
       })
       .catch(error => {
@@ -74,17 +72,39 @@ export default class MediaScreen extends Component {
       })
   }
 
+  renderDeleteButton() {
+    return (
+      this.state.selected.length &&
+      <Button
+        title="Delete"
+        fontSize={14}
+        icon={{
+          type: 'feather',
+          name: 'save'
+        }}
+        buttonStyle={{
+          marginTop: 10,
+          backgroundColor: Colors.buttonColor.toString()
+        }}
+        onPress={this.onRemoveUploads}
+      ><Text>Delete</Text></Button>
+    )
+  }
+
   render() {
     const { uploads } = this.state
+    const {
+      containerStyle,
+      multiImageContainer,
+      multiImageStyle,
+      singleImageStyle,
+      individualImageStyle
+    } = styles
     if (uploads && uploads.length) {
       return (
-        <View style={{ flex: 1, width }}>
+        <View style={containerStyle}>
           <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}>
+            style={multiImageContainer}>
             {uploads.map(upload => {
               let selected = this.state.selected.includes(upload.id) ? 'red' : 'transparent'
               return (
@@ -93,71 +113,74 @@ export default class MediaScreen extends Component {
                   key={upload.id}
                   >
                   <View
-                    style={{
-                      marginTop: 10,
-                      marginLeft: 10,
-                      borderColor: selected,
-                      borderWidth: 3,
-                      borderRadius: 5
-                    }}>
+                    style={[multiImageStyle, { borderColor: selected }]}>
                     <Image
-                      style={{
-                        height: 100,
-                        width: 100,
-                        borderRadius: 3
-                      }}
+                      style={individualImageStyle}
                       source={{ uri: upload.url }}
                     />
                   </View>
                 </TouchableOpacity>
             )})}
           </View>
-          {this.state.selected.length > 0 &&
-            <Button
-              title="Delete"
-              fontSize={14}
-              icon={{
-                type: 'feather',
-                name: 'save'
-              }}
-              buttonStyle={{
-                marginTop: 10,
-                backgroundColor: Colors.buttonColor.toString()
-              }}
-              onPress={this.onRemoveUploads}
-            ><Text>Delete</Text></Button>}
+          {this.renderDeleteButton()}
         </View>
       )
     } else {
       if (uploads) {
         let selected = this.state.selected.includes(uploads.id) ? 'red' : 'transparent'
           return (
-            <TouchableOpacity
-              onPress={() => this.onToggleSelectUpload(uploads.id)}
-              key={uploads.id}
-              >
-              <View
-                style={{
-                  marginTop: 10,
-                  marginLeft: 10
-                }}>
-                <Image
+            <View>
+              <TouchableOpacity
+                onPress={() => this.onToggleSelectUpload(uploads.id)}
+                key={uploads.id}
+                >
+                <View
                   style={{
-                    height: 100,
-                    width: 100,
-                    borderRadius: 3,
-                    borderWidth: 3,
-                    borderRadius: 5,
-                    borderColor: selected
-                  }}
-                  source={{ uri: uploads.url }}
-                />
-              </View>
-            </TouchableOpacity>
+                    marginTop: 10,
+                    marginLeft: 10
+                  }}>
+                  <Image
+                    style={[singleImageStyle, { borderColor: selected }]}
+                    source={{ uri: uploads.url }}
+                  />
+                </View>
+              </TouchableOpacity>
+              {this.renderDeleteButton()}
+            </View>
           )
       } else {
         return <Spinner />
       }
     }
+  }
+}
+
+const styles = {
+  containerStyle: {
+    flex: 1,
+    width
+  },
+  multiImageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  },
+  multiImageStyle: {
+    marginTop: 10,
+    marginLeft: 10,
+    borderWidth: 3,
+    borderRadius: 5
+  },
+  individualImageStyle: {
+    height: 100,
+    width: 100,
+    borderRadius: 3
+  },
+  singleImageStyle: {
+    height: 100,
+    width: 100,
+    borderRadius: 3,
+    borderWidth: 3,
+    borderRadius: 5
   }
 }

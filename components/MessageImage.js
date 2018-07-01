@@ -13,8 +13,26 @@ import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import Colors from '../constants/Colors'
+import { RNS3 } from 'react-native-aws3'
+import { S3_ACCESS_KEY, S3_SECRET_KEY } from 'react-native-dotenv'
+
+import { sendMessage } from '../utils/chat'
+
+const s3Options = {
+  keyPrefix: 'uploads/',
+  bucket: 'react-native-s3',
+  region: 'ap-southeast-1',
+  accessKey: S3_ACCESS_KEY,
+  secretKey: S3_SECRET_KEY,
+  successActionStatus: 201
+}
 
 export default class MessageImage extends React.Component {
+  state = {
+    currentUploadingProgress: 0,
+    sendMessageComplete: false
+  }
+
   renderCancelButton() {
     let size = 50
     return (
@@ -47,6 +65,42 @@ export default class MessageImage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    let { imageProps, currentMessage } = this.props
+    if (currentMessage.isSending) {
+      const file = {
+        uri: currentMessage.image,
+        type: 'image/png',
+        name: [
+          Math.random()
+            .toString(36)
+            .substring(2, 15),
+          Math.random()
+            .toString(36)
+            .substring(2, 15),
+          '.png'
+        ].join('')
+      }
+      RNS3.put(file, s3Options)
+        .then(response => {
+          if (response.status !== 201)
+            throw new Error('Failed to upload image to S3')
+
+          sendMessage({
+            conversation_id: this.props.conversationId,
+            upload_s3_location: response.body.postResponse.location
+          })
+          this.setState({
+            sendMessageComplete: true
+          })
+        })
+        .progress(e => {
+          let percent = e.loaded * 100.0 / e.total
+          this.setState({ currentUploadingProgress: percent })
+        })
+    }
+  }
+
   renderImageWithLoader() {
     let {
       containerStyle,
@@ -67,9 +121,8 @@ export default class MessageImage extends React.Component {
         }}
         size={width}
         width={4}
-        fill={20}
-        tintColor={Colors.themeColor}
-        onAnimationComplete={() => console.log('onAnimationComplete')}
+        fill={this.state.currentUploadingProgress}
+        tintColor={Colors.themeColor.toString()}
         backgroundColor={'#fff'}
       />
     )
@@ -133,7 +186,7 @@ export default class MessageImage extends React.Component {
 
     return (
       <View style={[styles.container, containerStyle]}>
-        {currentMessage.isSending
+        {currentMessage.isSending && this.state.sendMessageComplete == false
           ? this.renderImageWithLoader()
           : this.renderImage()}
       </View>

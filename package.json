@@ -21,6 +21,7 @@
     "react-native": "^0.55.3",
     "react-native-actioncable": "0.0.3",
     "react-native-actionsheet": "^2.4.2",
+    "react-native-aws3": "^0.0.8",
     "react-native-circular-progress": "^0.2.0",
     "react-native-dotenv": "^0.1.1",
     "react-native-elements": "^0.19.1",

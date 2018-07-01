@@ -85,6 +85,9 @@ export default class ConversationScreen extends Component {
       JSON.parse(data).conversation_id == conversationId
 
     if (message.user._id != this.state.currentUser.id && isSameConversation) {
+      if (message.upload_s3_location) {
+        message.image = message.upload_s3_location
+      }
       this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, message)
       }))
@@ -151,7 +154,7 @@ export default class ConversationScreen extends Component {
           }}
           wrapperStyle={{
             left: {
-              backgroundColor: color,
+              backgroundColor: isImage ? Colors.transparent : color,
               padding: 5
             }
           }}
@@ -310,6 +313,9 @@ export default class ConversationScreen extends Component {
               return (
                 <MessageImage
                   {...messageImageProps}
+                  conversationId={
+                    this.props.navigation.state.params.conversation_id
+                  }
                   cancelInProgressUpload={() =>
                     this.cancelInProgressUpload(messageImageProps)
                   }

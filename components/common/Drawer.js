@@ -29,6 +29,13 @@ class Drawer extends Component {
     })
   }
 
+  componentWillReceiveProps() {
+    CurrentUser.get().then(currentUser => {
+      this.setState({ currentUser })
+    })
+  }
+
+
   onLogOut() {
     let keys = ['auth_token', 'current_user']
 

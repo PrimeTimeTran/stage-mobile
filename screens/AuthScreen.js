@@ -83,6 +83,7 @@ class AuthScreen extends Component {
         data: data.user
       })
     })
+    this.setState({ email: '', password: '', errorMessage: '' })
     this.props.navigation.navigate('Conversations')
   }
 

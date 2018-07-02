@@ -1,5 +1,9 @@
 import React from 'react'
-import { ScrollView, Dimensions } from 'react-native'
+import {
+  ScrollView,
+  Dimensions,
+  StyleSheet
+} from 'react-native'
 
 import Colors from '../constants/Colors'
 import client from '../utils/client'
@@ -52,9 +56,9 @@ export default class ProfileScreen extends React.Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     minHeight: height,
     backgroundColor: 'white'
   }
-}
+})

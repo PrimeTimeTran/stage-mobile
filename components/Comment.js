@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native'
 
 import Colors from '../constants/Colors'
 import { Avatar, CardSection } from './common'
 
 export default class Comment extends Component {
-  onGoToProfile = user => {
-    this.props.onNavigateProfile(user)
-  }
+  onGoToProfile = user => this.props.onNavigateProfile(user)
 
   render() {
     const {
@@ -19,7 +22,7 @@ export default class Comment extends Component {
     const {
       commentContainerStyle,
       avatarStyle,
-      userContainerStyle,
+      textContainerStyle,
       userNameStyle,
       commentBodyStyle
     } = styles
@@ -39,7 +42,7 @@ export default class Comment extends Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={userContainerStyle}>
+        <View style={textContainerStyle}>
           <TouchableOpacity onPress={() =>
               this.onGoToProfile(user)
             }>
@@ -58,7 +61,7 @@ export default class Comment extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   commentContainerStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -72,7 +75,7 @@ const styles = {
     width: 40,
     borderRadius: 20
   },
-  userContainerStyle: {
+  textContainerStyle: {
     padding: 5,
     marginRight: 20
   },
@@ -83,4 +86,4 @@ const styles = {
     marginRight: 10,
     marginTop: 5
   }
-}
+})

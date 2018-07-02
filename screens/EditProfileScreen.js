@@ -1,5 +1,10 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import React, { Component } from 'react'
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet
+} from 'react-native'
 
 import { Icon, FormLabel, FormInput, Button } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -9,16 +14,18 @@ import CurrentUser from '../utils/CurrentUser'
 import { t } from '../locales/i18n'
 import client from '../utils/client'
 
+import {
+  Spinner
+} from '../components/common'
+
 export default class EditProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: t('drawer.editprofile.title'),
+    title: t('drawer.profile.title'),
     headerTitleStyle: { color: 'white' },
     headerLeft: (
       <TouchableOpacity
         style={{ padding: 10 }}
         onPress={() => {
-          // console.log('Navigation', navigation)
-          // console.log('Drawer?', navigation.state.params.profile_screen === 'Drawer')
           if (navigation.state.params.profile_screen === 'Drawer') {
             navigation.navigate('App')
             navigation.openDrawer()
@@ -46,10 +53,8 @@ export default class EditProfileScreen extends Component {
     age: null,
     phone_number: null,
     saved: null,
-    saved_text: null,
-
-    errorLastName: null,
     errorFirstName: null,
+    errorLastName: null,
     errorEmail: null,
     errorAge: null
   }
@@ -120,7 +125,8 @@ export default class EditProfileScreen extends Component {
       .catch(error => {
         console.log('Error', error)
       })
-      this.setState({ saved: true, saved_text: 'Saved' })
+      this.setState({ saved: true })
+      setInterval(() => this.setState({ saved: false }), 2000)
   }
 
   setUserData(data) {
@@ -177,7 +183,7 @@ export default class EditProfileScreen extends Component {
       description,
       age,
       phone_number,
-
+      saved,
       errorFirstName,
       errorLastName,
       errorEmail
@@ -192,59 +198,57 @@ export default class EditProfileScreen extends Component {
       return (
         <View>
           <KeyboardAwareScrollView>
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.first_name')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.first_name')}</FormLabel>
             <FormInput name="first_name" placeholder="James" value={first_name} onChangeText={this.onChangeFirstName} />
             <Text style={errorStyle}>{errorFirstName}</Text>
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.last_name')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.last_name')}</FormLabel>
             <FormInput name="last_name" placeholder="Huynh" value={last_name} onChangeText={this.onChangeLastName} />
             <Text style={errorStyle}>{errorLastName}</Text>
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.email')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.email')}</FormLabel>
             <FormInput name="email" placeholder="james@gmail.com" value={email} onChangeText={this.onChangeEmail} />
             <Text style={errorStyle}>{errorEmail}</Text>
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.city')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.city')}</FormLabel>
             <FormInput name="city" placeholder="Ho Chi Minh City" value={city} />
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.country')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.country')}</FormLabel>
             <FormInput name="country" placeholder="Vietnam" value={country} />
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.occupation')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.occupation')}</FormLabel>
             <FormInput name="occupation" placeholder="Chief Technical Officer" value={occupation} />
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.description')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.description')}</FormLabel>
             <FormInput name="description" placeholder="I love coding!" value={description} onChangeText={this.onChangeAge} />
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.age')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.age')}</FormLabel>
             <FormInput name="age" placeholder="18" value={age.toString()} />
 
-            <FormLabel labelStyle={labelStyle}>{t('drawer.editprofile.phone_number')}</FormLabel>
+            <FormLabel labelStyle={labelStyle}>{t('drawer.profile.phone_number')}</FormLabel>
             <FormInput name="phone_number" placeholder="0964359305" value={phone_number} />
 
             <Button
-              title={this.state.saved_text ? 'Saved' : 'Update'}
-              backgroundColor={this.state.saved ? Colors.buttonColor.toString() : 'red'}
+              title={saved ? 'Saved' : 'Update'}
+              backgroundColor={saved ? Colors.buttonColor.toString() : 'red'}
               onPress={this.onSubmit}
               icon={{
-                name: this.state.saved_text ? 'check-circle' : 'update',
-                type: this.state.saved_text ? 'feather' : 'material-icons'
+                name: saved ? 'check-circle' : 'update',
+                type: saved ? 'feather' : 'material-icons'
               }}>
-              <Text>{this.state.saved_text ? 'Saved' : 'Update'}</Text>
+              <Text>{saved ? 'Saved' : 'Update'}</Text>
             </Button>
 
           </KeyboardAwareScrollView>
         </View>
       )
     } else {
-      return (
-        <Text>Loading</Text>
-      )
+      return <Spinner />
     }
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   labelStyle: {
     color: Colors.themeColor
   },
@@ -252,4 +256,4 @@ const styles = {
     color: 'red',
     alignSelf: 'center'
   }
-}
+})

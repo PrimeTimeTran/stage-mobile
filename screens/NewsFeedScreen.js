@@ -251,9 +251,7 @@ export default class HomeScreen extends Component {
       </ScrollView>
     )
     } else {
-      return (
-        <Spinner />
-      )
+      return <Spinner />
     }
   }
 }

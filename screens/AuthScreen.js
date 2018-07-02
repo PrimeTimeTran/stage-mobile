@@ -4,7 +4,8 @@ import {
   Text,
   AsyncStorage,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  StyleSheet
 } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 
@@ -141,7 +142,7 @@ class AuthScreen extends Component {
 
 export default AuthScreen
 
-const styles = {
+const styles = StyleSheet.create({
   screenContainer: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -157,4 +158,4 @@ const styles = {
     borderBottomWidth: 5,
     borderColor: Colors.themeColor,
   }
-}
+})

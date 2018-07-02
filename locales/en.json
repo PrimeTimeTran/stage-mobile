@@ -27,9 +27,9 @@
   },
   "drawer": {
     "joined": "Joined since",
-    "profile": "Profile",
-    "editprofile": {
-      "title": "Update Profile",
+    "profile": {
+      "title": "Profile",
+      "header": "My Profile",
       "first_name": "First Name",
       "last_name": "Last Name",
       "email": "Email",
@@ -40,8 +40,14 @@
       "age": "Age",
       "phone_number": "Phone Number"
     },
-    "friends": "Friends",
-    "photos": "Photos",
+    "friends": {
+      "title": "Friends",
+      "header": "My Friends"
+    },
+    "media": {
+      "title": "Media",
+      "header": "My Media"
+    },
     "map": "Map",
     "gifting": "Gifting",
     "billing": "Billing",

@@ -27,9 +27,9 @@
   },
   "drawer": {
     "joined": "Đã Tham Gia Kể Từ",
-    "profile": "Hồ Sơ",
-    "editprofile": {
-      "title": "Cập Nhật Hồ Sơ",
+    "profile": {
+      "title": "Hồ Sơ",
+      "header": "Cập Nhật Hồ Sơ",
       "first_name": "Tên Đầu Tiên",
       "last_name": "Tên Họ",
       "email": "Email",
@@ -40,8 +40,14 @@
       "age": "Tuổi Tác",
       "phone_number": "Số Điện Thoại"
     },
-    "friends": "Bạn Bè",
-    "photos": "Ảnh",
+    "friends": {
+      "title": "Bạn Bè",
+      "header": "Bạn Bè Của Tôi"
+    },
+    "media": {
+      "title": "Thư Viện",
+      "header": "Thư Viện Của Tôi"
+    },
     "map": "Bản Đồ",
     "gifting": "Tặng Quà",
     "billing": "Thanh Toán",

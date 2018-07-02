@@ -4,7 +4,8 @@ import {
   Dimensions,
   TouchableOpacity,
   View,
-  Text
+  Text,
+  StyleSheet
 } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
@@ -20,7 +21,7 @@ const { width } = Dimensions.get('window')
 
 export default class MediaScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Media',
+    title: t('drawer.media.title'),
     headerTitleStyle: { color: 'white' },
     headerLeft: (
       <TouchableOpacity
@@ -169,7 +170,7 @@ export default class MediaScreen extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     width
@@ -197,4 +198,4 @@ const styles = {
     borderWidth: 3,
     borderRadius: 5
   }
-}
+})

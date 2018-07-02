@@ -4,6 +4,7 @@ import { View, Text } from 'react-native'
 import { Button, FormInput } from 'react-native-elements'
 import { CardSection } from './common'
 import Colors from '../constants/Colors'
+
 export default class PostForm extends Component {
   state = { body: '' }
 
@@ -47,7 +48,7 @@ export default class PostForm extends Component {
             marginRight: 10
           }}
           iconRight={{ name: 'share', type: 'material-community' }}>
-          <Text>Submit</Text>
+          <Text>Create Post</Text>
         </Button>
         <CardSection
           custom={{ justifyContent: 'space-around', padding: 0, marginBottom: 10 }}>

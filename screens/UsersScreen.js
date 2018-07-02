@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet
+} from 'react-native'
 
 import { Icon } from 'react-native-elements'
 
@@ -102,11 +108,11 @@ export default class UsersScreen extends Component {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   avatarStyle: {
     padding: 5,
     height: 90,
     width: 90,
     borderRadius: 50
   }
-}
+})

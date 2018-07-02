@@ -102,16 +102,16 @@ class Drawer extends Component {
         </View>
         <View style={drawerContentStyle}>
           <TouchableOpacity onPress={this.onEditProfile}>
-            <DrawerCard type="entypo" name="user" content={ t('drawer.profile') } />
+            <DrawerCard type="entypo" name="user" content={ t('drawer.profile.title') } />
           </TouchableOpacity>
           <TouchableOpacity onPress={this.onFriends}>
-            <DrawerCard type="entypo" name="users" content={ t('drawer.friends') } />
+            <DrawerCard type="entypo" name="users" content={ t('drawer.friends.title') } />
           </TouchableOpacity>
           <TouchableOpacity onPress={this.onMedia}>
             <DrawerCard
               type="material-icon"
               name="photo-library"
-              content={ t('drawer.photos') }
+              content={ t('drawer.media.title') }
             />
           </TouchableOpacity>
           <DrawerCard type="font-awesome" name="map" content={ t('drawer.map') } />

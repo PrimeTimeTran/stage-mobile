@@ -127,7 +127,12 @@ export default class ConversationsScreen extends React.Component {
     if (conversations) {
       if (conversations.length == 0 ){
         return (
-          <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{
+              flex: 1,
+              backgroundColor: '#fff',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
             <Text>Make some friends!</Text>
           </View>
         )

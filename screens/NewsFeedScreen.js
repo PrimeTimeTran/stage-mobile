@@ -107,7 +107,7 @@ export default class HomeScreen extends Component {
     )
   }
 
-  navigateProfile = user => {
+  onNavigateProfile = user => {
     const { id } = user
     CurrentUser.get().then(currentUser => {
       if (currentUser.id == id) {
@@ -161,7 +161,7 @@ export default class HomeScreen extends Component {
                   <CardSection custom={{ borderBottomWidth: 0 }}>
                     <View style={headerContainerStyle}>
                       <TouchableOpacity
-                        onPress={() => this.navigateProfile(user)}>
+                        onPress={() => this.onNavigateProfile(user)}>
                         <Avatar custom={avatarStyle} url={user.avatar_url} />
                       </TouchableOpacity>
                     </View>
@@ -243,7 +243,7 @@ export default class HomeScreen extends Component {
                       onPress={() => console.log('Comment')}
                       ><Text>Comment</Text></Button>
                   </CardSection>
-                  <CommentContainer comments={post.comments} postId={id} />
+                  <CommentContainer comments={post.comments} postId={id} onNavigateProfile={this.onNavigateProfile}/>
                 </Card>
               </View>
             )

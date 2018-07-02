@@ -2,7 +2,8 @@ import cable from 'react-native-actioncable'
 import { AsyncStorage, Platform } from 'react-native'
 import {
   DEV_CABLE_ANDROID,
-  DEV_CABLE_IOS
+  DEV_CABLE_IOS,
+  STAGING_CABLE_API
 } from 'react-native-dotenv'
 let consumer
 let backendHost
@@ -11,7 +12,7 @@ const hostname = window && window.location && window.location.hostname
 
 if (hostname === 'staging.getonstageapp.com') {
   socketType = 'wss'
-  backendHost = 'staging.getonstageapp.com'
+  backendHost = STAGING_CABLE_API
 } else {
   socketType = 'ws'
   if (Platform.OS == 'ios') {
@@ -20,9 +21,6 @@ if (hostname === 'staging.getonstageapp.com') {
     backendHost = DEV_CABLE_ANDROID
   }
 }
-
-
-socketType = 'ws'
 
 const createChannel = async (...args) => {
   let token = await AsyncStorage.getItem('auth_token')

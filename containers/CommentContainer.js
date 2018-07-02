@@ -40,13 +40,10 @@ export default class CommentContainer extends Component {
 
   render() {
     const { comments } = this.state
+    console.log('This Props Comment Container', this.props);
     return (
       <View>
-        {comments && (
-          comments.map(comment => (
-            <Comment key={comment.id} comment={comment} />
-          ))
-        )}
+        {comments && comments.map(comment => <Comment key={comment.id} comment={comment} onNavigateProfile={this.props.onNavigateProfile} />)}
         <CommentForm onSubmit={this.onAddComment} />
       </View>
     )

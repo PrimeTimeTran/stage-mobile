@@ -118,7 +118,9 @@ export default class MediaScreen extends Component {
               let selected = this.state.selected.includes(upload.id) ? 'red' : 'transparent'
               return (
                 <TouchableOpacity
-                  onPress={() => this.onToggleSelectUpload(upload.id)}
+                  onPress={() =>
+                    this.onToggleSelectUpload(upload.id)
+                  }
                   key={upload.id}
                   >
                   <View
@@ -141,7 +143,9 @@ export default class MediaScreen extends Component {
           return (
             <View>
               <TouchableOpacity
-                onPress={() => this.onToggleSelectUpload(uploads.id)}
+                onPress={() =>
+                  this.onToggleSelectUpload(uploads.id)
+                }
                 key={uploads.id}
                 >
                 <View

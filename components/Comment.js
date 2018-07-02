@@ -1,27 +1,56 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 import Colors from '../constants/Colors'
 import { Avatar, CardSection } from './common'
 
 export default class Comment extends Component {
+  onGoToProfile = user => {
+    this.props.onNavigateProfile(user)
+  }
+
   render() {
-    const { comment } = this.props
-    const { commentContainerStyle, avatarStyle } = styles
+    const {
+      id,
+      user,
+      body
+    } = this.props.comment
+
+    const {
+      commentContainerStyle,
+      avatarStyle,
+      userContainerStyle,
+      userNameStyle,
+      commentBodyStyle
+    } = styles
+
     return (
-      <CardSection id={comment.id} custom={commentContainerStyle}>
-        <View style={{ marginRight: 5 }}>
-          <Avatar
-            url={comment.user.user_profile_photo}
-            custom={[avatarStyle, { marginTop: 5 }]}
-          />
+      <CardSection
+          id={id}
+          custom={commentContainerStyle}
+        >
+        <View>
+          <TouchableOpacity onPress={() =>
+              this.onGoToProfile(user)
+            }>
+            <Avatar
+              url={user.user_profile_photo}
+              custom={avatarStyle}
+            />
+          </TouchableOpacity>
         </View>
-        <View style={{ padding: 5, marginRight: 20 }}>
-          <Text style={{ color: Colors.commentorColor }}>
-            {comment.user.full_name}
-          </Text>
-          <View style={{ marginTop: 5 }}>
-            <Text style={{ marginRight: 10 }}>{comment.body}</Text>
+        <View style={userContainerStyle}>
+          <TouchableOpacity onPress={() =>
+              this.onGoToProfile(user)
+            }>
+            <Text style={userNameStyle}>
+              {user.full_name}
+            </Text>
+          </TouchableOpacity>
+          <View>
+            <Text style={commentBodyStyle}>
+              {body}
+            </Text>
           </View>
         </View>
       </CardSection>
@@ -36,9 +65,22 @@ const styles = {
     backgroundColor: 'white'
   },
   avatarStyle: {
+    marginLeft: 5,
+    marginTop: 5,
     padding: 5,
-    height: 25,
-    width: 25,
-    borderRadius: 15
+    height: 40,
+    width: 40,
+    borderRadius: 20
+  },
+  userContainerStyle: {
+    padding: 5,
+    marginRight: 20
+  },
+  userNameStyle: {
+    color: Colors.commentorColor
+  },
+  commentBodyStyle: {
+    marginRight: 10,
+    marginTop: 5
   }
 }

@@ -17,7 +17,7 @@ I18n.locale = 'en'
 
 const getLanguage = async () => {
   try {
-    const choice = await Expo.Util.getCurrentLocaleAsync()
+    const choice = await Expo.Localization.getCurrentLocaleAsync()
     I18n.locale = choice.substr(0, 2)
     I18n.initAsync()
   } catch (error) {

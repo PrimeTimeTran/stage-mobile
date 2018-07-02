@@ -78,22 +78,38 @@ export default class UsersScreen extends Component {
               flex: 1,
               flexDirection: 'row',
               flexWrap: 'wrap',
-              alignItems: 'center'
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingBottom: 10
             }}>
             {users &&
               users.map(user => {
                 return (
                   <TouchableOpacity
                     key={user.id}
-                    style={{ alignItems: 'center' }}
-                    onPress={() => this.onAvatarPress(user.id, user.first_name)}
-                  >
+                    style={{
+                      alignItems: 'center',
+                      padding: 10
+                    }}
+                    onPress={() =>
+                      this.onAvatarPress(user.id, user.first_name)
+                    }>
                     <Avatar
                       url={user.avatar_url}
                       custom={[avatarStyle, { marginTop: 5 }]}
                     />
-                    <Text>{user.first_name}</Text>
-                    <Text>{user.age}</Text>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        marginTop: 5,
+                        fontWeight: 'bold',
+                        color: '#666'
+                      }}>
+                      {user.first_name}
+                    </Text>
+                    <Text style={{ fontSize: 14, color: '#999' }}>
+                      {user.age}
+                    </Text>
                   </TouchableOpacity>
                 )
               })}
@@ -101,18 +117,18 @@ export default class UsersScreen extends Component {
         </ScrollView>
       )
     } else {
-      return (
-        <Spinner />
-      )
+      return <Spinner />
     }
   }
 }
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    padding: 5,
-    height: 90,
-    width: 90,
-    borderRadius: 50
+    elevation: 3,
+    height: 73,
+    width: 73,
+    borderRadius: 35,
+    borderWidth: 3,
+    borderColor: '#eee'
   }
 })

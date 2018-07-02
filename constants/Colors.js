@@ -10,6 +10,8 @@ export default {
   tabBar: '#fefefe',
   errorBackground: 'red',
   errorText: '#fff',
+  defaultBlue: '#0084ff',
+  transparent: 'transparent',
   warningBackground: '#EAEB5E',
   warningText: '#666804',
   noticeBackground: tintColor,

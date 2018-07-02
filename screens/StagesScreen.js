@@ -20,9 +20,7 @@ import FollowingStage from '../components/FollowingStage'
 
 import client from '../utils/client'
 
-let SCREEN_WIDTH = Dimensions.get('window').width
-
-const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default class StagesScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -72,12 +70,11 @@ export default class StagesScreen extends React.Component {
   }
 
   onCallStage = phone => {
-    console.log('Phone Number: ', phone)
-    // const args = {
-    //   number: '0964359305',
-    //   prompt: false
-    // }
-    // call(args).catch(console.error)
+    const args = {
+      number: phone,
+      prompt: false
+    }
+    call(args).catch(console.error)
   }
 
   onShowStageUploads(stage, upload, index) {
@@ -87,8 +84,8 @@ export default class StagesScreen extends React.Component {
         autoplay={false}
         style={{
           flex: 1,
-          width: WINDOW_WIDTH,
-          height: WINDOW_HEIGHT
+          width,
+          height
         }}>
         {stage.uploads.map(upload => {
           return (
@@ -267,7 +264,7 @@ export default class StagesScreen extends React.Component {
                           />
                           <TouchableOpacity
                             style={{ marginLeft: 10 }}
-                            onPress={this.onCallStage(stage.phone)}
+                            onPress={() => this.onCallStage(stage.phone)}
                           >
                             <Text>
                               {stage.phone}
@@ -350,7 +347,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   stageButtonStyle: {
-    width: SCREEN_WIDTH / 2,
+    width: width / 2,
     backgroundColor: 'transparent',
     height: 45,
     borderColor: 'transparent',

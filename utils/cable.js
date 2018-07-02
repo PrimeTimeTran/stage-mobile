@@ -1,15 +1,26 @@
 import cable from 'react-native-actioncable'
 import { AsyncStorage, Platform } from 'react-native'
-
+import {
+  DEV_CABLE_ANDROID,
+  DEV_CABLE_IOS
+} from 'react-native-dotenv'
 let consumer
 let backendHost
 let socketType
+const hostname = window && window.location && window.location.hostname
 
-if (Platform.OS == 'ios') {
-  backendHost = 'localhost:3000'
+if (hostname === 'staging.getonstageapp.com') {
+  socketType = 'wss'
+  backendHost = 'staging.getonstageapp.com'
 } else {
-  backendHost = '192.168.1.218:3000'
+  socketType = 'ws'
+  if (Platform.OS == 'ios') {
+    backendHost = DEV_CABLE_IOS
+  } else {
+    backendHost = DEV_CABLE_ANDROID
+  }
 }
+
 
 socketType = 'ws'
 

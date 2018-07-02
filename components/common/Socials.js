@@ -14,6 +14,11 @@ class Socials extends Component {
       comments_count
     } = this.props
 
+    const {
+      containerStyle,
+      socialTextStyle
+    } = styles
+
     const like = reactions.filter(reaction => reaction.reaction_type == 'like')
     const heart = reactions.filter(reaction => reaction.reaction_type == 'heart')
     const wow = reactions.filter(reaction => reaction.reaction_type == 'wow')
@@ -22,37 +27,26 @@ class Socials extends Component {
 
     return (
       <CardSection>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginBottom: 10
-          }}>
+        <View style={containerStyle}>
           {reactions_count > 0 && (
             <View>
               <View style={{ flexDirection: 'row' }}>
-                { like.length > 0 && <SocialIcon type="evilicon" name="like" color="blue" size={20} /> }
-                { heart.length > 0 && <SocialIcon type="evilicon" name="heart" color="red" size={20} /> }
-                { wow.length > 0 && <SocialIcon type="entypo" name="emoji-happy" color="yellow" size={15} /> }
-                { laugh.length > 0 && <SocialIcon type="entypo" name="emoji-flirt" color="pink" size={15} /> }
-                { sad.length > 0 && <SocialIcon type="entypo" name="emoji-sad" color="green" size={15} /> }
-                <Text
-                  style={{ paddingLeft: 10, color: Colors.lightTextColor }}>
-                  {reactions_count == 1 && <Text>{reactions_count} Reaction</Text>}
-                  {reactions_count >= 2 && <Text>{reactions_count} Reactions</Text>}
+                { like.length && <SocialIcon type="evilicon" name="like" color="blue" size={20} /> }
+                { heart.length && <SocialIcon type="evilicon" name="heart" color="red" size={20} /> }
+                { wow.length && <SocialIcon type="entypo" name="emoji-happy" color="yellow" size={15} /> }
+                { laugh.length && <SocialIcon type="entypo" name="emoji-flirt" color="pink" size={15} /> }
+                { sad.length && <SocialIcon type="entypo" name="emoji-sad" color="green" size={15} /> }
+                <Text style={[socialTextStyle, { marginLeft: 5 }]}>
+                  { reactions_count == 1 && <Text>{reactions_count} Reaction</Text> }
+                  { reactions_count >= 2 && <Text>{reactions_count} Reactions</Text> }
                 </Text>
               </View>
             </View>
           )}
           {comments_count > 0 && (
-            <Text
-              style={{
-                paddingRight: 10,
-                color: Colors.lightTextColor
-              }}>
-              {comments_count == 1 && <Text>{comments_count} Comment</Text>}
-              {comments_count >= 2 && <Text>{comments_count} Comments</Text>}
+            <Text style={socialTextStyle}>
+              { comments_count == 1 && <Text>{comments_count} Comment</Text> }
+              { comments_count >= 2 && <Text>{comments_count} Comments</Text> }
             </Text>
           )}
         </View>
@@ -62,3 +56,16 @@ class Socials extends Component {
 }
 
 export { Socials }
+
+const styles = {
+  containerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10
+  },
+  socialTextStyle: {
+    paddingRight: 10,
+    color: Colors.lightTextColor
+  }
+}

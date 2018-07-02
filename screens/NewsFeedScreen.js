@@ -30,7 +30,7 @@ import {
 import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
 
-const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 import Colors from '../constants/Colors'
 
@@ -83,8 +83,8 @@ export default class HomeScreen extends Component {
         autoplay={false}
         style={{
           flex: 1,
-          width: WINDOW_WIDTH,
-          height: WINDOW_HEIGHT
+          width,
+          height
         }}>
         {post.uploads.map(upload => {
           return (
@@ -107,10 +107,10 @@ export default class HomeScreen extends Component {
     )
   }
 
-  navigateProfile = async user => {
+  navigateProfile = user => {
     const { id } = user
     CurrentUser.get().then(currentUser => {
-      if (parseInt(currentUser.id) == id) {
+      if (currentUser.id == id) {
         this.props.navigation.navigate('MyProfile')
       } else {
         this.props.navigation.navigate('Profile', {
@@ -124,7 +124,7 @@ export default class HomeScreen extends Component {
   onCreatePost = body => {
     const request = client()
     request
-      .then(api => api.post(`posts/`, { body: body }))
+      .then(api => api.post('posts', { body: body }))
       .then(response => {
         return response.data
       })

@@ -31,29 +31,17 @@ export default class FollowingStage extends Component {
 
   render() {
     const { stageId } = this.props
+    const { following } = this.state
 
-    if (this.state.following) {
-      return (
-        <TouchableOpacity
-          onPress={() => this.unFollow(stageId)}>
-          <Icon
-            name="heart"
-            type="font-awesome"
-            color="red"
-          />
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={() => this.follow(stageId)}>
-          <Icon
-            name="heart"
-            type="evilicon"
-            color="white"
-          />
-        </TouchableOpacity>
-        )
-    }
+    return (
+      <TouchableOpacity
+        onPress={following ? () => this.unFollow(stageId) : () => this.follow(stageId)}>
+        <Icon
+          name="heart"
+          type={following ? 'font-awesome' : 'evilicon'}
+          color={following ? 'red' : 'white'}
+        />
+      </TouchableOpacity>
+    )
   }
 }

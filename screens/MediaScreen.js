@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
-import { Image, Dimensions, TouchableOpacity, View, Text } from 'react-native'
+import {
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  View,
+  Text
+} from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 
 import Colors from '../constants/Colors'
 import client from '../utils/client'
+import { t } from '../locales/i18n'
 
 import {
   Spinner
@@ -122,7 +129,8 @@ export default class MediaScreen extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-            )})}
+              )
+            })}
           </View>
           {this.renderDeleteButton()}
         </View>

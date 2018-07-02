@@ -5,7 +5,7 @@ import { AppLoading } from 'expo'
 
 import { t } from '../locales/i18n'
 
-import Slides from '../components/slides'
+import Slides from '../components/Slides'
 
 const SLIDE_DATA = () => {
   return [

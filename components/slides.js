@@ -9,9 +9,10 @@ import {
 import { Button } from 'react-native-elements'
 import { Card, CardSection } from './common'
 
-let SCREEN_WIDTH = Dimensions.get('window').width
 import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
+
+const { width } = Dimensions.get('window')
 
 export default class Slides extends Component {
   renderLastSlide(idx) {
@@ -30,7 +31,12 @@ export default class Slides extends Component {
   }
 
   renderSlides() {
-    const { cardStyle, slideStyle, slideTextStyle } = styles
+    const {
+      cardStyle,
+      slideStyle,
+      slideTextStyle
+    } = styles
+
     return this.props.data.map((slide, idx) => {
       let image
       if (idx == 0) {
@@ -71,7 +77,7 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: SCREEN_WIDTH
+    width
   },
   slideTextStyle: {
     fontSize: 30,

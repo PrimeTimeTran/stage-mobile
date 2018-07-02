@@ -18,14 +18,17 @@ class PromptModal extends Component {
         transparent={true}
         visible={modalVisible}>
         <View style={
-          modalVisible ? { backgroundColor: 'rgba(0,0,0,0.5)' } : ''}>
+            modalVisible ? { backgroundColor: 'rgba(0,0,0,0.5)' } : ''
+          }>
           <View style={{
               alignItems: 'center',
               justifyContent: 'center',
               height
             }}>
             <TouchableHighlight>
-              <Text>Success</Text>
+              <View style={{height: 300, width: 300, backgroundColor: 'red'}}>
+                <Text>Success</Text>
+              </View>
             </TouchableHighlight>
           </View>
         </View>

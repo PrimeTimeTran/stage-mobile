@@ -8,8 +8,7 @@ import {
   Dimensions
 } from 'react-native'
 
-import { Button, Icon } from 'react-native-elements'
-
+import { Icon } from 'react-native-elements'
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 import { Video } from 'expo'
@@ -17,8 +16,8 @@ import { Video } from 'expo'
 import { t } from '../locales/i18n'
 import client from '../utils/client'
 import CurrentUser from '../utils/CurrentUser'
+import Colors from '../constants/Colors'
 
-import PostForm from '../components/PostForm'
 import {
   Avatar,
   Card,
@@ -27,12 +26,12 @@ import {
   Spinner,
   Socials
 } from '../components/common'
-import VideoPlayer from '../components/VideoPlayer'
 import CommentContainer from '../containers/CommentContainer'
+import PostForm from '../components/PostForm'
+import VideoPlayer from '../components/VideoPlayer'
+import CommentAndLike from '../components/CommentAndLike'
 
 const { width, height } = Dimensions.get('window')
-
-import Colors from '../constants/Colors'
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -138,42 +137,6 @@ export default class HomeScreen extends Component {
       })
   }
 
-  renderLikeAndCommentButton() {
-    return (
-      <CardSection
-        custom={{ justifyContent: 'space-around', padding: 0 }}>
-
-        <Button
-          title="Like"
-          color={Colors.buttonColor.toString()}
-          fontSize={14}
-          icon={{
-            name: 'thumb-up',
-            color: Colors.buttonColor.toString()
-          }}
-          buttonStyle={{
-            backgroundColor: 'transparent'
-          }}
-          onPress={() => console.log('Liked')}
-        ><Text>Like</Text></Button>
-
-        <Button
-          title="Comment"
-          color={Colors.buttonColor.toString()}
-          fontSize={14}
-          icon={{
-            name: 'comment',
-            color: Colors.buttonColor.toString()
-          }}
-          buttonStyle={{
-            backgroundColor: 'transparent'
-          }}
-          onPress={() => console.log('Comment')}
-          ><Text>Comment</Text></Button>
-      </CardSection>
-    )
-  }
-
   render() {
     const { posts, currentUser } = this.state
     const {
@@ -246,7 +209,7 @@ export default class HomeScreen extends Component {
                       comments_count={comments_count}
                       reactions={reactions}
                     />
-                    {this.renderLikeAndCommentButton()}
+                    <CommentAndLike />
                     <CommentContainer
                       comments={post.comments}
                       postId={id}

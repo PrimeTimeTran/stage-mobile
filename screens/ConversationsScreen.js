@@ -19,7 +19,7 @@ import client from '../utils/client'
 
 import { Avatar, SentAt, Spinner } from '../components/common'
 
-const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -82,8 +82,8 @@ export default class ConversationsScreen extends React.Component {
         autoplay={false}
         style={{
           flex: 1,
-          width: WINDOW_WIDTH,
-          height: WINDOW_HEIGHT
+          width,
+          height
         }}>
         {conversation.uploads.map(upload => {
           return (
@@ -92,7 +92,7 @@ export default class ConversationsScreen extends React.Component {
                 isLooping
                 video={upload.url}
                 fullScreen={true}
-                style={{ flex: 1, width: WINDOW_WIDTH, height: WINDOW_HEIGHT }}
+                style={{ flex: 1, width, height }}
               />
               <Text
                 style={{
@@ -293,9 +293,7 @@ export default class ConversationsScreen extends React.Component {
         </View>
       )
     } else {
-      return (
-        <Spinner />
-      )
+      return <Spinner />
     }
   }
 }

@@ -23,6 +23,7 @@ import AuthScreen from '../screens/AuthScreen'
 import ConversationsScreen from '../screens/ConversationsScreen'
 import ConversationScreen from '../screens/ConversationScreen'
 import SearchConversationsScreen from '../screens/SearchConversationsScreen'
+import NewConversationScreen from '../screens/NewConversationScreen'
 
 import NewsFeedScreen from '../screens/NewsFeedScreen'
 import UsersScreen from '../screens/UsersScreen'
@@ -59,6 +60,7 @@ const ConversationsStack = createStackNavigator(
     Users: UsersScreen,
     Profile: ProfileScreen,
     PrivateConversation: ConversationScreen,
+    NewConversation: NewConversationScreen
   },
   {
     transitionConfig: ConversationsTransitionConfiguration,

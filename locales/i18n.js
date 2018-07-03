@@ -17,7 +17,9 @@ I18n.locale = 'en'
 
 const getLanguage = async () => {
   try {
-    const choice = await Expo.Localization.getCurrentLocaleAsync()
+    // Ignore deprecation warnings about Util because the simulator
+    // doesn't work with with Localization function
+    const choice = await Expo.Util.getCurrentLocaleAsync()
     I18n.locale = choice.substr(0, 2)
     I18n.initAsync()
   } catch (error) {

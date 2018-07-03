@@ -210,7 +210,7 @@ export default class ConversationsScreen extends React.Component {
                           <View style={headerInfoStyle}>
                             {conversation.name ? (
                               <View>
-                                <Text style={[headerTitleStyle]}>
+                                <Text style={[headerTitleStyle, { color: Colors.themeColor }]}>
                                   {conversation.name}
                                 </Text>
                                 <View
@@ -223,10 +223,10 @@ export default class ConversationsScreen extends React.Component {
                                   <Icon
                                     name="chevron-right"
                                     type="material-community"
-                                    color={Colors.activeStageColor.toString()}
+                                    color='green'
                                     size={15}
                                   />
-                                  <Text style={stageInfoStyle}>{name}</Text>
+                                  <Text style={[stageInfoStyle, { color: 'green'}]}>{name}</Text>
                                 </View>
                               </View>
                             ) : (
@@ -234,14 +234,14 @@ export default class ConversationsScreen extends React.Component {
                             )}
                             <View style={{ alignSelf: 'flex-start' }}>
                               <SentAt
-                                sentAt={conversation.last_message.sent_at}
+                                sentAt={conversation.last_message_content.sent_at}
                               />
                             </View>
                           </View>
                           <Text
                             numberOfLines={3}
                             style={{ color: '#696969', fontSize: 13 }}>
-                            {conversation.last_message.body}
+                            {conversation.last_message_content.body}
                           </Text>
                           {/* <View style={{ flexDirection: 'row' }}>
                           {conversation.is_stage &&

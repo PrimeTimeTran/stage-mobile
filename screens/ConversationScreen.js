@@ -58,8 +58,7 @@ export default class ConversationScreen extends Component {
     })
     const conversation_id = this.props.navigation.state.params.conversation_id
 
-    const request = client()
-    request
+    client()
       .then(api =>
         api.get(`conversations/${conversation_id}/messages`)
       )

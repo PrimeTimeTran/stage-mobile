@@ -5,8 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
-  Platform
+  Dimensions
 } from 'react-native'
 
 import { Icon } from 'react-native-elements'
@@ -20,7 +19,7 @@ import client from '../utils/client'
 
 import { Avatar, SentAt } from '../components/common'
 
-const { WINDOW_WIDTH, WINDOW_HEIGHT } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default class SearchConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -85,7 +84,7 @@ export default class SearchConversationsScreen extends React.Component {
                 isLooping
                 video={upload.url}
                 fullScreen={true}
-                style={{ flex: 1, width: WINDOW_WIDTH, height: WINDOW_HEIGHT }}
+                style={{ flex: 1, width, height }}
               />
               <Text
                 style={{
@@ -231,14 +230,14 @@ export default class SearchConversationsScreen extends React.Component {
                             )}
                             <View style={{ alignSelf: 'flex-start' }}>
                               <SentAt
-                                sentAt={conversation.last_message.sent_at}
+                                sentAt={conversation.last_message_content.sent_at}
                               />
                             </View>
                           </View>
                           <Text
                             numberOfLines={3}
                             style={{ color: '#696969', fontSize: 13 }}>
-                            {conversation.last_message.body}
+                            {conversation.last_message_content.body}
                           </Text>
                           {/* <View style={{ flexDirection: 'row' }}>
                           {conversation.is_stage &&
@@ -290,7 +289,7 @@ export default class SearchConversationsScreen extends React.Component {
         </View>
       )
     } else {
-      return <div>Empty</div>
+      return <View>Empty</View>
     }
   }
 }

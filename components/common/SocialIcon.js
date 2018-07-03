@@ -10,4 +10,4 @@ const SocialIcon = ({ type, name, color, size }) => (
   />
 )
 
-export default SocialIcon
+export { SocialIcon }

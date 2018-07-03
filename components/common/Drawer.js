@@ -85,17 +85,9 @@ class Drawer extends Component {
     return ''
   }
 
-  onEditProfile = () => {
-    this.props.navigation.navigate('EditProfile', { profile_screen: 'Drawer' })
-  }
-
-  onFriends = () => {
-    this.props.navigation.navigate('Friends')
-  }
-
-  onMedia = () => {
-    this.props.navigation.navigate('Media')
-  }
+  onEditProfile = () => this.props.navigation.navigate('EditProfile', { profile_screen: 'Drawer' })
+  onFriends = () => this.props.navigation.navigate('Friends')
+  onMedia = () => this.props.navigation.navigate('Media')
 
   render() {
     const {

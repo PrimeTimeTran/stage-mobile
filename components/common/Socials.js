@@ -4,9 +4,13 @@ import { CardSection } from './CardSection'
 
 import Colors from '../../constants/Colors'
 
-import SocialIcon from './SocialIcon'
+import {
+  SocialIcon
+} from './index'
 
 class Socials extends Component {
+  reactedType = reaction => reaction.length > 0
+
   render() {
     const {
       reactions,
@@ -31,11 +35,11 @@ class Socials extends Component {
           {reactions_count > 0 && (
             <View>
               <View style={{ flexDirection: 'row' }}>
-                { like.length && <SocialIcon type="evilicon" name="like" color="blue" size={20} /> }
-                { heart.length && <SocialIcon type="evilicon" name="heart" color="red" size={20} /> }
-                { wow.length && <SocialIcon type="entypo" name="emoji-happy" color="yellow" size={15} /> }
-                { laugh.length && <SocialIcon type="entypo" name="emoji-flirt" color="pink" size={15} /> }
-                { sad.length && <SocialIcon type="entypo" name="emoji-sad" color="green" size={15} /> }
+                { this.reactedType(like) && <SocialIcon type="evilicon" name="like" color="blue" size={20} /> }
+                { this.reactedType(heart) && <SocialIcon type="evilicon" name="heart" color="red" size={20} /> }
+                { this.reactedType(wow) && <SocialIcon type="entypo" name="emoji-happy" color="yellow" size={15} /> }
+                { this.reactedType(laugh) && <SocialIcon type="entypo" name="emoji-flirt" color="pink" size={15} /> }
+                { this.reactedType(sad) && <SocialIcon type="entypo" name="emoji-sad" color="green" size={15} /> }
                 <Text style={[socialTextStyle, { marginLeft: 5 }]}>
                   { reactions_count == 1 && <Text>{reactions_count} Reaction</Text> }
                   { reactions_count >= 2 && <Text>{reactions_count} Reactions</Text> }

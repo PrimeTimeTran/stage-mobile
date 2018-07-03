@@ -83,7 +83,7 @@ export default class MediaScreen extends Component {
 
   renderDeleteButton() {
     return (
-      this.state.selected.length &&
+      this.state.selected &&
       <Button
         title="Delete"
         fontSize={14}

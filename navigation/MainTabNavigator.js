@@ -81,7 +81,7 @@ ConversationsStack.navigationOptions = ({ navigation }) => {
 }
 
 const NewsFeedStack = createStackNavigator({
-  Home: NewsFeedScreen,
+  NewsFeed: NewsFeedScreen,
   Profile: ProfileScreen,
   MyProfile: MyProfileScreen
 })
@@ -165,6 +165,8 @@ const MediaStack = createStackNavigator({
 
 const ApplicationDrawer = createDrawerNavigator(
   {
+    Welcome: WelcomeScreen,
+    Auth: AuthScreen,
     App: MainTabScreen,
     Edit: EditProfileStack,
     Friends: FriendsStack,
@@ -177,26 +179,11 @@ const ApplicationDrawer = createDrawerNavigator(
   }
 )
 
-ApplicationDrawer.navigationOptions = ({ navigation }) => {
+ApplicationDrawer.navigationOptions = () => {
   return {
-    drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => <Text>Go</Text>
+    drawerLabel: 'Home'
   }
 }
-
-const MainNavigation = createBottomTabNavigator(
-  {
-    Welcome: WelcomeScreen,
-    Auth: AuthScreen,
-    Main: ApplicationDrawer
-  },
-  {
-    lazy: true,
-    navigationOptions: { tabBarVisible: false }
-  }
-)
-
-
 
 const styles = StyleSheet.create({
   tabBarLabelStyle: {
@@ -207,4 +194,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MainNavigation
+export default ApplicationDrawer

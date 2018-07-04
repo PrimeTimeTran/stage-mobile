@@ -39,8 +39,7 @@ class Drawer extends Component {
       this.setState({ currentUser })
     })
 
-    const request = client()
-    request
+    client()
       .then(api =>
         api.get('uploads/1')
       )

@@ -61,8 +61,7 @@ export default class HomeScreen extends Component {
   }
 
   componentWillMount() {
-    const request = client()
-    request
+    client()
       .then(api => api.get('posts'))
       .then(response => {
         return response.data
@@ -121,8 +120,7 @@ export default class HomeScreen extends Component {
   }
 
   onCreatePost = body => {
-    const request = client()
-    request
+    client()
       .then(api => api.post('posts', { body: body }))
       .then(response => {
         return response.data

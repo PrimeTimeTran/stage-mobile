@@ -47,8 +47,7 @@ export default class StagesScreen extends React.Component {
   }
 
   componentWillMount() {
-    const request = client()
-    request
+    client()
       .then(api => api.get(`stages`))
       .then(response => {
         return response.data
@@ -114,8 +113,7 @@ export default class StagesScreen extends React.Component {
 
   onStartFollowing = stageId => {
     const params = { stageId: stageId }
-    const request = client()
-    request
+    client()
       .then(api => api.post(`user_conversations`, params))
       .then(response => {
         return response.data
@@ -126,8 +124,7 @@ export default class StagesScreen extends React.Component {
   }
 
   onStopFollowing = stageId => {
-    const request = client()
-    request
+    client()
       .then(api => api.delete(`user_conversations/${stageId}`))
       .then(response => {
         return response.data

@@ -16,8 +16,7 @@ export default class CommentContainer extends Component {
 
   onAddComment = body => {
     const { postId } = this.props
-    const request = client()
-    request
+    client()
       .then(api =>
         api.post(`posts/${postId}/comments`, {
           body: body,

@@ -17,8 +17,7 @@ class UserDescription extends Component {
 
   async componentWillMount() {
     const otherUserId = this.props.user.id
-    const request = client()
-    request
+    client()
       .then(api =>
         api.get(`conversations/present?otherUserId=${otherUserId}`)
       )

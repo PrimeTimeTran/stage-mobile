@@ -50,9 +50,8 @@ export default class SearchConversationsScreen extends React.Component {
   }
 
   search(text) {
-    const request = client()
     this.setState({ performedSearch: true })
-    request
+    client()
       .then(api =>
         api.get('conversations', { params: { keyword: text } })
       )

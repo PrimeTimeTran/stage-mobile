@@ -73,16 +73,15 @@ export default class MyProfileScreen extends React.Component {
   async componentWillMount() {
     CurrentUser.get().then(currentUser => {
       this.setState({ currentUser })
-      const request = client()
-        request
-          .then(api => api.get(`users/${this.state.currentUser.id}`))
-          .then(response => {
-            this.setState({ currentUser: response.data })
-            return response.data
-          })
-          .catch(error => {
-            console.log('Error:', error)
-          })
+      client()
+        .then(api => api.get(`users/${this.state.currentUser.id}`))
+        .then(response => {
+          this.setState({ currentUser: response.data })
+          return response.data
+        })
+        .catch(error => {
+          console.log('Error:', error)
+        })
     })
   }
 
@@ -246,7 +245,6 @@ export default class MyProfileScreen extends React.Component {
       currentUser,
       modalVisible
     } = this.state
-
     if (currentUser)  {
       return (
         <ScrollView>

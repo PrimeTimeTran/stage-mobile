@@ -15,6 +15,7 @@ if (hostname === 'staging.getonstageapp.com') {
   // Requirement for Loi's local development
   if (Platform.OS == 'ios') {
     backendHost = DEV_API_HOST_IOS
+    // backendHost = 'http://192.168.1.132:3000'
   } else {
     backendHost = DEV_API_HOST_ANDROID
   }

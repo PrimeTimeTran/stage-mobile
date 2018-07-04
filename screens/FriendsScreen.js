@@ -38,16 +38,15 @@ export default class FriendsScreen extends Component {
   }
 
   async componentWillMount() {
-    const request = client()
-      request
-        .then(api => api.get('friendships'))
-        .then(response => {
-          this.setState({ friends: response.data })
-          return response.data
-        })
-        .catch(error => {
-          console.log('Error:', error)
-        })
+    client()
+      .then(api => api.get('friendships'))
+      .then(response => {
+        this.setState({ friends: response.data })
+        return response.data
+      })
+      .catch(error => {
+        console.log('Error:', error)
+      })
   }
 
 

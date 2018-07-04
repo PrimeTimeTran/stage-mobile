@@ -41,8 +41,7 @@ export default class MediaScreen extends Component {
   state = { uploads: null, selected: [] }
 
   async componentWillMount() {
-    const request = client()
-    request
+    client()
       .then(api => api.get(`uploads`))
       .then(response => {
         return response.data
@@ -67,8 +66,7 @@ export default class MediaScreen extends Component {
 
   onDeleteUploads = () => {
     const { selected } = this.state
-    const request = client()
-    request
+    client()
       .then(api => api.delete('uploads/1', { params: { uploadIds: selected }}))
       .then(response => {
         return response.data

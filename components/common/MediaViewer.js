@@ -66,41 +66,51 @@ class MediaViewer extends React.Component {
     return (
       <View style={{ flexDirection: 'row' }}>
         {object.uploads.map((upload, index) => {
-            return (
-              <Lightbox
-                key={upload.id}
-                swipeToDismiss={false}
-                renderContent={() =>
-                  this.showUploads(
-                    object,
-                    upload,
-                    index
-                  )
-                }>
-                <View style={{ flex: 1 }}>
-                  { upload.media_type == 'vid' ?
-                      <VideoPlayer
-                        isLooping
-                        video={upload.url}
-                      />
-                  :
-                      <Image
-                        style={{
-                          height: 100,
-                          width: 100
-                          // borderRadius: 5
-                        }}
-                        source={{ uri: upload.url }}
-                      />
-                  }
+          return (
+            <Lightbox
+              key={upload.id}
+              swipeToDismiss={false}
+              renderContent={() =>
+                this.showUploads(
+                  object,
+                  upload,
+                  index
+                )
+              }>
+              <View style={{ flex: 1, marginRight: 5, marginTop: 10 }}>
+                { upload.media_type == 'vid' ?
+                    <VideoPlayer
+                      isLooping
+                      video={upload.url}
+                    />
+                :
+                    <Image
+                      style={{
+                        height: 90,
+                        width: 90,
+                        // borderRadius: 5
+                      }}
+                      source={{ uri: upload.url }}
+                    />
+                }
+                <View
+                  style={{
+                    backgroundColor: '#000000aa',
+                    position: 'absolute',
+                    height: 32,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    borderBottomRightRadius: 5,
+                    borderBottomLeftRadius: 5
+                  }}>
                   <Text
                     style={{
                       color: '#fff',
                       position: 'absolute',
-                      bottom: 2,
-                      right: 2,
-                      fontWeight: 'bold',
-                      fontSize: 10
+                      bottom: 8,
+                      right: 8,
+                      fontWeight: 'bold'
                     }}>
                     {Math.floor(
                       Math.random() * Math.floor(200)
@@ -108,9 +118,10 @@ class MediaViewer extends React.Component {
                     likes
                   </Text>
                 </View>
-              </Lightbox>
-            )
-          })}
+              </View>
+            </Lightbox>
+          )
+        })}
       </View>
     )
   }

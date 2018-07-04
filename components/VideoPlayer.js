@@ -22,6 +22,7 @@ export default class VideoPlayer extends Component {
   }
 
   render() {
+    const { fullScreen } = this.props
     return (
       <Video
         ref={component => (this.playbackInstance = component)}
@@ -45,7 +46,7 @@ export default class VideoPlayer extends Component {
         resizeMode="cover"
         isMuted={this.state.mute}
         style={
-          this.props.fullScreen ? { flex: 1 } : { height: 100, width: 100 }
+          fullScreen ? { flex: 1 } : { height: 90, width: 90 }
         }
       />
     )

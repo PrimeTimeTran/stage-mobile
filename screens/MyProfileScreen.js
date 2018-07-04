@@ -246,7 +246,7 @@ export default class MyProfileScreen extends React.Component {
       currentUser,
       modalVisible
     } = this.state
-
+    console.log('CurrentUser', currentUser);
     if (currentUser)  {
       return (
         <ScrollView>

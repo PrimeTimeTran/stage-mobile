@@ -103,8 +103,7 @@ export default class EditProfileScreen extends Component {
       phone_number
     } = this.state
 
-    const request = client()
-    request
+    client()
       .then(api => api.put(`users/${id}`, {user: {
         first_name,
         last_name,

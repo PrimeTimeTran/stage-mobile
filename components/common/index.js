@@ -14,4 +14,4 @@ export * from './DrawerCard'
 export * from './FriendCard'
 export * from './UserProfilePhotos'
 export * from './PromptModal'
-
+export * from './MediaViewer'

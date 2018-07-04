@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Dimensions } from 'react-native'
 import { Video } from 'expo'
 
 export default class VideoPlayer extends Component {
@@ -23,18 +22,6 @@ export default class VideoPlayer extends Component {
   }
 
   render() {
-    let myArray = [
-			'https://i.imgur.com/gHFLves.mp4',
-			'https://i.imgur.com/6hNdBia.mp4',
-			'https://i.imgur.com/GwV55GL.mp4',
-			'https://i.imgur.com/ZXEgLh0.mp4',
-			'https://i.imgur.com/RNVhrQa.mp4',
-			'https://i.imgur.com/46IdBXo.mp4',
-			'https://i.imgur.com/U25iofY.mp4',
-			'https://i.imgur.com/XcuP9Qi.mp4',
-			'https://i.imgur.com/h6UO42C.mp4',
-    ]
-    var rand = myArray[Math.floor(Math.random() * myArray.length)]
     return (
       <Video
         ref={component => (this.playbackInstance = component)}

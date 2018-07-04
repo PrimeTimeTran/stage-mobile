@@ -4,22 +4,21 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  Dimensions
+  View
 } from 'react-native'
 
 import { Icon } from 'react-native-elements'
-import Lightbox from 'react-native-lightbox'
-import Carousel from 'react-native-looped-carousel'
-import VideoPlayer from '../components/VideoPlayer'
 
 import Colors from '../constants/Colors'
 import { t } from '../locales/i18n'
 import client from '../utils/client'
 
-import { Avatar, SentAt, Spinner } from '../components/common'
-
-const { width, height } = Dimensions.get('window')
+import {
+  Avatar,
+  SentAt,
+  Spinner,
+  MediaViewer
+} from '../components/common'
 
 export default class ConversationsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -61,8 +60,7 @@ export default class ConversationsScreen extends React.Component {
   state = { conversations: null }
 
   componentWillMount() {
-    const request = client()
-    request
+    client()
       .then(api => api.get('conversations'))
       .then(response => {
         return response.data
@@ -73,42 +71,6 @@ export default class ConversationsScreen extends React.Component {
       .catch(error => {
         console.log('Error:', error)
       })
-  }
-
-  showStageUploads(conversation, upload, index) {
-    return (
-      <Carousel
-        currentPage={index}
-        autoplay={false}
-        style={{
-          flex: 1,
-          width,
-          height
-        }}>
-        {conversation.uploads.map(upload => {
-          return (
-            <View style={{ flex: 1 }} key={upload.id}>
-              <VideoPlayer
-                isLooping
-                video={upload.url}
-                fullScreen={true}
-                style={{ flex: 1, width, height }}
-              />
-              <Text
-                style={{
-                  color: '#fff',
-                  position: 'absolute',
-                  bottom: 20,
-                  right: 20,
-                  fontWeight: 'bold'
-                }}>
-                {Math.floor(Math.random() * Math.floor(200))} likes
-              </Text>
-            </View>
-          )
-        })}
-      </Carousel>
-    )
   }
 
   render() {
@@ -164,7 +126,7 @@ export default class ConversationsScreen extends React.Component {
                             paddingLeft: 5
                           }}>
                           <Avatar
-                            custom={[avatarStyle, { marginTop: 5 }]}
+                            custom={avatarStyle}
                             url={avatar_url}
                           />
                           {conversation.is_stage && (
@@ -243,46 +205,10 @@ export default class ConversationsScreen extends React.Component {
                             style={{ color: '#696969', fontSize: 13 }}>
                             {conversation.last_message_content.body}
                           </Text>
-                          {/* <View style={{ flexDirection: 'row' }}>
-                          {conversation.is_stage &&
-                            conversation.uploads &&
-                            conversation.uploads.map((upload, index) => {
-                              return (
-                                <Lightbox
-                                  key={upload.id}
-                                  swipeToDismiss={false}
-                                  renderContent={() =>
-                                    this.showStageUploads(
-                                      conversation,
-                                      upload,
-                                      index
-                                    )
-                                  }>
-                                  <View style={{ flex: 1 }}>
-                                    <VideoPlayer
-                                      isLooping
-                                      video={upload.url}
-                                      style={{ height: 50, width: 50 }}
-                                    />
-                                    <Text
-                                      style={{
-                                        color: '#fff',
-                                        position: 'absolute',
-                                        bottom: 2,
-                                        right: 2,
-                                        fontWeight: 'bold',
-                                        fontSize: 10
-                                      }}>
-                                      {Math.floor(
-                                        Math.random() * Math.floor(200)
-                                      )}{' '}
-                                      likes
-                                    </Text>
-                                  </View>
-                                </Lightbox>
-                              )
-                            })}
-                        </View> */}
+                        {conversation.is_stage &&
+                          conversation.uploads &&
+                          <MediaViewer object={conversation} />
+                        }
                         </View>
                       </View>
                     </TouchableOpacity>
@@ -333,7 +259,8 @@ const styles = StyleSheet.create({
   avatarStyle: {
     height: 50,
     width: 50,
-    borderRadius: 25
+    borderRadius: 25,
+    marginTop: 5
   },
   stageInfoStyle: {
     color: Colors.activeStageColor,

@@ -3,13 +3,17 @@ import {
   Text,
   View,
   Dimensions,
-  Image
+  Image,
+  StyleSheet
 } from 'react-native'
 
 import Lightbox from 'react-native-lightbox'
 import Carousel from 'react-native-looped-carousel'
 
 import VideoPlayer from '../VideoPlayer'
+import {
+  Avatar
+} from './index'
 
 const { width, height } = Dimensions.get('window')
 
@@ -41,6 +45,30 @@ class MediaViewer extends React.Component {
                     source={{ uri: upload.url }}
                   />
               }
+              <View
+                style={{
+                  position: 'absolute',
+                  height: 40,
+                  top: 10,
+                  left: 10,
+                  right: 5
+                }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'center' }}>
+                  <Avatar
+                    url={upload.user_avatar_url}
+                    custom={styles.avatarStyle}
+                  />
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: 25,
+                      paddingLeft: 10
+                    }}>
+                    {upload.user_name}
+                  </Text>
+                </View>
+              </View>
               <Text
                 style={{
                   color: '#fff',
@@ -128,3 +156,15 @@ class MediaViewer extends React.Component {
 }
 
 export { MediaViewer }
+
+const styles = StyleSheet.create({
+  avatarStyle: {
+    marginLeft: 5,
+    marginTop: 5,
+    padding: 5,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    paddingRight: 10
+  }
+})
